@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo Follow-Along Guide — AI Agents for Investment Consulting</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.demo{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.demo>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.demo>.head .id{font-weight:700;font-size:1.02em}
+.demo>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.demo>.head .badges{display:flex;gap:6px;flex-wrap:wrap}
+.demo>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.a{background:#059669;color:#fff}
+.b.bb{background:#1d4ed8;color:#fff}
+.b.c{background:#78716c;color:#fff}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}.k.a{color:#b45309}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:26px;position:relative}
+.chk li::before{content:"\2610";position:absolute;left:0;top:-1px;font-size:17px;color:#1d4ed8}
+.toc{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:14px 18px}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}.toc ol{columns:1}}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  pre .cp{display:none}
+  .demo,.warn,.note,.tip,.amber,table{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .demo{page-break-inside:avoid}
+  .pb{page-break-before:always}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Demo Follow-Along Guide</h1>
+  <div class="tagline">AI Agents for Investment Consulting &mdash; Microsoft Copilot Studio</div>
+  <div class="meta">
+    <span class="d">1 Day &middot; 27 August 2026</span> |
+    <span>Investment Consulting</span> |
+    <span>11 demos</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="warn">
+  <b>Use synthetic data only.</b> Every demo in this guide runs on the supplied <em>Northwind Multi-Asset Growth Fund</em> factsheet &mdash; a fictional fund created for training.
+  <b>Do not paste real client, fund, member or corporate data into any agent you build while following along</b>, and never into a trial or personal tenant.
+  If you are unsure whether your environment is approved for a piece of data, the answer is to use the synthetic file.
+</div>
+
+<section id="how">
+  <h2>How to use this guide</h2>
+  <p>
+    The workshop is <strong>trainer-led</strong>: Rajesh builds everything live on screen. Nothing here is required of you, and no lab has been provisioned.
+    This guide exists so that if you <em>want</em> to build alongside the demo &mdash; on the day or afterwards &mdash; you can, without pausing the room to ask what was clicked.
+  </p>
+  <p>Every demo below is written to the same shape: <strong>what it proves &rarr; what you need &rarr; the steps &rarr; the exact text to paste &rarr; what you should see &rarr; what to do when it breaks.</strong></p>
+  <p>If you fall behind, <strong>stop building and start watching.</strong> Every demo states what you should see, so you can read the outcome without having produced it, and the assets are yours to keep &mdash; the afternoon is not a race and nothing later depends on your having finished something earlier.</p>
+
+  <h3>Pick your track before the day</h3>
+  <table>
+    <thead><tr><th style="width:14%">Track</th><th style="width:30%">You have</th><th>What you can do</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="b a">A</span> <strong>Full build</strong></td>
+        <td>Copilot Studio access &mdash; a licence, or a trial you can start</td>
+        <td>All eleven demos. You will finish the day with your own working Fund Research Assistant &mdash; and, by demo 2.7, one that runs without being asked.</td>
+      </tr>
+      <tr>
+        <td><span class="b bb">B</span> <strong>Copilot only</strong></td>
+        <td>Microsoft 365 Copilot / Copilot Chat, but no Copilot Studio</td>
+        <td>Demos 1.1, 1.2 and 1.4 in full. For the rest, follow the steps as reading &mdash; they are written so the logic lands without the clicks.</td>
+      </tr>
+      <tr>
+        <td><span class="b c">C</span> <strong>Watch &amp; replay</strong></td>
+        <td>No AI tooling available on the day</td>
+        <td>Watch the demos, keep this guide, and replay any of them later. Every asset you need is in the appendix.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Find out which track you are on in 60 seconds:</strong> open <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> and sign in with your work account.
+    If you land on a home screen where you can create an agent &mdash; or are offered a free trial you are permitted to start &mdash; you are <strong>Track A</strong>.
+    If you are blocked by your tenant, you are Track B or C. <em>Either is fine.</em> Track A is not better attendance; it is just a different way of paying attention.
+  </div>
+  <div class="note">
+    <strong>Joining online?</strong> Five seats are remote. You get a dedicated feed of the Copilot Studio window itself &mdash; not a camera pointed at a room &mdash; so every click is legible at your end.
+    Put your questions in the meeting chat at any point rather than waiting for a pause; someone in the room is watching it and will read them out.
+    The demo segments are recorded and circulated afterwards, so if a step goes past faster than you can follow it, let it go and pick it up from the recording alongside this guide.
+  </div>
+  <div class="amber">
+    <strong>If Copilot Studio is blocked and you want Track A anyway:</strong> a separate Microsoft 365 Developer Program tenant, or a personal Microsoft 365 trial, gives you a sandbox that is nothing to do with your corporate tenant.
+    That is the cleanest option &mdash; but it makes the synthetic-data rule absolute. Nothing corporate goes into it, ever.
+  </div>
+</section>
+
+<section id="toc">
+  <h2>The eleven demos</h2>
+  <div class="toc">
+    <ol>
+      <li><a href="#d11">1.1 &mdash; Drift, fabrication and the grounding fix</a></li>
+      <li><a href="#d12">1.2 &mdash; A reusable extraction prompt</a></li>
+      <li><a href="#d13">1.3 &mdash; Your first agent: Fund Research Assistant</a></li>
+      <li><a href="#d14">1.4 &mdash; Marking up your own workflow</a></li>
+      <li><a href="#d21">2.1 &mdash; Generative orchestration and the trace</a></li>
+      <li><a href="#d22">2.2 &mdash; Calling an external and a legacy REST API</a></li>
+      <li><a href="#d23">2.3 &mdash; Excel and SQL data movement</a></li>
+      <li><a href="#d24">2.4 &mdash; Unstructured &rarr; structured, with a schema</a></li>
+      <li><a href="#d25">2.5 &mdash; Generating the PowerPoint</a></li>
+      <li><a href="#d26">2.6 &mdash; Publish to Teams, share, approve, govern</a></li>
+      <li><a href="#d27">2.7 &mdash; The agent runs without being asked (the trigger)</a></li>
+    </ol>
+  </div>
+  <p style="margin-top:10px;font-size:.92em;color:#546b8a">
+    Demos 1.1&ndash;1.4 run in the morning with the whole group. Demos 2.1&ndash;2.7 run in the afternoon with the developer track &mdash; but everything is written so that anyone can replay them.
+  </p>
+</section>
+
+<section id="preflight">
+  <h2>Pre-flight &mdash; 15 minutes, done before the day</h2>
+  <p>Do this the day before, not on the morning. If any step fails, you are simply on Track B or C &mdash; note which step failed and tell us at the start.</p>
+  <ul class="chk">
+    <li><strong>Sign in</strong> to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a>. Note what you see: an agent list, a trial offer, or a block.</li>
+    <li><strong>Download the demo assets</strong> &mdash; the <code>demo-assets/</code> folder circulated with this guide. It contains <code>sample-fund-factsheet.pdf</code> (plus <code>.html</code> and <code>.txt</code> versions of the same document), both spreadsheets, both manager updates and the two JSON files. <strong>Nothing has to be typed out by hand.</strong></li>
+    <li><strong>Create a working folder</strong> in OneDrive called <code>copilot-workshop</code> and put the factsheet in it.</li>
+    <li><strong>Copy <code>holdings.xlsx</code> and <code>benchmarks.xlsx</code></strong> into that folder too. Both already have their ranges formatted as real Excel <em>Tables</em>, which is what the connector needs &mdash; open one and check the ribbon shows <em>Table Design</em>. (If you would rather build them yourself, the rows are in <a href="#assets">the appendix</a>.)</li>
+    <li><strong>Check Power Automate opens</strong> at <a href="https://make.powerautomate.com">make.powerautomate.com</a> &mdash; needed for demos 2.2, 2.3, 2.5 and 2.7.</li>
+    <li><strong>Have Teams open</strong> &mdash; demos 2.6 and 2.7 publish and trigger there.</li>
+    <li><strong>Bring one real question</strong> from your own work that you would like an agent to answer. You will use it in demo 1.4.</li>
+  </ul>
+  <div class="tip">
+    <strong>Nothing to install.</strong> Everything is browser-based. If your laptop can open Teams and OneDrive, it can do every demo in this guide.
+  </div>
+</section>
+
+<section id="m1" class="pb">
+  <h2>Module 1 demos &mdash; foundations (all 35 participants)</h2>
+
+  <!-- D1.1 -->
+  <div class="demo" id="d11">
+    <div class="head">
+      <span class="id">Demo 1.1 <small>Drift, fabrication and the grounding fix</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
+
+      <div class="k">You need</div>
+      <p>Any chat interface to a model you are permitted to use &mdash; Microsoft 365 Copilot, Copilot Chat, or the Copilot Studio test pane. The factsheet file for step 3.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask with no context at all.</strong> Open a fresh chat and paste prompt A. Note the answer.</li>
+        <li><strong>Ask again in a new chat.</strong> Paste exactly the same prompt A a second time. Compare the two answers word by word.</li>
+        <li><strong>Now ground it.</strong> Attach <code>sample-fund-factsheet.pdf</code> to the chat and paste prompt B. Compare against what the document actually says.</li>
+        <li><strong>Ask for the impossible.</strong> With the file still attached, paste prompt C &mdash; it asks for two figures that are <em>not</em> in the document and cannot be worked out from it.</li>
+      </ol>
+
+      <div class="k">Prompt A &mdash; ungrounded</div>
+      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
+
+      <div class="k">Prompt B &mdash; grounded</div>
+      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
+For each figure, quote the section of the document it came from.
+If a figure is not present in the document, reply exactly: not stated.</pre>
+
+      <div class="k">Prompt C &mdash; the refusal test</div>
+      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
+and its portfolio turnover ratio.
+If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
+        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
+        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Prompt A returned "I don't know".</strong> Good &mdash; some configurations are more cautious. Try it without the fund name: <em>"What was the 3-year return of the multi-asset fund we discussed?"</em></li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.3 makes permanent.</li>
+        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.3. That single sentence removes most fabrication.</p>
+    </div>
+  </div>
+
+  <!-- D1.2 -->
+  <div class="demo" id="d12">
+    <div class="head">
+      <span class="id">Demo 1.2 <small>A reusable extraction prompt</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
+
+      <div class="k">You need</div>
+      <p>The same chat interface, with <code>sample-fund-factsheet.pdf</code> attached.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
+        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
+        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
+        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
+        <li><strong>Break it deliberately.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more. Watch the three absent fields fill themselves in.</li>
+      </ol>
+
+      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
+      <pre>Summarise the key points of this fund factsheet.</pre>
+
+      <div class="k">The structured prompt</div>
+      <pre>You are an investment consultant preparing a quarterly fund review for an
+institutional client - a long-horizon retirement portfolio.
+
+Use only the attached Northwind factsheet (data as of 30 June 2026).
+If a value is not present in the document, write: not stated.
+Do not estimate, infer or calculate any figure.
+
+Extract exactly these fields:
+  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
+  inception date, TER regular, TER direct, exit load,
+  return 1yr, return 3yr, return 5yr, return since inception,
+  benchmark 1yr, benchmark 3yr, benchmark 5yr,
+  equity allocation, debt allocation, gold allocation, cash allocation,
+  top holding name, top holding weight,
+  tracking error, portfolio turnover, NAV per unit
+
+Return a markdown table with exactly three columns: field | value | source section.
+One row per field, in the order listed above.
+
+Example row:
+TER direct | 0.62% | Section 9 Fees</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
+        <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
+        <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work.</li>
+        <li>With the refusal line deleted, watch those same three rows quietly fill with plausible-looking numbers. That is the entire lesson of this demo, and it is worth running twice.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
+        <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
+        <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Save this prompt. In demo 2.4 the same field list becomes an <em>enforced schema</em> &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
+    </div>
+  </div>
+
+  <!-- D1.3 -->
+  <div class="demo" id="d13">
+    <div class="head">
+      <span class="id">Demo 1.3 <small>Your first agent: the Fund Research Assistant</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~20 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the clever prompt you just wrote stops being a chat message and becomes a thing that exists &mdash; named, grounded, shareable, and the same for everyone who uses it.</div>
+
+      <div class="k">You need</div>
+      <p>Copilot Studio access (Track A). The factsheet file. About 20 minutes.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li>Go to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> and confirm the environment shown top-right is the one you intend to build in.</li>
+        <li>Select <strong>Create</strong> &rarr; <strong>New agent</strong>. If offered a describe-it-in-words flow, choose to <strong>skip to configure</strong> instead &mdash; you want to see the four boxes, not have them filled in for you.</li>
+        <li><strong>Name it</strong> <code>Fund Research Assistant</code> and give it the description below.</li>
+        <li><strong>Paste the Instructions</strong> below. This is demo 1.2's prompt, made permanent.</li>
+        <li><strong>Add Knowledge:</strong> under Knowledge, choose <strong>Add knowledge</strong> &rarr; upload <code>sample-fund-factsheet.pdf</code>. Wait until its status shows ready &mdash; this takes a minute or two.</li>
+        <li><strong>Turn off general knowledge.</strong> In Settings &rarr; Generative AI, disable the option that lets the agent answer from general world knowledge. This is the single most important switch on the page.</li>
+        <li><strong>Test it</strong> in the pane on the right with the three questions below.</li>
+      </ol>
+
+      <div class="k">Description</div>
+      <pre>Answers questions about fund factsheets for investment consultants. Quotes the
+source for every figure and refuses to estimate anything not in the document.</pre>
+
+      <div class="k">Instructions</div>
+      <pre>You are a research assistant for an investment consulting team.
+
+You answer questions about the fund documents in your knowledge only.
+
+Rules you must follow without exception:
+- Every figure you state must come from a document in your knowledge, or from
+  an action you called. Never from your own knowledge of the world.
+- After every figure, cite the section, page or action it came from.
+- If a figure is not in your documents, reply exactly: not stated.
+- Never estimate, infer or annualise a figure, and never fill a gap.
+- Arithmetic: you may state the difference between two figures you have just
+  retrieved, provided you show both of them with their sources in the same
+  reply. Everything else that produces a number - totals, averages, weighted
+  figures, currency conversion, anything computed across a set of rows - must
+  come from an action. If no action provides it, name the action that is
+  missing instead of working it out yourself.
+- If asked for advice on whether to invest, decline and say that suitability
+  is a consultant judgement, not a document lookup.
+- Be brief. A consultant is reading this between meetings.
+
+When asked to compare the fund against its benchmark, state both numbers and
+the difference, and label the difference as excess return.</pre>
+
+      <div class="tip" style="margin-top:10px">
+        <strong>Read the arithmetic rule twice &mdash; it is the spine of the whole afternoon.</strong> A difference between two figures already on screen is checkable by eye, so the agent may state it.
+        A total across ten rows, or a currency conversion, is not checkable by eye &mdash; so a system computes it and the agent quotes the system. Demos 2.2 and 2.3 build the actions that make this rule keepable rather than merely stern.
+      </div>
+
+      <div class="k">Test questions</div>
+      <pre>What is the fund's 3-year return versus its benchmark?
+What is the tracking error?
+Should my client invest in this fund?</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Question 1</strong> &mdash; 15.6% fund, 13.1% benchmark, excess return 2.5%, with a citation to the performance section.</li>
+        <li><strong>Question 2</strong> &mdash; <em>not stated</em>. The factsheet has no tracking error. This is the agent doing its job.</li>
+        <li><strong>Question 3</strong> &mdash; a polite decline that points at consultant judgement. You have just drawn the line between analysis and advice, in configuration rather than in policy.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It answers question 2 with a number.</strong> General knowledge is still on, or the knowledge file has not finished processing. Check both, then retest.</li>
+        <li><strong>It says it cannot find any documents.</strong> The file is still indexing. Wait two minutes. If it persists, remove and re-upload &mdash; a PDF over ~200 pages or an image-only scan will not index.</li>
+        <li><strong>It gives advice on question 3.</strong> Your Instructions were saved but not applied &mdash; use Save, then start a fresh test conversation. The test pane keeps the old configuration within an open conversation.</li>
+        <li><strong>No option to disable general knowledge.</strong> Names and placement of this setting move between releases. Alternative: add to Instructions &mdash; <em>"If the answer is not in your knowledge documents, do not answer from general knowledge. Reply: not stated."</em></li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Keep this agent. Demos 2.1, 2.2, 2.4, 2.5 and 2.6 all extend <em>this</em> agent rather than starting a new one &mdash; which is itself the point: an agent grows, a prompt does not.</p>
+    </div>
+  </div>
+
+  <!-- D1.4 -->
+  <div class="demo" id="d14">
+    <div class="head">
+      <span class="id">Demo 1.4 <small>Marking up your own workflow</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b c">C</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the judgement, not the tooling, is the scarce skill. Two people with the same tool and different workflow maps will get completely different value out of the afternoon.</div>
+
+      <div class="k">You need</div>
+      <p>Paper, or the table below in a blank document. No AI required &mdash; this one is deliberately manual.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>List the steps</strong> of one process you personally run &mdash; a quarterly review, a manager screen, a client pack. Aim for 6&ndash;12 steps, each one a verb.</li>
+        <li><strong>Time each step</strong> honestly, and note how often the whole process runs per year.</li>
+        <li><strong>Colour each step</strong> using the three categories from the slide: <span style="color:#1d4ed8;font-weight:600">prompting helps today</span>, <span style="color:#047857;font-weight:600">agent-suitable</span>, <span style="color:#b45309;font-weight:600">stays human</span>.</li>
+        <li><strong>Apply the four criteria</strong> to your green steps: repetition, data readiness, value, risk tier.</li>
+        <li><strong>Write one sentence:</strong> <em>"The first agent I would build is ___ because ___."</em> Bring it to the afternoon, or to your own team afterwards.</li>
+      </ol>
+
+      <table>
+        <thead><tr><th>Step</th><th>Mins</th><th>&times;/year</th><th>Category</th><th>Data ready?</th><th>Risk tier (1&ndash;4)</th></tr></thead>
+        <tbody>
+          <tr><td>e.g. pull latest factsheets</td><td>20</td><td>4</td><td>agent-suitable</td><td>yes &mdash; email + portal</td><td>2</td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="k g">What you should see</div>
+      <p>Usually two things surprise people. First, the steps that cost the most time are rarely the ones that felt hardest. Second, at least one step you assumed needed judgement turns out to be a lookup with a judgement attached to the end of it &mdash; and those split cleanly.</p>
+
+      <div class="k a">Carry this forward</div>
+      <p>Your green steps with high repetition and ready data are the shortlist. The capstone this afternoon is <em>our</em> answer to this exercise, run on your reporting pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<section id="m2" class="pb">
+  <h2>Module 2 demos &mdash; the build track (~10 developers)</h2>
+  <div class="note">
+    These six demos extend the <strong>same agent</strong> you built in demo 1.3. Each one adds a capability and leaves the previous ones working.
+    Where a step needs a <strong>premium connector</strong> your tenant may not have, the demo says so and gives you a no-premium substitute that teaches the same wiring.
+  </div>
+
+  <!-- D2.1 -->
+  <div class="demo" id="d21">
+    <div class="head">
+      <span class="id">Demo 2.1 <small>Generative orchestration and reading the trace</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~25 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the agent chooses its own path through your knowledge and tools &mdash; and when it chooses wrongly, the trace tells you exactly where, so the fix is a sentence rather than a rebuild.</div>
+
+      <div class="k">You need</div>
+      <p>Your Fund Research Assistant from demo 1.3. The second document, <code>manager-update-jul-2026.txt</code>, from <a href="#assets">the appendix</a>.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Add a second knowledge source.</strong> Save the manager update from the appendix as a <code>.txt</code> or <code>.docx</code> file and upload it alongside the factsheet.</li>
+        <li><strong>Confirm generative orchestration is on</strong> &mdash; Settings &rarr; Orchestration (or the toggle on the agent's Overview). This is what lets the agent decide which source to read.</li>
+        <li><strong>Ask a question that spans both documents</strong> &mdash; question 1 below. Neither document answers it alone.</li>
+        <li><strong>Open the trace.</strong> In the test pane, expand the activity / reasoning detail for that answer. Read which knowledge source it consulted, in what order, and what it retrieved.</li>
+        <li><strong>Now break it on purpose.</strong> Ask question 2 &mdash; deliberately ambiguous about which period and which plan.</li>
+        <li><strong>Read the trace again</strong> to see what it assumed, then <strong>fix it with one instruction</strong> (below) and re-ask.</li>
+      </ol>
+
+      <div class="k">Question 1 &mdash; spans both sources</div>
+      <pre>What did the manager say about the gold allocation, and does it match the
+allocation shown on the factsheet?</pre>
+
+      <div class="k">Question 2 &mdash; deliberately ambiguous</div>
+      <pre>What is the expense ratio and how has the fund performed?</pre>
+
+      <div class="k">The one-line fix &mdash; append to Instructions</div>
+      <pre>If a question is ambiguous about the period, the share class or the plan
+(Regular or Direct), do not choose one silently. Ask which is meant, or state
+every variant explicitly with its label.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Question 1 is answered from <em>both</em> documents, with two citations &mdash; the factsheet's 5% gold sleeve and the manager's commentary about it.</li>
+        <li>Question 2, before the fix, silently picks one expense ratio (usually Regular) and one period. Perfectly fluent, quietly wrong for half your readers.</li>
+        <li>After the fix, the agent either asks which you meant or gives both, labelled. Total effort: one sentence.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>No trace or activity detail visible.</strong> Its placement moves between releases &mdash; look for "activity", "reasoning" or a chevron on the answer bubble. Failing that, ask the agent directly: <em>"Which document did you use for that, and which section?"</em></li>
+        <li><strong>It only ever reads the factsheet.</strong> The second file is still indexing, or its name is not descriptive enough. Rename it so the topic is obvious &mdash; the agent uses file names when choosing.</li>
+        <li><strong>It answers question 2 correctly first time.</strong> Make it harder: <em>"What's the return?"</em> &mdash; with four periods on the factsheet, something has to be assumed.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D2.2 -->
+  <div class="demo" id="d22">
+    <div class="head">
+      <span class="id">Demo 2.2 <small>Calling an external API &mdash; and a legacy internal one</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~35 min</span><span class="b t">premium for part 1</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> this is the gap you named. An agent stops being a reader and starts being a participant in your systems the moment it can call one &mdash; and a legacy internal endpoint is wired exactly like a public one.</div>
+
+      <div class="k">The scenario</div>
+      <p>The Northwind fund reports in INR. Your client reports in USD. The agent needs the FX rate as at the factsheet date &mdash; a live external lookup &mdash; and the client's mandate limits, which live in an internal system nobody has an API document for.</p>
+
+      <div class="k">Part 1 &mdash; the external REST API</div>
+      <ol class="steps">
+        <li>Go to <a href="https://make.powerautomate.com">make.powerautomate.com</a> &rarr; <strong>Create</strong> &rarr; <strong>Instant cloud flow</strong> &rarr; trigger: <strong>When Copilot Studio calls a flow</strong>. Name it <code>Get FX Rate</code>.</li>
+        <li>Add two inputs to the trigger: text named <code>ratedate</code>, and number named <code>amountinr</code>.</li>
+        <li>Add an <strong>HTTP</strong> action. Method <code>GET</code>. URI: the URL below, with the input appended.</li>
+        <li><strong>Do the conversion in the flow, not in the agent.</strong> Add a <strong>Compose</strong> action with the expression below &mdash; it divides the rupee amount by the retrieved rate.</li>
+        <li>Add <strong>Respond to Copilot</strong> with two outputs: text <code>fxjson</code> set to the HTTP body, and number <code>amountusd</code> set to the Compose output.</li>
+        <li>Save. In Copilot Studio, open your agent &rarr; <strong>Actions</strong> &rarr; <strong>Add an action</strong> &rarr; pick your flow.</li>
+        <li>Give the action a description the agent can route on &mdash; text below. This description is how it decides to call your flow, so write it for a reader, not a machine.</li>
+        <li>Test: ask the agent the FX question below.</li>
+      </ol>
+
+      <div class="k">The API call</div>
+      <pre>https://api.frankfurter.app/2026-06-30?from=USD&to=INR</pre>
+      <p style="font-size:.92em;margin-top:-4px">A free, no-key FX endpoint. Paste it in a browser tab first to see the raw JSON before you wire it up &mdash; always confirm an API works outside the agent before blaming the agent.</p>
+
+      <div class="k">The conversion expression &mdash; Compose action</div>
+      <pre>div(
+  triggerBody()?['amountinr'],
+  float(body('HTTP')?['rates']?['INR'])
+)</pre>
+      <p style="font-size:.92em;margin-top:-4px">This is the arithmetic rule from demo 1.3 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
+
+      <div class="k">Action description &mdash; how the agent knows to use it</div>
+      <pre>Converts an amount in Indian rupees to US dollars at the exchange rate published
+for a given date, and returns both the rate and the converted amount. Use this
+whenever a value in rupees needs to be expressed in US dollars, or a currency
+conversion is requested. Never convert currency yourself - always call this.
+Input ratedate must be in YYYY-MM-DD format. Input amountinr is the rupee
+amount as a plain number, so Rs 4,820 crore is passed as 48200000000.</pre>
+
+      <div class="k">Test question</div>
+      <pre>The fund size is in rupees. What is it in US dollars as at the factsheet date?</pre>
+
+      <div class="k g" style="margin-top:10px">What you should see &mdash; part 1</div>
+      <ul>
+        <li>The agent reads <em>Rs 4,820 crore</em> off the factsheet, converts it to <code>48200000000</code>, and passes that to the action &mdash; the one piece of arithmetic it is allowed, because a crore is a unit, not a calculation.</li>
+        <li>It reports roughly <strong>USD 557.7 million</strong> at a rate of about 86.42, citing the action rather than itself.</li>
+        <li>Ask it <em>"did you work that out yourself?"</em>. The correct answer is no, and the trace will confirm it.</li>
+      </ul>
+
+      <div class="amber">
+        <strong>No premium connector?</strong> The HTTP action is premium. Build the flow anyway, and replace the HTTP action with a <strong>Compose</strong> action containing <code>fx-response.json</code> from the demo assets (also printed in <a href="#assets">the appendix</a>). Keep the second Compose that does the division &mdash; that is the part which matters.
+        Everything else &mdash; the input parameter, the action description, the routing decision, parsing the response, the agent using the result in a sentence &mdash; is identical. You lose the live call and keep the entire lesson.
+      </div>
+
+      <div class="k">Part 2 &mdash; the legacy internal system</div>
+      <p>No premium needed. This is the honest simulation of an internal endpoint: a flow that returns a fixed JSON payload, exactly as a wrapped legacy service would.</p>
+      <ol class="steps">
+        <li>New instant cloud flow, same Copilot Studio trigger, named <code>Get Client Mandate</code>. Input: text, <code>clientid</code>.</li>
+        <li>Add a <strong>Compose</strong> action containing <code>client-mandate-CL-4471.json</code> from the demo assets (also printed in <a href="#assets">the appendix</a>).</li>
+        <li><strong>Respond to Copilot</strong> with text output <code>mandatejson</code> = the Compose output.</li>
+        <li>Add it to the agent as a second action, with the description below.</li>
+        <li>Ask the combined question &mdash; it needs the factsheet, the mandate and a comparison.</li>
+      </ol>
+
+      <div class="k">Action description</div>
+      <pre>Looks up a client's investment mandate limits from the internal mandate system.
+Returns maximum equity allocation, permitted asset classes and minimum credit
+quality. Use whenever a fund must be checked against a client's mandate.
+Input clientid is the internal client reference, for example CL-4471.</pre>
+
+      <div class="k">Test question</div>
+      <pre>Does the Northwind fund's asset allocation comply with the mandate for client CL-4471?</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>The agent decides on its own to call the mandate action, then reads the factsheet's allocation section, then compares the two &mdash; without being told the sequence.</li>
+        <li>A clear answer: equity at 68% against a 70% mandate limit &mdash; compliant, but with only 2 points of headroom, which is exactly the kind of thing a consultant wants flagged.</li>
+        <li>In the trace: two knowledge reads and one action call, in an order the agent chose.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>The agent never calls the action.</strong> Nine times out of ten the description is too terse. Rewrite it to say <em>when</em> to use it, not just what it does &mdash; the agent routes on that sentence.</li>
+        <li><strong>The flow runs but the agent ignores the result.</strong> The output is not being returned as text the agent can read. Check the Respond step actually maps the body, and test the flow standalone in Power Automate first.</li>
+        <li><strong>The FX endpoint returns a different date</strong> than you asked for. That is correct behaviour &mdash; it falls back to the last business day. Good material for a conversation about what your agent should say when data is "close enough".</li>
+        <li><strong>Authentication errors on a real internal API.</strong> Expected, and out of scope today &mdash; that is a service-principal and gateway conversation with your platform team, and it is the first thing to raise if you take this back to your own environment.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D2.3 -->
+  <div class="demo" id="d23">
+    <div class="head">
+      <span class="id">Demo 2.3 <small>Excel and SQL data movement</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~25 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> numbers come from systems, narrative comes from the model. The moment arithmetic moves into Excel or SQL, a whole class of quiet errors disappears.</div>
+
+      <div class="k">You need</div>
+      <p><code>holdings.xlsx</code> and <code>benchmarks.xlsx</code> in OneDrive, copied from the demo assets in pre-flight. Both already use a real Excel <strong>Table</strong>, which is what the connector needs &mdash; if you rebuild them by hand from <a href="#assets">the appendix</a>, select the range and press <strong>Ctrl+T</strong> first, or the connector will not see them.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li>New flow, <strong>When Copilot Studio calls a flow</strong>, named <code>Get Holdings</code>. No inputs needed.</li>
+        <li>Add <strong>Excel Online (Business)</strong> &rarr; <strong>List rows present in a table</strong>. Point it at <code>holdings.xlsx</code> and its table.</li>
+        <li><strong>Compute the top-five total inside the flow.</strong> Add a <strong>Compose</strong> action with the expression below. This is the step people skip, and skipping it is what pushes the arithmetic back into the model.</li>
+        <li>Respond to Copilot with two outputs: text <code>holdingsrows</code> (the rows) and number <code>top5weightpct</code> (the Compose output).</li>
+        <li>Repeat for <code>benchmarks.xlsx</code> as <code>Get Benchmark</code>, with a text input <code>benchmarkname</code>.</li>
+        <li>Add both actions to the agent with descriptions that say when to use them.</li>
+        <li>Add the calculation rule below to Instructions &mdash; this is what stops the model doing the maths itself.</li>
+        <li>Ask the three test questions.</li>
+      </ol>
+
+      <div class="k">The top-five expression &mdash; Compose action</div>
+      <pre>add(
+  add(
+    add(
+      add(
+        float(first(body('List_rows_present_in_a_table')?['value'])?['weight_pct']),
+        float(body('List_rows_present_in_a_table')?['value'][1]?['weight_pct'])),
+      float(body('List_rows_present_in_a_table')?['value'][2]?['weight_pct'])),
+    float(body('List_rows_present_in_a_table')?['value'][3]?['weight_pct'])),
+  float(body('List_rows_present_in_a_table')?['value'][4]?['weight_pct'])
+)</pre>
+      <p style="font-size:.92em;margin-top:-4px">Deliberately literal, so you can read what it does at a glance: the weights of rows 1 to 5, added by the flow. The rows arrive already ranked, so
+      the first five rows <em>are</em> the top five. In your own environment this belongs in the query or the workbook &mdash; the point is only that it happens somewhere deterministic.</p>
+
+      <div class="k">Instructions to append</div>
+      <pre>Never calculate a total, a weighted figure or an average yourself, and never
+convert a currency yourself. Retrieve the number using an action and quote it.
+You may still state the difference between two figures you have retrieved, as
+long as both are shown with their sources.
+If a calculation is needed and no action provides it, say which action or data
+source is missing, and do not answer with a number.</pre>
+
+      <div class="k">Test questions</div>
+      <pre>What is the combined weight of the fund's top five holdings?
+How did the fund perform against the CRISIL Hybrid 35+65 Aggressive Index over 3 years?
+What is the average weight of the fund's top ten holdings?</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Question 1</strong> &mdash; <strong>22.9%</strong>, quoted from the action's <code>top5weightpct</code> output. Ask <em>"which action produced that?"</em> and it can name one. That is the whole difference between this answer and a plausible one.</li>
+        <li><strong>Question 2</strong> &mdash; 13.1% from the benchmark table, 15.6% from the factsheet, and the 2.5% difference labelled as excess return. This one the agent <em>is</em> allowed to subtract, because both operands are on screen with their sources and you can check it by eye.</li>
+        <li><strong>Question 3</strong> &mdash; the interesting one. No action returns an average, so the agent should decline and say an averaging action is missing. If it hands you a number instead, the rule is not holding, and you have found the defect this session exists to prevent.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Why question 2 is allowed and questions 1 and 3 are not.</strong> Two figures on screen, subtracted, can be checked by any reader in a second.
+        A total across ten rows, or an average, cannot &mdash; nobody re-adds the column, so a wrong answer survives review. The line is not "arithmetic is forbidden"; it is
+        <em>"if a reader cannot check it at a glance, a system computes it."</em> That distinction is worth more to your team than any single feature in Copilot Studio.
+      </div>
+
+      <div class="amber">
+        <strong>About the SQL half.</strong> The SQL Server connector is premium and most participants will not have a database to point at, so for you this part is <strong>watch-only</strong> &mdash; the wiring is identical to Excel: a flow, a parameterised call, a response, an action description.
+        The trainer runs it against a real database stood up from <code>benchmarks-sql.sql</code> in the demo assets, which creates the benchmark table and the two stored procedures shown on the slide, including <code>usp_GetExcessReturn</code>.
+        That script is yours to keep: it runs on Azure SQL free tier or any SQL Server 2019+, and it is the fastest way to reproduce this half in your own environment.
+        If you want practice today without a database, use <code>benchmarks.xlsx</code> as the stand-in. The lesson is the boundary, not the technology behind it.
+      </div>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Connector cannot see the table.</strong> The range is not formatted as a Table. This is the single most common failure in this demo.</li>
+        <li><strong>The agent still does the arithmetic itself.</strong> Ask it: <em>"Which action did you use for that figure?"</em> If it cannot name one, strengthen the calculation rule and retest in a fresh conversation.</li>
+        <li><strong>File not found.</strong> Excel Online (Business) reads OneDrive for Business and SharePoint, not personal OneDrive. Check which account the connection is using.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D2.4 -->
+  <div class="demo" id="d24">
+    <div class="head">
+      <span class="id">Demo 2.4 <small>Unstructured &rarr; structured, with a schema</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~30 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> this is the step your developers do by hand. With an enforced output shape, a gap becomes a flag instead of an invention &mdash; and the next step in the pipeline can finally rely on the result.</div>
+
+      <div class="k">You need</div>
+      <p>Your agent. The schema and the deliberately messy document, both in <a href="#assets">the appendix</a>.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li>Add the extraction instruction block below to your agent's Instructions.</li>
+        <li>Ask it to extract the clean factsheet &mdash; command 1. Check every field against the document yourself. Yes, all of them; this is the one demo where you must verify by hand.</li>
+        <li>Save the messy document from the appendix as a second file and upload it as knowledge.</li>
+        <li>Run command 2 against the messy document.</li>
+        <li>Compare the two outputs. Count the <code>not stated</code> values and the <code>needs_review</code> flags.</li>
+      </ol>
+
+      <div class="k">Instructions to append</div>
+      <pre>When asked to extract a fund record, return valid JSON only - no commentary,
+no markdown fence - with exactly these keys:
+
+fund_name, isin, share_class, aum, currency, benchmark, manager,
+inception_date, ter_regular, ter_direct, exit_load,
+return_1y, return_3y, return_5y, return_since_inception,
+benchmark_1y, benchmark_3y, benchmark_5y,
+alloc_equity, alloc_debt, alloc_gold, alloc_cash,
+as_of_date, source_document, needs_review
+
+Rules:
+- Every key must be present. Never add, remove or rename a key.
+- If a value is absent from the document, use the string: not stated
+- Percentages as strings with the percent sign, exactly as printed.
+- as_of_date in YYYY-MM-DD.
+- needs_review is a list of key names that were absent, ambiguous, or where the
+  document gave more than one candidate value. Empty list if none.
+- Never infer a value from another value.</pre>
+
+      <div class="k">Command 1 &mdash; the clean document</div>
+      <pre>Extract the fund record from the Northwind factsheet.</pre>
+
+      <div class="k">Command 2 &mdash; the messy document</div>
+      <pre>Extract the fund record from the Meridian manager update document.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Clean document:</strong> 25 keys, real values, and <code>needs_review</code> close to empty &mdash; which is the correct result, not a boring one. The factsheet is a well-formed document and a well-formed document should extract cleanly.</li>
+        <li><strong>The one field worth arguing about is <code>currency</code>.</strong> The factsheet never prints the word INR &mdash; it writes <em>Rs 4,820 crore</em> and <em>Domicile: India</em>. Returning <code>INR</code> is right, and reading it off the rupee symbol is exactly the kind of inference you want. Returning it while <em>also</em> listing it in <code>needs_review</code> is better still, because the next reader can see it was inferred rather than printed. Both answers are defensible; a silent guess with no trace is not.</li>
+        <li><strong>Messy document:</strong> around eighteen or nineteen <code>not stated</code> values out of the 25 keys, and <code>needs_review</code> listing the genuinely ambiguous ones &mdash; the 11.4% return that never says which period, the regular-plan charge given while the direct plan is only described as "lower", the "approximately" in front of the AUM, and <code>as_of_date</code>, which the document never states at all.</li>
+        <li>Both outputs parse as JSON. Paste one into any JSON validator to confirm.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>You get markdown fences or a preamble.</strong> Append: <em>"Output must begin with { and end with }. No other characters."</em></li>
+        <li><strong>needs_review comes back empty on the messy document.</strong> The agent is being agreeable rather than accurate. Add: <em>"If a value required interpretation of any kind, list its key in needs_review."</em></li>
+        <li><strong>A value looks right but is not on the page.</strong> Find it in the document before you accept it. This is the failure mode that survives review, and catching one here is worth more than the rest of the demo.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Stronger option if you have AI Builder credits:</strong> build this as a Prompt with a defined output schema rather than as Instructions. The shape is then enforced by the platform instead of requested by a sentence. Same idea, harder guarantee.
+      </div>
+    </div>
+  </div>
+
+  <!-- D2.5 -->
+  <div class="demo" id="d25">
+    <div class="head">
+      <span class="id">Demo 2.5 <small>Generating the report</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~30 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the deck stops being assembled by a person. The agent produces a complete, validated slide plan and hands it to whatever builds the file &mdash; a flow, an Office Script, or the Aspose code you already own.</div>
+
+      <div class="amber">
+        <strong>Read this before you start.</strong> Producing a genuine <code>.pptx</code> from a template normally needs a premium document-generation connector or your own code &mdash; which is why <strong>the last hop, plan to file, is trainer-demo only</strong>.
+        What you <em>can</em> build, completely, is everything up to it: the agent generating a validated slide plan and writing it to a file. In your own environment, the last step is the Aspose routine you already have, called as an action.
+        That is the honest architecture, and it is also the cheapest path for your team: keep the code that works, and let the agent orchestrate it.
+      </div>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li>Add the slide-plan instruction block below to your agent.</li>
+        <li>Ask for a review deck &mdash; command below. Read the JSON it produces as if you were the consultant presenting it.</li>
+        <li>Build a flow named <code>Save Slide Plan</code>: Copilot Studio trigger, text input <code>planjson</code>, then <strong>OneDrive for Business &rarr; Create file</strong> writing <code>plan.json</code> into your <code>copilot-workshop</code> folder.</li>
+        <li>Add it as an action, described as: <em>"Saves a finished slide plan as a file so it can be turned into a PowerPoint deck."</em></li>
+        <li>Ask the agent to generate <em>and save</em> the plan. Open the file in OneDrive to confirm it landed.</li>
+        <li>Watch the trainer complete the final hop from plan to a finished deck, using <code>deck-renderer.html</code> from the demo assets. Note exactly where your existing generator would sit instead.</li>
+        <li><strong>Do the last hop yourself, offline.</strong> Open <code>deck-renderer.html</code> in any browser, press <em>Load plan.json</em>, choose the file your agent just wrote, and print it. No tenant, no connector, no licence &mdash; the plan is the interface, so anything can render it.</li>
+      </ol>
+
+      <div class="k">Instructions to append</div>
+      <pre>When asked to produce a fund review deck, output valid JSON only, with this shape:
+
+{
+  "deck_title": "",
+  "client": "",
+  "as_of": "YYYY-MM-DD",
+  "slides": [
+    {"layout":"title",   "title":"", "subtitle":""},
+    {"layout":"kpi",     "title":"", "kpis":[{"label":"","value":"","source":""}]},
+    {"layout":"table",   "title":"", "columns":[], "rows":[[]], "source":""},
+    {"layout":"chart",   "title":"", "chart_type":"pie", "series":[{"label":"","value":0}], "source":""},
+    {"layout":"comment", "title":"", "bullets":[""], "source":""}
+  ],
+  "unresolved": []
+}
+
+Rules:
+- Every figure on every slide must carry a source string naming the document
+  section or the action it came from.
+- Any figure you could not source goes in unresolved, and does not appear on a slide.
+- Never write a commentary sentence containing a number that is not on a slide.
+- Five to seven slides. Commentary bullets: maximum twelve words each.</pre>
+
+      <div class="k">Command</div>
+      <pre>Produce a Q2 2026 fund review deck for client CL-4471 covering the Northwind
+fund: performance against benchmark, asset allocation, top holdings, fees,
+and a short commentary. Then save the plan.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Five to seven slides, every number carrying a source, and an <code>unresolved</code> list that is honest about what it could not find.</li>
+        <li>Commentary that references only figures present on the slides &mdash; the constraint that stops a deck contradicting itself.</li>
+        <li><code>plan.json</code> sitting in your OneDrive folder, ready for whatever builds the file.</li>
+        <li>Loaded into <code>deck-renderer.html</code>, that same JSON becomes a six-slide deck with every figure carrying its source, plus a final slide listing what could not be sourced. Compare it against <code>investment-report-sample.pdf</code> in the demo assets, which is the same plan rendered by the trainer.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Commentary contains a number you cannot find on any slide.</strong> The most valuable failure in the whole day. Tighten the rule and run again.</li>
+        <li><strong>The JSON will not parse.</strong> Usually a stray sentence before the brace. Same fix as demo 2.4.</li>
+        <li><strong>Twelve slides.</strong> The agent is being thorough rather than obedient. Constrain harder: <em>"Exactly six slides. No more."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D2.6 -->
+  <div class="demo" id="d26">
+    <div class="head">
+      <span class="id">Demo 2.6 <small>Publish to Teams, share, approve, govern</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~30 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> publishing is the step that turns your build into a team capability &mdash; and the approval gate is where autonomy actually gets set, in configuration rather than in a policy document.</div>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li>In your agent, select <strong>Publish</strong>. Wait for it to complete &mdash; nothing below works until it has.</li>
+        <li>Go to <strong>Channels</strong> &rarr; <strong>Microsoft Teams</strong> &rarr; turn it on, then <strong>Open the agent in Teams</strong>. Ask it a question from inside Teams.</li>
+        <li><strong>Share it.</strong> Use the Share control to add one colleague. Notice the difference between sharing it to <em>use</em> and adding a <em>co-author</em> &mdash; that distinction is your first governance decision.</li>
+        <li><strong>Add the approval gate.</strong> New flow, Copilot Studio trigger, text inputs <code>decksummary</code> and <code>approver</code>. Add <strong>Approvals &rarr; Start and wait for an approval</strong> (Approve/Reject), then Respond to Copilot with the outcome.</li>
+        <li>Add it as an action, described as: <em>"Sends a finished client deck for human approval before it is issued. Must be used before any output is described as final or client-ready."</em></li>
+        <li>Add the governance rule below to Instructions.</li>
+        <li>Ask the agent for a client-ready deck. Watch the approval land in Teams. <strong>Reject it once</strong> and see what the agent does.</li>
+        <li>Work the checklist below against what you built.</li>
+      </ol>
+
+      <div class="k">Instructions to append</div>
+      <pre>Nothing you produce is client-ready until a human has approved it. When asked
+for a final or client-ready output, always send it for approval first and report
+the outcome. If approval is rejected, state the reason and do not reissue the
+output. Never describe an unapproved document as final.</pre>
+
+      <div class="k">The governance checklist &mdash; work it against your own agent</div>
+      <table>
+        <thead><tr><th style="width:32%">Question</th><th>What good looks like</th></tr></thead>
+        <tbody>
+          <tr><td>What data does it read?</td><td>You can name every knowledge source and every action, from memory.</td></tr>
+          <tr><td>Where can data go?</td><td>You can name every connector and say whether it leaves the tenant.</td></tr>
+          <tr><td>Who can use it?</td><td>An explicit list, not "whoever has the link".</td></tr>
+          <tr><td>Who owns it?</td><td>A named person, with a named deputy.</td></tr>
+          <tr><td>What can it do unattended?</td><td>Read and draft. Anything client-facing passes the gate.</td></tr>
+          <tr><td>How do we know what it did?</td><td>You can open a past run and read the actions and inputs.</td></tr>
+          <tr><td>What happens when it is wrong?</td><td>A named reviewer, with time in their week to be that reviewer.</td></tr>
+          <tr><td>How does it change safely?</td><td>Edits are tested somewhere before they reach the published agent.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>The agent, in Teams, in your own sidebar &mdash; the moment it stops being a project and becomes a tool.</li>
+        <li>An approval card you must act on before the agent will call anything final.</li>
+        <li>On rejection: the agent reports the rejection and stops. It does not quietly try again, because you told it not to.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Teams channel greyed out.</strong> The agent is not published, or your tenant restricts Teams app publishing. Publishing to the test channel still demonstrates it.</li>
+        <li><strong>Approval never arrives.</strong> The approver address is wrong, or the flow is waiting. Check the run history in Power Automate &mdash; the flow, not the agent, is where the truth is.</li>
+        <li><strong>The agent calls output "final" without approval.</strong> Your rule is in Instructions but the conversation started before you saved. New conversation, retest.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D2.7 -->
+  <div class="demo" id="d27">
+    <div class="head">
+      <span class="id">Demo 2.7 <small>The agent runs without being asked &mdash; the trigger</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~20 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> this is the one that answers the question you actually asked. Everything so far has been an agent you talk to &mdash; useful, but still something a person has to remember to open. A trigger makes it part of the process: a file lands, the work happens, and a human sees a decision rather than a task.</div>
+
+      <div class="k">The scenario</div>
+      <p>A new fund factsheet arrives in a SharePoint library, the way one arrives in your world every quarter. Nobody opens Copilot Studio. Nobody types a prompt.
+      The extraction, the enrichment, the slide plan and the approval request all happen because a file appeared &mdash; and the first human involvement is a card in Teams asking a consultant to approve a deck that is already built.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li>Create a SharePoint document library (or a folder in one) called <code>incoming-factsheets</code>. A OneDrive folder works just as well if SharePoint is restricted.</li>
+        <li>New flow &mdash; this time an <strong>Automated cloud flow</strong>, not an instant one. Trigger: <strong>When a file is created (properties only)</strong>, pointed at that library. Name it <code>Factsheet Arrived</code>.</li>
+        <li>Add <strong>Get file content</strong> so the flow has the document itself.</li>
+        <li>Add the Copilot Studio action &mdash; in the flow, this is the connector step that <strong>invokes your agent</strong> and passes the file content plus the instruction below.</li>
+        <li>Route the agent's reply into the approval you already built in demo 2.6, so the outcome is a card in Teams rather than a message in a chat window.</li>
+        <li><strong>Test it the honest way:</strong> drop <code>sample-fund-factsheet.pdf</code> into the library and then close the browser tab. Come back in two minutes and look at Teams.</li>
+        <li>Now drop <code>meridian-manager-update.txt</code> in as well &mdash; the messy one &mdash; and watch what a triggered agent does when the document does not cooperate.</li>
+      </ol>
+
+      <div class="k">What the flow asks the agent</div>
+      <pre>A new fund document has arrived. Extract the fund record using the schema in
+your instructions, enrich it with the mandate and benchmark actions, and produce
+a slide plan for a quarterly review.
+
+Do not describe anything as final. Send the plan for approval and report the
+outcome. If more than three fields are in needs_review, do not produce a plan at
+all - report which fields failed and stop.</pre>
+
+      <div class="k">Instructions to append</div>
+      <pre>When you are invoked by a process rather than by a person, nobody is present to
+answer a follow-up question. So: never ask a clarifying question in that context.
+If something is ambiguous, choose nothing, state the ambiguity in needs_review,
+and let the approval step put it in front of a human.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Nothing at all, for about a minute &mdash; which is the point. No window is open. No one is waiting.</li>
+        <li>Then an approval card in Teams, carrying a slide plan built from a file you did nothing with except save it in the right place.</li>
+        <li>With the messy document, the agent stops instead: more than three fields in <code>needs_review</code>, so it reports the failure rather than producing a confident, wrong deck. <strong>An agent that declines to run is a working agent.</strong></li>
+        <li>In the flow's run history: the whole chain, timestamped, with inputs and outputs you can read back months later when somebody asks where a number came from.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>The trigger never fires.</strong> SharePoint triggers poll rather than push &mdash; the default interval means up to a minute of waiting, and a first run can take longer. Check the flow's run history before you change anything; the most common "broken trigger" is an impatient builder.</li>
+        <li><strong>No Copilot Studio action available in the flow.</strong> Feature placement moves between releases and some tenants restrict it. Substitute: have the flow do the extraction by calling the agent's published endpoint, or &mdash; simplest &mdash; run the same chain from a <strong>Scheduled</strong> trigger and demonstrate the identical point. Unattended is unattended, whatever started it.</li>
+        <li><strong>It asks a clarifying question and then waits forever.</strong> Exactly the failure the appended instruction prevents. Add it, republish, and drop the file again.</li>
+        <li><strong>Everything is blocked in your tenant.</strong> Read the steps and watch the trainer. The architecture is the transferable part, and it is unchanged whichever button starts it.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>This is the shape to take to your platform team, because it is the shape that changes a working week. An agent in a chat window saves a person some typing;
+      an agent on a trigger removes a step from the process and puts a human at the decision instead of the keyboard.
+      When you map your own workflow &mdash; demo 1.4 &mdash; the steps worth automating first are the ones that begin with <em>"when X arrives"</em>, because those already have a trigger waiting to be used.</p>
+    </div>
+  </div>
+</section>
+
+<section id="assets" class="pb">
+  <h2>Appendix &mdash; every asset you need</h2>
+  <p>Everything here is synthetic and safe to use anywhere. <strong>Every item below is shipped as a real file in the <code>demo-assets/</code> folder circulated with this guide</strong> &mdash; nothing has to be typed out.
+  The contents are also printed here so that anyone on Track C, or anyone reading this a year from now, can rebuild the whole set from the page alone.</p>
+
+  <table class="tbl" style="margin-bottom:14px">
+    <thead><tr><th>File</th><th>Used by</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td><code>sample-fund-factsheet.pdf</code> / <code>.html</code> / <code>.txt</code></td><td>every demo</td><td>The Northwind factsheet. Three formats, identical figures.</td></tr>
+      <tr><td><code>manager-update-jul-2026.txt</code></td><td>2.1</td><td>Second knowledge source, so the agent has to choose between documents.</td></tr>
+      <tr><td><code>meridian-manager-update.txt</code></td><td>2.4, 2.7</td><td>The deliberately messy document.</td></tr>
+      <tr><td><code>holdings.xlsx</code></td><td>2.3</td><td>Ten holdings. Already a real Excel Table.</td></tr>
+      <tr><td><code>benchmarks.xlsx</code></td><td>2.3</td><td>Three benchmarks. Already a real Excel Table.</td></tr>
+      <tr><td><code>client-mandate-CL-4471.json</code></td><td>2.2</td><td>The "legacy internal system" response.</td></tr>
+      <tr><td><code>fx-response.json</code></td><td>2.2</td><td>Substitute payload when the HTTP connector is unavailable.</td></tr>
+      <tr><td><code>benchmarks-sql.sql</code></td><td>2.3</td><td>Stands up the benchmark database and both stored procedures.</td></tr>
+      <tr><td><code>slide-plan-sample.json</code></td><td>2.5</td><td>A finished slide plan, for comparison against your own.</td></tr>
+      <tr><td><code>deck-renderer.html</code></td><td>2.5</td><td>Plan in, deck out. Open it in a browser; nothing to install.</td></tr>
+      <tr><td><code>investment-report-sample.pdf</code></td><td>2.5</td><td>The sample plan, rendered. This is what the capstone produces.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1. <code>sample-fund-factsheet.pdf</code> &mdash; the main document</h3>
+  <p>Circulated with this guide, alongside <code>.txt</code> and <code>.html</code> versions of the same document. The Northwind Multi-Asset Growth Fund: a fictional India-domiciled multi-asset fund, data as of 30 June 2026. Every demo starts here.
+  <strong>All three formats carry exactly the same fields and figures</strong>, so if the PDF will not attach in your environment, the <code>.txt</code> is a straight substitute.
+  Tracking error, portfolio turnover and NAV per unit are <em>deliberately absent</em> from all three &mdash; several demos depend on that.</p>
+
+  <h3>2. <code>manager-update-jul-2026.txt</code> &mdash; second knowledge source (demo 2.1)</h3>
+  <pre>NORTHWIND MULTI-ASSET GROWTH FUND
+Manager Commentary - July 2026
+SYNTHETIC DOCUMENT, FOR TRAINING USE ONLY
+
+Portfolio positioning
+We reduced equity modestly during June as large-cap valuations extended,
+ending the quarter at 68% against a neutral 65%. The debt sleeve was
+lengthened in duration following the softer inflation print.
+
+Gold
+The gold sleeve remains at approximately 5% of the portfolio. We continue to
+hold it as a drawdown hedge rather than a return driver, and we have no
+current intention of increasing it beyond 7% under any scenario.
+
+Outlook
+We expect range-bound equity markets through the second half, with the
+fixed-income sleeve carrying more of the return burden than in 2025. The
+fund remains positioned for a 5+ year horizon.
+
+Ananya Krishnan, CFA - Fund Manager</pre>
+
+  <h3>3. <code>holdings.xlsx</code> &mdash; demo 2.3</h3>
+  <p>Shipped ready to use. If you rebuild it: paste into Excel, <strong>select the range and press Ctrl+T</strong> to make it a Table, and name the sheet <code>Holdings</code>.</p>
+  <pre>rank,holding,weight_pct,asset_class
+1,HDFC Bank,6.2,Equity
+2,Reliance Industries,5.1,Equity
+3,ICICI Bank,4.3,Equity
+4,Infosys,3.8,Equity
+5,7.18% GOI 2033 (G-Sec),3.5,Debt
+6,Tata Consultancy Services,3.2,Equity
+7,Larsen & Toubro,2.9,Equity
+8,Bharti Airtel,2.6,Equity
+9,Axis Bank,2.4,Equity
+10,Sovereign Gold Bond 2032,2.2,Gold</pre>
+
+  <h3>4. <code>benchmarks.xlsx</code> &mdash; demo 2.3</h3>
+  <pre>benchmark_name,return_1y,return_3y,return_5y,as_of
+CRISIL Hybrid 35+65 Aggressive Index,12.8,13.1,11.7,2026-06-30
+CRISIL Composite Bond Fund Index,7.4,6.9,6.6,2026-06-30
+Nifty 50 TRI,16.1,17.2,15.4,2026-06-30</pre>
+
+  <h3>5. <code>client-mandate-CL-4471.json</code> &mdash; the "legacy internal system" response (demo 2.2)</h3>
+  <pre>{
+  "client_id": "CL-4471",
+  "client_name": "Meridian Retirement Trust",
+  "mandate_ref": "MND-2024-0117",
+  "max_equity_pct": 70,
+  "min_fixed_income_pct": 20,
+  "permitted_asset_classes": ["Equity", "Debt", "Gold", "Cash"],
+  "min_credit_quality": "AA",
+  "leverage_permitted": false,
+  "reporting_currency": "USD",
+  "review_frequency": "Quarterly",
+  "source_system": "MANDATE-LEGACY-01",
+  "retrieved_at": "2026-08-27T09:00:00Z"
+}</pre>
+
+  <h3>6. <code>fx-response.json</code> &mdash; substitute if the HTTP connector is unavailable (demo 2.2)</h3>
+  <pre>{
+  "amount": 1.0,
+  "base": "USD",
+  "date": "2026-06-30",
+  "rates": { "INR": 86.42 }
+}</pre>
+  <p style="font-size:.92em;margin-top:-4px">Illustrative rate. When the live endpoint is reachable it will return the real published rate, and may fall back to the previous business day &mdash; which is itself worth noticing.</p>
+
+  <h3>7. <code>meridian-manager-update.txt</code> &mdash; the deliberately messy document (demo 2.4)</h3>
+  <pre>MERIDIAN INDIA OPPORTUNITIES - QUARTERLY NOTE
+SYNTHETIC DOCUMENT, FOR TRAINING USE ONLY
+
+The strategy delivered 11.4% over the period, ahead of its comparator. Assets
+under management stood at approximately Rs 1,900 crore at quarter end, up from
+the prior quarter.
+
+Charges are 1.05% on the regular plan; the direct plan is lower. Investors
+should refer to the scheme information document for the current figure.
+
+The portfolio remains equity-oriented with a modest allocation to cash. The
+manager has run the strategy since launch.
+
+Note: figures are unaudited and subject to revision.</pre>
+  <p style="font-size:.92em;margin-top:-4px">
+    Deliberate traps: <em>"the period"</em> is never defined &mdash; 1 year? the quarter? &middot; the direct-plan TER is described but never given &middot; there is no ISIN, no benchmark name, no inception date, no allocation percentages &middot; <em>"approximately"</em> Rs 1,900 crore.
+    A good extraction returns roughly eighteen <code>not stated</code> values out of the 25 keys and a populated <code>needs_review</code>. A bad one fills the gaps for you.
+  </p>
+
+  <h3>8. <code>benchmarks-sql.sql</code> &mdash; the benchmark database (demo 2.3)</h3>
+  <p>Creates <code>dbo.Benchmark</code>, loads the three synthetic indices, and creates the two stored procedures shown on the slide:
+  <code>usp_GetBenchmarkReturns</code> returns one typed row, and <code>usp_GetExcessReturn</code> does the subtraction in the database rather than in the model.
+  Runs unchanged on Azure SQL Database free tier or SQL Server 2019+. Roughly five minutes to stand up, and it is the fastest way to reproduce the SQL half in your own environment.</p>
+
+  <h3>9. <code>slide-plan-sample.json</code> &mdash; a finished slide plan (demo 2.5)</h3>
+  <p>Six slides, every figure carrying a source, and two entries in <code>unresolved</code> &mdash; tracking error and portfolio turnover, the two fields the factsheet genuinely does not contain.
+  Compare your agent's plan against this one. If yours has fewer <code>unresolved</code> entries than this, that is not a better agent; check where the extra numbers came from.</p>
+
+  <h3>10. <code>deck-renderer.html</code> &mdash; plan in, deck out (demo 2.5)</h3>
+  <p>A single self-contained page: open it in any browser, press <em>Load plan.json</em>, and it renders the plan as a printable deck. No install, no licence, no tenant, no connector.
+  It exists to make one point &mdash; <strong>once the plan is a validated contract, whatever renders it is an implementation detail.</strong> In your environment the renderer is the Aspose generator you already own; here it is a browser page. The agent does not know the difference, and that is precisely why the architecture is a good one.
+  It also warns you, in red, if any figure in the plan arrives without a source.</p>
+
+  <h3>11. <code>investment-report-sample.pdf</code> &mdash; the capstone output</h3>
+  <p>Item 9 rendered by item 10. This is the artefact the whole day is pointed at: the deck that today is assembled by hand, through six hand-offs, from a factsheet, a workbook, a benchmark lookup and a mandate system.
+  The last page is the one to look at &mdash; it lists what the agent could not source and therefore refused to put on a slide.</p>
+
+</section>
+
+<section id="trouble">
+  <h2>Troubleshooting &mdash; the ten things that actually go wrong</h2>
+  <table>
+    <thead><tr><th style="width:34%">Symptom</th><th>Cause and fix</th></tr></thead>
+    <tbody>
+      <tr><td>Agent answers from general knowledge</td><td>General knowledge is enabled, or knowledge files have not finished indexing. Disable it in Settings, wait for file status to show ready, and always retest in a <strong>new</strong> conversation.</td></tr>
+      <tr><td>Instruction changes have no effect</td><td>You saved but tested in an existing conversation. Start a new one. This costs more workshop time than any other single issue.</td></tr>
+      <tr><td>The agent never calls your action</td><td>The action description does not say <em>when</em> to use it. Rewrite it as a sentence a colleague would understand, and name the trigger conditions.</td></tr>
+      <tr><td>Excel connector cannot see the data</td><td>The range is not formatted as a Table (Ctrl+T), or the file is in personal OneDrive rather than OneDrive for Business.</td></tr>
+      <tr><td>Flow succeeds, agent ignores the result</td><td>The Respond step is not returning the value as text the agent can read. Test the flow standalone in Power Automate first &mdash; always isolate before you debug the agent.</td></tr>
+      <tr><td>"Premium connector required"</td><td>Expected for HTTP and SQL. Use the Compose substitutes in the appendix &mdash; you keep the whole lesson and lose only the live call.</td></tr>
+      <tr><td>JSON output will not parse</td><td>A preamble sentence or a markdown fence. Add: <em>"Output must begin with { and end with }. No other characters."</em></td></tr>
+      <tr><td>An automated trigger never fires</td><td>SharePoint and OneDrive triggers <em>poll</em>; they do not push. Allow a minute, and longer for a flow's first run. Read the run history before changing anything &mdash; most "broken triggers" are impatience.</td></tr>
+          <tr><td>The agent does arithmetic it was told not to</td><td>Check which rule it broke. A difference between two figures it showed you is allowed; a total, an average or a conversion is not. If it produced one of those, no action was returning the number &mdash; build the action rather than sharpening the sentence.</td></tr>
+          <tr><td>Everything is blocked in your tenant</td><td>You are Track C, and that is a legitimate outcome, not a failure. Watch, keep this guide, and replay in a developer tenant afterwards &mdash; every asset you need is shipped as a real file alongside this guide.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="after">
+  <h2>After the workshop &mdash; taking this into your own environment</h2>
+  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the four conversations to start, in this order:</p>
+  <ol>
+    <li><strong>An environment.</strong> A Power Platform environment your team owns, with dev and prod separated. Ask for this first &mdash; everything else waits on it.</li>
+    <li><strong>Connector approval and DLP.</strong> The specific list of connectors your agent needs, and which data groups they sit in. This is the dependency with a queue in front of it, so start it early.</li>
+    <li><strong>An identity for the agent.</strong> How it authenticates to your internal and legacy systems &mdash; a service principal, a gateway, or an API wrapper around what exists.</li>
+    <li><strong>A named owner and reviewer.</strong> Not a formality: an agent nobody owns stops being maintained within a quarter, and an approval gate with no time behind it is theatre.</li>
+  </ol>
+  <div class="note">
+    Bring your workflow map from demo 1.4 to that conversation. A request framed as <em>"we want to remove four steps from the quarterly review, here is the map and here is what it needs"</em> lands very differently from <em>"we would like to try Copilot Studio"</em>.
+  </div>
+  <p style="margin-top:12px">Related material: <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="course-outline-copilot-studio.html">the full course outline</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a> &middot; <a href="module-2-build.html">Module 2 slides</a>.</p>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI |
+  <a href="https://devops.gheware.com">devops.gheware.com</a> |
+  Trainer: Rajesh Gheware |
+  Demo Follow-Along Guide v1.1
+</footer>
+
+<script>
+document.querySelectorAll('pre').forEach(function(pre){
+  var text=pre.innerText;
+  var b=document.createElement('button');
+  b.className='cp';b.type='button';b.textContent='Copy';
+  b.onclick=function(){
+    navigator.clipboard.writeText(text).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done');},1400);
+    });
+  };
+  pre.appendChild(b);
+});
+</script>
+</body>
+</html>

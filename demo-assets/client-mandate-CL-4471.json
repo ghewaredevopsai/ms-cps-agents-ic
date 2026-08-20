@@ -1,0 +1,14 @@
+{
+  "client_id": "CL-4471",
+  "client_name": "Meridian Retirement Trust",
+  "mandate_ref": "MND-2024-0117",
+  "max_equity_pct": 70,
+  "min_fixed_income_pct": 20,
+  "permitted_asset_classes": ["Equity", "Debt", "Gold", "Cash"],
+  "min_credit_quality": "AA",
+  "leverage_permitted": false,
+  "reporting_currency": "USD",
+  "review_frequency": "Quarterly",
+  "source_system": "MANDATE-LEGACY-01",
+  "retrieved_at": "2026-08-27T09:00:00Z"
+}

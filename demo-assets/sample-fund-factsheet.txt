@@ -1,0 +1,195 @@
+================================================================
+SAMPLE / SYNTHETIC DOCUMENT — FOR TRAINING & DEMO USE ONLY
+This is a fictional fund. All names, figures, holdings and returns
+are illustrative and invented. Not a real fund, not an offer, and
+not investment advice. Do not use for any real investment decision.
+================================================================
+
+NORTHWIND MULTI-ASSET GROWTH FUND
+Fund Fact Sheet — Institutional Share Class
+Data as of: 30 June 2026
+
+----------------------------------------------------------------
+1. FUND OVERVIEW
+----------------------------------------------------------------
+The Northwind Multi-Asset Growth Fund is an open-ended multi-asset
+allocation fund that invests across equity, fixed income, gold and
+cash. Its objective is long-term capital growth with lower volatility
+than a pure equity fund, by dynamically allocating across asset classes.
+The fund is designed for long-horizon investors and institutional
+allocators (including pension and retirement portfolios) seeking a
+single diversified, professionally managed growth vehicle.
+
+----------------------------------------------------------------
+2. KEY FACTS
+----------------------------------------------------------------
+Fund name:            Northwind Multi-Asset Growth Fund
+Share class:          Institutional
+Fund type:            Open-ended multi-asset allocation fund
+Inception date:       15 March 2016
+Fund size (AUM):      Rs 4,820 crore
+Benchmark:            CRISIL Hybrid 35+65 Aggressive Index
+Fund manager:         Ananya Krishnan (managing since inception)
+Domicile:             India
+Risk rating:          High (equity-oriented multi-asset)
+Expense ratio (TER):  1.18% Regular plan / 0.62% Direct plan
+Minimum investment:   Rs 5,000 (retail) / Rs 1 crore (Institutional class)
+Exit load:            1.0% if redeemed within 12 months; nil thereafter
+ISIN:                 INF000SAMPLE01 (illustrative)
+
+----------------------------------------------------------------
+3. INVESTMENT STRATEGY
+----------------------------------------------------------------
+- Core allocation to Indian large- and mid-cap equities for growth.
+- Fixed income (government securities and high-grade corporate bonds)
+  for stability and income.
+- A gold sleeve (via sovereign gold bonds / gold ETFs) as an inflation
+  and equity-drawdown hedge.
+- Allocation is reviewed monthly and tilted based on valuation,
+  interest-rate outlook and macro conditions.
+- The fund does not use leverage and avoids unrated credit.
+
+----------------------------------------------------------------
+4. PERFORMANCE (annualised, as of 30 June 2026)
+----------------------------------------------------------------
+Period            Fund       Benchmark
+1 year            14.2%      12.8%
+3 years           15.6%      13.1%
+5 years           13.9%      11.7%
+Since inception   12.4%      10.9%
+
+Past performance is illustrative/synthetic and does not indicate
+future results.
+
+----------------------------------------------------------------
+5. ASSET ALLOCATION
+----------------------------------------------------------------
+Equity                 68%
+Fixed income (debt)    24%
+Gold / commodities      5%
+Cash & equivalents      3%
+
+Geographic (equity):   India 92% / International 8%
+
+----------------------------------------------------------------
+6. EQUITY SECTOR ALLOCATION
+----------------------------------------------------------------
+Financials             24%
+Information Technology 16%
+Consumer               12%
+Energy                 11%
+Industrials            10%
+Healthcare              9%
+Others                 18%
+
+----------------------------------------------------------------
+7. TOP 10 HOLDINGS
+----------------------------------------------------------------
+1.  HDFC Bank                       6.2%
+2.  Reliance Industries             5.1%
+3.  ICICI Bank                      4.3%
+4.  Infosys                         3.8%
+5.  7.18% GOI 2033 (G-Sec)          3.5%
+6.  Tata Consultancy Services       3.2%
+7.  Larsen & Toubro                 2.9%
+8.  Bharti Airtel                   2.6%
+9.  Axis Bank                       2.4%
+10. Sovereign Gold Bond 2032        2.2%
+
+----------------------------------------------------------------
+8. RISK PROFILE & CONSIDERATIONS
+----------------------------------------------------------------
+- Suitable for investors with a 5+ year horizon.
+- Equity exposure means the fund can fall in value in market downturns;
+  the multi-asset structure aims to soften, not eliminate, drawdowns.
+- Interest-rate movements affect the fixed-income sleeve.
+- Gold exposure can be volatile but historically diversifies equity risk.
+- Not suitable for investors needing capital protection or short-term
+  liquidity certainty.
+
+----------------------------------------------------------------
+9. FEES
+----------------------------------------------------------------
+Total Expense Ratio (Regular plan):  1.18% per annum
+Total Expense Ratio (Direct plan):   0.62% per annum
+Exit load:                           1.0% within 12 months, nil after
+No entry load. Fees are illustrative.
+
+----------------------------------------------------------------
+10. FUND MANAGER
+----------------------------------------------------------------
+Ananya Krishnan, CFA — 18 years of investment experience across
+multi-asset and equity strategies. Has managed the Northwind
+Multi-Asset Growth Fund since its 2016 inception. Supported by a
+team of four sector analysts and one fixed-income strategist.
+
+================================================================
+FREQUENTLY ASKED QUESTIONS (FAQ)
+================================================================
+
+Q1. What is the fund's objective?
+Long-term capital growth with lower volatility than a pure equity
+fund, achieved by allocating dynamically across equity, debt, gold
+and cash.
+
+Q2. Is this fund suitable for a pension or retirement allocation?
+It is designed for long-horizon investors, including institutional
+and retirement portfolios, via the Institutional share class. As
+with any equity-oriented fund, suitability depends on the investor's
+risk tolerance and time horizon; a consultant should confirm fit
+against the client's investment policy.
+
+Q3. What is the benchmark and why?
+The CRISIL Hybrid 35+65 Aggressive Index, which reflects a roughly
+65% equity / 35% debt blend — a close match to the fund's target
+asset mix, making it a fair yardstick for performance.
+
+Q4. What returns has the fund delivered?
+As of 30 June 2026 (annualised): 14.2% over 1 year, 15.6% over
+3 years, 13.9% over 5 years, and 12.4% since inception — ahead of
+the benchmark over each period. (Illustrative figures.)
+
+Q5. What are the fees?
+The total expense ratio is 1.18% per year for the Regular plan and
+0.62% for the Direct plan. An exit load of 1% applies if you redeem
+within 12 months.
+
+Q6. How liquid is the fund? How do redemptions work?
+It is open-ended, so units can be redeemed on any business day at the
+applicable NAV. Redemptions within 12 months of purchase incur a 1%
+exit load; after 12 months there is no exit load.
+
+Q7. How much of the fund is in equities versus safer assets?
+Currently 68% equity, 24% fixed income, 5% gold, and 3% cash. The
+mix is reviewed monthly and can shift with market conditions.
+
+Q8. What are the largest holdings?
+The top holdings include HDFC Bank (6.2%), Reliance Industries
+(5.1%), ICICI Bank (4.3%), Infosys (3.8%) and a government security,
+7.18% GOI 2033 (3.5%). Financials and IT are the largest equity
+sectors.
+
+Q9. Does the fund use leverage or invest in risky credit?
+No. The fund does not use leverage and avoids unrated credit,
+holding only government securities and high-grade corporate bonds
+in its fixed-income sleeve.
+
+Q10. Why does the fund hold gold?
+The ~5% gold sleeve (via sovereign gold bonds and gold ETFs) acts as
+an inflation hedge and tends to diversify equity risk during
+market drawdowns.
+
+Q11. Who manages the fund?
+Ananya Krishnan, CFA, who has run the fund since its 2016 inception,
+supported by a team of sector analysts and a fixed-income strategist.
+
+Q12. What is the minimum investment?
+Rs 5,000 for the retail plan and Rs 1 crore for the Institutional
+share class.
+
+================================================================
+DISCLAIMER: This document is synthetic and created solely for
+training and product-demonstration purposes. The fund, figures,
+holdings, manager and performance are fictional and illustrative.
+Nothing here is an offer, solicitation, or investment advice.
+================================================================

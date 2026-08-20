@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------------------
+# Copilot Studio workshop — files excluded from version control
+#
+# This folder mixes CLIENT-FACING DELIVERABLES (safe to track) with COMMERCIAL
+# AND CONTACT MATERIAL (not safe to track). The rule applied here: anything
+# containing pricing, margins, purchase-order references, or a named
+# individual's email or phone number stays untracked.
+#
+# Nothing in this file quotes those values — it only names the files.
+# ---------------------------------------------------------------------------
+
+# Deleted 20 Aug 2026, but kept listed so a recreated copy stays untracked:
+#   commercial-quote.md   — pricing, discount off list, payment terms
+#   po-revision-email.txt — named recipients, PO reference, revised pricing
+commercial-quote.md
+po-revision-email.txt
+
+# Requirements source of truth: broker contact details, the client's
+# internally-reported pain points and tooling constraints (shared in
+# confidence), PO status, and the commercials block.
+training-requirements.txt
+
+# README.md is NOT ignored — as of 20 Aug 2026 it carries course information
+# only; commercials, PO state and contact details were removed from it.
+
+# Local Claude Code settings — machine-specific, not part of the deliverable.
+.claude/
+
+# Working notes for this engagement. Local only — references the commercial/PO
+# context that README.md and presentation/ must never carry.
+CLAUDE.md
+
+# ---------------------------------------------------------------------------
+# Generic secret / credential patterns — belt and braces
+# ---------------------------------------------------------------------------
+.env
+.env.*
+*.env
+secrets.*
+credentials.*
+*.key
+*.pem
+*.pfx
+*.p12
+id_rsa*
+*token*.json
+*.credentials
+
+# ---------------------------------------------------------------------------
+# OS / editor noise
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide Plan Renderer — Investment Report Agent</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#0f1b2a; color:#1f2937; }
+  #bar { background:#12263f; color:#e2e8f0; padding:10px 18px; display:flex; gap:14px;
+         align-items:center; font-size:13px; position:sticky; top:0; z-index:9; }
+  #bar b { color:#fff; font-size:14px; margin-right:auto; }
+  #bar button, #bar label { background:#1e88a8; color:#fff; border:0; padding:7px 13px;
+         border-radius:5px; cursor:pointer; font-size:12.5px; font-family:inherit; }
+  #bar .hint { color:#93a7bd; font-size:12px; }
+  #err { display:none; background:#7f1d1d; color:#fee2e2; padding:9px 18px; font-size:13px; }
+  .slide { width:1000px; height:562px; background:#fff; margin:22px auto; padding:44px 52px;
+           position:relative; box-shadow:0 8px 26px rgba(0,0,0,.45); overflow:hidden; }
+  .slide h2 { margin:0 0 4px; font-size:29px; color:#12263f; }
+  .rule { width:76px; height:4px; background:#1e88a8; margin:12px 0 24px; }
+  .title-slide { display:flex; flex-direction:column; justify-content:center;
+                 background:linear-gradient(135deg,#12263f 0%,#0a1725 100%); color:#fff; }
+  .title-slide h1 { font-size:44px; margin:0 0 16px; line-height:1.15; }
+  .title-slide .sub { font-size:18px; color:#9ec5d8; line-height:1.5; }
+  .title-slide .brand { position:absolute; bottom:38px; left:52px; font-size:12.5px; color:#5c7d94; }
+  .kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .kpi { border:1px solid #dbe3ec; border-top:4px solid #1e88a8; border-radius:7px; padding:16px 17px; }
+  .kpi .lab { font-size:13px; color:#64748b; min-height:34px; }
+  .kpi .val { font-size:32px; font-weight:700; color:#12263f; margin:6px 0 8px; }
+  .kpi .src { font-size:10.5px; color:#94a3b8; border-top:1px dotted #dbe3ec; padding-top:6px; }
+  table { width:100%; border-collapse:collapse; font-size:16px; }
+  th { background:#12263f; color:#fff; text-align:left; padding:10px 13px; font-size:14px; }
+  td { padding:9px 13px; border-bottom:1px solid #e8edf3; }
+  tr:last-child td { font-weight:700; background:#f4f8fb; }
+  .bul { font-size:19px; line-height:1.85; margin:0; padding-left:24px; }
+  .bul li { margin-bottom:5px; }
+  .src-foot { position:absolute; bottom:24px; left:52px; right:52px; font-size:10.5px;
+              color:#94a3b8; border-top:1px dotted #dbe3ec; padding-top:7px; }
+  .pieWrap { display:flex; align-items:center; gap:52px; }
+  .legend { font-size:16px; }
+  .legend div { margin-bottom:11px; display:flex; align-items:center; gap:11px; }
+  .sw { width:15px; height:15px; border-radius:3px; display:inline-block; }
+  .unres { border:1px solid #f0c987; background:#fffbf1; border-radius:7px; padding:16px 18px; font-size:15px; }
+  .unres b { color:#92400e; }
+  .unres li { margin:5px 0; }
+  .pgno { position:absolute; bottom:22px; right:52px; font-size:11px; color:#94a3b8; }
+  @media print {
+    @page { size:1000px 562px; margin:0; }
+    body { background:#fff; }
+    #bar, #err { display:none !important; }
+    .slide { margin:0; box-shadow:none; page-break-after:always; break-after:page; }
+    .slide:last-child { page-break-after:auto; break-after:auto; }
+  }
+</style>
+</head>
+<body>
+<div id="bar">
+  <b>Slide Plan Renderer</b>
+  <span class="hint">the stand-in for your Aspose generator &mdash; plan JSON in, deck out</span>
+  <label>Load plan.json <input id="file" type="file" accept=".json,application/json" hidden></label>
+  <button id="paste">Paste plan</button>
+  <button id="print">Print / save as PDF</button>
+</div>
+<div id="err"></div>
+<div id="deck"></div>
+
+<script>
+const COLORS = ['#12263f','#1e88a8','#c9a227','#7f9bb3','#5a7d5a','#8a5a7d'];
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function pie(series) {
+  const total = series.reduce((a, s) => a + (+s.value || 0), 0) || 1;
+  let ang = -Math.PI / 2, paths = '', legend = '';
+  series.forEach((s, i) => {
+    const frac = (+s.value || 0) / total, end = ang + frac * 2 * Math.PI;
+    const x1 = 130 + 118 * Math.cos(ang),  y1 = 130 + 118 * Math.sin(ang);
+    const x2 = 130 + 118 * Math.cos(end),  y2 = 130 + 118 * Math.sin(end);
+    const large = frac > 0.5 ? 1 : 0;
+    const c = COLORS[i % COLORS.length];
+    // a single segment covering the whole circle needs a circle, not an arc
+    paths += frac >= 0.999
+      ? `<circle cx="130" cy="130" r="118" fill="${c}"/>`
+      : `<path d="M130,130 L${x1.toFixed(2)},${y1.toFixed(2)} A118,118 0 ${large},1 ${x2.toFixed(2)},${y2.toFixed(2)} Z" fill="${c}"/>`;
+    legend += `<div><span class="sw" style="background:${c}"></span>${esc(s.label)} &mdash; <b>${esc(s.value)}%</b></div>`;
+    ang = end;
+  });
+  return `<div class="pieWrap"><svg width="260" height="260" viewBox="0 0 260 260">${paths}</svg>
+          <div class="legend">${legend}</div></div>`;
+}
+
+function renderSlide(s, n, plan) {
+  const foot = s.source ? `<div class="src-foot">Source: ${esc(s.source)}</div>` : '';
+  const pg = `<div class="pgno">${n}</div>`;
+  if (s.layout === 'title') {
+    return `<div class="slide title-slide">
+      <h1>${esc(s.title)}</h1><div class="sub">${esc(s.subtitle)}</div>
+      <div class="brand" style="color:#5c7d94">Generated by the Investment Report Agent &middot; synthetic training data</div></div>`;
+  }
+  let body = '';
+  if (s.layout === 'kpi') {
+    body = `<div class="kpis">` + (s.kpis || []).map(k =>
+      `<div class="kpi"><div class="lab">${esc(k.label)}</div><div class="val">${esc(k.value)}</div>
+       <div class="src">${esc(k.source)}</div></div>`).join('') + `</div>`;
+  } else if (s.layout === 'table') {
+    body = `<table><tr>` + (s.columns || []).map(c => `<th>${esc(c)}</th>`).join('') + `</tr>` +
+      (s.rows || []).map(r => `<tr>` + r.map(c => `<td>${esc(c)}</td>`).join('') + `</tr>`).join('') + `</table>`;
+  } else if (s.layout === 'chart') {
+    body = pie(s.series || []);
+  } else if (s.layout === 'comment') {
+    body = `<ul class="bul">` + (s.bullets || []).map(b => `<li>${esc(b)}</li>`).join('') + `</ul>`;
+  } else {
+    body = `<p style="color:#b45309">Unknown layout: ${esc(s.layout)}</p>`;
+  }
+  return `<div class="slide"><h2>${esc(s.title)}</h2><div class="rule"></div>${body}${foot}${pg}</div>`;
+}
+
+function render(plan) {
+  const err = document.getElementById('err');
+  err.style.display = 'none';
+  const problems = [];
+  if (!Array.isArray(plan.slides) || !plan.slides.length) problems.push('plan has no slides');
+  (plan.slides || []).forEach((s, i) => {
+    if (s.layout !== 'title' && !s.source && s.layout !== 'kpi') problems.push(`slide ${i + 1} "${s.title}" has no source`);
+    if (s.layout === 'kpi') (s.kpis || []).forEach(k => { if (!k.source) problems.push(`KPI "${k.label}" has no source`); });
+  });
+  let html = plan.slides.map((s, i) => renderSlide(s, i + 1, plan)).join('');
+  if (plan.unresolved && plan.unresolved.length) {
+    html += `<div class="slide"><h2>Unresolved &mdash; not shown on any slide</h2><div class="rule"></div>
+      <div class="unres"><b>The agent could not source these, so they were withheld rather than invented:</b>
+      <ul>` + plan.unresolved.map(u => `<li>${esc(u)}</li>`).join('') + `</ul></div>
+      <div class="src-foot">This slide is the point of the whole exercise: a gap is reported, never filled.</div>
+      <div class="pgno">${plan.slides.length + 1}</div></div>`;
+  }
+  document.getElementById('deck').innerHTML = html;
+  if (problems.length) {
+    err.style.display = 'block';
+    err.textContent = 'Plan rendered with warnings: ' + problems.join(' · ');
+  }
+  document.title = (plan.deck_title || 'Investment Report') + ' — rendered';
+}
+
+function load(text) {
+  try { render(JSON.parse(text)); }
+  catch (e) {
+    const err = document.getElementById('err');
+    err.style.display = 'block';
+    err.textContent = 'That is not valid JSON: ' + e.message +
+      '  —  the usual cause is a preamble sentence or a markdown fence around the plan.';
+  }
+}
+
+document.getElementById('file').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader(); r.onload = () => load(r.result); r.readAsText(f);
+});
+document.getElementById('paste').addEventListener('click', () => {
+  const t = window.prompt('Paste the slide plan JSON produced by the agent:');
+  if (t) load(t);
+});
+document.getElementById('print').addEventListener('click', () => window.print());
+
+// Embedded default plan, so the renderer works with zero setup and offline.
+const DEFAULT_PLAN = {
+  "deck_title": "Northwind Multi-Asset Growth Fund - Q2 2026 Review",
+  "client": "Meridian Retirement Trust (CL-4471)",
+  "as_of": "2026-06-30",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Northwind Multi-Asset Growth Fund",
+      "subtitle": "Q2 2026 Review - Meridian Retirement Trust (CL-4471) - Data as of 30 June 2026"
+    },
+    {
+      "layout": "kpi",
+      "title": "Performance at a glance",
+      "kpis": [
+        {"label": "Fund - 3 year (annualised)", "value": "15.6%", "source": "Factsheet, Performance"},
+        {"label": "Benchmark - 3 year",         "value": "13.1%", "source": "SQL usp_GetBenchmarkReturns"},
+        {"label": "Excess return - 3 year",     "value": "2.5%",  "source": "SQL usp_GetExcessReturn"},
+        {"label": "Fund size",                  "value": "Rs 4,820 crore", "source": "Factsheet, Key Facts"},
+        {"label": "Fund size (USD)",            "value": "USD 557.7 mn",   "source": "Action Get FX Rate, 86.42 at 2026-06-30"},
+        {"label": "TER - Direct plan",          "value": "0.62%", "source": "Factsheet, Key Facts"}
+      ]
+    },
+    {
+      "layout": "table",
+      "title": "Performance against benchmark",
+      "columns": ["Period", "Fund", "Benchmark", "Excess"],
+      "rows": [
+        ["1 year",          "14.2%", "12.8%", "1.4%"],
+        ["3 years",         "15.6%", "13.1%", "2.5%"],
+        ["5 years",         "13.9%", "11.7%", "2.2%"],
+        ["Since inception", "12.4%", "10.9%", "1.5%"]
+      ],
+      "source": "Factsheet Performance; benchmark and excess from SQL usp_GetExcessReturn"
+    },
+    {
+      "layout": "chart",
+      "title": "Asset allocation",
+      "chart_type": "pie",
+      "series": [
+        {"label": "Equity",              "value": 68},
+        {"label": "Fixed income (debt)", "value": 24},
+        {"label": "Gold / commodities",  "value": 5},
+        {"label": "Cash & equivalents",  "value": 3}
+      ],
+      "source": "Factsheet, Asset Allocation"
+    },
+    {
+      "layout": "table",
+      "title": "Top five holdings",
+      "columns": ["Rank", "Holding", "Weight", "Asset class"],
+      "rows": [
+        ["1", "HDFC Bank",              "6.2%", "Equity"],
+        ["2", "Reliance Industries",    "5.1%", "Equity"],
+        ["3", "ICICI Bank",             "4.3%", "Equity"],
+        ["4", "Infosys",                "3.8%", "Equity"],
+        ["5", "7.18% GOI 2033 (G-Sec)", "3.5%", "Debt"],
+        ["",  "Top five total",         "22.9%", ""]
+      ],
+      "source": "Action Get Holdings (holdings.xlsx); total computed in the flow, not by the model"
+    },
+    {
+      "layout": "comment",
+      "title": "Consultant commentary and mandate check",
+      "bullets": [
+        "Fund ahead of benchmark over every stated period.",
+        "Equity 68% against a 70% mandate limit - compliant.",
+        "Two points of headroom; monitor at next rebalance.",
+        "Gold sleeve 5%, held as a drawdown hedge.",
+        "Manager unchanged since 2016 inception."
+      ],
+      "source": "Factsheet; action Get Client Mandate (MANDATE-LEGACY-01); manager update July 2026"
+    }
+  ],
+  "unresolved": [
+    "tracking_error - not present in any source document",
+    "portfolio_turnover - not present in any source document"
+  ]
+};
+render(DEFAULT_PLAN);
+</script>
+</body>
+</html>

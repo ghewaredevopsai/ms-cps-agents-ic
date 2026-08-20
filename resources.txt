@@ -1,0 +1,118 @@
+YouTube Resources — Microsoft Copilot Studio
+Investment Consulting team | Trainer: Rajesh Gheware
+Compiled 2026-08-20. All URLs verified live on that date.
+
+Note: Copilot Studio's UI churned heavily through 2025-26. Check each video's
+recording date before pointing participants at it — older videos show a
+different canvas than the current product.
+
+
+-- START HERE: first agent, zero to working (simple) --
+
+https://www.youtube.com/watch?v=dX9MJM5EokE
+  "How to Use Microsoft Copilot Studio (Step-by-Step Tutorial)" — Kevin Stratvert.
+  The gentlest on-ramp on YouTube. Screen-recorded end to end, no jargon,
+  no Power Platform background assumed. Best single link for a participant
+  who has never opened the maker portal.
+
+https://www.youtube.com/watch?v=9_Dw9qcjLgA
+  "The EASIEST Way to Build a Copilot Agent (NEW Agent Builder Tutorial)" —
+  Collaboration Simplified. Covers the lightweight Agent Builder path inside
+  M365 Copilot rather than the full Copilot Studio canvas — the fastest route
+  from idea to a shareable agent, and closest to what a business user on the team
+  would realistically do unaided.
+
+https://www.youtube.com/playlist?list=PLib8Q64STW-vd481IBYksL-urT_CpDar4
+  "Copilot Studio Complete Beginner Tutorials Series - Step by Step" —
+  Dhruvin Shah, 21 videos. Short, single-concept episodes (topics, entities,
+  triggers, publishing) you can pick off individually. Useful as follow-up
+  homework rather than watched straight through.
+
+
+-- STRUCTURED FULL COURSES (simple -> intermediate, demo-driven) --
+
+https://www.youtube.com/playlist?list=PLstKwQQDs5sBiB4dqJNsxST6waoCB9lB_
+  "Microsoft Copilot Studio Full Course (Beginner to Advanced)" — D365Techy,
+  23 videos. The most complete free syllabus of the lot; builds progressively
+  from first agent to knowledge sources, actions and deployment.
+
+https://www.youtube.com/watch?v=4yQDmJ1n-dU
+  "Build and Use Agents in Microsoft 365 Copilot: Complete Tutorial (2026)" —
+  Lisa Crosbie. Recent (Feb 2026), so the UI matches today's product. Frames
+  agents from the M365 end-user side first, then the maker side.
+
+https://www.youtube.com/playlist?list=PLTyFh-qDKAiGYsEuJ5plLSEFR72E9M9sW
+  "Microsoft Copilot Studio" — Reza Dorrani, 24 videos. Power Platform
+  practitioner's angle: deeper on connectors, Power Automate hand-offs and
+  the plumbing behind an agent. Pick individual episodes by topic.
+
+
+-- AUTONOMOUS AGENTS: triggers, actions, real business flows (intermediate) --
+
+https://www.youtube.com/watch?v=ZE95URGcT7o
+  "Build Your First Autonomous Agent with Copilot Studio" — Lisa Crosbie.
+  The pivot from "chatbot that answers" to "agent that acts on a trigger
+  without being asked." Highest signal-to-noise single video for that shift.
+
+https://www.youtube.com/watch?v=iFHXzz0xT8w
+  "Build Your First Autonomous Agent in Copilot Studio | Beginner Guide" —
+  Lui Iacobellis. Same ground as above at a slower pace with more of the
+  configuration screens shown. Good as the second pass or for self-study.
+
+https://www.youtube.com/watch?v=IPEbex_AxAc
+  "How To Build Autonomous Agents in Copilot Studio (STEP BY STEP)" —
+  Citizen Developer. Business-process framing (approvals, inbox-driven work)
+  rather than feature tour — the closest of the three to a consulting-team
+  use case.
+
+
+-- SOPHISTICATED: multi-agent orchestration, MCP, bring-your-own-model --
+
+https://www.youtube.com/watch?v=OmJAtDFcSZY
+  "Build autonomous agents in Copilot Studio | Your MCPs, your models &
+  multi-agent" — Microsoft Mechanics. The official statement of where the
+  product is heading: MCP tool servers, bring-your-own-model, agents calling
+  agents. Dense and fast — best used as trainer prep, not participant
+  homework.
+
+https://www.youtube.com/watch?v=CNQwVUXjx-A
+  "Building a Multi-Agent AI System in Copilot Studio | Sales Assistant
+  Orchestrator Demo" — Phoebe Makes Cloud Simple. A worked orchestrator +
+  child-agent build. Useful as a concrete "what does sophisticated actually
+  look like" demo to show on screen.
+
+
+-- CHANNELS WORTH SUBSCRIBING TO (product moves fast) --
+
+https://www.youtube.com/@MicrosoftCopilotStudio
+  Official product channel. Release notes, feature announcements and first-
+  party demos. The authority when a video and the live product disagree.
+
+https://www.youtube.com/@lisacrosbie
+  Lisa Crosbie — 5x Microsoft MVP and Microsoft Certified Trainer. Highest
+  signal-to-noise independent source for end-to-end build demos at exactly
+  this audience's level.
+
+https://www.youtube.com/@MSFTMechanics
+  Microsoft Mechanics. Official but technical — architecture and roadmap
+  depth the product channel skips. Best source for the sophisticated end.
+
+https://www.youtube.com/@MicrosoftPowerPlatform
+  Official Power Platform channel. Context for everything Copilot Studio sits
+  on: Dataverse, connectors, Power Automate, governance and ALM.
+
+https://www.youtube.com/@RezaDorrani
+  Reza Dorrani — Power Platform MVP. Deep, patient, practitioner-grade builds.
+  Go here when you need to understand how something actually works.
+
+https://www.youtube.com/@AndersJensenorg
+  Anders Jensen — automation-first channel. Strong on wiring agents into real
+  workflows end to end rather than demoing features in isolation.
+
+https://www.youtube.com/@KevinStratvert
+  Kevin Stratvert — the broadest, most beginner-friendly Microsoft channel
+  (4M+ subscribers). Send non-technical participants here first.
+
+https://www.youtube.com/@D365Techy
+  D365Techy. Owner of the full beginner-to-advanced course playlist above;
+  steady stream of Copilot Studio and Dynamics 365 walkthroughs.
