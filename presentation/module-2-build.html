@@ -515,6 +515,64 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 7 -->
+<section class="slide" data-sec="2.1 Orchestration" data-title="The debugging loop, generalised" data-demo="2.1" data-role="post" data-notes="The debrief for demo 2.1, and the most portable thing in the afternoon. Look back at what you actually changed just now: the name and description on a knowledge source, one sentence in the instructions, and a set of questions you can re-run. None of it was code, and none of it was a rebuild. That is the loop, and it does not change for the rest of the day - a symptom, then the trace to locate which layer produced it, then exactly one change, then the same test set re-run to see whether it helped. The table underneath maps the four symptoms you will actually hit onto the layer that owns each one, and note that two of the four rows are about descriptions rather than logic. From here on everything we add is an action, and an action goes wrong in the same two ways: it was never chosen, which is a description problem, or it was chosen and returned nothing, which is a flow problem you diagnose outside the agent. The habit worth carrying is the one in the amber strip - read the trace before you change anything, and change one thing at a time, because a fix you cannot attribute is not a fix you can defend next month.">
+  <h2>The loop you will use for the rest of the afternoon<span class="cue post">POST &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
+  <div class="body g1">
+    <svg viewBox="0 0 1180 424" role="img" aria-label="The agent debugging loop, generalised from demo 2.1">
+      <text class="lb" x="4" y="14">WHAT YOU JUST DID, WITH THE SPECIFICS REMOVED</text>
+
+      <rect class="bx" x="4" y="24" width="206" height="62" rx="8"/>
+      <text class="tt" x="24" y="50" style="font-size:14px">1 &nbsp;A symptom</text>
+      <text class="ss" x="24" y="72">the answer is wrong, not the tool</text>
+      <path class="fl" d="M214 55 L242 55"/>
+      <rect class="bx" x="246" y="24" width="206" height="62" rx="8"/>
+      <text class="tt" x="266" y="50" style="font-size:14px">2 &nbsp;Read the trace</text>
+      <text class="ss" x="266" y="72">before changing anything</text>
+      <path class="fl" d="M456 55 L484 55"/>
+      <rect class="bx a" x="488" y="24" width="206" height="62" rx="8"/>
+      <text class="tt" x="508" y="50" style="font-size:14px">3 &nbsp;Locate the layer</text>
+      <text class="ss" x="508" y="72">the table below names four</text>
+      <path class="fl" d="M698 55 L726 55"/>
+      <rect class="bx a" x="730" y="24" width="206" height="62" rx="8"/>
+      <text class="tt" x="750" y="50" style="font-size:14px">4 &nbsp;Change one thing</text>
+      <text class="ss" x="750" y="72">exactly one, then measure</text>
+      <path class="fl" d="M940 55 L968 55"/>
+      <rect class="bx g" x="972" y="24" width="204" height="62" rx="8"/>
+      <text class="tt" x="992" y="50" style="font-size:14px">5 &nbsp;Re-run the set</text>
+      <text class="ss" x="992" y="72">the identical questions</text>
+      <path class="ar" d="M1074 90 L1074 104 L106 104 L106 92"/>
+      <text class="ss" x="500" y="120" style="fill:#1d4ed8;font-weight:600">better, worse, or no real change &mdash; then round again</text>
+
+      <text class="lb" x="4" y="150">THE FOUR LAYERS, AND THE SYMPTOM THAT POINTS AT EACH</text>
+      <rect class="bx w" x="4" y="160" width="1172" height="26" rx="4"/>
+      <text class="lb" x="24" y="178">WHAT YOU SEE</text><text class="lb" x="420" y="178">THE LAYER THAT OWNS IT</text><text class="lb" x="700" y="178">THE FIX</text><text class="lb" x="1050" y="178">WHERE</text>
+      <text class="ss" x="24" y="208">It read the wrong document, or ignored one</text>
+      <text class="tt" x="420" y="208" style="font-size:13px">Knowledge source</text>
+      <text class="ss" x="700" y="208">its display name and description</text>
+      <text class="ss" x="1050" y="208" style="fill:#1d4ed8">demo 2.1</text>
+      <text class="ss" x="24" y="234">It silently picked a period, plan or share class</text>
+      <text class="tt" x="420" y="234" style="font-size:13px">Instructions</text>
+      <text class="ss" x="700" y="234">one sentence naming the ambiguity</text>
+      <text class="ss" x="1050" y="234" style="fill:#1d4ed8">demo 2.1</text>
+      <text class="ss" x="24" y="260">It never called your action at all</text>
+      <text class="tt" x="420" y="260" style="font-size:13px">Action description</text>
+      <text class="ss" x="700" y="260">say <tspan font-style="italic">when</tspan> to use it, not what it is called</text>
+      <text class="ss" x="1050" y="260" style="fill:#b45309">session 2.2</text>
+      <text class="ss" x="24" y="286">It called the action and got nothing back</text>
+      <text class="tt" x="420" y="286" style="font-size:13px">The flow itself</text>
+      <text class="ss" x="700" y="286">test it standalone, outside the agent</text>
+      <text class="ss" x="1050" y="286" style="fill:#b45309">session 2.2</text>
+      <path class="ar" d="M4 300 L1176 300" style="stroke:#cbd5e1;stroke-width:1;marker-end:none"/>
+      <text class="ss" x="24" y="322" style="fill:#546b8a">Two of the four are descriptions rather than logic &mdash; which is why most &ldquo;agent bugs&rdquo; are fixed in a sentence and why the trace, not the symptom, tells you which sentence.</text>
+
+      <rect class="bx d" x="4" y="336" width="1172" height="84" rx="8"/>
+      <text class="ss w" x="24" y="364" style="font-size:14px">Nothing you changed in that demo was code. Three levers did all of it: <tspan font-weight="700" fill="#fbbf24">a name, a sentence, and a set of questions.</tspan></text>
+      <text class="ss w" x="24" y="392">Every capability added between here and 18:00 &mdash; the APIs, the spreadsheets, the extraction, the deck, the trigger &mdash; is debugged with exactly this loop.</text>
+    </svg>
+  </div>
+  <div class="take"><b>Read the trace before you change anything, and change one thing at a time.</b> A fix you cannot attribute is not a fix you can defend when somebody asks next month why the agent behaves differently.</div>
+</section>
+<!-- 8 -->
 <section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Choosing how to call a system" data-notes="Work down this list, not up. Prebuilt connector first, every time; a custom connector only when you own an OpenAPI spec and more than one agent will call it. MCP is emerging - check availability in your tenant before promising it." data-demo="2.2" data-role="pre">
   <h2>Four ways to give an agent hands &mdash; pick deliberately<span class="cue pre">PRE &middot; DEMO 2.2</span><span class="tag">2.2</span></h2>
   <div class="body g64">
@@ -563,7 +621,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 8 -->
+<!-- 9 -->
 <section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Anatomy of one action call" data-notes="Step 2 is the one to remember: the description is the routing decision. Steps 6 and 7 are where a plausible default becomes a silent bug - if the call fails, the agent must say so rather than substitute a number." data-demo="2.2" data-role="pre">
   <h2>Anatomy of a single action call, end to end<span class="cue pre">PRE &middot; DEMO 2.2</span><span class="tag">2.2</span></h2>
   <div class="body g1">
@@ -621,7 +679,7 @@ svg{width:100%;height:auto;display:block}
   <div class="take"><b>Step 2 is the whole game.</b> The agent routes on your action description &mdash; so write it as a sentence that says <em>when</em> to use the tool, not what the endpoint is called.</div>
 </section>
 
-<!-- 9 -->
+<!-- 10 -->
 <section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Reaching a legacy system — three patterns" data-notes="Which pattern you are in decides your timeline far more than anything in Copilot Studio does. Pattern C is where large organisations usually land, and that wrapper is a normal API project with a normal timeline. Legacy access is not a product feature." data-demo="2.2" data-role="pre">
   <h2>Reaching an internal or legacy system &mdash; three honest patterns<span class="cue pre">PRE &middot; DEMO 2.2</span><span class="tag k">2.2</span></h2>
   <div class="body g64">
@@ -679,7 +737,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 10 -->
+<!-- 11 -->
 <section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Identity: who is the agent when it calls?" data-notes="Decide per action, not per agent. On-behalf-of preserves the user's own permissions; a service identity is predictable but broad, and scoped lazily it becomes a standing key to everything. The wrong default here is a genuine security finding." data-demo="2.2" data-role="post">
   <h2>Who <em>is</em> the agent when it calls your system?<span class="cue post">POST &middot; DEMO 2.2</span><span class="tag k">2.2</span></h2>
   <div class="body g46">
@@ -736,7 +794,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 11 -->
+<!-- 12 -->
 <section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Failure engineering" data-notes="The most under-taught topic in agent building - every row is a real incident pattern. The last one matters most: partial success is worse than outright failure, because it produces a confident, half-right deck." data-demo="2.2" data-role="post">
   <h2>Failure engineering &mdash; the part that separates a demo from a system<span class="cue post">POST &middot; DEMO 2.2</span><span class="tag k">2.2</span></h2>
   <div class="body g64">
@@ -818,7 +876,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 12 -->
+<!-- 13 -->
 <section class="slide" data-sec="2.3 Excel &amp; SQL" data-title="The numbers boundary" data-notes="The rule is not that arithmetic is forbidden - it is that anything a reader cannot check at a glance must be computed by a system. A difference between two figures shown with their sources is checkable by eye, so the agent may state it. A total across ten rows, an average, or a currency conversion is not checkable by eye, so an action computes it and the agent quotes the action. Drawing the line this way makes the rule keepable; drawing it at all arithmetic makes it a rule people quietly break. Note that an action is not the only system that can compute: where the code interpreter is enabled on the agent, it will generate and run code over an attached file, which is a further deterministic path to the same number. The rule is unchanged either way - the figure comes from something that would produce it again tomorrow, and the agent quotes what produced it." data-demo="2.3" data-role="pre">
   <h2>The numbers boundary: where the model stops and a system starts<span class="cue pre">PRE &middot; DEMO 2.3</span><span class="tag">2.3</span></h2>
   <div class="body g55">
@@ -864,7 +922,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 13 -->
+<!-- 14 -->
 <section class="slide" data-sec="2.3 Excel &amp; SQL" data-title="Reading from Excel and SQL" data-notes="The range must be a real Excel Table or the connector cannot see it - the single most common failure in this demo. Then shape the result: five well-named fields beat two hundred rows, which cost tokens, latency and routing accuracy at once." data-demo="2.3" data-role="pre">
   <h2>Reading real data: Excel and SQL, without surprises<span class="cue pre">PRE &middot; DEMO 2.3</span><span class="tag">2.3</span></h2>
   <div class="body g64">
@@ -933,7 +991,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 14 -->
+<!-- 15 -->
 <section class="slide" data-sec="2.3 Excel &amp; SQL" data-title="Writing back safely" data-notes="Writes are where agents become genuinely risky. The question worth sitting with: what happens if the agent retries a write after a timeout? The idempotency key is the answer, and it is the most important idea on this slide." data-demo="2.3" data-role="post">
   <h2>Writing back to a system of record &mdash; safely<span class="cue post">POST &middot; DEMO 2.3</span><span class="tag k">2.3</span></h2>
   <div class="body g64">
@@ -1000,7 +1058,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 15 -->
+<!-- 16 -->
 <section class="slide" data-sec="2.4 Extraction" data-title="What actually varies in documents" data-notes="Six kinds of variation, and the ones that bite hardest are inconsistent labels and implied periods. This is why extraction is a schema problem rather than a reading problem." data-demo="2.4" data-role="pre">
   <h2>Extraction is hard for one reason: everything varies<span class="cue pre">PRE &middot; DEMO 2.4</span><span class="tag">2.4</span></h2>
   <div class="body g64">
@@ -1066,7 +1124,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 16 -->
+<!-- 17 -->
 <section class="slide" data-sec="2.4 Extraction" data-title="The schema is the contract" data-notes="needs_review and source_document are the two fields that make the whole pipeline reviewable. Never let the model add or rename a key - a helpful extra key is a breaking change for everything downstream." data-demo="2.4" data-role="pre">
   <h2>The schema is the contract the rest of the pipeline relies on<span class="cue pre">PRE &middot; DEMO 2.4</span><span class="tag k">2.4</span></h2>
   <div class="body g55">
@@ -1113,7 +1171,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 17 -->
+<!-- 18 -->
 <section class="slide" data-sec="2.4 Extraction" data-title="The validation ladder" data-notes="Four rungs, cheapest first. Most teams stop at rung 1 and then wonder why bad decks still ship. Rung 4 catches the gross-versus-net class of error, and note that it flags rather than decides." data-demo="2.4" data-role="post">
   <h2>The validation ladder &mdash; four rungs, cheapest first<span class="cue post">POST &middot; DEMO 2.4</span><span class="tag k">2.4</span></h2>
   <div class="body g46">
@@ -1163,7 +1221,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 18 -->
+<!-- 19 -->
 <section class="slide" data-sec="2.4 Extraction" data-title="The failure gallery" data-notes="Run against the deliberately messy document, a good extraction flags rather than fills. If it fills a gap instead, that is worth more than any slide here - it is the exact failure mode you are engineering against." data-demo="2.4" data-role="post">
   <h2>The failure gallery &mdash; what a good extraction refuses to do<span class="cue post">POST &middot; DEMO 2.4</span><span class="tag">2.4</span></h2>
   <div class="body g1">
@@ -1217,7 +1275,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 19 -->
+<!-- 20 -->
 <section class="slide" data-sec="2.5 Report generation" data-title="Before and after" data-notes="The business case in one picture. Aspose does not go away - it stays, and it stays yours. What goes away is a person standing between every pair of steps, retyping." data-demo="2.5" data-role="pre">
   <h2>Your reporting pipeline, before and after<span class="cue pre">PRE &middot; DEMO 2.5</span><span class="tag k">2.5</span></h2>
   <div class="body g1">
@@ -1264,7 +1322,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 20 -->
+<!-- 21 -->
 <section class="slide" data-sec="2.5 Report generation" data-title="The slide plan as interface" data-notes="An intermediate representation beats letting the agent drive PowerPoint directly: reviewable before a file exists, testable as JSON, and the renderer becomes swappable. It also keeps the model away from layout, which it is bad at." data-demo="2.5" data-role="pre">
   <h2>Never let the agent build the deck. Let it write the plan.<span class="cue pre">PRE &middot; DEMO 2.5</span><span class="tag k">2.5</span></h2>
   <div class="body g55">
@@ -1320,7 +1378,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 21 -->
+<!-- 22 -->
 <section class="slide" data-sec="2.5 Report generation" data-title="Rendering: four options compared" data-notes="Option A is the recommendation: wrap the generator you already own behind an endpoint. It preserves the investment, needs no new licence and no new data path, and the work is a thin API wrapper your own team can build." data-demo="2.5" data-role="post">
   <h2>Turning the plan into a deck: four options, honestly compared<span class="cue post">POST &middot; DEMO 2.5</span><span class="tag">2.5</span></h2>
   <div class="body g64">
@@ -1368,7 +1426,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 22 -->
+<!-- 23 -->
 <section class="slide" data-sec="2.5 Report generation" data-title="What stays in code" data-notes="The balance slide, and the antidote to over-enthusiasm after a good demo. Deterministic, high-volume or precision-critical work stays in code. Agents read, decide, orchestrate and explain." data-demo="2.5" data-role="post">
   <h2>What stays in code &mdash; and should<span class="cue post">POST &middot; DEMO 2.5</span><span class="tag">2.5</span></h2>
   <div class="body g55">
@@ -1412,7 +1470,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 23 -->
+<!-- 24 -->
 <section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="What publish actually does" data-notes="Publish snapshots a version; your edits do not reach users until you publish again - which is the point, because your changes cannot break their Tuesday. The channel is wherever the work already happens, which usually means Teams." data-demo="2.6" data-role="pre">
   <h2>Publishing: what actually happens, and where people meet it<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g64">
@@ -1483,7 +1541,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 24 -->
+<!-- 25 -->
 <section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Environments, solutions, ALM" data-notes="Short and firm: build in the default environment and you will regret it. Solutions and connection references are what make an agent movable between environments, and what stop your personal credentials travelling to production." data-demo="2.6" data-role="pre">
   <h2>Environments and ALM: the part that decides whether this survives<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag">2.6</span></h2>
   <div class="body g46">
@@ -1557,7 +1615,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 25 -->
+<!-- 26 -->
 <section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Designing the approval gate" data-notes="The gate is where autonomy is actually set. The design question to carry away: what exactly is the approver looking at, and do they have the time to look? A gate nobody works moves accountability without moving attention." data-demo="2.6" data-role="pre">
   <h2>The approval gate is where autonomy is actually set<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g64">
@@ -1613,7 +1671,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 26 -->
+<!-- 27 -->
 <section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The governance checklist, worked" data-notes="Worked against a real agent rather than in the abstract. Any row you cannot answer is a piece of work, not a formality - and this table is the artefact to take to a governance forum." data-demo="2.6" data-role="post">
   <h2>The governance checklist &mdash; worked against what we just built<span class="cue post">POST &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
@@ -1666,7 +1724,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 27 -->
+<!-- 28 -->
 <section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The trigger: from chat window to process" data-notes="The slide that answers the question the day was booked on. Everything up to here is an agent someone opens; a trigger makes it part of the process. The test of whether an agent is inside a workflow is simple - if nobody opens anything, does the work still happen? Note the rule for unattended runs: never ask a clarifying question when nobody is there to answer, flag it and let the gate catch it." data-demo="2.7" data-role="pre">
   <h2>The trigger &mdash; the difference between a tool and a process<span class="cue pre">PRE &middot; DEMO 2.7</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
@@ -1743,7 +1801,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 28 -->
+<!-- 29 -->
 <section class="slide" data-sec="2.7 Close" data-title="The capstone, fully lit" data-notes="A callback to the build map from the start of the afternoon, with every box now lit. Note the caveats at the bottom: one synthetic fund, a mocked legacy call, and nothing evaluated at scale yet." data-demo="2.7" data-role="post">
   <h2>What we built &mdash; end to end, in one run<span class="cue post">POST &middot; DEMO 2.7</span><span class="tag g">2.7</span></h2>
   <div class="body g1">
@@ -1821,7 +1879,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 29 -->
+<!-- 30 -->
 <section class="slide" data-sec="2.7 Close" data-title="When to graduate from Copilot Studio" data-notes="Honest and short. The five signals protect you from building the wrong thing next year. Agent Framework is the named path, but it is not today's decision - prototype here first, always.">
   <h2>When to graduate &mdash; and how you will know<span class="tag">2.7</span></h2>
   <div class="body g64">
@@ -1866,7 +1924,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 30 -->
+<!-- 31 -->
 <section class="slide" data-sec="2.7 Close" data-title="Building the ROI case" data-notes="The arithmetic to take to a sponsor, deliberately conservative. Claim time to first draft rather than total elimination: a case that survives scrutiny beats one that impresses and then collapses.">
   <h2>The ROI case, in numbers your sponsor will accept<span class="tag">2.7</span></h2>
   <div class="body g46">
@@ -1918,7 +1976,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 31 -->
+<!-- 32 -->
 <section class="slide" data-sec="2.7 Close" data-title="Your next 30 / 60 / 90 days" data-notes="Specifics, not inspiration. Worth naming your own week-one action before you leave. Note that the 30-day column needs no code at all - it is entirely questions and requests.">
   <h2>Monday morning: 30 / 60 / 90 days<span class="tag g">2.7</span></h2>
   <div class="body g1">
@@ -1983,7 +2041,7 @@ svg{width:100%;height:auto;display:block}
   <div id="segs"></div>
   <span id="cuenext"></span>
   <span style="color:#7f9dc4">&larr; &rarr; &middot; O index &middot; N notes &middot; F full</span>
-  <span id="num">1 / 31</span>
+  <span id="num">1 / 32</span>
 </div>
 
 <script>
