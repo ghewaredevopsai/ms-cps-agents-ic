@@ -224,180 +224,76 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 3 -->
-<section class="slide" data-sec="1.1 Model behaviour" data-title="What the model is actually doing" data-notes="The whole mechanism is next-word prediction, one word at a time, over whatever is in the context window. Three consequences follow: it is never silent, the same question can give different answers, and errors compound because each word it writes becomes context for the next.">
-  <h2>What the model is actually doing when it answers<span class="tag">1.1</span></h2>
-  <div class="body g64">
+<section class="slide" data-sec="1.1 Model behaviour" data-title="Why it invents, and the one fix" data-notes="This is the slide behind demo 1.1. Three facts sit along the top and they explain everything below them: the model is never silent, two runs of the same question can differ, and it sees only what you put in front of it. The three rows are the failure modes those facts produce, and the middle row is the one to worry about. A fabricated tracking error is usually caught, because a reviewer knows the factsheet has no such field. A gross-versus-net figure or the wrong share class is not caught, because every number on the page is genuine and nothing looks wrong on review. The third row is not a model failure at all - it is an integration gap, and it is the one Copilot Studio exists to close. Grounding, at the bottom, is the fix you will watch in the demo, and the two columns matter equally: it removes most of the first row and makes every figure checkable, but it does not make the model good at arithmetic, it does not know which period you meant, and it will not refuse unless you tell it to. Those three gaps are what the rest of the day builds controls for.">
+  <h2>Why it invents &mdash; and the one fix that changes everything<span class="tag k">1.1</span></h2>
+  <div class="body g1">
     <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Next token prediction loop">
-        <text class="lb" x="8" y="14">WHAT IT CAN SEE</text>
-        <rect class="bx" x="8" y="22" width="300" height="112" rx="8"/>
-        <text class="ss" x="24" y="46">&bull; your question</text>
-        <text class="ss" x="24" y="68">&bull; the factsheet you attached</text>
-        <text class="ss" x="24" y="90">&bull; earlier turns in this chat</text>
-        <text class="ss" x="24" y="112">&bull; the instructions it was given</text>
-        <path class="fl" d="M312 78 L386 78"/>
-        <text class="lb" x="392" y="14">WHAT IT DOES</text>
-        <rect class="bx d" x="392" y="22" width="300" height="112" rx="8"/>
-        <text class="tt w" x="408" y="52">Scores every possible</text>
-        <text class="tt w" x="408" y="74">next word, picks one,</text>
-        <text class="tt w" x="408" y="96">repeats.</text>
-        <text class="ss w" x="408" y="120" style="font-size:11.5px">That is the whole mechanism.</text>
+      <svg viewBox="0 0 1180 470" role="img" aria-label="Three facts about the model, the three failure modes they cause, and what grounding does and does not fix">
 
-        <text class="lb" x="8" y="170">CANDIDATES FOR THE NEXT WORD &mdash; &ldquo;The fund returned &hellip;&rdquo;</text>
-        <rect class="bx w" x="8" y="180" width="684" height="118" rx="8"/>
-        <text class="ss" x="26" y="206">&ldquo;8.4%&rdquo;</text>
-        <rect class="rise" x="110" y="194" width="330" height="15" rx="3" style="fill:#1d4ed8"/><text class="ss" x="452" y="206">plausible &mdash; and invented</text>
-        <text class="ss" x="26" y="234">&ldquo;7.2%&rdquo;</text>
-        <rect class="rise r2" x="110" y="222" width="250" height="15" rx="3" style="fill:#60a5fa"/><text class="ss" x="452" y="234">equally plausible</text>
-        <text class="ss" x="26" y="262">&ldquo;approx.&rdquo;</text>
-        <rect class="rise r3" x="110" y="250" width="120" height="15" rx="3" style="fill:#93c5fd"/>
-        <text class="ss" x="26" y="290">&ldquo;not stated&rdquo;</text>
-        <rect class="rise r4" x="110" y="278" width="26" height="15" rx="3" style="fill:#cbd5e1"/><text class="ss" x="452" y="290">the honest answer scores lowest</text>
+        <rect class="bx d" x="4" y="4" width="1172" height="56" rx="8"/>
+        <text class="lb w" x="24" y="24">THREE FACTS ABOUT THE THING YOU ARE PROMPTING</text>
+        <text class="ss w" x="24" y="46" style="font-size:11.5px">It is <tspan style="font-weight:700;fill:#fbbf24">never silent</tspan> &mdash; a confident answer is the default</text>
+        <text class="ss w" x="424" y="46" style="font-size:11.5px">Two runs of one question <tspan style="font-weight:700;fill:#fbbf24">can differ</tspan></text>
+        <text class="ss w" x="812" y="46" style="font-size:11.5px">It sees <tspan style="font-weight:700;fill:#fbbf24">only what you put in front of it</tspan></text>
 
-        <rect class="bx g" x="8" y="316" width="684" height="48" rx="8"/>
-        <text class="tt" x="26" y="346">Output: &ldquo;The fund returned<tspan class="tok" dx="6" style="fill:#1d4ed8;font-weight:700">8.4%</tspan><tspan class="tok t2" dx="6">over</tspan><tspan class="tok t3" dx="6">the</tspan><tspan class="tok t4" dx="6">three</tspan><tspan class="tok t5" dx="6">years&hellip;&rdquo;</tspan></text>
-        <path class="ar" d="M350 366 C350 400 120 404 120 140" style="stroke-dasharray:4 5"/>
-        <text class="ss" x="140" y="400">each word it writes becomes context for the next &mdash; errors compound</text>
+        <rect class="bx d" x="4" y="70" width="1172" height="28" rx="6"/>
+        <text class="lb w" x="24" y="89" style="font-size:9.5px">HOW THAT SHOWS UP</text>
+        <text class="lb w" x="330" y="89" style="font-size:9.5px">WHAT YOU ACTUALLY SEE</text>
+        <text class="lb w" x="700" y="89" style="font-size:9.5px">WHY</text>
+        <text class="lb w" x="944" y="89" style="font-size:9.5px">WHAT REMOVES IT</text>
+
+        <rect class="bx r" x="4" y="104" width="1172" height="84" rx="7"/>
+        <text class="ss" x="24" y="130" style="font-size:12.5px;font-weight:700;fill:#0b2545">1 &nbsp;Fabrication</text>
+        <text class="ss" x="24" y="150" style="font-size:10.5px">a figure that was never in the document</text>
+        <text class="ss" x="24" y="170" style="font-size:10.5px;fill:#94a3b8">usually caught &mdash; a reviewer knows the factsheet</text>
+        <text class="ss" x="330" y="132" style="font-size:10.5px">Ask &nbsp;&ldquo;what is the fund's tracking error?&rdquo;</text>
+        <text class="ss" x="330" y="154" style="font-size:10.5px;fill:#b91c1c">Answer &nbsp;&ldquo;4.2% against the benchmark&rdquo;</text>
+        <text class="ss" x="330" y="174" style="font-size:10.5px;fill:#94a3b8">the factsheet carries no such field at all</text>
+        <text class="ss" x="700" y="140" style="font-size:10.5px">It completes the shape of an</text>
+        <text class="ss" x="700" y="158" style="font-size:10.5px">answer. It never looks for the field.</text>
+        <text class="lb g" x="944" y="140" style="font-size:9.5px">GROUNDING</text>
+        <text class="ss" x="944" y="160" style="font-size:10.5px">below, and in demo 1.1</text>
+
+        <rect class="bx a" x="4" y="196" width="1172" height="84" rx="7"/>
+        <text class="ss" x="24" y="222" style="font-size:12.5px;font-weight:700;fill:#7f1d1d">2 &nbsp;Right number, wrong thing</text>
+        <text class="ss" x="24" y="242" style="font-size:10.5px">period, share class, currency or entity slips</text>
+        <text class="ss" x="24" y="262" style="font-size:10.5px;fill:#b45309;font-weight:600">the one that should worry you</text>
+        <text class="ss" x="330" y="232" style="font-size:10.5px">Gross vs net of fees &nbsp;&middot;&nbsp; Regular vs Direct plan</text>
+        <text class="ss" x="330" y="254" style="font-size:10.5px">Q1 vs full year &nbsp;&middot;&nbsp; accumulation vs income units</text>
+        <text class="ss" x="700" y="232" style="font-size:10.5px">The figure is genuine, so</text>
+        <text class="ss" x="700" y="250" style="font-size:10.5px">nothing looks wrong on review.</text>
+        <text class="ss" x="700" y="268" style="font-size:10.5px;fill:#b45309;font-weight:600">It survives the check.</text>
+        <text class="lb a" x="944" y="232" style="font-size:9.5px">SCHEMA + VALIDATION</text>
+        <text class="ss" x="944" y="252" style="font-size:10.5px">session 2.4</text>
+        <circle class="pulse" cx="1152" cy="238" r="9" style="fill:#dc2626"/>
+
+        <rect class="bx" x="4" y="288" width="1172" height="84" rx="7"/>
+        <text class="ss" x="24" y="314" style="font-size:12.5px;font-weight:700;fill:#0b2545">3 &nbsp;Stale or absent data</text>
+        <text class="ss" x="24" y="334" style="font-size:10.5px">it cannot see anything live</text>
+        <text class="ss" x="24" y="354" style="font-size:10.5px;fill:#94a3b8">not a model failure &mdash; an integration gap</text>
+        <text class="ss" x="330" y="324" style="font-size:10.5px">No live NAV, no benchmark level as at today</text>
+        <text class="ss" x="330" y="346" style="font-size:10.5px">No access to any of your systems of record</text>
+        <text class="ss" x="700" y="324" style="font-size:10.5px">Nothing connects it to your</text>
+        <text class="ss" x="700" y="342" style="font-size:10.5px">systems &mdash; yet.</text>
+        <text class="lb" x="944" y="324" style="font-size:9.5px">ACTIONS CALLING SYSTEMS</text>
+        <text class="ss" x="944" y="344" style="font-size:10.5px">sessions 2.2 and 2.3</text>
+
+        <rect class="bx g" x="4" y="380" width="1172" height="86" rx="8"/>
+        <text class="lb g" x="24" y="402">GROUNDING &mdash; THE FIX YOU ARE ABOUT TO WATCH, AND ITS EDGES</text>
+        <text class="ss" x="24" y="424" style="font-size:11.5px;fill:#047857;font-weight:600">WHAT IT FIXES</text>
+        <text class="ss" x="24" y="444" style="font-size:11px">The question becomes &ldquo;what does this document say?&rdquo; &mdash; and every figure</text>
+        <text class="ss" x="24" y="460" style="font-size:11px">arrives with a citation you can check in seconds. Row 1 largely disappears.</text>
+        <text class="ss" x="620" y="424" style="font-size:11.5px;fill:#b91c1c;font-weight:600">WHAT IT DOES NOT FIX</text>
+        <text class="ss" x="620" y="444" style="font-size:11px">It is still poor at arithmetic. It still does not know which period you meant.</text>
+        <text class="ss" x="620" y="460" style="font-size:11px">And it will not refuse when your documents are silent &mdash; unless you instruct it to.</text>
+        <line x1="600" y1="410" x2="600" y2="458" style="stroke:#a7f3d0"/>
       </svg>
     </div>
-    <div class="pts">
-      <h3>Consequences you will design around</h3>
-      <ul>
-        <li><b>It is never silent.</b> A confident number is the default output, whether or not the data exists.</li>
-        <li><b>Same question, different answer.</b> Sampling is probabilistic &mdash; two runs can differ. That matters for anything repeated monthly.</li>
-        <li><b>It has no access to anything</b> you did not put in the context. No NAV feed, no ledger, no internal system &mdash; unless an action fetches it.</li>
-        <li><b>Errors compound.</b> A wrong figure in sentence one is treated as fact by sentence four.</li>
-      </ul>
-      <div class="callout bad"><b>The trap for a consulting team:</b> the failure looks exactly like the success. Fluent, formatted, correctly-worded &mdash; and wrong.</div>
-    </div>
   </div>
-  <div class="take"><b>So:</b> the engineering task is never &ldquo;make it smarter&rdquo;. It is <b>constrain what it can see, and check what it produces</b> &mdash; which is what the rest of the day builds.</div>
+  <div class="take"><b>Numbers come from systems; narrative comes from the model.</b> Never the reverse &mdash; and note that not one of the three rows raises an error, so there is no exception to catch.</div>
 </section>
 
 <!-- 4 -->
-<section class="slide" data-sec="1.1 Model behaviour" data-title="Where it breaks on consulting work" data-notes="Three failure modes, and the middle one is the dangerous one. A fabricated return is usually caught because a reviewer knows the factsheet; a gross-versus-net or wrong-share-class figure is real, so nothing looks wrong on review. None of the three raises an error.">
-  <h2>The three ways it breaks on consulting work<span class="tag">1.1</span></h2>
-  <div class="body g64">
-    <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Three failure modes">
-        <rect class="bx r" x="6" y="6" width="688" height="122" rx="8"/>
-        <text class="lb r" x="24" y="30">1 &mdash; FABRICATION</text>
-        <text class="tt" x="24" y="54">A number that was never in the document</text>
-        <rect class="bx w" x="24" y="64" width="316" height="50" rx="5"/>
-        <text class="ss" x="36" y="84">Ask: &ldquo;3-year annualised return for this fund?&rdquo;</text>
-        <text class="ss" x="36" y="103" style="fill:#b91c1c">Answer: &ldquo;8.4%&rdquo; &mdash; the factsheet shows only 1-yr</text>
-        <text class="ss" x="358" y="84">The model completes the shape of an</text>
-        <text class="ss" x="358" y="103">answer. It does not look for the field.</text>
-
-        <rect class="bx a" x="6" y="140" width="688" height="122" rx="8"/>
-        <text class="lb a" x="24" y="164">2 &mdash; RIGHT NUMBER, WRONG THING</text>
-        <text class="tt" x="24" y="188">Period, share class, currency or entity slips</text>
-        <rect class="bx w" x="24" y="198" width="316" height="50" rx="5"/>
-        <text class="ss" x="36" y="218">Gross vs net of fees &middot; GBP vs USD share class</text>
-        <text class="ss" x="36" y="237">Q1 vs FY &middot; accumulation vs income unit</text>
-        <text class="ss" x="358" y="218">The most dangerous failure: the figure is</text>
-        <text class="ss" x="358" y="237">real, so nothing looks wrong on review.</text>
-
-        <rect class="bx" x="6" y="274" width="688" height="122" rx="8"/>
-        <text class="lb" x="24" y="298">3 &mdash; STALE OR ABSENT DATA</text>
-        <text class="tt" x="24" y="322">It cannot see anything live</text>
-        <rect class="bx w" x="24" y="332" width="316" height="50" rx="5"/>
-        <text class="ss" x="36" y="352">No live NAV, no today's benchmark level</text>
-        <text class="ss" x="36" y="371">No access to your systems of record</text>
-        <text class="ss" x="358" y="352">Fixed by <tspan font-weight="700">actions</tspan> that call an API &mdash;</text>
-        <text class="ss" x="358" y="371">session 2.2 this afternoon.</text>
-
-        <circle class="pulse" cx="672" cy="30" r="9" style="fill:#dc2626"/>
-        <circle class="pulse" cx="672" cy="164" r="9" style="fill:#d97706"/>
-        <text class="lb r" x="6" y="420">NONE OF THESE RAISES AN ERROR. THERE IS NO EXCEPTION TO CATCH.</text>
-      </svg>
-    </div>
-    <div class="pts">
-      <h3>Which one should worry you most</h3>
-      <ul>
-        <li><b>Not #1.</b> A fabricated 3-year return is usually caught &mdash; a reviewer knows the factsheet.</li>
-        <li><b>#2 is the real risk.</b> Gross-vs-net or wrong share class survives review because every number on the page is genuine.</li>
-        <li><b>#3 is not a model problem at all</b> &mdash; it is an integration problem, and it is the one Copilot Studio actually solves.</li>
-      </ul>
-      <h3>The controls, previewed</h3>
-      <ul>
-        <li><em>Grounding</em> &rarr; kills most of #1 &nbsp;(next slide)</li>
-        <li><em>Schema + validation</em> &rarr; catches #2 &nbsp;(2.4)</li>
-        <li><em>Actions calling real systems</em> &rarr; removes #3 &nbsp;(2.2, 2.3)</li>
-      </ul>
-      <div class="callout">Rule we will apply all day: <b>numbers come from systems, narrative comes from the model.</b> Never the reverse.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 5 -->
-<section class="slide" data-sec="1.1 Model behaviour" data-title="Grounding — the fix and its limits" data-notes="Grounding turns recall into reading, and citations make an answer checkable in seconds. It does not fix arithmetic, it does not know which period you meant, and it will not refuse unless you instruct it to. Highest-value control available today, and it needs no new licence.">
-  <h2>Grounding &mdash; what it fixes, and what it does not<span class="tag">1.1</span></h2>
-  <div class="body g64">
-    <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Ungrounded versus grounded answering">
-        <text class="lb r" x="6" y="16">UNGROUNDED &mdash; ANSWERING FROM MEMORY</text>
-        <rect class="bx w" x="6" y="26" width="150" height="62" rx="7"/>
-        <text class="tt" x="24" y="52">Question</text><text class="ss" x="24" y="72">&ldquo;3-yr return?&rdquo;</text>
-        <path class="ar" d="M160 57 L214 57" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
-        <rect class="bx r" x="218" y="26" width="180" height="62" rx="7"/>
-        <text class="tt" x="238" y="52">Model recalls</text><text class="ss" x="238" y="72">from training patterns</text>
-        <path class="ar" d="M402 57 L456 57" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
-        <rect class="bx w" x="460" y="26" width="234" height="62" rx="7"/>
-        <text class="tt" x="478" y="52">&ldquo;8.4%&rdquo;</text>
-        <text class="ss" x="478" y="72" style="fill:#b91c1c">no source &middot; unverifiable &middot; invented</text>
-
-        <line x1="6" y1="108" x2="694" y2="108" stroke="#e2e8f0" stroke-width="1.5"/>
-
-        <text class="lb g" x="6" y="140">GROUNDED &mdash; ANSWERING FROM YOUR DOCUMENTS</text>
-        <rect class="bx w" x="6" y="150" width="150" height="70" rx="7"/>
-        <text class="tt" x="24" y="176">Question</text><text class="ss" x="24" y="196">&ldquo;3-yr return?&rdquo;</text>
-        <path class="fl" d="M160 185 L212 185"/>
-        <rect class="bx g" x="216" y="150" width="182" height="70" rx="7"/>
-        <text class="tt" x="234" y="176">Retrieve</text>
-        <text class="ss" x="234" y="196">the passages that match</text>
-        <path class="fl" d="M402 185 L454 185"/>
-        <rect class="bx d" x="458" y="150" width="236" height="70" rx="7"/>
-        <text class="tt w" x="476" y="176">Model reads &amp; answers</text>
-        <text class="ss w" x="476" y="196">restricted to what was retrieved</text>
-
-        <rect class="bx" x="216" y="240" width="182" height="86" rx="7"/>
-        <text class="lb" x="232" y="262">YOUR CORPUS</text>
-        <text class="ss" x="232" y="282">fund factsheets (PDF)</text>
-        <text class="ss" x="232" y="300">SharePoint &middot; manager updates</text>
-        <text class="ss" x="232" y="318">prior client reports</text>
-        <path class="fl" d="M307 238 L307 224"/>
-
-        <rect class="bx g" x="458" y="240" width="236" height="86" rx="7"/>
-        <text class="tt" x="476" y="266">&ldquo;6.1% &mdash; net, GBP acc class&rdquo;</text>
-        <text class="ss" x="476" y="288" style="fill:#047857">Source: Factsheet p.2, 30 Jun 2026</text>
-        <text class="ss" x="476" y="310">checkable in one click</text>
-
-        <rect class="bx a" x="6" y="344" width="688" height="68" rx="8"/>
-        <text class="lb a" x="24" y="366">WHAT GROUNDING STILL DOES NOT DO</text>
-        <text class="ss" x="24" y="388">It does not do arithmetic reliably &middot; it does not know which period you meant &middot;</text>
-        <text class="ss" x="24" y="406">it does not refuse when the corpus is silent unless you instruct it to</text>
-      </svg>
-    </div>
-    <div class="pts">
-      <h3>What changes</h3>
-      <ul>
-        <li>The question stops being &ldquo;what do you know?&rdquo; and becomes <b>&ldquo;what does this document say?&rdquo;</b></li>
-        <li><b>Citations make it reviewable.</b> An unverifiable answer has no place in a client deliverable; a cited one can be spot-checked in seconds.</li>
-        <li>Retrieval quality now decides answer quality &mdash; <b>a stale corpus produces confidently stale answers.</b></li>
-      </ul>
-      <h3>What you must add on top</h3>
-      <ul>
-        <li><b>Instructions that permit refusal</b> &mdash; &ldquo;if the figure is not in the source, say <em>not stated</em>.&rdquo;</li>
-        <li><b>Computation in a tool, not the prompt</b> &mdash; Excel or SQL does the maths (2.3).</li>
-        <li><b>Freshness discipline</b> &mdash; who refreshes the corpus, and how often.</li>
-      </ul>
-      <div class="callout good">Grounding is the single highest-value control available to you today &mdash; and it needs no new licence, tooling or approval.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 6 -->
 <section class="slide" data-sec="1.1 Model behaviour" data-title="The accuracy bar in investment consulting" data-notes="Decide the tier before you build - it sets the controls, the review model and whether the agent may act unattended. Teams stall by applying tier 4 standards to tier 2 work, or ship tier 4 output with tier 2 review. The capstone sits at tier 3.">
   <h2>Setting the accuracy bar: not every output carries the same risk<span class="tag">1.1</span></h2>
   <div class="body g46">
@@ -450,259 +346,141 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 7 -->
-<section class="slide" data-sec="1.2 Prompting" data-title="Anatomy of a prompt that works" data-notes="Five parts, each removing one class of failure. The line that does the most work is context: use only this document, and if a figure is absent write not stated. In Module 2 these five parts become the agent's Instructions - you are already writing agent configuration.">
+<!-- 5 -->
+<section class="slide" data-sec="1.2 Prompting" data-title="Anatomy of a prompt that works" data-notes="Five parts, and the right-hand column is the point: each one exists because dropping it brings back a specific, predictable failure. Context does the most work of the five - use only this document, and if a figure is absent write not stated - and it is the sentence that removes most fabrication on its own. Format is the one people underrate, because a fixed output shape is what makes the next step automatable rather than a person retyping. Example is the one most often skipped, and it has the highest return on effort: one worked row settles formatting faster than three paragraphs of instruction. Two habits worth carrying out of this: always make silence a legal answer, and always ask for the source, because it is free verification and it discourages invention. In Module 2 these five parts do not disappear - they become the agent Instructions block, which means you are already writing agent configuration rather than chat messages.">
   <h2>Anatomy of a prompt that survives contact with real work<span class="tag">1.2</span></h2>
-  <div class="body g64">
-    <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Five parts of a structured prompt">
-        <rect class="bx d" x="6" y="6" width="132" height="70" rx="7"/>
-        <text class="tt w" x="22" y="34">ROLE</text><text class="ss w" x="22" y="54">who is speaking</text>
-        <rect class="bx w" x="146" y="6" width="548" height="70" rx="7"/>
-        <text class="ss" x="162" y="32" style="font-size:13.5px">&ldquo;You are an investment consultant preparing a quarterly fund review</text>
-        <text class="ss" x="162" y="52" style="font-size:13.5px">for an institutional client &mdash; a long-horizon retirement portfolio.&rdquo;</text>
-        <text class="ss" x="162" y="68" style="fill:#94a3b8">Sets vocabulary and default assumptions &mdash; net of fees, institutional share class.</text>
-
-        <rect class="bx d" x="6" y="86" width="132" height="70" rx="7"/>
-        <text class="tt w" x="22" y="114">CONTEXT</text><text class="ss w" x="22" y="134">what it may use</text>
-        <rect class="bx w" x="146" y="86" width="548" height="70" rx="7"/>
-        <text class="ss" x="162" y="112" style="font-size:13.5px">&ldquo;Use only the attached Northwind factsheet (data as of 30 Jun 2026).</text>
-        <text class="ss" x="162" y="132" style="font-size:13.5px">If a figure is not present, write <tspan font-weight="700">not stated</tspan> &mdash; do not estimate.&rdquo;</text>
-        <text class="ss" x="162" y="148" style="fill:#94a3b8">This one sentence removes most fabrication.</text>
-
-        <rect class="bx d" x="6" y="166" width="132" height="70" rx="7"/>
-        <text class="tt w" x="22" y="194">TASK</text><text class="ss w" x="22" y="214">one job, precisely</text>
-        <rect class="bx w" x="146" y="166" width="548" height="70" rx="7"/>
-        <text class="ss" x="162" y="192" style="font-size:13.5px">&ldquo;Extract: fund name, ISIN, share class, AUM, TER, 1/3/5-yr return</text>
-        <text class="ss" x="162" y="212" style="font-size:13.5px">(annualised), benchmark, benchmark return, excess return.&rdquo;</text>
-        <text class="ss" x="162" y="228" style="fill:#94a3b8">Named fields, not &ldquo;summarise the key points&rdquo;.</text>
-
-        <rect class="bx d" x="6" y="246" width="132" height="70" rx="7"/>
-        <text class="tt w" x="22" y="274">FORMAT</text><text class="ss w" x="22" y="294">shape of the output</text>
-        <rect class="bx w" x="146" y="246" width="548" height="70" rx="7"/>
-        <text class="ss" x="162" y="272" style="font-size:13.5px">&ldquo;Return a table, one row per field, columns: field | value | source page.&rdquo;</text>
-        <text class="ss" x="162" y="292" style="font-size:13.5px">A fixed shape is what makes the next step automatable.</text>
-        <text class="ss" x="162" y="308" style="fill:#94a3b8">In Module 2 this becomes an enforced schema (2.4).</text>
-
-        <rect class="bx d" x="6" y="326" width="132" height="70" rx="7"/>
-        <text class="tt w" x="22" y="354">EXAMPLE</text><text class="ss w" x="22" y="374">one worked row</text>
-        <rect class="bx w" x="146" y="326" width="548" height="70" rx="7"/>
-        <text class="ss" x="162" y="352" style="font-size:13.5px">&ldquo;TER (Direct) | 0.62% | &sect;9&rdquo; &nbsp;&mdash;&nbsp; one example fixes formatting ambiguity</text>
-        <text class="ss" x="162" y="372" style="font-size:13.5px">faster than three paragraphs of instruction.</text>
-        <text class="ss" x="162" y="388" style="fill:#94a3b8">Highest return on effort of the five.</text>
-      </svg>
-    </div>
-    <div class="pts">
-      <h3>Why this structure and not another</h3>
-      <ul>
-        <li>Each part removes one class of failure: <b>role</b> fixes tone and assumptions, <b>context</b> fixes fabrication, <b>task</b> fixes vagueness, <b>format</b> makes output machine-usable, <b>example</b> fixes ambiguity.</li>
-        <li>Drop any one and you can predict which failure returns.</li>
-      </ul>
-      <h3>Habits that pay off</h3>
-      <ul>
-        <li><b>Name the fields.</b> &ldquo;Key highlights&rdquo; gets you a different set every run.</li>
-        <li><b>Always permit &ldquo;not stated&rdquo;.</b> Silence must be a legal answer.</li>
-        <li><b>Ask for the source page.</b> Free verification, and it discourages invention.</li>
-        <li>Keep the good ones. A prompt that works is <b>a team asset</b>, not a chat message.</li>
-      </ul>
-      <div class="callout">These five parts do not disappear when you move to Copilot Studio &mdash; they become the agent's <b>Instructions</b>. You are already writing agent code.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 8 -->
-<section class="slide" data-sec="1.2 Prompting" data-title="Decomposition — model-sized steps" data-notes="Six steps, and only two of them need a model at all. Language in, language out goes to the model; numbers, rules and files go to a tool. A single mega-prompt collapses all six and you cannot tell which one failed.">
-  <h2>Never ask for the whole report: decompose into model-sized steps<span class="tag">1.2</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 250" role="img" aria-label="Report pipeline broken into six steps">
-        <rect class="bx" x="4" y="40" width="172" height="96" rx="8"/>
-        <text class="lb" x="20" y="64">STEP 1</text><text class="tt" x="20" y="88">Gather</text>
-        <text class="ss" x="20" y="108">factsheets, manager</text><text class="ss" x="20" y="126">updates, holdings file</text>
-        <path class="fl" d="M180 88 L204 88"/>
-        <rect class="bx g" x="208" y="40" width="172" height="96" rx="8"/>
-        <text class="lb g" x="224" y="64">STEP 2</text><text class="tt" x="224" y="88">Extract</text>
-        <text class="ss" x="224" y="108">unstructured &rarr; fields</text><text class="ss" x="224" y="126">against a schema</text>
-        <path class="fl" d="M384 88 L408 88"/>
-        <rect class="bx" x="412" y="40" width="172" height="96" rx="8"/>
-        <text class="lb" x="428" y="64">STEP 3</text><text class="tt" x="428" y="88">Validate</text>
-        <text class="ss" x="428" y="108">ranges, dates, class,</text><text class="ss" x="428" y="126">currency &mdash; flag gaps</text>
-        <path class="fl" d="M588 88 L612 88"/>
-        <rect class="bx r" x="616" y="40" width="172" height="96" rx="8"/>
-        <text class="lb r" x="632" y="64">STEP 4</text><text class="tt" x="632" y="88">Compute</text>
-        <text class="ss" x="632" y="108">excess return, weights,</text><text class="ss" x="632" y="126">attribution</text>
-        <path class="fl" d="M792 88 L816 88"/>
-        <rect class="bx g" x="820" y="40" width="172" height="96" rx="8"/>
-        <text class="lb g" x="836" y="64">STEP 5</text><text class="tt" x="836" y="88">Draft narrative</text>
-        <text class="ss" x="836" y="108">commentary from the</text><text class="ss" x="836" y="126">validated numbers</text>
-        <path class="fl" d="M996 88 L1020 88"/>
-        <rect class="bx r" x="1024" y="40" width="152" height="96" rx="8"/>
-        <text class="lb r" x="1040" y="64">STEP 6</text><text class="tt" x="1040" y="88">Assemble</text>
-        <text class="ss" x="1040" y="108">template, charts,</text><text class="ss" x="1040" y="126">the deck itself</text>
-
-        <text class="lb g" x="4" y="170">MODEL DOES THIS WELL &mdash; LANGUAGE-SHAPED WORK</text>
-        <rect x="208" y="180" width="176" height="9" rx="4" fill="#a7f3d0"/>
-        <rect x="820" y="180" width="176" height="9" rx="4" fill="#a7f3d0"/>
-        <text class="lb r" x="4" y="216">MODEL DOES THIS BADLY &mdash; GIVE IT TO A TOOL</text>
-        <rect x="616" y="226" width="176" height="9" rx="4" fill="#fecaca"/>
-        <rect x="1024" y="226" width="156" height="9" rx="4" fill="#fecaca"/>
-        <rect x="4" y="226" width="176" height="9" rx="4" fill="#e2e8f0"/>
-        <rect x="412" y="226" width="176" height="9" rx="4" fill="#e2e8f0"/>
-        <text class="ss" x="4" y="248" style="fill:#64748b">grey = deterministic plumbing: connectors, flows, code &mdash; no model needed</text>
+      <svg viewBox="0 0 1180 420" role="img" aria-label="Five parts of a structured prompt and the failure each one prevents">
+        <rect class="bx d" x="4" y="4" width="140" height="76" rx="7"/>
+        <text class="tt w" x="20" y="36" style="font-size:14px">ROLE</text>
+        <text class="ss w" x="20" y="56" style="font-size:10px">who is speaking</text>
+        <rect class="bx w" x="152" y="4" width="1024" height="76" rx="7"/>
+        <text class="ss" x="168" y="32" style="font-size:12.5px;fill:#0b2545">&ldquo;You are an investment consultant preparing a quarterly fund review for an</text>
+        <text class="ss" x="168" y="52" style="font-size:12.5px;fill:#0b2545">institutional client &mdash; a long-horizon retirement portfolio.&rdquo;</text>
+        <text class="ss" x="168" y="70" style="font-size:10px;fill:#94a3b8">Sets the vocabulary and the default assumptions &mdash; net of fees, institutional class.</text>
+        <line x1="868" y1="16" x2="868" y2="68" style="stroke:#e2e8f0"/>
+        <text class="lb r" x="884" y="32" style="font-size:9px">DROP IT AND YOU GET</text>
+        <text class="ss" x="884" y="50" style="font-size:10.5px;fill:#b91c1c">generic tone, and retail</text>
+        <text class="ss" x="884" y="66" style="font-size:10.5px;fill:#b91c1c">assumptions you never asked for</text>
+        <rect class="bx d" x="4" y="88" width="140" height="76" rx="7"/>
+        <text class="tt w" x="20" y="120" style="font-size:14px">CONTEXT</text>
+        <text class="ss w" x="20" y="140" style="font-size:10px">what it may use</text>
+        <rect class="bx w" x="152" y="88" width="1024" height="76" rx="7"/>
+        <text class="ss" x="168" y="116" style="font-size:12.5px;fill:#0b2545">&ldquo;Use only the attached Northwind factsheet (data as of 30 June 2026).</text>
+        <text class="ss" x="168" y="136" style="font-size:12.5px;fill:#0b2545">If a figure is not present, write <tspan style="font-weight:700">not stated</tspan> &mdash; do not estimate.&rdquo;</text>
+        <text class="ss" x="168" y="154" style="font-size:10px;fill:#94a3b8">The highest-value sentence on this slide: it removes most fabrication on its own.</text>
+        <line x1="868" y1="100" x2="868" y2="152" style="stroke:#e2e8f0"/>
+        <text class="lb r" x="884" y="116" style="font-size:9px">DROP IT AND YOU GET</text>
+        <text class="ss" x="884" y="134" style="font-size:10.5px;fill:#b91c1c">fabrication comes straight back,</text>
+        <text class="ss" x="884" y="150" style="font-size:10.5px;fill:#b91c1c">fluently and with confidence</text>
+        <rect class="bx d" x="4" y="172" width="140" height="76" rx="7"/>
+        <text class="tt w" x="20" y="204" style="font-size:14px">TASK</text>
+        <text class="ss w" x="20" y="224" style="font-size:10px">one job, precisely</text>
+        <rect class="bx w" x="152" y="172" width="1024" height="76" rx="7"/>
+        <text class="ss" x="168" y="200" style="font-size:12.5px;fill:#0b2545">&ldquo;Extract: fund name, ISIN, share class, AUM, TER, 1/3/5-year return</text>
+        <text class="ss" x="168" y="220" style="font-size:12.5px;fill:#0b2545">(annualised), benchmark, benchmark return, excess return.&rdquo;</text>
+        <text class="ss" x="168" y="238" style="font-size:10px;fill:#94a3b8">Named fields &mdash; never &ldquo;summarise the key points&rdquo;.</text>
+        <line x1="868" y1="184" x2="868" y2="236" style="stroke:#e2e8f0"/>
+        <text class="lb r" x="884" y="200" style="font-size:9px">DROP IT AND YOU GET</text>
+        <text class="ss" x="884" y="218" style="font-size:10.5px;fill:#b91c1c">a different set of fields</text>
+        <text class="ss" x="884" y="234" style="font-size:10.5px;fill:#b91c1c">every single run</text>
+        <rect class="bx d" x="4" y="256" width="140" height="76" rx="7"/>
+        <text class="tt w" x="20" y="288" style="font-size:14px">FORMAT</text>
+        <text class="ss w" x="20" y="308" style="font-size:10px">shape of the output</text>
+        <rect class="bx w" x="152" y="256" width="1024" height="76" rx="7"/>
+        <text class="ss" x="168" y="284" style="font-size:12.5px;fill:#0b2545">&ldquo;Return a table, one row per field, columns: field | value | source page.&rdquo;</text>
+        <text class="ss" x="168" y="304" style="font-size:12.5px;fill:#0b2545">A fixed shape is what makes the step after this one automatable.</text>
+        <text class="ss" x="168" y="322" style="font-size:10px;fill:#94a3b8">In Module 2 this same demand becomes an enforced schema (session 2.4).</text>
+        <line x1="868" y1="268" x2="868" y2="320" style="stroke:#e2e8f0"/>
+        <text class="lb r" x="884" y="284" style="font-size:9px">DROP IT AND YOU GET</text>
+        <text class="ss" x="884" y="302" style="font-size:10.5px;fill:#b91c1c">readable prose that no</text>
+        <text class="ss" x="884" y="318" style="font-size:10.5px;fill:#b91c1c">downstream step can consume</text>
+        <rect class="bx d" x="4" y="340" width="140" height="76" rx="7"/>
+        <text class="tt w" x="20" y="372" style="font-size:14px">EXAMPLE</text>
+        <text class="ss w" x="20" y="392" style="font-size:10px">one worked row</text>
+        <rect class="bx w" x="152" y="340" width="1024" height="76" rx="7"/>
+        <text class="ss" x="168" y="368" style="font-size:12.5px;fill:#0b2545">&ldquo;TER (Direct) | 0.62% | &sect;9&rdquo;</text>
+        <text class="ss" x="168" y="388" style="font-size:12.5px;fill:#0b2545">One worked row settles formatting faster than three paragraphs of instruction.</text>
+        <text class="ss" x="168" y="406" style="font-size:10px;fill:#94a3b8">Highest return on effort of the five, and the one most often skipped.</text>
+        <line x1="868" y1="352" x2="868" y2="404" style="stroke:#e2e8f0"/>
+        <text class="lb r" x="884" y="368" style="font-size:9px">DROP IT AND YOU GET</text>
+        <text class="ss" x="884" y="386" style="font-size:10.5px;fill:#b91c1c">formatting drift, and an</text>
+        <text class="ss" x="884" y="402" style="font-size:10.5px;fill:#b91c1c">argument with the model</text>
       </svg>
     </div>
-    <div class="body g55" style="margin-top:6px">
-      <div class="pts">
-        <h3>The judgement being taught</h3>
-        <ul>
-          <li><b>Language in, language out &rarr; model.</b> Reading a PDF, writing commentary.</li>
-          <li><b>Numbers, rules, files &rarr; tool.</b> Arithmetic in Excel or SQL; the deck built by a template engine.</li>
-          <li>A single mega-prompt collapses all six steps and you cannot tell which one failed.</li>
-        </ul>
-      </div>
-      <div class="pts">
-        <h3>Why this is the map of Module 2</h3>
-        <ul>
-          <li>Step 2 &rarr; <b>2.4 extraction</b> &middot; step 3 &rarr; validation rules &middot; step 4 &rarr; <b>2.3 Excel/SQL</b> &middot; step 5 &rarr; instructions &middot; step 6 &rarr; <b>2.5 PowerPoint</b>.</li>
-          <li>Today your developers do all six by hand, with Aspose and custom code carrying steps 4 and 6.</li>
-        </ul>
-      </div>
-    </div>
   </div>
-  <div class="take"><b>Decomposition is the skill.</b> Once the six steps are separate, each one can be tested, fixed and automated independently &mdash; and only two of them need a model at all.</div>
+  <div class="take"><b>These five parts do not disappear when you move to Copilot Studio &mdash; they become the agent's Instructions.</b> You are already writing agent configuration; demo 1.3 simply makes it permanent, shared and versioned.</div>
 </section>
 
-<!-- 9 -->
-<section class="slide" data-sec="1.2 Prompting" data-title="The prompting ceiling" data-notes="The hinge of the day. Prompting hits four walls - no system access, no repeatability, no action, no audit trail - and no amount of cleverness gets past them. This is also the honest diagnosis of why the Copilot pilot plateaued.">
-  <h2>The prompting ceiling &mdash; and why your pilot hit it<span class="tag">1.2</span></h2>
-  <div class="body g64">
+<!-- 6 -->
+<section class="slide" data-sec="1.3 What an agent is" data-title="What people actually build with it" data-notes="Six agents that exist in firms like yours, before any theory about how they work. Read the middle line of each card first - what it touches. That line is the whole difference between an agent and a chat window: every one of these reaches something outside the conversation, and that is why they change a process rather than saving somebody typing. Notice also how similar they are underneath. Each is the same handful of parts - a knowledge source, a tool or two, something that starts it, and a place people meet it - pointed at a different job. That is the good news and the discipline at once: the second agent is much cheaper than the first, provided you resist the temptation to make one agent do all six jobs. Session 1.4 gives you the criteria for choosing which of these to build first, and the honest answer for most firms is the least glamorous one on this slide.">
+  <h2>What people actually build with it &mdash; six agents from your world<span class="tag">1.3</span></h2>
+  <div class="body g1">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Four limits that prompting cannot pass">
-        <rect class="bx d" x="238" y="166" width="224" height="90" rx="8"/>
-        <text class="tt w" x="270" y="200" style="font-size:17px">Prompting alone</text>
-        <text class="ss w" x="270" y="224">one person, one chat,</text>
-        <text class="ss w" x="270" y="242">one answer at a time</text>
+      <svg viewBox="0 0 1180 436" role="img" aria-label="Six investment consulting agent use cases, each showing what starts it, what it touches and what it returns">
 
-        <rect class="bx r" x="238" y="16" width="224" height="122" rx="8"/>
-        <text class="lb r" x="256" y="40">NO SYSTEM ACCESS</text>
-        <text class="ss" x="256" y="62">It cannot call your fund-data</text>
-        <text class="ss" x="256" y="80">API, query the database, or</text>
-        <text class="ss" x="256" y="98">read the legacy system.</text>
-        <text class="ss" x="256" y="122" style="fill:#dc2626;font-weight:600">You paste. Every time.</text>
-        <path class="ar" d="M350 146 L350 162" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
+        <!-- card 1 : the capstone -->
+        <rect class="bx d" x="4" y="26" width="380" height="150" rx="8"/>
+        <text class="tt w" x="22" y="52" style="font-size:14.5px">Quarterly fund review</text>
+        <rect class="bx a" x="248" y="36" width="122" height="21" rx="10"/>
+        <text class="lb a" x="258" y="51" style="font-size:8.5px">TODAY'S CAPSTONE</text>
+        <text class="ss w" x="22" y="80" style="font-size:10.5px"><tspan style="fill:#93c5fd;font-weight:700">Starts &nbsp;</tspan>a new factsheet lands in the SharePoint library</text>
+        <text class="ss w" x="22" y="102" style="font-size:10.5px"><tspan style="fill:#93c5fd;font-weight:700">Touches &nbsp;</tspan>factsheets, the mandate system, benchmarks, Excel</text>
+        <text class="ss w" x="22" y="124" style="font-size:10.5px"><tspan style="fill:#93c5fd;font-weight:700">Returns &nbsp;</tspan>a drafted review deck and an approval card in Teams</text>
+        <text class="ss w" x="22" y="152" style="font-size:10.5px;fill:#fbbf24;font-weight:600">Built in front of you this afternoon, from an empty screen.</text>
 
-        <rect class="bx r" x="6" y="166" width="222" height="90" rx="8"/>
-        <text class="lb r" x="24" y="190">NO REPEATABILITY</text>
-        <text class="ss" x="24" y="212">Same request next month,</text>
-        <text class="ss" x="24" y="230">different structure, different</text>
-        <text class="ss" x="24" y="248">wording. Nothing is fixed.</text>
-        <path class="ar" d="M232 211 L236 211" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
+        <!-- card 2 -->
+        <rect class="bx" x="400" y="26" width="380" height="150" rx="8"/>
+        <text class="tt" x="418" y="52" style="font-size:14.5px">Manager research summariser</text>
+        <text class="ss" x="418" y="80" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Starts &nbsp;</tspan>someone drops a 40-page manager update in chat</text>
+        <text class="ss" x="418" y="102" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Touches &nbsp;</tspan>the update, the house question list, past summaries</text>
+        <text class="ss" x="418" y="124" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Returns &nbsp;</tspan>a one-page structured summary, every claim cited</text>
+        <text class="ss" x="418" y="152" style="font-size:10.5px;fill:#94a3b8">The strongest second candidate: same shape, smaller blast radius.</text>
 
-        <rect class="bx r" x="472" y="166" width="222" height="90" rx="8"/>
-        <text class="lb r" x="490" y="190">NO ACTION</text>
-        <text class="ss" x="490" y="212">It produces text. It cannot</text>
-        <text class="ss" x="490" y="230">write the file, send it, or</text>
-        <text class="ss" x="490" y="248">update the record.</text>
-        <path class="ar" d="M468 211 L464 211" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
+        <!-- card 3 -->
+        <rect class="bx" x="796" y="26" width="380" height="150" rx="8"/>
+        <text class="tt" x="814" y="52" style="font-size:14.5px">Mandate compliance check</text>
+        <text class="ss" x="814" y="80" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Starts &nbsp;</tspan>a consultant asks, or a holdings file is refreshed</text>
+        <text class="ss" x="814" y="102" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Touches &nbsp;</tspan>the portfolio, the client mandate, allocation limits</text>
+        <text class="ss" x="814" y="124" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Returns &nbsp;</tspan>breaches and headroom, with a source for each number</text>
+        <text class="ss" x="814" y="152" style="font-size:10.5px;fill:#94a3b8">It reads and it flags. It never decides whether a breach is acceptable.</text>
 
-        <rect class="bx r" x="238" y="284" width="224" height="106" rx="8"/>
-        <text class="lb r" x="256" y="308">NO AUDIT OR SHARING</text>
-        <text class="ss" x="256" y="330">The clever prompt lives in</text>
-        <text class="ss" x="256" y="348">one person's chat history.</text>
-        <text class="ss" x="256" y="366">Nothing is reviewable,</text>
-        <text class="ss" x="256" y="384">versioned or inheritable.</text>
-        <path class="ar" d="M350 278 L350 262" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
+        <!-- card 4 -->
+        <rect class="bx" x="4" y="190" width="380" height="150" rx="8"/>
+        <text class="tt" x="22" y="216" style="font-size:14.5px">Client query triage</text>
+        <text class="ss" x="22" y="244" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Starts &nbsp;</tspan>a question arrives in a shared inbox or Teams channel</text>
+        <text class="ss" x="22" y="266" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Touches &nbsp;</tspan>past answers, policy documents, the client record</text>
+        <text class="ss" x="22" y="288" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Returns &nbsp;</tspan>a classified query, a drafted reply, or an escalation</text>
+        <text class="ss" x="22" y="316" style="font-size:10.5px;fill:#94a3b8">High volume &mdash; but only worth it once the answers live somewhere.</text>
 
-        <rect class="bx g" x="6" y="284" width="222" height="106" rx="8"/>
-        <text class="lb g" x="24" y="308">AN AGENT ADDS</text>
-        <text class="ss" x="24" y="330">&bull; knowledge, always on</text>
-        <text class="ss" x="24" y="348">&bull; actions into systems</text>
-        <text class="ss" x="24" y="366">&bull; a fixed, shared definition</text>
-        <text class="ss" x="24" y="384">&bull; a place to run and be audited</text>
+        <!-- card 5 -->
+        <rect class="bx" x="400" y="190" width="380" height="150" rx="8"/>
+        <text class="tt" x="418" y="216" style="font-size:14.5px">Fee and RFP benchmarking</text>
+        <text class="ss" x="418" y="244" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Starts &nbsp;</tspan>a consultant pastes a fee schedule from an RFP</text>
+        <text class="ss" x="418" y="266" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Touches &nbsp;</tspan>your benchmark table in Excel or SQL, past mandates</text>
+        <text class="ss" x="418" y="288" style="font-size:10.5px"><tspan style="fill:#1d4ed8;font-weight:700">Returns &nbsp;</tspan>a like-for-like comparison, with the basis stated</text>
+        <text class="ss" x="418" y="316" style="font-size:10.5px;fill:#94a3b8">Good data, low frequency &mdash; a fast build, a slower payback.</text>
 
-        <rect class="bx a" x="472" y="284" width="222" height="106" rx="8"/>
-        <text class="lb a" x="490" y="308">THE ARITHMETIC</text>
-        <text class="ss" x="490" y="332">Prompting trims minutes off</text>
-        <text class="ss" x="490" y="350">each of 20 manual steps.</text>
-        <text class="ss" x="490" y="374" style="fill:#b45309;font-weight:600">An agent removes 12 of them.</text>
+        <!-- card 6 -->
+        <rect class="bx g" x="796" y="190" width="380" height="150" rx="8"/>
+        <text class="tt" x="814" y="216" style="font-size:14.5px">The policy desk</text>
+        <text class="ss" x="814" y="244" style="font-size:10.5px"><tspan style="fill:#047857;font-weight:700">Starts &nbsp;</tspan>anyone asks a question in Teams, at any hour</text>
+        <text class="ss" x="814" y="266" style="font-size:10.5px"><tspan style="fill:#047857;font-weight:700">Touches &nbsp;</tspan>internal policy documents, process notes, templates</text>
+        <text class="ss" x="814" y="288" style="font-size:10.5px"><tspan style="fill:#047857;font-weight:700">Returns &nbsp;</tspan>a cited answer, or a ticket when the documents fall short</text>
+        <text class="ss" x="814" y="316" style="font-size:10.5px;fill:#047857;font-weight:600">The easiest first agent in any firm, and the least glamorous.</text>
+
+        <!-- reading band -->
+        <rect class="bx a" x="4" y="352" width="1172" height="76" rx="8"/>
+        <text class="lb a" x="22" y="374">READ THE MIDDLE LINE OF EACH CARD FIRST</text>
+        <text class="ss" x="22" y="397" style="font-size:12px">Every one reaches <tspan style="font-weight:700;fill:#92400e">something outside the conversation</tspan> &mdash; which is the whole difference between an agent and a chat window.</text>
+        <text class="ss" x="22" y="418" style="font-size:11px;fill:#b45309">Underneath they are the same few parts pointed at different jobs, which is why the second agent costs far less than the first. Session 1.4 is how you choose.</text>
       </svg>
-    </div>
-    <div class="pts">
-      <h3>This is the hinge of the whole day</h3>
-      <ul>
-        <li>Copilot made individuals modestly faster. It could not <b>enter the workflow</b>, so the process kept its shape &mdash; and the process is where the time goes.</li>
-        <li>Governance and tooling limits get the blame, and they are real. But even with perfect access, <b>prompting alone would still hit these four walls.</b></li>
-      </ul>
-      <h3>The definition we will use</h3>
-      <div class="callout"><b>An agent is what you get when you give the model three things it does not have on its own:</b> knowledge it can always see, tools it can call, and a place to run where it can be shared and audited.</div>
-      <ul>
-        <li>That is not a philosophical definition &mdash; it maps exactly onto the four things you configure in Copilot Studio. Next slide.</li>
-      </ul>
     </div>
   </div>
 </section>
 
-<!-- 10 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Chatbot → assistant → agent" data-notes="Rows one and two make someone better informed; rows three to six change how the work gets done. Only the second group shows up in a process metric. The price of that group is ownership - an agent is a small production system, not a chat.">
-  <h2>Chatbot &rarr; grounded assistant &rarr; agent: what actually changes<span class="tag">1.3</span></h2>
-  <div class="body g64">
-    <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Capability comparison across three generations">
-        <rect class="bx" x="196" y="6" width="160" height="46" rx="7"/>
-        <text class="tt" x="216" y="28" style="font-size:14px">Chatbot</text><text class="ss" x="216" y="44">scripted replies</text>
-        <rect class="bx" x="360" y="6" width="160" height="46" rx="7"/>
-        <text class="tt" x="380" y="28" style="font-size:14px">Grounded assistant</text><text class="ss" x="380" y="44">reads your documents</text>
-        <rect class="bx d" x="524" y="6" width="170" height="46" rx="7"/>
-        <text class="tt w" x="544" y="28" style="font-size:14px">Agent</text><text class="ss w" x="544" y="44">decides and acts</text>
-
-        <text class="ss" x="6" y="82" style="fill:#0b2545;font-weight:600">Answers a question</text>
-        <line x1="6" y1="92" x2="694" y2="92" stroke="#eef2f7"/>
-        <text x="270" y="82" font-size="17" fill="#059669">&#10003;</text><text x="434" y="82" font-size="17" fill="#059669">&#10003;</text><text x="602" y="82" font-size="17" fill="#059669">&#10003;</text>
-
-        <text class="ss" x="6" y="126" style="fill:#0b2545;font-weight:600">Cites where the answer came from</text>
-        <line x1="6" y1="136" x2="694" y2="136" stroke="#eef2f7"/>
-        <text x="270" y="126" font-size="17" fill="#cbd5e1">&#10007;</text><text x="434" y="126" font-size="17" fill="#059669">&#10003;</text><text x="602" y="126" font-size="17" fill="#059669">&#10003;</text>
-
-        <text class="ss" x="6" y="170" style="fill:#0b2545;font-weight:600">Calls a system &mdash; API, Excel, SQL</text>
-        <line x1="6" y1="180" x2="694" y2="180" stroke="#eef2f7"/>
-        <text x="270" y="170" font-size="17" fill="#cbd5e1">&#10007;</text><text x="434" y="170" font-size="17" fill="#cbd5e1">&#10007;</text><text x="602" y="170" font-size="17" fill="#059669">&#10003;</text>
-
-        <text class="ss" x="6" y="214" style="fill:#0b2545;font-weight:600">Chooses its own sequence of steps</text>
-        <line x1="6" y1="224" x2="694" y2="224" stroke="#eef2f7"/>
-        <text x="270" y="214" font-size="17" fill="#cbd5e1">&#10007;</text><text x="434" y="214" font-size="17" fill="#cbd5e1">&#10007;</text><text x="602" y="214" font-size="17" fill="#059669">&#10003;</text>
-
-        <text class="ss" x="6" y="258" style="fill:#0b2545;font-weight:600">Produces an artefact &mdash; file, record, message</text>
-        <line x1="6" y1="268" x2="694" y2="268" stroke="#eef2f7"/>
-        <text x="270" y="258" font-size="17" fill="#cbd5e1">&#10007;</text><text x="434" y="258" font-size="17" fill="#cbd5e1">&#10007;</text><text x="602" y="258" font-size="17" fill="#059669">&#10003;</text>
-
-        <text class="ss" x="6" y="302" style="fill:#0b2545;font-weight:600">Runs for the whole team, not one person</text>
-        <line x1="6" y1="312" x2="694" y2="312" stroke="#eef2f7"/>
-        <text x="270" y="302" font-size="17" fill="#cbd5e1">&#10007;</text><text x="434" y="302" font-size="17" fill="#f59e0b">~</text><text x="602" y="302" font-size="17" fill="#059669">&#10003;</text>
-
-        <rect class="bx a" x="6" y="330" width="688" height="82" rx="8"/>
-        <text class="lb a" x="24" y="354">THE LINE THAT MATTERS</text>
-        <text class="tt" x="24" y="378" style="font-size:14.5px">Rows 1&ndash;2 make someone better informed. Rows 3&ndash;6 change how the work gets done.</text>
-        <text class="ss" x="24" y="398">Your internal GPT tool sits at column two. Everything in Module 2 is column three.</text>
-      </svg>
-    </div>
-    <div class="pts">
-      <h3>Reading the table honestly</h3>
-      <ul>
-        <li>Most &ldquo;AI rollouts&rdquo; stop at column two &mdash; useful, popular, and <b>invisible in process metrics</b>.</li>
-        <li>Column three is where automation shows up in cycle time, because the agent does steps rather than advising a human who does them.</li>
-      </ul>
-      <h3>What column three costs you</h3>
-      <ul>
-        <li>Connections have to be approved. Actions have to be built. Failures need handling.</li>
-        <li><b>Somebody owns it</b> &mdash; an agent is a small production system, not a chat.</li>
-        <li>That ownership is the price of the productivity, and it is worth naming up front.</li>
-      </ul>
-      <div class="callout">Copilot Studio is where columns two and three are configured &mdash; the same tool, a different level of ambition.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 11 -->
+<!-- 7 -->
 <section class="slide" data-sec="1.3 What an agent is" data-title="Agent anatomy in Copilot Studio" data-notes="Hold this diagram: instructions, knowledge, topics, actions, wrapped in orchestration and published to a channel. Everything in Module 2 configures one box on it. Note that only Actions involves engineering - the other three are written in English.">
   <h2>Agent anatomy in Copilot Studio &mdash; the four things you configure<span class="tag">1.3</span></h2>
   <div class="body g1">
@@ -789,7 +567,7 @@ svg{width:100%;height:auto;display:block}
   <div class="take"><b>Hold this diagram in your head for the afternoon.</b> Every session in Module 2 configures one box on this picture &mdash; and the capstone lights up all of them.</div>
 </section>
 
-<!-- 12 -->
+<!-- 8 -->
 <section class="slide" data-sec="1.3 What an agent is" data-title="How the agent decides — the orchestration loop" data-notes="The agent plans each request at runtime rather than following a script. Two ways to drive it: generative for open work, topics where behaviour is non-negotiable. When it goes wrong it is almost always the planning step choosing the wrong action, and the trace shows you which.">
   <h2>How the agent decides what to do<span class="tag">1.3</span></h2>
   <div class="body g64">
@@ -854,120 +632,309 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 13 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Copilot vs Copilot Studio" data-notes="A practical distinction, not an academic one. If the task needs a system outside M365, or must run the same way every month, or belongs to the team rather than to you, it is Copilot Studio. Same tenant, same data boundary - not a new vendor decision.">
-  <h2>Where Copilot ends and Copilot Studio begins<span class="tag">1.3</span></h2>
+<!-- 9 -->
+<section class="slide" data-sec="1.3 What an agent is" data-title="What Copilot Studio actually gives you" data-notes="This is the map worth keeping. Read it in four bands: what the agent may read, what it may do, what may start it, and where people meet it - with the platform that builds, tests, ships and watches it running underneath. Three things are worth noticing. First, most of the left column is chosen from lists rather than engineered: knowledge sources and triggers are configuration, and only the tools band involves building anything. Second, the triggers band is what separates an agent from a chat window - if nothing on that list starts your agent, someone has to remember to open it, and adoption becomes a memory problem rather than a capability one. Third, the bottom band is the half that decides whether an agent is still running next year: the test pane tells you what it did, evaluation tells you whether a change helped, and environments and solutions are what let you fix it without breaking somebody's Tuesday. Nothing on this slide is a future release - the constraint on what you build is your tenant's governance and your own clarity about the job, not the product.">
+  <h2>What Copilot Studio actually gives you &mdash; the whole surface<span class="tag">1.3</span></h2>
+  <div class="body g1">
+    <div>
+      <svg viewBox="0 0 1180 474" role="img" aria-label="Copilot Studio capability map: knowledge, tools and triggers feeding an agent, published to channels, producing outputs, on a platform that builds, tests, ships, watches and governs it">
+
+        <!-- ============ LEFT: what goes in ============ -->
+        <rect class="bx" x="4" y="6" width="296" height="116" rx="8"/>
+        <text class="lb" x="20" y="26">KNOWLEDGE &mdash; WHAT IT MAY READ</text>
+        <text class="ss" x="20" y="48" style="font-size:11px">SharePoint and OneDrive libraries</text>
+        <text class="ss" x="20" y="64" style="font-size:11px">Uploaded files &mdash; PDF, DOCX, XLSX, TXT</text>
+        <text class="ss" x="20" y="80" style="font-size:11px">Dataverse tables, with synonyms</text>
+        <text class="ss" x="20" y="96" style="font-size:11px">The public web &mdash; or firmly switched off</text>
+        <text class="ss" x="20" y="112" style="font-size:11px">More sources through connectors</text>
+
+        <rect class="bx" x="4" y="128" width="296" height="116" rx="8"/>
+        <text class="lb" x="20" y="148">TOOLS &mdash; WHAT IT MAY DO</text>
+        <text class="ss" x="20" y="170" style="font-size:11px">Prebuilt connectors &mdash; a thousand systems</text>
+        <text class="ss" x="20" y="186" style="font-size:11px">Agent flows, built in Power Automate</text>
+        <text class="ss" x="20" y="202" style="font-size:11px">Reusable AI Builder prompts</text>
+        <text class="ss" x="20" y="218" style="font-size:11px">MCP servers</text>
+        <text class="ss" x="20" y="234" style="font-size:11px">A custom connector over any REST API</text>
+
+        <rect class="bx" x="4" y="250" width="296" height="116" rx="8"/>
+        <text class="lb" x="20" y="270">TRIGGERS &mdash; WHAT STARTS IT</text>
+        <text class="ss" x="20" y="292" style="font-size:11px">A person, in a chat window</text>
+        <text class="ss" x="20" y="308" style="font-size:11px;fill:#b45309;font-weight:600">A file landing in a library</text>
+        <text class="ss" x="20" y="324" style="font-size:11px">A schedule, or a record changing</text>
+        <text class="ss" x="20" y="340" style="font-size:11px">An email, or an approval completing</text>
+        <text class="ss" x="20" y="356" style="font-size:11px">Another agent calling this one</text>
+
+        <path class="fl" d="M304 64 L322 64"/>
+        <path class="fl" d="M304 186 L322 186"/>
+        <path class="fl" d="M304 308 L322 308"/>
+
+        <!-- ============ CENTRE: the agent ============ -->
+        <rect class="bx d" x="326" y="6" width="300" height="360" rx="8"/>
+        <text class="lb w" x="344" y="28">THE AGENT &mdash; WHAT YOU SET</text>
+
+        <rect class="bx" x="344" y="40" width="264" height="58" rx="6" style="fill:#12325a;stroke:#274a72"/>
+        <text class="ss w" x="360" y="62" style="font-size:12.5px;font-weight:600">Instructions</text>
+        <text class="ss w" x="360" y="82" style="font-size:11px;fill:#93c5fd">the rules, in English &mdash; ~8,000 characters</text>
+
+        <rect class="bx" x="344" y="104" width="264" height="58" rx="6" style="fill:#12325a;stroke:#274a72"/>
+        <text class="ss w" x="360" y="126" style="font-size:12.5px;font-weight:600">Orchestration</text>
+        <text class="ss w" x="360" y="146" style="font-size:11px;fill:#93c5fd">it plans each request &mdash; or you script it</text>
+
+        <rect class="bx" x="344" y="168" width="264" height="58" rx="6" style="fill:#12325a;stroke:#274a72"/>
+        <text class="ss w" x="360" y="190" style="font-size:12.5px;font-weight:600">Topics</text>
+        <text class="ss w" x="360" y="210" style="font-size:11px;fill:#93c5fd">for paths where behaviour is fixed</text>
+
+        <rect class="bx" x="344" y="232" width="264" height="58" rx="6" style="fill:#12325a;stroke:#274a72"/>
+        <text class="ss w" x="360" y="254" style="font-size:12.5px;font-weight:600">Adaptive cards</text>
+        <text class="ss w" x="360" y="274" style="font-size:11px;fill:#93c5fd">collect typed input, not free-text prose</text>
+
+        <text class="ss w" x="344" y="314" style="font-size:11px">Model chosen per agent, changeable later</text>
+        <text class="ss w" x="344" y="334" style="font-size:11px">Child agents when one agent knows too much</text>
+        <text class="ss w" x="344" y="356" style="font-size:11px;fill:#fbbf24;font-weight:600">Every run traced &mdash; which tool, what in, what back</text>
+
+        <path class="fl" d="M630 93 L646 93"/>
+        <path class="fl" d="M630 279 L646 279"/>
+
+        <!-- ============ RIGHT TOP: channels ============ -->
+        <rect class="bx a" x="650" y="6" width="526" height="174" rx="8"/>
+        <text class="lb a" x="668" y="28">WHERE PEOPLE MEET IT &mdash; THE CHANNELS</text>
+        <text class="ss" x="668" y="54" style="font-size:11.5px">&bull; &nbsp;Microsoft Teams</text>
+        <text class="ss" x="668" y="76" style="font-size:11.5px">&bull; &nbsp;Microsoft 365 Copilot</text>
+        <text class="ss" x="668" y="98" style="font-size:11.5px">&bull; &nbsp;A demo or public website</text>
+        <text class="ss" x="668" y="120" style="font-size:11.5px">&bull; &nbsp;Embedded in your own app</text>
+        <text class="ss" x="930" y="54" style="font-size:11.5px">&bull; &nbsp;Power Apps and SharePoint</text>
+        <text class="ss" x="930" y="76" style="font-size:11.5px">&bull; &nbsp;Voice and telephony</text>
+        <text class="ss" x="930" y="98" style="font-size:11.5px">&bull; &nbsp;Direct Line, for anything else</text>
+        <text class="ss" x="668" y="148" style="font-size:11px;fill:#94a3b8">Teams and Microsoft 365 Copilot both pass through an administrator in most tenants</text>
+        <text class="ss" x="668" y="166" style="font-size:11px;fill:#94a3b8">&mdash; a queue to join early, not a switch. The list moves between releases.</text>
+
+        <!-- ============ RIGHT BOTTOM: what it produces ============ -->
+        <rect class="bx g" x="650" y="192" width="526" height="174" rx="8"/>
+        <text class="lb g" x="668" y="214">WHAT IT LEAVES BEHIND</text>
+        <text class="ss" x="668" y="238" style="font-size:11.5px">A cited answer in seconds, checkable against the source it came from</text>
+        <text class="ss" x="668" y="258" style="font-size:11.5px">A row written to a system of record &mdash; stamped, and reversible</text>
+        <text class="ss" x="668" y="278" style="font-size:11.5px">A file: a deck, a workbook, a document, in the right folder</text>
+        <text class="ss" x="668" y="298" style="font-size:11.5px">An approval card in front of a named person, before anything is issued</text>
+        <text class="ss" x="668" y="318" style="font-size:11.5px">A run history still readable months later, when somebody asks</text>
+        <text class="ss" x="668" y="346" style="font-size:11.5px;fill:#047857;font-weight:600">That last line is why an agent belongs in regulated work at all.</text>
+
+        <!-- ============ BOTTOM BAND: the platform ============ -->
+        <rect class="bx" x="4" y="372" width="1172" height="100" rx="8"/>
+        <text class="lb" x="20" y="390">AND THE PLATFORM AROUND ALL OF IT</text>
+
+        <rect class="bx w" x="16" y="394" width="182" height="72" rx="6"/>
+        <text class="lb" x="30" y="412">BUILD</text>
+        <text class="ss" x="30" y="430" style="font-size:10.5px">one authoring canvas</text>
+        <text class="ss" x="30" y="445" style="font-size:10.5px">overview &middot; knowledge &middot; tools</text>
+        <text class="ss" x="30" y="460" style="font-size:10.5px">agents &middot; topics &middot; channels</text>
+
+        <rect class="bx w" x="209" y="394" width="182" height="72" rx="6"/>
+        <text class="lb" x="223" y="412">TEST</text>
+        <text class="ss" x="223" y="430" style="font-size:10.5px">the test pane, live</text>
+        <text class="ss" x="223" y="445" style="font-size:10.5px">a full trace of every step:</text>
+        <text class="ss" x="223" y="460" style="font-size:10.5px">what it chose, and why</text>
+
+        <rect class="bx w" x="402" y="394" width="182" height="72" rx="6"/>
+        <text class="lb" x="416" y="412">PROVE</text>
+        <text class="ss" x="416" y="430" style="font-size:10.5px">Evaluation test sets</text>
+        <text class="ss" x="416" y="445" style="font-size:10.5px">score, change one thing,</text>
+        <text class="ss" x="416" y="460" style="font-size:10.5px">re-run, compare</text>
+
+        <rect class="bx w" x="595" y="394" width="182" height="72" rx="6"/>
+        <text class="lb" x="609" y="412">SHIP</text>
+        <text class="ss" x="609" y="430" style="font-size:10.5px">environments and solutions</text>
+        <text class="ss" x="609" y="445" style="font-size:10.5px">dev &rarr; test &rarr; prod</text>
+        <text class="ss" x="609" y="460" style="font-size:10.5px">publish, version, roll back</text>
+
+        <rect class="bx w" x="788" y="394" width="182" height="72" rx="6"/>
+        <text class="lb" x="802" y="412">WATCH</text>
+        <text class="ss" x="802" y="430" style="font-size:10.5px">Activity: every session</text>
+        <text class="ss" x="802" y="445" style="font-size:10.5px">Analytics: resolution,</text>
+        <text class="ss" x="802" y="460" style="font-size:10.5px">escalation, satisfaction</text>
+
+        <rect class="bx a" x="981" y="394" width="182" height="72" rx="6"/>
+        <text class="lb a" x="995" y="412">GOVERN</text>
+        <text class="ss" x="995" y="430" style="font-size:10.5px">DLP &middot; connector approval</text>
+        <text class="ss" x="995" y="445" style="font-size:10.5px">security roles &middot; audit trail</text>
+        <text class="ss" x="995" y="460" style="font-size:10.5px;fill:#92400e;font-weight:600">inherited, not invented</text>
+      </svg>
+    </div>
+  </div>
+  <div class="take"><b>Nothing on this slide is a future release.</b> Every box is in the product today &mdash; which means the limit on what you build is your tenant's governance and your own clarity about the job, not the tooling.</div>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-sec="1.3 What an agent is" data-title="Copilot vs Copilot Studio vs Foundry" data-notes="Three products, one spectrum, and the choice is almost always settled by two questions rather than by features. First: does the job have to reach a system outside Microsoft 365? If it does, the left column is out, however good the writing is. Second: does an engineering team own this, with Azure skills and an Azure budget? If not, the right column is out, however attractive full control sounds. What is left is the middle, which is why the middle is where this day is spent. The effort ratings are about who can realistically build and maintain each one, not about how capable each is - Foundry is the most capable and the least likely to be the right answer for a first agent. It is also worth saying plainly that these coexist. Nothing here replaces the Copilot licences already in use; the left column keeps doing individual drafting while agents take the repeatable pipeline work, in the same tenant, under the same policy.">
+  <h2>Three products, one spectrum &mdash; and where you actually sit<span class="tag">1.3</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Copilot compared with Copilot Studio">
-        <rect class="bx" x="6" y="6" width="336" height="330" rx="8"/>
-        <text class="tt" x="24" y="34" style="font-size:16px">Microsoft 365 Copilot</text>
-        <text class="ss" x="24" y="54" style="fill:#94a3b8">what most of your pilot has been</text>
-        <line x1="24" y1="66" x2="324" y2="66" stroke="#dbe4f1"/>
-        <text class="ss" x="24" y="92">Works inside Word, Excel, Outlook, Teams</text>
-        <text class="ss" x="24" y="118">Grounded on <tspan font-weight="600">your M365 content</tspan> automatically</text>
-        <text class="ss" x="24" y="144">Personal &mdash; scoped to what you can see</text>
-        <text class="ss" x="24" y="170">No custom instructions that persist</text>
-        <text class="ss" x="24" y="196">Cannot call a non-Microsoft system</text>
-        <text class="ss" x="24" y="222">Cannot be shared, versioned or owned</text>
-        <text class="ss" x="24" y="248">Output: text and edits, in the app</text>
-        <rect class="bx" x="24" y="266" width="300" height="56" rx="6"/>
-        <text class="ss" x="38" y="288" style="fill:#0b2545;font-weight:600">Good at: drafting, summarising,</text>
-        <text class="ss" x="38" y="308" style="fill:#0b2545;font-weight:600">reformatting &mdash; for one person.</text>
+      <svg viewBox="0 0 700 420" role="img" aria-label="Microsoft 365 Copilot compared with Copilot Studio and Microsoft Foundry">
 
-        <rect class="bx d" x="358" y="6" width="336" height="330" rx="8"/>
-        <text class="tt w" x="376" y="34" style="font-size:16px">Copilot Studio</text>
-        <text class="ss w" x="376" y="54">where the afternoon happens</text>
-        <line x1="376" y1="66" x2="676" y2="66" stroke="#274a72"/>
-        <text class="ss w" x="376" y="92">You define the agent and where it runs</text>
-        <text class="ss w" x="376" y="118">Grounded on <tspan font-weight="600">the corpus you choose</tspan></text>
-        <text class="ss w" x="376" y="144">Shared &mdash; a team capability with an owner</text>
-        <text class="ss w" x="376" y="170">Instructions persist and are versioned</text>
-        <text class="ss w" x="376" y="196">Calls <tspan font-weight="600" fill="#fbbf24">any REST API</tspan>, incl. legacy systems</text>
-        <text class="ss w" x="376" y="222">Published to Teams; roles and audit apply</text>
-        <text class="ss w" x="376" y="248">Output: files, records, messages, actions</text>
-        <rect class="bx" x="376" y="266" width="300" height="56" rx="6" style="fill:#12325a;stroke:#274a72"/>
-        <text class="ss w" x="390" y="288" style="font-weight:600">Good at: running a defined piece</text>
-        <text class="ss w" x="390" y="308" style="font-weight:600">of process, repeatedly, for everyone.</text>
+        <!-- ===== column 1 : M365 Copilot ===== -->
+        <rect class="bx" x="4" y="6" width="228" height="364" rx="8"/>
+        <text class="tt" x="18" y="32" style="font-size:14px">Microsoft 365 Copilot</text>
+        <text class="ss" x="18" y="50" style="font-size:9.5px;fill:#94a3b8">the assistant already in your apps</text>
 
-        <rect class="bx a" x="6" y="346" width="688" height="70" rx="8"/>
-        <text class="lb a" x="24" y="368">THE RULE OF THUMB</text>
-        <text class="tt" x="24" y="390" style="font-size:14px">Needs a system outside M365 &middot; must run the same way every month &middot;</text>
-        <text class="tt" x="24" y="410" style="font-size:14px">belongs to the team rather than to you &nbsp;&rarr;&nbsp; <tspan font-weight="700">Copilot Studio</tspan></text>
+        <text class="lb" x="18" y="74" style="font-size:9px">WHAT IT IS</text>
+        <text class="ss" x="18" y="90" style="font-size:10.5px">Chat, inside Word, Excel, Outlook</text>
+        <text class="ss" x="18" y="104" style="font-size:10.5px">and Teams, grounded automatically</text>
+        <text class="ss" x="18" y="118" style="font-size:10.5px">on the M365 content you can see</text>
+
+        <text class="lb" x="18" y="142" style="font-size:9px">BEST WHEN</text>
+        <text class="ss" x="18" y="158" style="font-size:10.5px">the job is drafting or summarising</text>
+        <text class="ss" x="18" y="172" style="font-size:10.5px">it never needs to leave M365</text>
+        <text class="ss" x="18" y="186" style="font-size:10.5px">one person, one document, today</text>
+
+        <text class="lb" x="18" y="210" style="font-size:9px">IN YOUR WORLD</text>
+        <text class="ss" x="18" y="226" style="font-size:10.5px">Summarise a 40-page manager update</text>
+        <text class="ss" x="18" y="240" style="font-size:10.5px">Redraft a client email</text>
+        <text class="ss" x="18" y="254" style="font-size:10.5px">Explain a formula in a holdings file</text>
+
+        <text class="lb r" x="18" y="278" style="font-size:9px">THE CATCH</text>
+        <text class="ss" x="18" y="294" style="font-size:10.5px">Personal, not shared. Instructions</text>
+        <text class="ss" x="18" y="308" style="font-size:10.5px">do not persist. It cannot call a</text>
+        <text class="ss" x="18" y="322" style="font-size:10.5px">system outside Microsoft 365.</text>
+
+        <text class="lb" x="18" y="344" style="font-size:9px">EFFORT TO BUILD AND OWN</text>
+        <text x="18" y="364" style="font-size:15px"><tspan style="fill:#f59e0b">&#9733;&#9733;</tspan><tspan style="fill:#cbd5e1">&#9734;&#9734;&#9734;</tspan></text>
+
+        <!-- ===== column 2 : Copilot Studio (the day's subject) ===== -->
+        <rect class="bx d" x="238" y="6" width="228" height="364" rx="8"/>
+        <text class="tt w" x="252" y="32" style="font-size:14px">Copilot Studio</text>
+        <text class="ss w" x="252" y="50" style="font-size:9.5px;fill:#fbbf24">where today is spent</text>
+
+        <text class="lb w" x="252" y="74" style="font-size:9px">WHAT IT IS</text>
+        <text class="ss w" x="252" y="90" style="font-size:10.5px">A low-code studio for agents you</text>
+        <text class="ss w" x="252" y="104" style="font-size:10.5px">own &mdash; grounded on the corpus you</text>
+        <text class="ss w" x="252" y="118" style="font-size:10.5px">choose, calling the systems you name</text>
+
+        <text class="lb w" x="252" y="142" style="font-size:9px">BEST WHEN</text>
+        <text class="ss w" x="252" y="158" style="font-size:10.5px">the job is a repeatable procedure</text>
+        <text class="ss w" x="252" y="172" style="font-size:10.5px">it must reach outside M365</text>
+        <text class="ss w" x="252" y="186" style="font-size:10.5px">the team owns it, and it is traced</text>
+
+        <text class="lb w" x="252" y="210" style="font-size:9px">IN YOUR WORLD</text>
+        <text class="ss w" x="252" y="226" style="font-size:10.5px">The quarterly fund review, end to</text>
+        <text class="ss w" x="252" y="240" style="font-size:10.5px">end: read, enrich, draft the deck,</text>
+        <text class="ss w" x="252" y="254" style="font-size:10.5px">route it for sign-off</text>
+
+        <text class="lb w" x="252" y="278" style="font-size:9px;fill:#fca5a5">THE CATCH</text>
+        <text class="ss w" x="252" y="294" style="font-size:10.5px">Connector approval and DLP are</text>
+        <text class="ss w" x="252" y="308" style="font-size:10.5px">yours to obtain. Lifecycle is yours</text>
+        <text class="ss w" x="252" y="322" style="font-size:10.5px">to run. Not for heavy computation.</text>
+
+        <text class="lb w" x="252" y="344" style="font-size:9px">EFFORT TO BUILD AND OWN</text>
+        <text x="252" y="364" style="font-size:15px"><tspan style="fill:#f59e0b">&#9733;&#9733;&#9733;</tspan><tspan style="fill:#486a99">&#9734;&#9734;</tspan></text>
+
+        <!-- ===== column 3 : Microsoft Foundry ===== -->
+        <rect class="bx" x="472" y="6" width="224" height="364" rx="8"/>
+        <text class="tt" x="486" y="32" style="font-size:14px">Microsoft Foundry</text>
+        <text class="ss" x="486" y="50" style="font-size:9.5px;fill:#94a3b8">the pro-code floor beneath it</text>
+
+        <text class="lb" x="486" y="74" style="font-size:9px">WHAT IT IS</text>
+        <text class="ss" x="486" y="90" style="font-size:10.5px">Azure's platform for designing,</text>
+        <text class="ss" x="486" y="104" style="font-size:10.5px">evaluating and operating AI systems</text>
+        <text class="ss" x="486" y="118" style="font-size:10.5px">at scale. Agent Framework lives here.</text>
+
+        <text class="lb" x="486" y="142" style="font-size:9px">BEST WHEN</text>
+        <text class="ss" x="486" y="158" style="font-size:10.5px">you need a specific or tuned model</text>
+        <text class="ss" x="486" y="172" style="font-size:10.5px">network isolation, or full control</text>
+        <text class="ss" x="486" y="186" style="font-size:10.5px">an engineering team owns the result</text>
+
+        <text class="lb" x="486" y="210" style="font-size:9px">IN YOUR WORLD</text>
+        <text class="ss" x="486" y="226" style="font-size:10.5px">A firm-wide research engine over ten</text>
+        <text class="ss" x="486" y="240" style="font-size:10.5px">years of filings, on a model you</text>
+        <text class="ss" x="486" y="254" style="font-size:10.5px">chose and evaluated yourself</text>
+
+        <text class="lb r" x="486" y="278" style="font-size:9px">THE CATCH</text>
+        <text class="ss" x="486" y="294" style="font-size:10.5px">Azure skills, Azure cost, Azure</text>
+        <text class="ss" x="486" y="308" style="font-size:10.5px">operations. Months, not afternoons.</text>
+        <text class="ss" x="486" y="322" style="font-size:10.5px">Out of scope for today.</text>
+
+        <text class="lb" x="486" y="344" style="font-size:9px">EFFORT TO BUILD AND OWN</text>
+        <text x="486" y="364" style="font-size:15px"><tspan style="fill:#f59e0b">&#9733;&#9733;&#9733;&#9733;&#9733;</tspan></text>
+
+        <!-- ===== the deciding questions ===== -->
+        <rect class="bx a" x="4" y="376" width="692" height="42" rx="7"/>
+        <text class="ss" x="18" y="394" style="font-size:11.5px;fill:#92400e"><tspan style="font-weight:700">Two questions settle it.</tspan> Must it reach a system outside Microsoft 365? If yes, not the left.</text>
+        <text class="ss" x="18" y="410" style="font-size:11.5px;fill:#92400e">Does an engineering team own the result? If no, not the right. What is left is the middle.</text>
       </svg>
     </div>
     <div class="pts">
-      <h3>Why the distinction is practical, not academic</h3>
+      <h3>Why the middle column, for you</h3>
       <ul>
-        <li>It explains the pilot result precisely: Copilot was asked to do a job that needed the other column.</li>
-        <li>It is also a <b>governance conversation</b>. Copilot needed no new approvals. An agent that calls a legacy internal endpoint needs a connector, a service identity and a DLP decision &mdash; and that is a normal, answerable request.</li>
+        <li>It explains the pilot result precisely: <b>Copilot was asked to do a job that needed the middle column.</b> The writing was never the problem &mdash; the reach was.</li>
+        <li>The effort stars are about <em>who can build and maintain it</em>, not about capability. Foundry is the most capable and the least likely to be right for a first agent.</li>
       </ul>
-      <h3>Not a migration</h3>
+      <h3>Not a migration &mdash; they coexist</h3>
       <ul>
-        <li>They coexist. Copilot stays for individual drafting; agents take the repeatable pipeline work.</li>
-        <li>Your team keeps using Copilot for code review exactly as today &mdash; nothing here replaces it.</li>
+        <li>Copilot keeps doing individual drafting. Agents take the repeatable pipeline work. Same tenant, same policy, same day.</li>
+        <li>Moving right is a decision you make <b>on evidence</b> &mdash; Module 2 closes with the five signals that say it is time, and almost nobody should start there.</li>
       </ul>
-      <div class="callout">Same login, same tenant, same data boundary. <b>Copilot Studio is not a new vendor decision</b> &mdash; which is why it fits inside your current governance.</div>
+      <div class="callout">Same login, same tenant, same data boundary. <b>None of this is a new vendor decision</b> &mdash; which is exactly why it fits inside your current governance.</div>
     </div>
   </div>
 </section>
 
-<!-- 14 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Honest limits of Copilot Studio" data-notes="Stated honestly so nobody builds the wrong thing: conversational speed rather than batch, orchestration steered with words rather than code, thin regression testing, and no place for heavy computation. Fast, governed prototyping is the real value.">
+<!-- 11 -->
+<section class="slide" data-sec="1.3 What an agent is" data-title="Honest limits of Copilot Studio" data-notes="Stated plainly so nobody builds the wrong thing. The first row is the one most likely to be live in this room: Copilot Studio runs at conversational speed, so ten thousand documents overnight is the wrong shape for it - pilot the logic here and move the volume elsewhere. The second and third rows are the ones teams discover late: orchestration is steered with words rather than code, so a genuinely complex branch gets awkward, and neither regression testing nor a clean dev-to-prod path comes for free - both are deliberate work you will do in sessions 2.1 and 2.6. The fourth row is simply the wrong tool at any volume. Worth knowing where the capstone sits against all this: comfortably inside the envelope, but near its edge on volume - which is exactly why it is a good thing to prove here before anyone commits engineering budget. None of this is a reason not to start. It is the reason to start here rather than somewhere more expensive.">
   <h2>Honest limits: what Copilot Studio should not be asked to do<span class="tag">1.3</span></h2>
-  <div class="body g46">
-    <div class="pts">
-      <h3>Where it is genuinely strong</h3>
-      <ul>
-        <li>Document-shaped work, low-to-moderate volume, humans in the loop, Microsoft-centred data.</li>
-        <li><b>Time to first working agent: hours.</b> That is the point &mdash; it makes the idea testable before anyone commits engineering.</li>
-      </ul>
-      <h3>Where it will fight you</h3>
-      <ul>
-        <li><b>Latency &amp; throughput</b> &mdash; conversational speed, not batch. Ten thousand documents overnight is the wrong shape.</li>
-        <li><b>Fine control</b> &mdash; you steer orchestration with words, not code. Complex branching logic gets awkward fast.</li>
-        <li><b>Testing &amp; ALM</b> &mdash; regression testing is thin; dev&rarr;test&rarr;prod takes deliberate effort.</li>
-        <li><b>Deep custom logic</b> &mdash; proprietary models, heavy computation, real-time pricing: not here.</li>
-      </ul>
-      <div class="callout">Say this to your stakeholders: <b>a fast, governed prototyping platform</b> &mdash; and the honest place to prove value before asking for engineering budget.</div>
-    </div>
+  <div class="body g1">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Fit envelope by volume and control needed">
-        <path d="M60 40 L60 348 L672 348" fill="none" stroke="#94a8c4" stroke-width="2"/>
-        <text class="lb" x="60" y="30">CONTROL &amp; COMPLEXITY REQUIRED</text>
-        <text class="lb" x="470" y="374">VOLUME / FREQUENCY &rarr;</text>
-        <path d="M60 348 L60 220 Q210 200 340 196 Q470 192 560 348 Z" fill="#ecfdf5" stroke="#34d399" stroke-width="2"/>
-        <text class="lb g" x="150" y="300">COPILOT STUDIO FITS HERE</text>
-        <path d="M60 196 Q300 150 672 130" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 6"/>
-        <text class="lb r" x="330" y="120">ABOVE THIS LINE &mdash; GRADUATE TO CODE-FIRST</text>
+      <svg viewBox="0 0 1180 398" role="img" aria-label="Where Copilot Studio is strong, and the four limits with what to do instead">
 
-        <circle cx="150" cy="300" r="8" fill="#059669"/>
-        <text class="ss" x="166" y="292" style="fill:#065f46;font-weight:600">Policy / methodology Q&amp;A</text>
-        <text class="ss" x="166" y="310" style="fill:#64748b">low stakes, high use &mdash; ideal first agent</text>
+        <rect class="bx g" x="4" y="4" width="1172" height="64" rx="8"/>
+        <text class="lb g" x="24" y="26">WHERE IT IS GENUINELY STRONG</text>
+        <text class="ss" x="24" y="50" style="font-size:11.5px">Document-shaped work, moderate volume, humans in the loop</text>
+        <text class="ss" x="424" y="50" style="font-size:11.5px">Microsoft-centred data, already inside your governance</text>
+        <text class="ss" x="812" y="50" style="font-size:11.5px;fill:#047857;font-weight:600">Time to a working agent: hours, not a project</text>
 
-        <circle cx="360" cy="248" r="11" fill="#1d4ed8"/>
-        <text class="ss" x="380" y="242" style="fill:#0b2545;font-weight:700">Investment Report Agent</text>
-        <text class="ss" x="380" y="260" style="fill:#64748b">your capstone &mdash; inside the envelope, near its edge</text>
+        <rect class="bx d" x="4" y="78" width="1172" height="28" rx="6"/>
+        <text class="lb w" x="24" y="97" style="font-size:9.5px">WHERE IT WILL FIGHT YOU</text>
+        <text class="lb w" x="340" y="97" style="font-size:9.5px">WHAT THAT MEANS IN PRACTICE</text>
+        <text class="lb w" x="830" y="97" style="font-size:9.5px">WHAT TO DO INSTEAD</text>
 
-        <circle cx="250" cy="330" r="8" fill="#059669"/>
-        <text class="ss" x="266" y="336" style="fill:#065f46">Manager research summariser</text>
+        <rect class="bx r" x="4" y="112" width="1172" height="56" rx="7"/>
+        <text class="ss" x="24" y="134" style="font-size:12.5px;font-weight:700;fill:#0b2545">Latency and throughput</text>
+        <text class="ss" x="24" y="154" style="font-size:10px;fill:#94a3b8">the misconception most likely to be in this room</text>
+        <text class="ss" x="340" y="134" style="font-size:11.5px">Conversational speed, not batch. Ten thousand documents</text>
+        <text class="ss" x="340" y="154" style="font-size:11.5px">overnight is the wrong shape for this tool.</text>
+        <text class="ss" x="830" y="134" style="font-size:11.5px">Prove the logic here, then move the volume to a</text>
+        <text class="ss" x="830" y="154" style="font-size:11.5px">scheduled flow or a code-first job.</text>
 
-        <circle cx="470" cy="180" r="9" fill="#d97706"/>
-        <text class="ss" x="486" y="176" style="fill:#b45309;font-weight:600">Firm-wide document processing</text>
-        <text class="ss" x="486" y="194" style="fill:#64748b">volume pushes it out &mdash; pilot here, build elsewhere</text>
+        <rect class="bx" x="4" y="176" width="1172" height="56" rx="7"/>
+        <text class="ss" x="24" y="198" style="font-size:12.5px;font-weight:700;fill:#0b2545">Fine control</text>
+        <text class="ss" x="24" y="218" style="font-size:10px;fill:#94a3b8">words are the steering wheel</text>
+        <text class="ss" x="340" y="198" style="font-size:11.5px">You steer orchestration with instructions, not code.</text>
+        <text class="ss" x="340" y="218" style="font-size:11.5px">Genuinely complex branching gets awkward fast.</text>
+        <text class="ss" x="830" y="198" style="font-size:11.5px">Push the awkward branch into a topic, or into a</text>
+        <text class="ss" x="830" y="218" style="font-size:11.5px">flow you can test on its own.</text>
 
-        <circle cx="200" cy="110" r="9" fill="#dc2626"/>
-        <text class="ss" x="216" y="106" style="fill:#b91c1c;font-weight:600">Real-time valuation / pricing</text>
-        <text class="ss" x="216" y="124" style="fill:#64748b">wrong tool, at any volume</text>
+        <rect class="bx" x="4" y="240" width="1172" height="56" rx="7"/>
+        <text class="ss" x="24" y="262" style="font-size:12.5px;font-weight:700;fill:#0b2545">Testing and lifecycle</text>
+        <text class="ss" x="24" y="282" style="font-size:10px;fill:#94a3b8">discovered late, by most teams</text>
+        <text class="ss" x="340" y="262" style="font-size:11.5px">Regression testing is thin, and a clean dev &rarr; test &rarr;</text>
+        <text class="ss" x="340" y="282" style="font-size:11.5px">prod path takes deliberate effort. Neither is free.</text>
+        <text class="ss" x="830" y="262" style="font-size:11.5px">Test sets in 2.1, solutions and environments in</text>
+        <text class="ss" x="830" y="282" style="font-size:11.5px">2.6 &mdash; budget the effort rather than assume it.</text>
 
-        <rect class="bx" x="60" y="384" width="612" height="32" rx="6"/>
-        <text class="ss" x="76" y="404">Microsoft Agent Framework and code-first stacks live <tspan font-weight="700">above the dashed line</tspan> &mdash; the roadmap conversation in 2.7, not a build today.</text>
+        <rect class="bx" x="4" y="304" width="1172" height="56" rx="7"/>
+        <text class="ss" x="24" y="326" style="font-size:12.5px;font-weight:700;fill:#0b2545">Deep custom logic</text>
+        <text class="ss" x="24" y="346" style="font-size:10px;fill:#94a3b8">the wrong tool at any volume</text>
+        <text class="ss" x="340" y="326" style="font-size:11.5px">Proprietary or tuned models, heavy computation,</text>
+        <text class="ss" x="340" y="346" style="font-size:11.5px">real-time pricing: none of it belongs here.</text>
+        <text class="ss" x="830" y="326" style="font-size:11.5px">That is the Foundry column on the previous slide</text>
+        <text class="ss" x="830" y="346" style="font-size:11.5px">&mdash; a roadmap conversation in 2.7, not a build today.</text>
+
+        <rect class="bx a" x="4" y="368" width="1172" height="26" rx="6"/>
+        <text class="ss" x="24" y="386" style="font-size:11.5px;fill:#92400e"><tspan style="font-weight:700">None of this is a reason not to start.</tspan> It is the reason to start <tspan style="font-weight:700">here</tspan> rather than somewhere far more expensive.</text>
       </svg>
     </div>
   </div>
+  <div class="take">Say this to your stakeholders: <b>a fast, governed prototyping platform</b> &mdash; and the honest place to prove the value is real before anyone is asked for engineering budget.</div>
 </section>
 
-<!-- 15 -->
+<!-- 12 -->
 <section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Your workflow, marked up" data-notes="The centrepiece. Green is where cycle time actually falls - repetitive, rule-bound, system-connected work. Amber stays human by design, not by limitation. The report-production column is the capstone target because it scores well on all four criteria, not because it is painful.">
   <h2>Your workflow, marked up: where an agent belongs &mdash; and where it does not<span class="tag k">1.4</span></h2>
   <div class="body g1">
@@ -1048,7 +1015,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 16 -->
+<!-- 13 -->
 <section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Why the pilot didn't move the needle" data-notes="The pilot was measured against integration while only assistance was possible. Assistance shaves minutes off each of twenty manual steps; integration removes twelve of them. Same model, same licence, same data - the difference is where it sits in the process.">
   <h2>Why the Copilot pilot did not move the numbers<span class="tag k">1.4</span></h2>
   <div class="body g64">
@@ -1110,7 +1077,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 17 -->
+<!-- 14 -->
 <section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Where the internal GPT tool sits" data-notes="Not rivals. A general assistant answers questions; an agent does a named job the same way every time and produces an artefact. We already have a GPT tool is the most common reason an agent programme never starts, and it is a category error.">
   <h2>Where the internal GPT tool sits, and what an agent adds<span class="tag k">1.4</span></h2>
   <div class="body g64">
@@ -1159,7 +1126,7 @@ svg{width:100%;height:auto;display:block}
       <h3>Practical consequence</h3>
       <ul>
         <li>Keep the GPT tool for open questions across the firm.</li>
-        <li>Build agents where the work is <b>repetitive, document-shaped and system-connected</b> &mdash; the green column on the previous slide.</li>
+        <li>Build agents where the work is <b>repetitive, document-shaped and system-connected</b> &mdash; the sweet spot on the next slide.</li>
         <li>Neither requires the other to be replaced or defended.</li>
       </ul>
       <div class="callout">If someone can describe the task as <b>a procedure with a predictable output</b>, it is an agent candidate. If they cannot, it is a chat question.</div>
@@ -1167,7 +1134,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 18 -->
+<!-- 15 -->
 <section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Picking the first agent" data-notes="Four criteria in priority order: repetition, data readiness, value, risk. Data readiness is the most common silent killer - if the input is not in a form a system can reach, nothing else matters. Note the disqualifiers as much as the candidates.">
   <h2>Picking the first agent: four criteria, one picture<span class="tag k">1.4</span></h2>
   <div class="body g64">
@@ -1215,7 +1182,7 @@ svg{width:100%;height:auto;display:block}
         <li><b>1 &nbsp;Repetition.</b> If it happens twice a year, the build will never pay back. Frequency beats glamour.</li>
         <li><b>2 &nbsp;Data readiness.</b> Does the input already exist in a form a system can reach? Unready data is the most common silent killer.</li>
         <li><b>3 &nbsp;Value.</b> Hours saved &times; how many people &times; how often &mdash; state it as a number you would defend.</li>
-        <li><b>4 &nbsp;Risk.</b> Which tier from slide 6? Tier 4 is not a first agent.</li>
+        <li><b>4 &nbsp;Risk.</b> Which tier from the accuracy bar in 1.1? Tier 4 is not a first agent.</li>
       </ul>
       <h3>Disqualifiers</h3>
       <ul>
@@ -1226,8 +1193,8 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 19 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="The governance envelope" data-notes="None of these five layers is new; they already exist for Power Platform in your tenant, and an agent inherits them rather than asking for an exception. That is the single most useful thing to say to a governance forum. Start the connector conversation early - it has a queue.">
+<!-- 16 -->
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="The governance envelope" data-notes="None of these five layers is new; they already exist for Power Platform in your tenant, and an agent inherits them rather than asking for an exception. That is the single most useful thing to say to a governance forum. Start the connector conversation early - it has a queue. Layer 3 is stronger than it looks: where the data sits in Dataverse, the agent authenticates as the person asking, so rows they may not see never reach the answer - that is row-level security doing the work, not a sentence in the instructions.">
   <h2>The governance envelope an agent lives inside<span class="tag k">1.4</span></h2>
   <div class="body g46">
     <div class="pts">
@@ -1240,7 +1207,7 @@ svg{width:100%;height:auto;display:block}
       <ul>
         <li><b>What data does it touch?</b> &rarr; knowledge scope + connector list</li>
         <li><b>Where does data go?</b> &rarr; stays in tenant unless a connector says otherwise; that is what DLP governs</li>
-        <li><b>Who can use it?</b> &rarr; sharing roles, environment membership</li>
+        <li><b>Who can use it?</b> &rarr; sharing roles, environment membership &mdash; and for data held in Dataverse, <em>each user’s own security roles decide which rows reach the answer</em>, enforced by the platform rather than by an instruction</li>
         <li><b>How do we know what it did?</b> &rarr; the run trace and audit log</li>
       </ul>
       <div class="callout">Have the connector conversation <b>before</b> you build, not after the demo. It is the one dependency that has a queue in front of it.</div>
@@ -1276,7 +1243,7 @@ svg{width:100%;height:auto;display:block}
   </div>
 </section>
 
-<!-- 20 -->
+<!-- 17 -->
 <section class="slide" data-sec="Close" data-title="What we build after lunch" data-notes="The afternoon in one picture, with the Module 2 session numbers mapped onto each stage. Before the break, pick the one step of your own week you would hand to an agent first - and be ready to say why it beats the alternatives on repetition, data readiness, value and risk.">
   <h2>What we build after lunch &mdash; and what we need from you</h2>
   <div class="body g1">
@@ -1343,7 +1310,7 @@ svg{width:100%;height:auto;display:block}
   <span id="ttl" style="min-width:300px"></span>
   <div id="prog"><div id="progf"></div></div>
   <span style="color:#7f9dc4">&larr; &rarr; &middot; O index &middot; N notes &middot; F full</span>
-  <span id="num">1 / 20</span>
+  <span id="num">1 / 17</span>
 </div>
 
 <script>

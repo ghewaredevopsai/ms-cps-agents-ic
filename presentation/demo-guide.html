@@ -324,8 +324,9 @@ TER direct | 0.62% | Section 9 Fees</pre>
         <li><strong>Name it</strong> <code>Fund Research Assistant</code> and give it the description below.</li>
         <li><strong>Paste the Instructions</strong> below. This is demo 1.2's prompt, made permanent.</li>
         <li><strong>Add Knowledge:</strong> under Knowledge, choose <strong>Add knowledge</strong> &rarr; upload <code>sample-fund-factsheet.pdf</code>. Wait until its status shows ready &mdash; this takes a minute or two.</li>
-        <li><strong>Turn off general knowledge.</strong> In Settings &rarr; Generative AI, disable the option that lets the agent answer from general world knowledge. This is the single most important switch on the page.</li>
-        <li><strong>Test it</strong> in the pane on the right with the three questions below.</li>
+        <li><strong>Close both doors to the open web.</strong> Settings &rarr; <strong>Generative AI</strong>. Switch <strong>Allow ungrounded responses</strong> to <em>off</em> &mdash; that blocks any answer not built from a knowledge source or a tool. Then switch <strong>Use information from the Web</strong> to <em>off</em>. Both, not one.</li>
+        <li><strong>Retest before doing anything else.</strong> Those two switches are usually enough &mdash; verified on a live tenant, where the same question went from a web answer to a cited factsheet answer on the toggles alone. <strong>Only if it still cites the web:</strong> Topics &rarr; <strong>System</strong> &rarr; switch off <code>Conversational boosting</code>, which answers from a generative fallback and is the step almost everyone misses.</li>
+        <li><strong>Test it</strong> in the pane on the right with the three questions below &mdash; in a <strong>new</strong> conversation, always.</li>
       </ol>
 
       <div class="k">Description</div>
@@ -361,6 +362,12 @@ the difference, and label the difference as excess return.</pre>
         A total across ten rows, or a currency conversion, is not checkable by eye &mdash; so a system computes it and the agent quotes the system. Demos 2.2 and 2.3 build the actions that make this rule keepable rather than merely stern.
       </div>
 
+      <div class="note">
+        <strong>Two other switches live on that same Generative AI page.</strong> Leave them alone today, but know they are there.
+        <strong>File uploads</strong> lets a user attach a PDF, TXT, CSV, XLSX or image to the conversation, up to 15&nbsp;MB.
+        <strong>Code interpreter</strong> generates and runs code over an attached file &mdash; which is a further <em>deterministic</em> route to a computed number, alongside the actions you build in demos 2.2 and 2.3. The arithmetic rule does not change either way: the figure comes from something that would produce it again tomorrow, and the agent says what produced it. Both switches may be restricted in your tenant.
+      </div>
+
       <div class="k">Test questions</div>
       <pre>What is the fund's 3-year return versus its benchmark?
 What is the tracking error?
@@ -375,10 +382,11 @@ Should my client invest in this fund?</pre>
 
       <div class="k r">When it does not behave</div>
       <ul>
-        <li><strong>It answers question 2 with a number.</strong> General knowledge is still on, or the knowledge file has not finished processing. Check both, then retest.</li>
+        <li><strong>It answers question 2 with a number.</strong> One of the two switches is still on, or the knowledge file has not finished processing. Check both, then retest.</li>
+        <li><strong>It cites a web page even with both switches off.</strong> <code>Conversational boosting</code> is still enabled. Turn it off (step 7) and start a new conversation. If a system <em>fallback</em> topic is also swallowing good retrievals, switch that off too while you are debugging, and put it back afterwards.</li>
         <li><strong>It says it cannot find any documents.</strong> The file is still indexing. Wait two minutes. If it persists, remove and re-upload &mdash; a PDF over ~200 pages or an image-only scan will not index.</li>
         <li><strong>It gives advice on question 3.</strong> Your Instructions were saved but not applied &mdash; use Save, then start a fresh test conversation. The test pane keeps the old configuration within an open conversation.</li>
-        <li><strong>No option to disable general knowledge.</strong> Names and placement of this setting move between releases. Alternative: add to Instructions &mdash; <em>"If the answer is not in your knowledge documents, do not answer from general knowledge. Reply: not stated."</em></li>
+        <li><strong>You cannot find those switches.</strong> Names and placement move between releases. Alternative: add to Instructions &mdash; <em>"If the answer is not in your knowledge documents, do not answer from general knowledge. Reply: not stated."</em> A setting is stronger than a sentence, so keep looking &mdash; but the sentence gets you through the demo.</li>
       </ul>
 
       <div class="k a">Carry this forward</div>
@@ -437,8 +445,8 @@ Should my client invest in this fund?</pre>
   <!-- D2.1 -->
   <div class="demo" id="d21">
     <div class="head">
-      <span class="id">Demo 2.1 <small>Generative orchestration and reading the trace</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b t">~25 min</span></span>
+      <span class="id">Demo 2.1 <small>Generative orchestration, the trace, and proving a fix</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~32 min</span></span>
     </div>
     <div class="body">
       <div class="goal"><b>What it proves:</b> the agent chooses its own path through your knowledge and tools &mdash; and when it chooses wrongly, the trace tells you exactly where, so the fix is a sentence rather than a rebuild.</div>
@@ -449,11 +457,16 @@ Should my client invest in this fund?</pre>
       <div class="k">Steps</div>
       <ol class="steps">
         <li><strong>Add a second knowledge source.</strong> Save the manager update from the appendix as a <code>.txt</code> or <code>.docx</code> file and upload it alongside the factsheet.</li>
+        <li><strong>Name it and describe it properly.</strong> Give the source a meaningful display name and a one-line description of what it contains. The agent reads both when it decides which source to consult &mdash; an untitled upload competes badly against a well-named one, and this costs you nothing.</li>
+        <li><strong>Mark it as an official source</strong> &mdash; the ellipsis on the knowledge source &rarr; <em>official source</em>. Answers drawn from it are then flagged as coming from an official source. A small thing that matters disproportionately to a reader deciding how far to trust a figure.</li>
         <li><strong>Confirm generative orchestration is on</strong> &mdash; Settings &rarr; Orchestration (or the toggle on the agent's Overview). This is what lets the agent decide which source to read.</li>
         <li><strong>Ask a question that spans both documents</strong> &mdash; question 1 below. Neither document answers it alone.</li>
         <li><strong>Open the trace.</strong> In the test pane, expand the activity / reasoning detail for that answer. Read which knowledge source it consulted, in what order, and what it retrieved.</li>
         <li><strong>Now break it on purpose.</strong> Ask question 2 &mdash; deliberately ambiguous about which period and which plan.</li>
         <li><strong>Read the trace again</strong> to see what it assumed, then <strong>fix it with one instruction</strong> (below) and re-ask.</li>
+        <li><strong>Now prove the fix, instead of believing it.</strong> Open the <strong>Evaluation</strong> tab &rarr; <em>New evaluation</em> &rarr; <em>Single response</em> &rarr; <strong>Quick question set</strong>. Copilot Studio generates ten questions from your agent's own description, instructions and knowledge. Read them, correct any that are wrong, and run the set.</li>
+        <li><strong>Change exactly one thing and re-run the identical set.</strong> Delete the instruction you added in step 8, run again, compare the two scores. One change per run &mdash; change two and a better score tells you nothing about which one earned it.</li>
+        <li><strong>Export the set to CSV and keep it.</strong> This is the file you re-run before every future change, and the artefact that makes a change to a published agent defensible rather than hopeful.</li>
       </ol>
 
       <div class="k">Question 1 &mdash; spans both sources</div>
@@ -468,6 +481,11 @@ allocation shown on the factsheet?</pre>
 (Regular or Direct), do not choose one silently. Ask which is meant, or state
 every variant explicitly with its label.</pre>
 
+      <div class="note">
+        <strong>If your source is a table rather than a document</strong> &mdash; a Dataverse table, say &mdash; you get two more levers on the same screen: per-column <strong>synonyms</strong> and per-column <strong>descriptions</strong>. Add the words your team actually uses (<em>tag</em> for <em>asset tag</em>, <em>TER</em> for <em>expense ratio</em>, <em>sleeve</em> for <em>allocation</em>) and retrieval accuracy improves without touching the instructions.
+        Column names are the schema; synonyms are the house vocabulary. Most retrieval complaints about tabular data are really vocabulary complaints.
+      </div>
+
       <div class="k g">What you should see</div>
       <ul>
         <li>Question 1 is answered from <em>both</em> documents, with two citations &mdash; the factsheet's 5% gold sleeve and the manager's commentary about it.</li>
@@ -480,6 +498,8 @@ every variant explicitly with its label.</pre>
         <li><strong>No trace or activity detail visible.</strong> Its placement moves between releases &mdash; look for "activity", "reasoning" or a chevron on the answer bubble. Failing that, ask the agent directly: <em>"Which document did you use for that, and which section?"</em></li>
         <li><strong>It only ever reads the factsheet.</strong> The second file is still indexing, or its name is not descriptive enough. Rename it so the topic is obvious &mdash; the agent uses file names when choosing.</li>
         <li><strong>It answers question 2 correctly first time.</strong> Make it harder: <em>"What's the return?"</em> &mdash; with four periods on the factsheet, something has to be assumed.</li>
+        <li><strong>The generated questions are poor.</strong> Expected &mdash; they are generated from your own description and instructions, so a thin description gives thin questions. Fix the description, regenerate, or upload your own CSV of questions with the answers you expect. <em>A test set you wrote yourself is always better than one you accepted.</em></li>
+        <li><strong>No Evaluation tab.</strong> It is a newer surface and may not be in your tenant yet. The discipline survives without it: keep the same ten questions in a file, run them by hand in a new conversation after each change, and record what changed.</li>
       </ul>
     </div>
   </div>
@@ -802,7 +822,7 @@ and a short commentary. Then save the plan.</pre>
   <div class="demo" id="d26">
     <div class="head">
       <span class="id">Demo 2.6 <small>Publish to Teams, share, approve, govern</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b t">~30 min</span></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~35 min</span></span>
     </div>
     <div class="body">
       <div class="goal"><b>What it proves:</b> publishing is the step that turns your build into a team capability &mdash; and the approval gate is where autonomy actually gets set, in configuration rather than in a policy document.</div>
@@ -812,6 +832,9 @@ and a short commentary. Then save the plan.</pre>
         <li>In your agent, select <strong>Publish</strong>. Wait for it to complete &mdash; nothing below works until it has.</li>
         <li>Go to <strong>Channels</strong> &rarr; <strong>Microsoft Teams</strong> &rarr; turn it on, then <strong>Open the agent in Teams</strong>. Ask it a question from inside Teams.</li>
         <li><strong>Share it.</strong> Use the Share control to add one colleague. Notice the difference between sharing it to <em>use</em> and adding a <em>co-author</em> &mdash; that distinction is your first governance decision.</li>
+        <li><strong>Now try the other channel.</strong> Channels &rarr; <strong>Microsoft 365 Copilot</strong> &rarr; tick <em>make the agent available in Microsoft 365 Copilot</em> &rarr; <strong>Add channel</strong>, then publish again. Re-open the channel afterwards and confirm the tick box is still set &mdash; it frequently clears itself during publish, and the symptom is an agent that never appears.</li>
+        <li><strong>Submit it to the organisation catalogue.</strong> Availability options &rarr; choose the audience (your teammates and shared users, or everyone in the organisation) &rarr; submit. The status becomes <em>waiting for approval</em>. <strong>That is the lesson of this step:</strong> you cannot put an agent in front of the firm on your own signature.</li>
+        <li><strong>Look at the other side of the gate.</strong> With admin rights: Microsoft&nbsp;365 admin centre &rarr; <strong>Agents</strong> &rarr; <em>manage requests</em>, where an administrator approves the agent, chooses who may install it, who receives it pre-installed, and which policy templates apply. Without admin rights &mdash; the normal case &mdash; find out <em>who</em> holds that queue. They are on your critical path, and the queue is not short.</li>
         <li><strong>Add the approval gate.</strong> New flow, Copilot Studio trigger, text inputs <code>decksummary</code> and <code>approver</code>. Add <strong>Approvals &rarr; Start and wait for an approval</strong> (Approve/Reject), then Respond to Copilot with the outcome.</li>
         <li>Add it as an action, described as: <em>"Sends a finished client deck for human approval before it is issued. Must be used before any output is described as final or client-ready."</em></li>
         <li>Add the governance rule below to Instructions.</li>
@@ -850,6 +873,7 @@ output. Never describe an unapproved document as final.</pre>
       <div class="k r">When it does not behave</div>
       <ul>
         <li><strong>Teams channel greyed out.</strong> The agent is not published, or your tenant restricts Teams app publishing. Publishing to the test channel still demonstrates it.</li>
+        <li><strong>The agent never appears in M365 Copilot.</strong> Three usual causes, in this order: the channel tick box cleared itself on publish; the catalogue request is still awaiting an administrator; or the audience you chose does not include you. Check all three before rebuilding anything.</li>
         <li><strong>Approval never arrives.</strong> The approver address is wrong, or the flow is waiting. Check the run history in Power Automate &mdash; the flow, not the agent, is where the truth is.</li>
         <li><strong>The agent calls output "final" without approval.</strong> Your rule is in Instructions but the conversation started before you saved. New conversation, retest.</li>
       </ul>
@@ -1054,11 +1078,12 @@ Note: figures are unaudited and subject to revision.</pre>
 </section>
 
 <section id="trouble">
-  <h2>Troubleshooting &mdash; the ten things that actually go wrong</h2>
+  <h2>Troubleshooting &mdash; the twelve things that actually go wrong</h2>
   <table>
     <thead><tr><th style="width:34%">Symptom</th><th>Cause and fix</th></tr></thead>
     <tbody>
-      <tr><td>Agent answers from general knowledge</td><td>General knowledge is enabled, or knowledge files have not finished indexing. Disable it in Settings, wait for file status to show ready, and always retest in a <strong>new</strong> conversation.</td></tr>
+      <tr><td>Agent answers from general knowledge</td><td>One of the two Generative&nbsp;AI switches is still on &mdash; <em>Allow ungrounded responses</em> and <em>Use information from the Web</em> &mdash; or the knowledge files have not finished indexing. Fix both, wait for file status to show ready, and always retest in a <strong>new</strong> conversation.</td></tr>
+      <tr><td>It still cites the web with both switches off</td><td>The <code>Conversational boosting</code> system topic is enabled and answering from a generative fallback. Topics &rarr; System &rarr; switch it off. If a system <em>fallback</em> topic is also swallowing retrievals that plainly succeeded, disable that while debugging and restore it afterwards.</td></tr>
       <tr><td>Instruction changes have no effect</td><td>You saved but tested in an existing conversation. Start a new one. This costs more workshop time than any other single issue.</td></tr>
       <tr><td>The agent never calls your action</td><td>The action description does not say <em>when</em> to use it. Rewrite it as a sentence a colleague would understand, and name the trigger conditions.</td></tr>
       <tr><td>Excel connector cannot see the data</td><td>The range is not formatted as a Table (Ctrl+T), or the file is in personal OneDrive rather than OneDrive for Business.</td></tr>
@@ -1066,6 +1091,7 @@ Note: figures are unaudited and subject to revision.</pre>
       <tr><td>"Premium connector required"</td><td>Expected for HTTP and SQL. Use the Compose substitutes in the appendix &mdash; you keep the whole lesson and lose only the live call.</td></tr>
       <tr><td>JSON output will not parse</td><td>A preamble sentence or a markdown fence. Add: <em>"Output must begin with { and end with }. No other characters."</em></td></tr>
       <tr><td>An automated trigger never fires</td><td>SharePoint and OneDrive triggers <em>poll</em>; they do not push. Allow a minute, and longer for a flow's first run. Read the run history before changing anything &mdash; most "broken triggers" are impatience.</td></tr>
+          <tr><td>An evaluation score improved and you cannot say why</td><td>You changed more than one thing between runs. Re-run the baseline, change a single instruction, source or model, and run the identical set again. A score you cannot attribute is not evidence &mdash; and it is worse than no score, because it feels like one.</td></tr>
           <tr><td>The agent does arithmetic it was told not to</td><td>Check which rule it broke. A difference between two figures it showed you is allowed; a total, an average or a conversion is not. If it produced one of those, no action was returning the number &mdash; build the action rather than sharpening the sentence.</td></tr>
           <tr><td>Everything is blocked in your tenant</td><td>You are Track C, and that is a legitimate outcome, not a failure. Watch, keep this guide, and replay in a developer tenant afterwards &mdash; every asset you need is shipped as a real file alongside this guide.</td></tr>
     </tbody>
@@ -1074,16 +1100,29 @@ Note: figures are unaudited and subject to revision.</pre>
 
 <section id="after">
   <h2>After the workshop &mdash; taking this into your own environment</h2>
-  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the four conversations to start, in this order:</p>
+  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the five conversations to start, in this order:</p>
   <ol>
     <li><strong>An environment.</strong> A Power Platform environment your team owns, with dev and prod separated. Ask for this first &mdash; everything else waits on it.</li>
     <li><strong>Connector approval and DLP.</strong> The specific list of connectors your agent needs, and which data groups they sit in. This is the dependency with a queue in front of it, so start it early.</li>
     <li><strong>An identity for the agent.</strong> How it authenticates to your internal and legacy systems &mdash; a service principal, a gateway, or an API wrapper around what exists.</li>
     <li><strong>A named owner and reviewer.</strong> Not a formality: an agent nobody owns stops being maintained within a quarter, and an approval gate with no time behind it is theatre.</li>
+    <li><strong>The publishing route.</strong> Teams you can usually reach yourself. Microsoft&nbsp;365 Copilot goes through the organisation catalogue and an administrator's approval queue &mdash; so find out who holds that queue and what they need from you. Ask in week one; it is the request that decides your launch date, not your build.</li>
   </ol>
+
   <div class="note">
     Bring your workflow map from demo 1.4 to that conversation. A request framed as <em>"we want to remove four steps from the quarterly review, here is the map and here is what it needs"</em> lands very differently from <em>"we would like to try Copilot Studio"</em>.
   </div>
+
+  <h3>Three defects that will find you the first time you write to Dataverse</h3>
+  <p>Nothing today writes to Dataverse &mdash; the capstone stages everything in SharePoint on purpose. In your own environment it will be a Dataverse table soon enough, and these three cost an afternoon each the first time:</p>
+  <table>
+    <thead><tr><th style="width:30%">What you see</th><th>What is actually wrong</th></tr></thead>
+    <tbody>
+      <tr><td>A choice column rejects the write, or silently stores the wrong option</td><td>Your form or card collects the choice <em>label</em> as text (<code>"High"</code>); Dataverse stores the choice <em>value</em> as a number. Map it explicitly &mdash; set a variable with a Power&nbsp;Fx <code>Switch(Topic.Priority, "Low", 1, "Medium", 2, "High", 3, "Critical", 4, 1)</code> and write the variable, not the label.</td></tr>
+      <tr><td>The write errors on a field you have clearly mapped</td><td>You bound the whole <em>record</em> where the column wants a <em>field</em>. Pick the field explicitly &mdash; <code>TicketTitle.Text</code>, not <code>TicketTitle</code>. The designer reports this unhelpfully, so check every binding rather than hunting the message.</td></tr>
+      <tr><td>A lookup column will not accept anything you give it</td><td>Lookups want the OData form, not a name or a GUID on its own: <code>/contacts(&lt;guid&gt;)</code>. Get the GUID with a List rows step filtered on <code>emailaddress1 eq '&lt;System.User.Email&gt;'</code>, coerce it to text, then build the string. <code>System.User.Email</code> is also the cleanest hook for &ldquo;who is asking&rdquo; &mdash; the identity question from session 2.2, answered concretely.</td></tr>
+    </tbody>
+  </table>
   <p style="margin-top:12px">Related material: <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="course-outline-copilot-studio.html">the full course outline</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a> &middot; <a href="module-2-build.html">Module 2 slides</a>.</p>
 </section>
 

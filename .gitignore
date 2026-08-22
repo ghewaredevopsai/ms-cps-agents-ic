@@ -55,3 +55,11 @@ Thumbs.db
 *~
 .idea/
 .vscode/
+
+# ---------------------------------------------------------------------------
+# Research inputs — reference material mined for course improvements.
+# Third-party content (e.g. frames captured from public video walkthroughs),
+# kept locally for study only. Not ours to redistribute, and not part of the
+# participant-facing deliverable.
+# ---------------------------------------------------------------------------
+inputs/
