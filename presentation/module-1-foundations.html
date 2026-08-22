@@ -1240,7 +1240,7 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 17 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="The governance envelope" data-notes="None of these five layers is new; they already exist for Power Platform in your tenant, and an agent inherits them rather than asking for an exception. That is the single most useful thing to say to a governance forum. Start the connector conversation early - it has a queue. Layer 3 is stronger than it looks: where the data sits in Dataverse, the agent authenticates as the person asking, so rows they may not see never reach the answer - that is row-level security doing the work, not a sentence in the instructions." data-demo="1.4" data-role="post">
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="The governance envelope" data-notes="None of these five layers is new; they already exist for Power Platform in your tenant, and an agent inherits them rather than asking for an exception. That is the single most useful thing to say to a governance forum. Start the connector conversation early - it has a queue. Layer 3 is stronger than it looks: where the data sits in Dataverse, the agent authenticates as the person asking, so rows they may not see never reach the answer - that is row-level security doing the work, not a sentence in the instructions. The classification question is the one most often missed: labels and permissions are enforced on what the agent reads, but nothing labels what it writes. If the deck it produces carries client holdings, someone must apply the label to that file - decide who, before the first one is generated." data-demo="1.4" data-role="post">
   <h2>The governance envelope an agent lives inside<span class="cue post">POST &middot; DEMO 1.4</span><span class="tag k">1.4</span></h2>
   <div class="body g46">
     <div class="pts">
@@ -1249,11 +1249,12 @@ svg{width:100%;height:auto;display:block}
         <li><b>None of these layers is new.</b> They already exist for Power Platform in your tenant &mdash; an agent inherits them rather than asking for an exception.</li>
         <li>That is the single most useful thing to tell a governance forum: <em>this is a configuration inside an approved boundary, not a new vendor or a new data path.</em></li>
       </ul>
-      <h3>The four questions you will be asked</h3>
+      <h3>The five questions you will be asked</h3>
       <ul>
         <li><b>What data does it touch?</b> &rarr; knowledge scope + connector list</li>
         <li><b>Where does data go?</b> &rarr; stays in tenant unless a connector says otherwise; that is what DLP governs</li>
         <li><b>Who can use it?</b> &rarr; sharing roles, environment membership &mdash; and for data held in Dataverse, <em>each user’s own security roles decide which rows reach the answer</em>, enforced by the platform rather than by an instruction</li>
+        <li><b>What classification is the data?</b> &rarr; a public factsheet and a client mandate are not the same document. Sensitivity labels travel with the <em>source</em>; a deck the agent generates does <em>not</em> inherit them automatically &mdash; someone has to label the output</li>
         <li><b>How do we know what it did?</b> &rarr; the run trace and audit log</li>
       </ul>
       <div class="callout">Have the connector conversation <b>before</b> you build, not after the demo. It is the one dependency that has a queue in front of it.</div>
@@ -1385,7 +1386,7 @@ svg{width:100%;height:auto;display:block}
   var links=[].slice.call(toc.querySelectorAll('a'));
 
   // demo cue layer: where each demo runs, and what is next from here
-  var DEMOS={'1.1':{t:'Drift, fabrication and the grounding fix',m:'~10 min'},'1.2':{t:'A reusable extraction prompt',m:'~12 min'},'1.3':{t:'Your first agent: Fund Research Assistant',m:'~20 min'},'1.4':{t:'Marking up your own workflow',m:'~10 min'}};
+  var DEMOS={'1.1':{t:'Drift, fabrication and the grounding fix',m:'~10 min'},'1.2':{t:'A reusable extraction prompt',m:'~12 min'},'1.3':{t:'Your first agent: Fund Research Assistant',m:'~28 min'},'1.4':{t:'Marking up your own workflow',m:'~10 min'}};
   var runAfter={};
   slides.forEach(function(s,k){ if(s.dataset.role==='pre') runAfter[s.dataset.demo]=k; });
   var demoOrder=Object.keys(runAfter).sort();

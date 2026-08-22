@@ -309,13 +309,13 @@ TER direct | 0.62% | Section 9 Fees</pre>
   <div class="demo" id="d13">
     <div class="head">
       <span class="id">Demo 1.3 <small>Your first agent: the Fund Research Assistant</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~20 min</span></span>
+      <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~28 min</span></span>
     </div>
     <div class="body">
       <div class="goal"><b>What it proves:</b> the clever prompt you just wrote stops being a chat message and becomes a thing that exists &mdash; named, grounded, shareable, and the same for everyone who uses it.</div>
 
       <div class="k">You need</div>
-      <p>Copilot Studio access (Track A). The factsheet file. About 20 minutes.</p>
+      <p>Copilot Studio access (Track A). The factsheet file. About 28 minutes.</p>
 
       <div class="k">Steps</div>
       <ol class="steps">
@@ -327,6 +327,10 @@ TER direct | 0.62% | Section 9 Fees</pre>
         <li><strong>Close both doors to the open web.</strong> Settings &rarr; <strong>Generative AI</strong>. Switch <strong>Allow ungrounded responses</strong> to <em>off</em> &mdash; that blocks any answer not built from a knowledge source or a tool. Then switch <strong>Use information from the Web</strong> to <em>off</em>. Both, not one.</li>
         <li><strong>Retest before doing anything else.</strong> Those two switches are usually enough &mdash; verified on a live tenant, where the same question went from a web answer to a cited factsheet answer on the toggles alone. <strong>Only if it still cites the web:</strong> Topics &rarr; <strong>System</strong> &rarr; switch off <code>Conversational boosting</code>, which answers from a generative fallback and is the step almost everyone misses.</li>
         <li><strong>Test it</strong> in the pane on the right with the three questions below &mdash; in a <strong>new</strong> conversation, always.</li>
+        <li><strong>Now make one behaviour non-negotiable.</strong> Question 3 was refused by a <em>sentence in Instructions</em> &mdash; guidance the model weighs against everything else you wrote. For the things compliance signs off, that is not strong enough. <strong>Topics</strong> &rarr; <strong>+ Add a topic</strong> &rarr; <strong>From blank</strong>, named <code>Advice refusal</code>.</li>
+        <li><strong>Add the trigger phrases</strong> below &mdash; six is plenty. They match on <em>meaning</em>, so you need not enumerate every phrasing.</li>
+        <li><strong>Add a Message node</strong> and paste the refusal wording below. Nothing on this path is generated, so nothing on it can be re-worded. Save.</li>
+        <li><strong>Retest in a new conversation</strong>, asking three ways &mdash; <em>"should we buy this"</em>, <em>"is this a good fund"</em>, <em>"would you recommend it"</em>. Compare with step 8.</li>
       </ol>
 
       <div class="k">Description</div>
@@ -368,6 +372,29 @@ the difference, and label the difference as excess return.</pre>
         <strong>Code interpreter</strong> generates and runs code over an attached file &mdash; which is a further <em>deterministic</em> route to a computed number, alongside the actions you build in demos 2.2 and 2.3. The arithmetic rule does not change either way: the figure comes from something that would produce it again tomorrow, and the agent says what produced it. Both switches may be restricted in your tenant.
       </div>
 
+      <div class="k">Trigger phrases &mdash; the <code>Advice refusal</code> topic</div>
+      <pre>Should my client invest in this fund?
+Is this a good fund?
+Would you recommend this fund?
+Do you think we should allocate to this?
+Is this fund suitable for our client?
+Should we buy this?</pre>
+
+      <div class="k">Message node &mdash; the wording, fixed</div>
+      <pre>I can't advise on whether to invest. Suitability depends on the client's
+mandate, risk tolerance and existing allocation - that is a consultant
+judgement, not a document lookup.
+
+I can give you what the documents say: performance against the benchmark,
+the allocation, the risk figures and the mandate limits. Ask me for any of
+those and I will cite the source.</pre>
+
+      <div class="tip">
+        <strong>Instructions or a topic? The test is who has to defend the wording.</strong>
+        Instructions are the right home for almost everything &mdash; they are how the agent adapts to a question you did not anticipate. A <strong>topic</strong> is right when the answer must be identical every time and somebody outside the team signs it off: the advice refusal, a regulatory disclaimer, the escalation path on a mandate breach.
+        Three topics is healthy for an agent this size; thirty means you have rebuilt a decision tree. Note that the agent still <em>chooses</em> the topic, so the trigger phrases matter as much as the message inside it.
+      </div>
+
       <div class="k">Test questions</div>
       <pre>What is the fund's 3-year return versus its benchmark?
 What is the tracking error?
@@ -378,6 +405,7 @@ Should my client invest in this fund?</pre>
         <li><strong>Question 1</strong> &mdash; 15.6% fund, 13.1% benchmark, excess return 2.5%, with a citation to the performance section.</li>
         <li><strong>Question 2</strong> &mdash; <em>not stated</em>. The factsheet has no tracking error. This is the agent doing its job.</li>
         <li><strong>Question 3</strong> &mdash; a polite decline that points at consultant judgement. You have just drawn the line between analysis and advice, in configuration rather than in policy.</li>
+        <li><strong>Question 3, after the topic</strong> &mdash; the same words, whichever way you asked. Before, the decline was polite and slightly different every time; after, it is a fixed statement compliance can read once and approve once. <strong>That is the whole argument for topics.</strong></li>
       </ul>
 
       <div class="k r">When it does not behave</div>
@@ -386,6 +414,8 @@ Should my client invest in this fund?</pre>
         <li><strong>It cites a web page even with both switches off.</strong> <code>Conversational boosting</code> is still enabled. Turn it off (step 7) and start a new conversation. If a system <em>fallback</em> topic is also swallowing good retrievals, switch that off too while you are debugging, and put it back afterwards.</li>
         <li><strong>It says it cannot find any documents.</strong> The file is still indexing. Wait two minutes. If it persists, remove and re-upload &mdash; a PDF over ~200 pages or an image-only scan will not index.</li>
         <li><strong>It gives advice on question 3.</strong> Your Instructions were saved but not applied &mdash; use Save, then start a fresh test conversation. The test pane keeps the old configuration within an open conversation.</li>
+        <li><strong>The topic never fires.</strong> Too few phrases, or too close to the questions the agent answers normally. Add two in the words <em>your</em> team uses, and give the topic a description &mdash; that is read too.</li>
+        <li><strong>The topic fires when it should not</strong> &mdash; it swallows <em>"what is the recommended allocation in the mandate?"</em>, a document lookup. Narrow the phrases to ones asking for <em>your</em> opinion. A refusal topic that over-triggers is worse than none.</li>
         <li><strong>You cannot find those switches.</strong> Names and placement move between releases. Alternative: add to Instructions &mdash; <em>"If the answer is not in your knowledge documents, do not answer from general knowledge. Reply: not stated."</em> A setting is stronger than a sentence, so keep looking &mdash; but the sentence gets you through the demo.</li>
       </ul>
 
@@ -753,12 +783,12 @@ Rules:
       <span class="badges"><span class="b a">A</span><span class="b t">~30 min</span></span>
     </div>
     <div class="body">
-      <div class="goal"><b>What it proves:</b> the deck stops being assembled by a person. The agent produces a complete, validated slide plan and hands it to whatever builds the file &mdash; a flow, an Office Script, or the Aspose code you already own.</div>
+      <div class="goal"><b>What it proves:</b> the deck stops being assembled by a person. The agent produces a complete, validated slide plan and hands it to whatever builds the file &mdash; a flow, a renderer script, or the generator you already own.</div>
 
       <div class="amber">
-        <strong>Read this before you start.</strong> Producing a genuine <code>.pptx</code> from a template normally needs a premium document-generation connector or your own code &mdash; which is why <strong>the last hop, plan to file, is trainer-demo only</strong>.
-        What you <em>can</em> build, completely, is everything up to it: the agent generating a validated slide plan and writing it to a file. In your own environment, the last step is the Aspose routine you already have, called as an action.
-        That is the honest architecture, and it is also the cheapest path for your team: keep the code that works, and let the agent orchestrate it.
+        <strong>Read this before you start.</strong> The last hop &mdash; plan to file &mdash; is the one people assume needs a premium connector. <strong>It does not.</strong>
+        A genuine <code>.pptx</code> can be written by anything that reads the plan: the generator you already own, or <code>plan-to-pptx.py</code> from the demo assets, which does it offline with one library and no licence.
+        What matters is that <strong>the plan is the interface</strong>. Everything before it is what you build in Copilot Studio; everything after it is code your team already knows how to write.
       </div>
 
       <div class="k">Steps</div>
@@ -768,8 +798,8 @@ Rules:
         <li>Build a flow named <code>Save Slide Plan</code>: Copilot Studio trigger, text input <code>planjson</code>, then <strong>OneDrive for Business &rarr; Create file</strong> writing <code>plan.json</code> into your <code>copilot-workshop</code> folder.</li>
         <li>Add it as an action, described as: <em>"Saves a finished slide plan as a file so it can be turned into a PowerPoint deck."</em></li>
         <li>Ask the agent to generate <em>and save</em> the plan. Open the file in OneDrive to confirm it landed.</li>
-        <li>Watch the trainer complete the final hop from plan to a finished deck, using <code>deck-renderer.html</code> from the demo assets. Note exactly where your existing generator would sit instead.</li>
-        <li><strong>Do the last hop yourself, offline.</strong> Open <code>deck-renderer.html</code> in any browser, press <em>Load plan.json</em>, choose the file your agent just wrote, and print it. No tenant, no connector, no licence &mdash; the plan is the interface, so anything can render it.</li>
+        <li>Watch the trainer complete the final hop, plan to a real <code>.pptx</code>, using <code>plan-to-pptx.py</code> from the demo assets. Note exactly where your own generator would sit instead &mdash; the agent cannot tell the difference.</li>
+        <li><strong>Do the last hop yourself, offline.</strong> Two routes, neither needing a tenant, a connector or a licence: run <code>python3 plan-to-pptx.py plan.json deck.pptx</code> for a real editable PowerPoint file, or open <code>deck-renderer.html</code> in any browser, press <em>Load plan.json</em> and print it. Same plan, two renderers &mdash; which is exactly the point.</li>
       </ol>
 
       <div class="k">Instructions to append</div>
@@ -806,7 +836,7 @@ and a short commentary. Then save the plan.</pre>
         <li>Five to seven slides, every number carrying a source, and an <code>unresolved</code> list that is honest about what it could not find.</li>
         <li>Commentary that references only figures present on the slides &mdash; the constraint that stops a deck contradicting itself.</li>
         <li><code>plan.json</code> sitting in your OneDrive folder, ready for whatever builds the file.</li>
-        <li>Loaded into <code>deck-renderer.html</code>, that same JSON becomes a six-slide deck with every figure carrying its source, plus a final slide listing what could not be sourced. Compare it against <code>investment-report-sample.pdf</code> in the demo assets, which is the same plan rendered by the trainer.</li>
+        <li>Run through <code>plan-to-pptx.py</code>, that same JSON becomes a seven-slide PowerPoint file: six slides of content with every figure carrying its source, and a closing slide listing what could not be sourced. Compare it against <code>investment-report-sample.pptx</code> in the demo assets. <code>deck-renderer.html</code> renders the identical plan in a browser if you would rather install nothing.</li>
       </ul>
 
       <div class="k r">When it does not behave</div>
@@ -832,6 +862,7 @@ and a short commentary. Then save the plan.</pre>
         <li>In your agent, select <strong>Publish</strong>. Wait for it to complete &mdash; nothing below works until it has.</li>
         <li>Go to <strong>Channels</strong> &rarr; <strong>Microsoft Teams</strong> &rarr; turn it on, then <strong>Open the agent in Teams</strong>. Ask it a question from inside Teams.</li>
         <li><strong>Share it.</strong> Use the Share control to add one colleague. Notice the difference between sharing it to <em>use</em> and adding a <em>co-author</em> &mdash; that distinction is your first governance decision.</li>
+        <li><strong>Open one page you have not looked at yet:</strong> Settings &rarr; <strong>Security</strong> &rarr; <strong>Authentication</strong>. With <em>Authenticate with Microsoft</em> on, knowledge results trim to each asker's own permissions &mdash; a colleague who cannot open a file cannot be cited to it. Off, everyone queries one index and the agent becomes a way to read documents you were never given. Thirty seconds, and it decides whether sharing this agent is safe.</li>
         <li><strong>Now try the other channel.</strong> Channels &rarr; <strong>Microsoft 365 Copilot</strong> &rarr; tick <em>make the agent available in Microsoft 365 Copilot</em> &rarr; <strong>Add channel</strong>, then publish again. Re-open the channel afterwards and confirm the tick box is still set &mdash; it frequently clears itself during publish, and the symptom is an agent that never appears.</li>
         <li><strong>Submit it to the organisation catalogue.</strong> Availability options &rarr; choose the audience (your teammates and shared users, or everyone in the organisation) &rarr; submit. The status becomes <em>waiting for approval</em>. <strong>That is the lesson of this step:</strong> you cannot put an agent in front of the firm on your own signature.</li>
         <li><strong>Look at the other side of the gate.</strong> With admin rights: Microsoft&nbsp;365 admin centre &rarr; <strong>Agents</strong> &rarr; <em>manage requests</em>, where an administrator approves the agent, chooses who may install it, who receives it pre-installed, and which policy templates apply. Without admin rights &mdash; the normal case &mdash; find out <em>who</em> holds that queue. They are on your critical path, and the queue is not short.</li>
@@ -884,7 +915,7 @@ output. Never describe an unapproved document as final.</pre>
   <div class="demo" id="d27">
     <div class="head">
       <span class="id">Demo 2.7 <small>The agent runs without being asked &mdash; the trigger</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b t">~20 min</span></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~22 min</span></span>
     </div>
     <div class="body">
       <div class="goal"><b>What it proves:</b> this is the one that answers the question you actually asked. Everything so far has been an agent you talk to &mdash; useful, but still something a person has to remember to open. A trigger makes it part of the process: a file lands, the work happens, and a human sees a decision rather than a task.</div>
@@ -902,7 +933,19 @@ output. Never describe an unapproved document as final.</pre>
         <li>Route the agent's reply into the approval you already built in demo 2.6, so the outcome is a card in Teams rather than a message in a chat window.</li>
         <li><strong>Test it the honest way:</strong> drop <code>sample-fund-factsheet.pdf</code> into the library and then close the browser tab. Come back in two minutes and look at Teams.</li>
         <li>Now drop <code>meridian-manager-update.txt</code> in as well &mdash; the messy one &mdash; and watch what a triggered agent does when the document does not cooperate.</li>
+        <li><strong>Change the trigger, and nothing else.</strong> Open the same flow, delete the trigger step, and put a different one in its place. Everything downstream &mdash; get the file, call the agent, route to approval &mdash; is untouched. Do it twice, with the two below.</li>
       </ol>
+
+      <div class="k">The two other triggers worth building</div>
+      <ul>
+        <li><strong>Recurrence</strong> &mdash; <em>runs on a date, not an event.</em> Set it to the first business day of the quarter, because your quarterly review is a <em>calendar</em> obligation: nobody drops a file to start it, the date arrives. Over a list of funds, this is the difference between reviewing one fund when asked and having drafted all twelve before anyone sits down.</li>
+        <li><strong>When a new email arrives (V3)</strong> &mdash; filtered to a folder or sender, <em>has attachment</em> set, <em>include attachments</em> on. The honest one: manager updates, capital-call notices and revised factsheets arrive in an <em>inbox</em>, not a library. A shared mailbox a flow watches is usually a shorter conversation than a new SharePoint site.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>The trigger is a swap, not a rebuild.</strong> A file arriving, a date, an email, a row changing, an approval completing, another agent calling &mdash; each is one dropdown, and everything from demos 2.2&ndash;2.6 runs unchanged behind it. You are not looking for work that suits Copilot Studio; you are looking for the sentence <em>&ldquo;when X arrives, someone has to&hellip;&rdquo;</em>.
+      </div>
+
 
       <div class="k">What the flow asks the agent</div>
       <pre>A new fund document has arrived. Extract the fund record using the schema in
@@ -939,6 +982,13 @@ and let the approval step put it in front of a human.</pre>
       <p>This is the shape to take to your platform team, because it is the shape that changes a working week. An agent in a chat window saves a person some typing;
       an agent on a trigger removes a step from the process and puts a human at the decision instead of the keyboard.
       When you map your own workflow &mdash; demo 1.4 &mdash; the steps worth automating first are the ones that begin with <em>"when X arrives"</em>, because those already have a trigger waiting to be used.</p>
+
+      <div class="note">
+        <strong>Where the evidence lives &mdash; open these three once before you leave.</strong>
+        The agent's <strong>Analytics</strong> tab: sessions, engagement, and the share of conversations that ended <em>without</em> an answer &mdash; a rising unanswered rate is your knowledge going stale, visible here long before anyone complains.
+        <strong>Session transcripts</strong>, retained as Dataverse rows: the honest answer to <em>&ldquo;show me every question anyone asked this agent last quarter&rdquo;</em>, which run history cannot give you because most conversations never reach a flow &mdash; check the retention period your tenant applies, it is a setting and it needs an owner.
+        <strong>Flow run history</strong>: elapsed time and outcome per unattended run, which is what turns the ROI estimate into a measurement. Screenshot the analytics page at week four; the case that gets a second agent funded is the one with actuals in it.
+      </div>
     </div>
   </div>
 </section>
@@ -961,7 +1011,9 @@ and let the approval step put it in front of a human.</pre>
       <tr><td><code>benchmarks-sql.sql</code></td><td>2.3</td><td>Stands up the benchmark database and both stored procedures.</td></tr>
       <tr><td><code>slide-plan-sample.json</code></td><td>2.5</td><td>A finished slide plan, for comparison against your own.</td></tr>
       <tr><td><code>deck-renderer.html</code></td><td>2.5</td><td>Plan in, deck out. Open it in a browser; nothing to install.</td></tr>
-      <tr><td><code>investment-report-sample.pdf</code></td><td>2.5</td><td>The sample plan, rendered. This is what the capstone produces.</td></tr>
+      <tr><td><code>plan-to-pptx.py</code></td><td>2.5</td><td>Plan in, real <code>.pptx</code> out. One library, runs offline.</td></tr>
+      <tr><td><code>investment-report-sample.pptx</code></td><td>2.5</td><td>The sample plan as an editable PowerPoint file. What the capstone produces.</td></tr>
+      <tr><td><code>investment-report-sample.pdf</code></td><td>2.5</td><td>The same plan through the browser renderer.</td></tr>
     </tbody>
   </table>
 
@@ -1071,9 +1123,13 @@ Note: figures are unaudited and subject to revision.</pre>
   It exists to make one point &mdash; <strong>once the plan is a validated contract, whatever renders it is an implementation detail.</strong> In your environment the renderer is the Aspose generator you already own; here it is a browser page. The agent does not know the difference, and that is precisely why the architecture is a good one.
   It also warns you, in red, if any figure in the plan arrives without a source.</p>
 
-  <h3>11. <code>investment-report-sample.pdf</code> &mdash; the capstone output</h3>
-  <p>Item 9 rendered by item 10. This is the artefact the whole day is pointed at: the deck that today is assembled by hand, through six hand-offs, from a factsheet, a workbook, a benchmark lookup and a mandate system.
+  <h3>11. <code>investment-report-sample.pptx</code> / <code>.pdf</code> &mdash; the capstone output</h3>
+  <p>Item 9 rendered twice &mdash; by item 12 into an editable PowerPoint file, and by item 10 into the PDF. This is the artefact the whole day is pointed at: the deck that today is assembled by hand, through six hand-offs, from a factsheet, a workbook, a benchmark lookup and a mandate system.
   The last page is the one to look at &mdash; it lists what the agent could not source and therefore refused to put on a slide.</p>
+
+  <h3>12. <code>plan-to-pptx.py</code> &mdash; plan in, PowerPoint out (demo 2.5)</h3>
+  <p>The last hop, in one file. <code>pip install python-pptx</code>, then <code>python3 plan-to-pptx.py slide-plan-sample.json deck.pptx</code>. It writes a real, editable PowerPoint file &mdash; a native chart you can click into, a real table, every figure carrying its source, and a closing slide built from <code>unresolved</code>. No tenant, no connector, no licence. For a PDF afterwards: <code>soffice --headless --convert-to pdf deck.pptx</code>.
+  <strong>Two details worth opening the code for.</strong> It shrinks type rather than let text overflow its box, because the library cannot compute autofit &mdash; that is the defect which finds every report generator the first time real commentary runs longer than the sample. And it refuses to print a source line it does not have, which is the schema's discipline carried one step further down the pipeline.</p>
 
 </section>
 
@@ -1100,11 +1156,12 @@ Note: figures are unaudited and subject to revision.</pre>
 
 <section id="after">
   <h2>After the workshop &mdash; taking this into your own environment</h2>
-  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the five conversations to start, in this order:</p>
+  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the six conversations to start, in this order:</p>
   <ol>
     <li><strong>An environment.</strong> A Power Platform environment your team owns, with dev and prod separated. Ask for this first &mdash; everything else waits on it.</li>
     <li><strong>Connector approval and DLP.</strong> The specific list of connectors your agent needs, and which data groups they sit in. This is the dependency with a queue in front of it, so start it early.</li>
     <li><strong>An identity for the agent.</strong> How it authenticates to your internal and legacy systems &mdash; a service principal, a gateway, or an API wrapper around what exists.</li>
+    <li><strong>Data classification, not just DLP.</strong> DLP governs which connectors may combine; it says nothing about the sensitivity of what the agent reads and writes. Two questions for your information-protection owner: can a user be cited to a document they may not open (with user authentication, no &mdash; results trim to the asker), and does a generated deck inherit the label of its most restrictive source (no &mdash; it carries no label until something applies one). The second is the gap: decide who labels the output before the first client deck exists.</li>
     <li><strong>A named owner and reviewer.</strong> Not a formality: an agent nobody owns stops being maintained within a quarter, and an approval gate with no time behind it is theatre.</li>
     <li><strong>The publishing route.</strong> Teams you can usually reach yourself. Microsoft&nbsp;365 Copilot goes through the organisation catalogue and an administrator's approval queue &mdash; so find out who holds that queue and what they need from you. Ask in week one; it is the request that decides your launch date, not your build.</li>
   </ol>

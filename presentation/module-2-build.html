@@ -738,7 +738,7 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 11 -->
-<section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Identity: who is the agent when it calls?" data-notes="Decide per action, not per agent. On-behalf-of preserves the user's own permissions; a service identity is predictable but broad, and scoped lazily it becomes a standing key to everything. The wrong default here is a genuine security finding." data-demo="2.2" data-role="post">
+<section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Identity: who is the agent when it calls?" data-notes="Decide per action, not per agent. On-behalf-of preserves the user's own permissions; a service identity is predictable but broad, and scoped lazily it becomes a standing key to everything. The wrong default here is a genuine security finding. The two models on this slide govern actions - what the agent may call. The authentication switch in the last bullet governs knowledge - what it may read, per person. They are set in different places and people conflate them: an agent can be perfectly scoped on its actions and still show every consultant the same SharePoint index. Demo 2.6 opens that page." data-demo="2.2" data-role="post">
   <h2>Who <em>is</em> the agent when it calls your system?<span class="cue post">POST &middot; DEMO 2.2</span><span class="tag k">2.2</span></h2>
   <div class="body g46">
     <div class="pts">
@@ -757,6 +757,7 @@ svg{width:100%;height:auto;display:block}
         <li>Client-scoped reads &rarr; on-behalf-of.</li>
         <li>Reference data everyone may see &rarr; service identity.</li>
         <li>Writes &rarr; service identity, narrowly scoped, always logged with the requesting user.</li>
+        <li><b>And one switch above all three:</b> <em>Settings &rarr; Security &rarr; Authentication</em>. &ldquo;Authenticate with Microsoft&rdquo; is what makes <b>knowledge</b> results trim to each asker's own permissions. Leave it off and everyone sees one index &mdash; check it <em>before</em> you share the agent.</li>
       </ul>
     </div>
     <div>
@@ -1379,16 +1380,16 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 22 -->
-<section class="slide" data-sec="2.5 Report generation" data-title="Rendering: four options compared" data-notes="Option A is the recommendation: wrap the generator you already own behind an endpoint. It preserves the investment, needs no new licence and no new data path, and the work is a thin API wrapper your own team can build." data-demo="2.5" data-role="post">
+<section class="slide" data-sec="2.5 Report generation" data-title="Rendering: four options compared" data-notes="Option A is the recommendation: wrap the generator you already own behind an endpoint. It preserves the investment, needs no new licence and no new data path, and the work is a thin API wrapper your own team can build. Two things worth knowing about option C: Office Scripts is Excel-only and cannot build a PowerPoint file at all, and Microsoft Graph exposes a .pptx as a file to upload, download and convert &mdash; it has no API that authors slide content. That is why the first-party route is the Open XML SDK, which means writing OOXML parts yourself." data-demo="2.5" data-role="post">
   <h2>Turning the plan into a deck: four options, honestly compared<span class="cue post">POST &middot; DEMO 2.5</span><span class="tag">2.5</span></h2>
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 430" role="img" aria-label="Four rendering options compared">
         <rect class="bx a" x="4" y="4" width="692" height="106" rx="8" style="stroke-width:3"/>
-        <text class="lb a" x="22" y="26">OPTION A &middot; YOUR ASPOSE CODE, EXPOSED AS AN ACTION &nbsp;&mdash;&nbsp; RECOMMENDED</text>
+        <text class="lb a" x="22" y="26">OPTION A &middot; YOUR OWN GENERATOR, EXPOSED AS AN ACTION &nbsp;&mdash;&nbsp; RECOMMENDED</text>
         <text class="ss" x="22" y="50">Wrap the generator you already own behind a small HTTP endpoint. The agent posts the plan; it returns a file.</text>
         <text class="ss" x="22" y="72" style="fill:#047857">&#10003; keeps your template, your house format, your years of edge cases &nbsp; &#10003; no new licence &nbsp; &#10003; your team owns it</text>
-        <text class="ss" x="22" y="94" style="fill:#b45309">&mdash; needs a thin API wrapper and a service identity. Days of work, not months.</text>
+        <text class="ss" x="22" y="94" style="fill:#b45309">&mdash; Aspose or python-pptx behind it; either way a thin wrapper and a service identity. Days, not months.</text>
 
         <rect class="bx" x="4" y="118" width="692" height="94" rx="8"/>
         <text class="lb" x="22" y="140">OPTION B &middot; PREMIUM DOCUMENT-GENERATION CONNECTOR</text>
@@ -1397,10 +1398,10 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="22" y="200" style="fill:#b91c1c">&#10007; third-party licence, procurement, and a DLP review of a new data path</text>
 
         <rect class="bx" x="4" y="220" width="692" height="94" rx="8"/>
-        <text class="lb" x="22" y="242">OPTION C &middot; OFFICE SCRIPTS / GRAPH API</text>
-        <text class="ss" x="22" y="264">Build the file inside Microsoft 365 from the plan.</text>
-        <text class="ss" x="22" y="284" style="fill:#047857">&#10003; entirely inside the tenant &nbsp; &#10003; no third party</text>
-        <text class="ss" x="22" y="302" style="fill:#b91c1c">&#10007; you rebuild the layout logic your Aspose code already has &mdash; the expensive kind of new work</text>
+        <text class="lb" x="22" y="242">OPTION C &middot; OPEN XML SDK / OFFICE ADD-IN (OFFICE.JS)</text>
+        <text class="ss" x="22" y="264">Build the file with Microsoft&rsquo;s own libraries &mdash; no Graph API authors PowerPoint content.</text>
+        <text class="ss" x="22" y="284" style="fill:#047857">&#10003; first-party and free &nbsp; &#10003; no third-party licence</text>
+        <text class="ss" x="22" y="302" style="fill:#b91c1c">&#10007; Open XML means authoring OOXML parts by hand; Office.js has no native chart API</text>
 
         <rect class="bx r" x="4" y="322" width="692" height="94" rx="8"/>
         <text class="lb r" x="22" y="344">OPTION D &middot; ASK THE MODEL TO PRODUCE THE FILE DIRECTLY</text>
@@ -1415,13 +1416,14 @@ svg{width:100%;height:auto;display:block}
         <li>Your Aspose code encodes years of house-format decisions. <b>That is an asset, not legacy.</b></li>
         <li>Nothing new to license, nothing new to procure, no new data path to defend in a DLP review.</li>
         <li>The wrapper is a normal internal API &mdash; the same conversation as pattern A in session 2.2.</li>
+        <li><b>If the licence is the objection</b>, python-pptx writes the same file from the same plan. The architecture does not move &mdash; only what sits behind the endpoint.</li>
       </ul>
       <h3 class="a">What changes for your developers</h3>
       <ul>
         <li>They stop <em>running</em> the generator and start <em>maintaining</em> it as a service.</li>
         <li>The interesting work moves up: the schema, the validation rules, the sourcing discipline.</li>
       </ul>
-      <div class="callout">Today's demo uses the plan plus a simple renderer, because we cannot reach your Aspose code from here. In your environment, <b>that box is already built.</b></div>
+      <div class="callout">Today's demo renders the plan with <span class="mono">plan-to-pptx.py</span> &mdash; one library, no licence, no tenant &mdash; because we cannot reach your own generator from here. In your environment, <b>that box is already built.</b></div>
     </div>
   </div>
 </section>
@@ -1672,11 +1674,11 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 27 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The governance checklist, worked" data-notes="Worked against a real agent rather than in the abstract. Any row you cannot answer is a piece of work, not a formality - and this table is the artefact to take to a governance forum." data-demo="2.6" data-role="post">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The governance checklist, worked" data-notes="Worked against a real agent rather than in the abstract. Any row you cannot answer is a piece of work, not a formality - and this table is the artefact to take to a governance forum. Row three is the one teams skip. Knowledge respects the permissions and sensitivity labels on the source, so a user cannot be cited to a document they may not open - but the deck the agent generates inherits no label at all. Whoever owns the output folder owns that gap." data-demo="2.6" data-role="post">
   <h2>The governance checklist &mdash; worked against what we just built<span class="cue post">POST &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 400" role="img" aria-label="Governance checklist worked example">
+      <svg viewBox="0 0 1180 448" role="img" aria-label="Governance checklist worked example">
         <rect class="bx w" x="4" y="4" width="1172" height="32" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
         <text class="lb w" x="22" y="25">THE QUESTION</text>
         <text class="lb w" x="360" y="25">OUR ANSWER FOR THIS AGENT</text>
@@ -1693,32 +1695,37 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="880" y="116">DLP connector groups</text>
 
         <rect class="bx g" x="4" y="138" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="164" style="font-weight:600;fill:#0b2545">Who can use it? Who can change it?</text>
-        <text class="ss" x="360" y="164">Users: the IC group. Co-authors: two named builders. Rows follow the user</text>
-        <text class="ss" x="880" y="164">sharing roles + row-level security</text>
+        <text class="ss" x="22" y="164" style="font-weight:600;fill:#0b2545">Which classification of data reaches it?</text>
+        <text class="ss" x="360" y="164">Factsheet public; mandate and holdings are not. Output inherits neither label</text>
+        <text class="ss" x="880" y="164">sensitivity labels + source permissions</text>
 
         <rect class="bx g" x="4" y="186" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="212" style="font-weight:600;fill:#0b2545">What can it do without a human?</text>
-        <text class="ss" x="360" y="212">Read, extract, enrich, draft. Nothing irreversible, nothing issued</text>
-        <text class="ss" x="880" y="212">approval gate + instructions</text>
+        <text class="ss" x="22" y="212" style="font-weight:600;fill:#0b2545">Who can use it? Who can change it?</text>
+        <text class="ss" x="360" y="212">Users: the IC group. Co-authors: two named builders. Rows follow the user</text>
+        <text class="ss" x="880" y="212">sharing roles + row-level security</text>
 
         <rect class="bx g" x="4" y="234" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="260" style="font-weight:600;fill:#0b2545">How do we know what it did?</text>
-        <text class="ss" x="360" y="260">Run trace, action inputs and outputs, citations, approval id</text>
-        <text class="ss" x="880" y="260">analytics + flow run history</text>
+        <text class="ss" x="22" y="260" style="font-weight:600;fill:#0b2545">What can it do without a human?</text>
+        <text class="ss" x="360" y="260">Read, extract, enrich, draft. Nothing irreversible, nothing issued</text>
+        <text class="ss" x="880" y="260">approval gate + instructions</text>
 
-        <rect class="bx a" x="4" y="282" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="308" style="font-weight:600;fill:#92400e">Who owns it, and who reviews its output?</text>
-        <text class="ss" x="360" y="308" style="fill:#92400e">Named owner + named deputy; reviewer with time allocated</text>
-        <text class="ss" x="880" y="308" style="fill:#92400e">a person, not a setting</text>
+        <rect class="bx g" x="4" y="282" width="1172" height="42" rx="5"/>
+        <text class="ss" x="22" y="308" style="font-weight:600;fill:#0b2545">How do we know what it did?</text>
+        <text class="ss" x="360" y="308">Run trace, action inputs and outputs, citations, approval id</text>
+        <text class="ss" x="880" y="308">analytics + flow run history</text>
 
         <rect class="bx a" x="4" y="330" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="356" style="font-weight:600;fill:#92400e">How does it change safely?</text>
-        <text class="ss" x="360" y="356" style="fill:#92400e">Solution export dev &rarr; test &rarr; prod; eval set re-run before promotion</text>
-        <text class="ss" x="880" y="356" style="fill:#92400e">ALM &mdash; the work that is still ahead of you</text>
+        <text class="ss" x="22" y="356" style="font-weight:600;fill:#92400e">Who owns it, and who reviews its output?</text>
+        <text class="ss" x="360" y="356" style="fill:#92400e">Named owner + named deputy; reviewer with time allocated</text>
+        <text class="ss" x="880" y="356" style="fill:#92400e">a person, not a setting</text>
 
-        <rect class="bx d" x="4" y="378" width="1172" height="22" rx="4"/>
-        <text class="ss w" x="22" y="394" style="font-size:11.5px">Five rows are settled by configuration. The last two are settled by people &mdash; and those are the two that decide whether this is still running next year.</text>
+        <rect class="bx a" x="4" y="378" width="1172" height="42" rx="5"/>
+        <text class="ss" x="22" y="404" style="font-weight:600;fill:#92400e">How does it change safely?</text>
+        <text class="ss" x="360" y="404" style="fill:#92400e">Solution export dev &rarr; test &rarr; prod; eval set re-run before promotion</text>
+        <text class="ss" x="880" y="404" style="fill:#92400e">ALM &mdash; the work that is still ahead of you</text>
+
+        <rect class="bx d" x="4" y="426" width="1172" height="22" rx="4"/>
+        <text class="ss w" x="22" y="442" style="font-size:11.5px">Six rows are settled by configuration. The last two are settled by people &mdash; and those are the two that decide whether this is still running next year.</text>
       </svg>
     </div>
   </div>
@@ -1880,11 +1887,11 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 30 -->
-<section class="slide" data-sec="2.7 Close" data-title="When to graduate from Copilot Studio" data-notes="Honest and short. The five signals protect you from building the wrong thing next year. Agent Framework is the named path, but it is not today's decision - prototype here first, always.">
+<section class="slide" data-sec="2.7 Close" data-title="When to graduate from Copilot Studio" data-notes="Honest and short. The five signals protect you from building the wrong thing next year. Agent Framework is the named path, but it is not today's decision - prototype here first, always. The amber box at the bottom is the one to act on. Our capstone agent already does four unrelated jobs - extract, mandate-check, benchmark, plan - behind a single instruction block heading for the 8,000-character ceiling. That is signal 1, and the first answer is not code: it is connected agents, where one agent lists others as tools and each keeps its own knowledge, instructions and trace. You get shorter instructions, a smaller blast radius per change, and separate owners. Graduate only when splitting has stopped helping.">
   <h2>When to graduate &mdash; and how you will know<span class="tag">2.7</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Signals that you have outgrown Copilot Studio">
+      <svg viewBox="0 0 700 520" role="img" aria-label="Signals that you have outgrown Copilot Studio">
         <rect class="bx g" x="4" y="4" width="692" height="126" rx="8"/>
         <text class="lb g" x="22" y="26">STAY IN COPILOT STUDIO WHILE</text>
         <text class="ss" x="22" y="50">&bull; &nbsp;a human is in the loop and volumes are human-scale</text>
@@ -1906,6 +1913,12 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="22" y="358">with tests and a deployment pipeline. Same concepts &mdash; instructions, tools, orchestration, traces &mdash;</text>
         <text class="ss" x="22" y="378">expressed in code instead of configuration.</text>
         <text class="ss" x="22" y="404" style="font-weight:600;fill:#0b2545">Everything you learned today transfers. The vocabulary does not change; only who maintains it does.</text>
+
+        <rect class="bx a" x="4" y="428" width="692" height="88" rx="8"/>
+        <text class="lb a" x="22" y="450">BEFORE YOU GRADUATE &mdash; THE STEP MOST TEAMS SKIP</text>
+        <text class="ss" x="22" y="472" style="fill:#92400e">Signal 1 usually means one agent is doing four jobs. Split it before you leave the product:</text>
+        <text class="ss" x="22" y="492" style="fill:#92400e">a research agent, a mandate-compliance agent, a report agent &mdash; each with its own knowledge,</text>
+        <text class="ss" x="22" y="512" style="fill:#92400e;font-weight:600">tools and instructions &mdash; and one agent calling the others as tools. Still Copilot Studio. Still no code.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1925,7 +1938,7 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 31 -->
-<section class="slide" data-sec="2.7 Close" data-title="Building the ROI case" data-notes="The arithmetic to take to a sponsor, deliberately conservative. Claim time to first draft rather than total elimination: a case that survives scrutiny beats one that impresses and then collapses.">
+<section class="slide" data-sec="2.7 Close" data-title="Building the ROI case" data-notes="The arithmetic to take to a sponsor, deliberately conservative. Claim time to first draft rather than total elimination: a case that survives scrutiny beats one that impresses and then collapses. The dark band is the half of the ROI case that usually goes missing. Copilot Studio keeps its own analytics - sessions, engagement, escalation, and how many conversations ended without an answer - and session transcripts are retained as Dataverse rows, which is also the honest answer to the governance question 'show me every question anyone asked this agent last quarter'. Flow run history covers the unattended path. Look at all three before the second funding conversation, and check the retention period your tenant applies to transcripts - it is a setting, and someone should own it.">
   <h2>The ROI case, in numbers your sponsor will accept<span class="tag">2.7</span></h2>
   <div class="body g46">
     <div class="pts">
@@ -1941,10 +1954,11 @@ svg{width:100%;height:auto;display:block}
       <ul>
         <li><b>&ldquo;What if it is wrong?&rdquo;</b> &rarr; the gate, the unresolved list, the audit trail.</li>
         <li><b>&ldquo;Who maintains it?&rdquo;</b> &rarr; the named owner. Have the name ready before the meeting.</li>
+        <li><b>&ldquo;How do you know anyone uses it?&rdquo;</b> &rarr; the Analytics tab, at the second meeting. Estimates get you funded once; actuals get you funded again.</li>
       </ul>
     </div>
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Worked ROI arithmetic">
+      <svg viewBox="0 0 700 536" role="img" aria-label="Worked ROI arithmetic">
         <rect class="bx" x="4" y="4" width="692" height="136" rx="8"/>
         <text class="lb" x="22" y="26">THE COST TODAY &mdash; USE YOUR OWN NUMBERS, NOT THESE</text>
         <text class="ss" x="22" y="52">Fund reviews per quarter</text><text class="tt" x="480" y="52" style="font-size:14px">40</text>
@@ -1971,6 +1985,12 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="22" y="360">Aspose wrapper API</text><text class="tt" x="480" y="360" style="font-size:14px">1&ndash;2 weeks</text>
         <text class="ss" x="22" y="382">Connector approval, DLP, environment</text><text class="tt" x="480" y="382" style="font-size:14px">elapsed, not effort</text>
         <text class="ss" x="22" y="406" style="font-weight:600;fill:#92400e">Ongoing: an owner, a reviewer, and a re-run of the eval set at each change.</text>
+
+        <rect class="bx d" x="4" y="428" width="692" height="98" rx="8"/>
+        <text class="lb w" x="22" y="450">WHERE THE ACTUALS COME FROM &mdash; AFTER LAUNCH</text>
+        <text class="ss w" x="22" y="472">Everything above is an estimate until the agent has run. Three places hold the real numbers:</text>
+        <text class="ss w" x="22" y="492">The <tspan style="fill:#fbbf24">Analytics</tspan> tab &mdash; sessions, engagement, and the share that ended with no answer at all.</text>
+        <text class="ss w" x="22" y="512">Session <tspan style="fill:#fbbf24">transcripts</tspan> in Dataverse &mdash; what people actually asked. Flow run history &mdash; elapsed per run.</text>
       </svg>
     </div>
   </div>
@@ -2074,7 +2094,7 @@ svg{width:100%;height:auto;display:block}
   var links=[].slice.call(toc.querySelectorAll('a'));
 
   // demo cue layer: where each demo runs, and what is next from here
-  var DEMOS={'2.1':{t:'Generative orchestration, the trace, and proving a fix',m:'~32 min'},'2.2':{t:'Calling an external API &mdash; and a legacy internal one',m:'~35 min'},'2.3':{t:'Excel and SQL data movement',m:'~25 min'},'2.4':{t:'Unstructured &rarr; structured, with a schema',m:'~30 min'},'2.5':{t:'Generating the report',m:'~30 min'},'2.6':{t:'Publish to Teams, share, approve, govern',m:'~35 min'},'2.7':{t:'The agent runs without being asked &mdash; the trigger',m:'~20 min'}};
+  var DEMOS={'2.1':{t:'Generative orchestration, the trace, and proving a fix',m:'~32 min'},'2.2':{t:'Calling an external API &mdash; and a legacy internal one',m:'~35 min'},'2.3':{t:'Excel and SQL data movement',m:'~25 min'},'2.4':{t:'Unstructured &rarr; structured, with a schema',m:'~30 min'},'2.5':{t:'Generating the report',m:'~30 min'},'2.6':{t:'Publish to Teams, share, approve, govern',m:'~35 min'},'2.7':{t:'The agent runs without being asked &mdash; the trigger',m:'~22 min'}};
   var runAfter={};
   slides.forEach(function(s,k){ if(s.dataset.role==='pre') runAfter[s.dataset.demo]=k; });
   var demoOrder=Object.keys(runAfter).sort();

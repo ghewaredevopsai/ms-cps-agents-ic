@@ -40,7 +40,9 @@ All five `presentation/` files are cross-linked and there is **no `.md` source o
 | `benchmarks-sql.sql` | 2.3 | Stands up the benchmark DB + `usp_GetBenchmarkReturns` and `usp_GetExcessReturn`. Azure SQL free tier or SQL Server 2019+ |
 | `slide-plan-sample.json` | 2.5 | A finished slide plan: 6 slides, every figure sourced, 2 `unresolved` |
 | `deck-renderer.html` | 2.5 | **Plan in, deck out.** Self-contained browser page — the stand-in for the client's own generator. Warns if any figure arrives without a source |
-| `investment-report-sample.pdf` | 2.5 | The sample plan rendered — what the capstone produces |
+| `plan-to-pptx.py` | 2.5 | **Plan in, real `.pptx` out.** One library (`python-pptx`), runs offline — the stand-in for a team's own generator. Shrinks type rather than overflow a box, and refuses to print a source it does not have |
+| `investment-report-sample.pptx` | 2.5 | The sample plan as an editable PowerPoint file — what the capstone produces |
+| `investment-report-sample.pdf` | 2.5 | The same plan through the browser renderer |
 
 ## Course shape
 
