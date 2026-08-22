@@ -125,7 +125,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <table>
     <thead><tr><th style="width:22%">What</th><th style="width:38%">What it is good for</th><th>Where it stops</th></tr></thead>
     <tbody>
-      <tr><td><strong>Microsoft 365 Copilot</strong></td><td>Helping <em>you</em>, right now, inside a document or a chat. Drafting, summarising, rewriting.</td><td>It forgets. Nothing is repeatable, nothing is shareable, and it cannot reach a system nobody has connected.</td></tr>
+      <tr><td><strong>Microsoft 365 Copilot</strong></td><td>Helping <em>you</em>, right now, inside a document or a chat. Drafting, summarising, rewriting.</td><td>The chat is personal and your instructions do not persist, so nothing you tune is repeatable. It also cannot reach a system nobody has connected. (Its own lightweight agent builder crosses the first of those, not the second &mdash; see Part&nbsp;5.)</td></tr>
       <tr><td><strong>Copilot Studio</strong></td><td>Building a <em>thing</em>: named, grounded in chosen documents, able to call your APIs, publishable to Teams, and identical for every user.</td><td>It is a prototyping platform. Real limits on scale, latency and fine control &mdash; we cover these honestly on the day.</td></tr>
       <tr><td><strong>Code-first frameworks</strong></td><td>Full control, when you have outgrown the above.</td><td>Out of scope for this workshop. It is where you graduate to, not where you start.</td></tr>
     </tbody>
@@ -168,7 +168,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <ol>
     <li><strong>Name the source, always.</strong> Ask for a source column or a citation on every figure. An unsourced number is not evidence, however confident it sounds.</li>
     <li><strong>Give it permission to fail.</strong> Without an explicit refusal line, a model will fill a gap rather than report one &mdash; and a fabricated tracking error looks exactly like a real one.</li>
-    <li><strong>Decompose.</strong> Extract, then check, then write. A single prompt that does all three does none of them reliably.</li>
+    <li><strong>One job per prompt.</strong> Extract, then check, then write &mdash; a single prompt that does all three does none of them reliably. On the day this becomes an agent that calls a different tool for each step.</li>
     <li><strong>Never let it do arithmetic that matters.</strong> A total, an average or a currency conversion should come from a system. This rule is the spine of the afternoon.</li>
   </ol>
 
@@ -290,7 +290,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <h2>On the day</h2>
   <ul>
     <li><strong>Morning, everyone:</strong> how models actually behave, prompting and its ceiling, what an agent really is, and where one fits your workflow under your governance constraints.</li>
-    <li><strong>Afternoon, the developer group:</strong> the Investment Report Agent built end to end &mdash; APIs, spreadsheets and databases, extraction, the deck, deployment to Teams, and the trigger.</li>
+    <li><strong>Afternoon, everyone stays &mdash; build detail pitched at the developers:</strong> the Investment Report Agent built end to end &mdash; APIs, spreadsheets and databases, extraction, the deck, deployment to Teams, and the trigger.</li>
     <li><strong>Nothing is required of your machine.</strong> The day is trainer-led on screen. If you want to build alongside it, the <a href="demo-guide.html">demo follow-along guide</a> has every step and every piece of text to paste.</li>
     <li><strong>Joining online?</strong> You get a dedicated feed of the Copilot Studio window rather than a room camera, someone watching the meeting chat, and recordings of the demo segments afterwards.</li>
   </ul>

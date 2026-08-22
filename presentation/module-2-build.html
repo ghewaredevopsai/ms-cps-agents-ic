@@ -158,7 +158,7 @@ svg{width:100%;height:auto;display:block}
   <div class="rule"></div>
   <div class="meta">
     <b>Investment Consulting team</b><br>
-    Thursday, 27 August 2026 &nbsp;&middot;&nbsp; 13:00 &ndash; 18:00 &nbsp;&middot;&nbsp; the ~10 developers<br>
+    Thursday, 27 August 2026 &nbsp;&middot;&nbsp; 13:00 &ndash; 18:00 &nbsp;&middot;&nbsp; all 35 &middot; build depth for the ~10 developers<br>
     Trainer: <b>Rajesh Gheware</b>
   </div>
   <div class="chips">
@@ -322,27 +322,30 @@ svg{width:100%;height:auto;display:block}
   <h2>Instructions are production code &mdash; annotated<span class="cue pre">PRE &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
   <div class="body g55">
     <div>
-      <svg viewBox="0 0 640 430" role="img" aria-label="Annotated agent instruction block">
-        <rect class="bx d" x="4" y="4" width="632" height="422" rx="8"/>
+      <svg viewBox="0 0 640 488" role="img" aria-label="Annotated agent instruction block">
+        <rect class="bx d" x="4" y="4" width="632" height="480" rx="8"/>
         <text class="mn w" x="22" y="30">You are a research assistant for an investment</text>
         <text class="mn w" x="22" y="48">consulting team.</text>
         <text class="mn w" x="22" y="80">- Every figure must come from a document or an</text>
         <text class="mn w" x="22" y="98">&nbsp;&nbsp;action result in this conversation.</text>
         <text class="mn w" x="22" y="120">- Cite the section or the action after each figure.</text>
         <text class="mn w" x="22" y="142">- If a figure is absent, reply exactly: not stated.</text>
-        <text class="mn w" x="22" y="164">- Never estimate, infer, annualise or convert.</text>
-        <text class="mn w" x="22" y="186">- Never calculate. Retrieve, then state.</text>
-        <text class="mn w" x="22" y="208">- If a question is ambiguous about period, share</text>
-        <text class="mn w" x="22" y="226">&nbsp;&nbsp;class or plan, ask - do not choose silently.</text>
-        <text class="mn w" x="22" y="248">- Decline suitability questions: that is consultant</text>
-        <text class="mn w" x="22" y="266">&nbsp;&nbsp;judgement, not a document lookup.</text>
-        <text class="mn w" x="22" y="288">- Nothing is client-ready until approved.</text>
-        <text class="mn w" x="22" y="310">- On any action failure, say which action failed</text>
-        <text class="mn w" x="22" y="328">&nbsp;&nbsp;and stop. Do not substitute a plausible value.</text>
-        <text class="mn w" x="22" y="350">- Be brief. A consultant reads this between</text>
-        <text class="mn w" x="22" y="368">&nbsp;&nbsp;meetings.</text>
-        <rect class="bx dd" x="22" y="384" width="596" height="34" rx="5"/>
-        <text class="ss w" x="36" y="406" style="fill:#fbbf24">Fourteen lines. Every one of them is a bug that has already happened.</text>
+        <text class="mn w" x="22" y="164">- Never estimate, infer or annualise a figure.</text>
+        <text class="mn w" x="22" y="186">- Never calculate a total, an average, a weighted figure or a</text>
+        <text class="mn w" x="22" y="204">&nbsp;&nbsp;currency conversion. Retrieve it with an action and quote the action.</text>
+        <text class="mn w" x="22" y="226">- You may state the difference between two figures you retrieved,</text>
+        <text class="mn w" x="22" y="244">&nbsp;&nbsp;provided both are shown with their sources.</text>
+        <text class="mn w" x="22" y="266">- If a question is ambiguous about period, share</text>
+        <text class="mn w" x="22" y="284">&nbsp;&nbsp;class or plan, ask - do not choose silently.</text>
+        <text class="mn w" x="22" y="306">- Decline suitability questions: that is consultant</text>
+        <text class="mn w" x="22" y="324">&nbsp;&nbsp;judgement, not a document lookup.</text>
+        <text class="mn w" x="22" y="346">- Nothing is client-ready until approved.</text>
+        <text class="mn w" x="22" y="368">- On any action failure, say which action failed</text>
+        <text class="mn w" x="22" y="386">&nbsp;&nbsp;and stop. Do not substitute a plausible value.</text>
+        <text class="mn w" x="22" y="408">- Be brief. A consultant reads this between</text>
+        <text class="mn w" x="22" y="426">&nbsp;&nbsp;meetings.</text>
+        <rect class="bx dd" x="22" y="442" width="596" height="34" rx="5"/>
+        <text class="ss w" x="36" y="464" style="fill:#fbbf24">Eleven rules. Every one of them is a bug that has already happened.</text>
       </svg>
     </div>
     <div class="pts">
@@ -351,7 +354,7 @@ svg{width:100%;height:auto;display:block}
         <li><b>Lines 1&ndash;2</b> &rarr; fabrication. The rule that turns recall into reading.</li>
         <li><b>Citation line</b> &rarr; makes every claim checkable in seconds, which is what lets a reviewer accept it at all.</li>
         <li><b>&ldquo;not stated&rdquo;</b> &rarr; silence becomes a legal answer. Without this the model always fills the gap.</li>
-        <li><b>&ldquo;Never calculate&rdquo;</b> &rarr; arithmetic moves to Excel and SQL in 2.3. This single line prevents a whole class of quiet errors.</li>
+        <li><b>The arithmetic pair</b> &rarr; totals, averages and conversions move to Excel and SQL in 2.3; a difference between two figures already on screen may be stated, because a reader can check it by eye. Session 2.3 draws that line properly.</li>
         <li><b>Ambiguity rule</b> &rarr; the gross-vs-net failure. The one that survives review.</li>
         <li><b>Failure rule</b> &rarr; an action that times out must not become an invented number. This is the line teams forget.</li>
       </ul>
@@ -2002,7 +2005,7 @@ svg{width:100%;height:auto;display:block}
   <h2>Monday morning: 30 / 60 / 90 days<span class="tag g">2.7</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 380" role="img" aria-label="Thirty sixty ninety day plan">
+      <svg viewBox="0 0 1180 402" role="img" aria-label="Thirty sixty ninety day plan">
         <rect class="bx" x="4" y="24" width="380" height="240" rx="8"/>
         <text class="lb" x="22" y="18">FIRST 30 DAYS &mdash; REMOVE THE UNKNOWNS</text>
         <text class="tt" x="22" y="54" style="font-size:14px">Ask, do not build</text>
@@ -2036,14 +2039,14 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="814" y="80">&bull; &nbsp;Solution into a test environment; run the eval set</text>
         <text class="ss" x="814" y="102">&bull; &nbsp;Approval gate live, with a reviewer who has the time</text>
         <text class="ss" x="814" y="124">&bull; &nbsp;Publish to Teams for 3&ndash;5 consultants, not the whole team</text>
-        <text class="ss" x="814" y="146">&bull; &nbsp;Governance pack: the seven checklist rows, answered</text>
+        <text class="ss" x="814" y="146">&bull; &nbsp;Governance pack: the eight checklist rows, answered</text>
         <text class="ss" x="814" y="168">&bull; &nbsp;Decide the second agent, using the same four criteria</text>
         <rect class="bx g" x="814" y="184" width="340" height="64" rx="5"/>
         <text class="ss" x="826" y="206" style="fill:#047857;font-weight:600">Success at day 90: one agent in real use,</text>
         <text class="ss" x="826" y="226" style="fill:#047857;font-weight:600">owned, governed, and measurably faster.</text>
         <text class="ss" x="826" y="244" style="fill:#047857">One. Not five.</text>
 
-        <rect class="bx d" x="4" y="284" width="1172" height="92" rx="8"/>
+        <rect class="bx d" x="4" y="284" width="1172" height="110" rx="8"/>
         <text class="tt w" x="24" y="312" style="font-size:16px">The one thing that decides whether any of this happens</text>
         <text class="ss w" x="24" y="338">Not the tooling, not the licence, not the model. <tspan style="fill:#fbbf24;font-weight:700">A named person whose actual job includes owning this</tspan> &mdash;</text>
         <text class="ss w" x="24" y="358">and a first agent narrow enough that they can succeed at it within a quarter.</text>
@@ -2051,6 +2054,7 @@ svg{width:100%;height:auto;display:block}
       </svg>
     </div>
   </div>
+  <div class="take"><b>What you take away:</b> both decks with per-slide notes &middot; the <a href="demo-guide.html">demo follow-along guide</a>, which doubles as the patterns reference &middot; the <a href="reference-pack.html">reference pack</a> &mdash; ten consulting prompts, the capability&rarr;workflow map, and the surfaces you can use without an environment or a developer &middot; the full demo-asset set.</div>
 </section>
 
 </div></div>
