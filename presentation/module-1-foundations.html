@@ -144,6 +144,7 @@ svg{width:100%;height:auto;display:block}
     <a href="module-2-build.html" title="Module 2 slides">Module 2</a>
     <a href="demo-guide.html" title="Participant demo follow-along guide">Demo guide</a>
     <a href="pre-reads.html" title="Pre-read pack">Pre-reads</a>
+    <a href="reference-pack.html" title="Take-away reference pack">Reference</a>
     <a href="course-outline-copilot-studio.html" title="Back to the course outline">&larr; Course outline</a>
   </div>
 </div>
@@ -810,7 +811,7 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 11 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Copilot vs Copilot Studio vs Foundry" data-notes="Three products, one spectrum, and the choice is almost always settled by two questions rather than by features. First: does the job have to reach a system outside Microsoft 365? If it does, the left column is out, however good the writing is. Second: does an engineering team own this, with Azure skills and an Azure budget? If not, the right column is out, however attractive full control sounds. What is left is the middle, which is why the middle is where this day is spent. The effort ratings are about who can realistically build and maintain each one, not about how capable each is - Foundry is the most capable and the least likely to be the right answer for a first agent. It is also worth saying plainly that these coexist. Nothing here replaces the Copilot licences already in use; the left column keeps doing individual drafting while agents take the repeatable pipeline work, in the same tenant, under the same policy." data-demo="1.3" data-role="post">
+<section class="slide" data-sec="1.3 What an agent is" data-title="Copilot vs Copilot Studio vs Foundry" data-notes="Three products, one spectrum, and the choice is almost always settled by two questions rather than by features. First: does the job have to reach a system outside Microsoft 365? If it does, the left column is out, however good the writing is. Second: does an engineering team own this, with Azure skills and an Azure budget? If not, the right column is out, however attractive full control sounds. What is left is the middle, which is why the middle is where this day is spent. The effort ratings are about who can realistically build and maintain each one, not about how capable each is - Foundry is the most capable and the least likely to be the right answer for a first agent. There is one rung inside the left column worth three minutes of the room's time, because it is the only thing on this slide most of the audience can build unaided: an agent over a single SharePoint library, made from the library itself. It grounds, it cites and it shares - and it stops dead at the first question needing a figure from another system, which is the cleanest possible setup for what gets built next. It is also worth saying plainly that these coexist. Nothing here replaces the Copilot licences already in use; the left column keeps doing individual drafting while agents take the repeatable pipeline work, in the same tenant, under the same policy." data-demo="1.3" data-role="post">
   <h2>Three products, one spectrum &mdash; and where you actually sit<span class="cue post">POST &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g64">
     <div>
@@ -837,7 +838,7 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="18" y="254" style="font-size:10.5px">Explain a formula in a holdings file</text>
 
         <text class="lb r" x="18" y="278" style="font-size:9px">THE CATCH</text>
-        <text class="ss" x="18" y="294" style="font-size:10.5px">Personal, not shared. Instructions</text>
+        <text class="ss" x="18" y="294" style="font-size:10.5px">The chat is personal; instructions</text>
         <text class="ss" x="18" y="308" style="font-size:10.5px">do not persist. It cannot call a</text>
         <text class="ss" x="18" y="322" style="font-size:10.5px">system outside Microsoft 365.</text>
 
@@ -916,6 +917,11 @@ svg{width:100%;height:auto;display:block}
       <ul>
         <li>Copilot keeps doing individual drafting. Agents take the repeatable pipeline work. Same tenant, same policy, same day.</li>
         <li>Moving right is a decision you make <b>on evidence</b> &mdash; Module 2 closes with the five signals that say it is time, and almost nobody should start there.</li>
+      </ul>
+      <h3>The rung inside the left column</h3>
+      <ul>
+        <li>An agent scoped to <b>one SharePoint library</b>, made from the library in a few clicks &mdash; named, cited and shareable, with no canvas and no environment. <b>You can build one this week;</b> it is shown for three minutes before the build.</li>
+        <li>It reads that library and nothing else: no system call, no trigger, no deck, no trace. Those four gaps are the middle column's entire job.</li>
       </ul>
       <div class="callout">Same login, same tenant, same data boundary. <b>None of this is a new vendor decision</b> &mdash; which is exactly why it fits inside your current governance.</div>
     </div>
@@ -1386,7 +1392,7 @@ svg{width:100%;height:auto;display:block}
   var links=[].slice.call(toc.querySelectorAll('a'));
 
   // demo cue layer: where each demo runs, and what is next from here
-  var DEMOS={'1.1':{t:'Drift, fabrication and the grounding fix',m:'~10 min'},'1.2':{t:'A reusable extraction prompt',m:'~12 min'},'1.3':{t:'Your first agent: Fund Research Assistant',m:'~28 min'},'1.4':{t:'Marking up your own workflow',m:'~10 min'}};
+  var DEMOS={'1.1':{t:'Drift, fabrication and the grounding fix',m:'~10 min'},'1.2':{t:'A reusable extraction prompt',m:'~12 min'},'1.3':{t:'Your first agent: Fund Research Assistant',m:'~31 min'},'1.4':{t:'Marking up your own workflow',m:'~10 min'}};
   var runAfter={};
   slides.forEach(function(s,k){ if(s.dataset.role==='pre') runAfter[s.dataset.demo]=k; });
   var demoOrder=Object.keys(runAfter).sort();

@@ -1,6 +1,7 @@
 YouTube Resources — Microsoft Copilot Studio
 Investment Consulting team | Trainer: Rajesh Gheware
 Compiled 2026-08-20. All URLs verified live on that date.
+Non-developer section added 2026-08-22; those URLs verified live on that date.
 
 Note: Copilot Studio's UI churned heavily through 2025-26. Check each video's
 recording date before pointing participants at it — older videos show a
@@ -80,6 +81,43 @@ https://www.youtube.com/watch?v=CNQwVUXjx-A
   Orchestrator Demo" — Phoebe Makes Cloud Simple. A worked orchestrator +
   child-agent build. Useful as a concrete "what does sophisticated actually
   look like" demo to show on screen.
+
+
+-- FOR THE NON-DEVELOPER MAJORITY: what you can build with no environment --
+
+Everything above assumes you will open Copilot Studio. Most of the team will not,
+and does not need to. These cover the rung below it - the surfaces you can use
+without a Power Platform environment, a connector approval or a developer. They
+match Part 3 of the reference pack.
+
+https://www.youtube.com/watch?v=eKpvBdiEEFI
+  "Create a SharePoint agent for your site" - Microsoft Community Learning.
+  Start here. First-party, so it matches the product rather than someone's
+  older recording. An agent scoped to a site or library, made from the library
+  itself: the single most useful thing a non-developer on this team can build.
+
+https://www.youtube.com/watch?v=xbAwpzvadeA
+  "Build a Copilot Agent in SharePoint in Under 8 Minutes!" - Scott Brant.
+  The fastest end-to-end version. Closest to the three-minute demo shown before
+  the Module 1 build - watch this if you want to repeat it on your own library
+  the same afternoon.
+
+https://www.youtube.com/watch?v=UaFlKD6MFvI
+  "Introduction to Agents in SharePoint: Your Getting Started Guide" -
+  Daniel Christian. The fuller pass for anyone who wants the settings rather
+  than just the happy path. Second video, not first.
+
+https://www.youtube.com/watch?v=mV7J6b0Oyuk
+  "How to Use Copilot in Excel for Data Analysis (Step-by-Step Demo)" - Gestisoft.
+  For holdings and performance workbooks. Watch it with the discipline from the
+  reference pack in mind: ask it to write the formula, not to tell you the
+  answer. The workbook computes; the model drafts.
+
+https://www.youtube.com/watch?v=l0nh1sYtY5A
+  "How to Use Copilot in Microsoft Teams Meetings | 5 Powerful Features (2026)" -
+  Mike Tholfsen. Recent, so the screens match. Relevant here for one reason:
+  a meeting recap feeding the decisions/actions/owners prompt is the shortest
+  path from a manager or committee meeting to a circulated record.
 
 
 -- CHANNELS WORTH SUBSCRIBING TO (product moves fast) --

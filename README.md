@@ -12,6 +12,7 @@
 - **Attending?** Read `presentation/pre-reads.html` first (~30 min), then open `presentation/demo-guide.html` — it has the pre-flight checklist and every demo step.
 - **Want the shape of the day?** `presentation/course-outline-copilot-studio.html`.
 - **The slides** are `presentation/module-1-foundations.html` and `module-2-build.html`. Press **N** on any slide for that slide's notes, **O** for the index.
+- **Not a developer?** `presentation/reference-pack.html` Part 3 is the part for you — what you can build on your own, without waiting for anything to be provisioned. Part 1 is ten prompts you can use today.
 
 ## Files
 
@@ -25,6 +26,7 @@
 | `presentation/module-2-build.html` | **Module 2 slide deck** — 32 slides, per-slide session notes (press N), segmented session progress. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
 | `presentation/demo-guide.html` | **Participant demo follow-along guide** — all 11 demos (4 in Module 1, 7 in Module 2), with copy-paste prompts, sample data and troubleshooting |
 | `presentation/pre-reads.html` | **Pre-read pack** sent ahead of the day — Copilot Studio primer, prompting cheat-sheet, agent anatomy, the capstone brief, and a graded video shortlist. ~30 min, 4 A4 pages |
+| `presentation/reference-pack.html` | **Reference pack** to keep afterwards — a ten-prompt consulting prompt pack (copy buttons), a capability→workflow map for choosing what to build next, and the surfaces you can use without an environment or a developer. 12 A4 pages |
 
 All five `presentation/` files are cross-linked and there is **no `.md` source of truth** for them — the HTML is the deliverable (deliberate, agreed 20 Aug 2026). Both decks print to PDF (18 and 32 pages at 1280×720).
 

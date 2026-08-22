@@ -309,13 +309,29 @@ TER direct | 0.62% | Section 9 Fees</pre>
   <div class="demo" id="d13">
     <div class="head">
       <span class="id">Demo 1.3 <small>Your first agent: the Fund Research Assistant</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~28 min</span></span>
+      <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~31 min</span></span>
     </div>
     <div class="body">
       <div class="goal"><b>What it proves:</b> the clever prompt you just wrote stops being a chat message and becomes a thing that exists &mdash; named, grounded, shareable, and the same for everyone who uses it.</div>
 
       <div class="k">You need</div>
-      <p>Copilot Studio access (Track A). The factsheet file. About 28 minutes.</p>
+      <p>Copilot Studio access (Track A). The factsheet file. About 31 minutes.</p>
+
+      <div class="k">First, the three-click version &mdash; 3 minutes</div>
+      <p>Before building anything, see what you get <em>without</em> Copilot Studio. This is the rung most of
+      the room can reach on their own, and the contrast is what makes the next 28 minutes worth sitting through.</p>
+      <ol>
+        <li>Open a SharePoint document library holding a few fund documents. Use <strong>Add an agent</strong>
+        (wording varies) from the library itself.</li>
+        <li>Name it, write one sentence describing who it is for, and save. There is no canvas and nothing to configure.</li>
+        <li>Ask it two of the test questions below, then share the link with someone.</li>
+      </ol>
+      <div class="note"><b>What to point out while it answers.</b> It works, it cites, it is shareable, and it took
+      a minute &mdash; that is a genuine result and it is the right first thing for most people to build.
+      Then ask it the third test question, the one needing a benchmark figure, and watch it fail: <b>it can only
+      read that library.</b> It cannot call the mandate system, cannot run when nobody asks, cannot produce a deck,
+      and offers no trace to read when it is wrong. Those four sentences are the reason the rest of this demo exists.
+      Participants who want this for their own libraries have it as Part&nbsp;3 of the <a href="reference-pack.html">reference pack</a>.</div>
 
       <div class="k">Steps</div>
       <ol class="steps">
@@ -674,6 +690,17 @@ long as both are shown with their sources.
 If a calculation is needed and no action provides it, say which action or data
 source is missing, and do not answer with a number.</pre>
 
+      <div class="k a">Optional &mdash; the other deterministic path (~2 min, cut this first if you are late)</div>
+      <p>The flow is not the only thing that can compute. Where the <strong>code interpreter</strong> is enabled on
+      the agent (Settings &rarr; Generative AI), attach <code>holdings.xlsx</code> to the conversation and ask for
+      the same top-five total. The agent writes code, runs it over the file, and shows you the code it ran.</p>
+      <div class="note"><b>Why show it, and why the rule does not change.</b> Consultants reasonably ask whether the
+      flow was necessary for something this small. It was not &mdash; but notice what both paths have in common and
+      the chat answer does not: <b>a figure produced by something that would produce it again tomorrow, and that you
+      can read.</b> That is the whole test. The flow wins where the number must be identical for every user and every
+      run with no file attached; the code interpreter wins for one-off analysis on a file in front of you.
+      Neither is the model doing arithmetic in its head.</div>
+
       <div class="k">Test questions</div>
       <pre>What is the combined weight of the fund's top five holdings?
 How did the fund perform against the CRISIL Hybrid 35+65 Aggressive Index over 3 years?
@@ -771,7 +798,7 @@ Rules:
       </ul>
 
       <div class="tip">
-        <strong>Stronger option if you have AI Builder credits:</strong> build this as a Prompt with a defined output schema rather than as Instructions. The shape is then enforced by the platform instead of requested by a sentence. Same idea, harder guarantee.
+        <strong>Stronger option if you have AI Builder credits:</strong> build this as a Prompt with a defined output schema rather than as Instructions. The shape is then enforced by the platform instead of requested by a sentence. Same idea, harder guarantee. <strong>The wider point is ownership, not credits.</strong> A schema built this way is a named, versioned asset with an owner &mdash; the same extraction contract every agent and every colleague uses, changed in one place. The equivalent sentence pasted into six agents' Instructions is six things that will quietly diverge. This is what &ldquo;turn a prompt into a team asset&rdquo; means in the product rather than in principle.
       </div>
     </div>
   </div>
@@ -1180,7 +1207,7 @@ Note: figures are unaudited and subject to revision.</pre>
       <tr><td>A lookup column will not accept anything you give it</td><td>Lookups want the OData form, not a name or a GUID on its own: <code>/contacts(&lt;guid&gt;)</code>. Get the GUID with a List rows step filtered on <code>emailaddress1 eq '&lt;System.User.Email&gt;'</code>, coerce it to text, then build the string. <code>System.User.Email</code> is also the cleanest hook for &ldquo;who is asking&rdquo; &mdash; the identity question from session 2.2, answered concretely.</td></tr>
     </tbody>
   </table>
-  <p style="margin-top:12px">Related material: <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="course-outline-copilot-studio.html">the full course outline</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a> &middot; <a href="module-2-build.html">Module 2 slides</a>.</p>
+  <p style="margin-top:12px">Related material: <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="course-outline-copilot-studio.html">the full course outline</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a> &middot; <a href="module-2-build.html">Module 2 slides</a> &middot; <a href="reference-pack.html">the reference pack</a>.</p>
 </section>
 
 </div>

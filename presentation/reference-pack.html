@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference Pack — AI Agents for Investment Consulting</title>
+<style>
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.4px;line-height:1.55;margin:8px 0 12px;white-space:pre-wrap}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.demo{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.demo>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.demo>.head .id{font-weight:700;font-size:1.02em}
+.demo>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.demo>.head .badges{display:flex;gap:6px;flex-wrap:wrap}
+.demo>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.a{background:#059669;color:#fff}
+.b.bb{background:#1d4ed8;color:#fff}
+.b.c{background:#78716c;color:#fff}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}.k.a{color:#b45309}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.toc{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:14px 18px}
+.toc ol{margin:0;padding-left:20px}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:9.4px}
+  pre .cp{display:none}
+  .demo,.warn,.note,.tip,.amber,table{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .demo{page-break-inside:avoid}
+  .pb{page-break-before:always}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>Reference Pack</h1>
+  <div class="tagline">AI Agents for Investment Consulting &mdash; Microsoft Copilot Studio</div>
+  <div class="meta">
+    <span class="d">Take away from 27 August 2026</span> |
+    <span>Three parts</span> |
+    <span>Part 3 needs no environment</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="note">
+  <b>What this is, and how it differs from everything else you were given.</b> The slides and the
+  <a href="demo-guide.html">demo guide</a> are a narrative &mdash; they run in order and they build one agent.
+  This pack is the <b>lookup version</b>: things to copy, a map for choosing what to build next, and the surfaces
+  you can use on Monday without waiting for anything to be provisioned.
+  <b>Part 1 and Part 3 are for everyone. Part 2 is for whoever decides what gets built.</b>
+</div>
+
+<section id="toc">
+  <h2>What is in the pack</h2>
+  <div class="toc">
+    <ol>
+      <li><a href="#p1">The consulting prompt pack &mdash; ten prompts, and the rules they obey</a></li>
+      <li><a href="#p2">Capability map &mdash; which surface serves which piece of your work</a></li>
+      <li><a href="#p3">What you can build without a developer &mdash; the rung below Copilot Studio</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ PART 1 ============================ -->
+<section id="p1">
+  <h2>Part 1 &mdash; The consulting prompt pack</h2>
+
+  <p>Ten prompts that do work this team actually does. They are written against the
+  <strong>Northwind Multi-Asset Growth Fund</strong> material used all day, so you can run any of them
+  immediately and see the expected answer; swapping in your own document is a find-and-replace.</p>
+
+  <div class="amber">
+    <b>These are meant to become team assets, not personal snippets.</b> A prompt that lives in one person's
+    chat history is worth one person's time. The same prompt, owned, named, versioned and pasted by twelve people,
+    is worth twelve &mdash; and it is the only version anyone can improve. Put them somewhere shared before you
+    start editing them. <b>Where you have AI Builder available, a prompt with a defined output schema is the
+    governed form of the same thing</b> &mdash; the shape is then enforced by the platform rather than requested
+    by a sentence.
+  </div>
+
+  <h3>The five rules every prompt below obeys</h3>
+  <table>
+    <thead><tr><th style="width:26%">Rule</th><th>Why, in this business</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Name the source</strong></td><td>Ask for a source column or a citation on every figure. An unsourced number is not evidence, however confident it sounds.</td></tr>
+      <tr><td><strong>Give it permission to fail</strong></td><td>Without an explicit refusal line, the model fills a gap rather than reporting one. A fabricated tracking error looks exactly like a real one.</td></tr>
+      <tr><td><strong>Decompose</strong></td><td>Extract, then check, then write. One prompt that does all three does none of them reliably.</td></tr>
+      <tr><td><strong>Keep it out of the arithmetic that matters</strong></td><td>It may state the <em>difference</em> between two figures it has retrieved and shown you with their sources. <strong>Totals, averages, weighted figures and currency conversion must come from a system</strong> &mdash; a workbook, a query, an action.</td></tr>
+      <tr><td><strong>Fix the output shape</strong></td><td>A table with named columns can be checked, pasted and automated. A paragraph can only be read.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <b>Before you paste anything real.</b> Everything in this pack is written against synthetic training data.
+    Whatever you run these in, apply the rule you already apply to any other tool: <b>no client, fund, member or
+    scheme data goes anywhere it is not approved to go</b>, and never into a trial or personal tenant. If you are
+    unsure whether a surface is approved, that is a question for your information-protection owner and it is worth
+    asking before the first useful answer, not after.
+  </div>
+
+  <!-- ---------------- 1 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">1 &mdash; Factsheet &rarr; structured record<small>the spine of everything else</small></span>
+      <span class="badges"><span class="b bb">EXTRACTION</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> you need the same fields off every factsheet, every quarter, in a shape the next step can rely on.</div>
+      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
+
+      <div class="k">Prompt B &mdash; grounded</div>
+      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
+For each figure, quote the section of the document it came from.
+If a figure is not present in the document, reply exactly: not stated.</pre>
+
+      <div class="k">Prompt C &mdash; the refusal test</div>
+      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
+and its portfolio turnover ratio.
+If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
+        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
+        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Prompt A returned "I don't know".</strong> Good &mdash; some configurations are more cautious. Try it without the fund name: <em>"What was the 3-year return of the multi-asset fund we discussed?"</em></li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.3 makes permanent.</li>
+        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.3. That single sentence removes most fabrication.</p>
+    </div>
+  </div>
+
+  <!-- D1.2 -->
+  <div class="demo" id="d12">
+    <div class="head">
+      <span class="id">Demo 1.2 <small>A reusable extraction prompt</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
+
+      <div class="k">You need</div>
+      <p>The same chat interface, with <code>sample-fund-factsheet.pdf</code> attached.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
+        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
+        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
+        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
+        <li><strong>Break it deliberately.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more. Watch the three absent fields fill themselves in.</li>
+      </ol>
+
+      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
+      <pre>Summarise the key points of this fund factsheet.</pre>
+
+      <div class="k">The structured prompt</div>
+      <pre>You are an investment consultant preparing a quarterly fund review for an
+institutional client - a long-horizon retirement portfolio.
+
+Use only the attached Northwind factsheet (data as of 30 June 2026).
+If a value is not present in the document, write: not stated.
+Do not estimate, infer or calculate any figure.
+
+Extract exactly these fields:
+  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
+  inception date, TER regular, TER direct, exit load,
+  return 1yr, return 3yr, return 5yr, return since inception,
+  benchmark 1yr, benchmark 3yr, benchmark 5yr,
+  equity allocation, debt allocation, gold allocation, cash allocation,
+  top holding name, top holding weight,
+  tracking error, portfolio turnover, NAV per unit
+
+Return a markdown table with exactly three columns: field | value | source section.
+One row per field, in the order listed above.
+
+Example row:
+TER direct | 0.62% | Section 9 Fees</pre>
+      <p><strong>What good looks like:</strong> 26 rows in your order, stable across runs, and the last three
+      &mdash; tracking error, portfolio turnover, NAV per unit &mdash; reading <code>not stated</code>. Those three
+      are absent from the factsheet on purpose. If they come back with numbers, your refusal line is not working
+      and nothing downstream of it can be trusted either.</p>
+    </div>
+  </div>
+
+  <!-- ---------------- 2 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">2 &mdash; Manager update &rarr; the house question list<small>manager research</small></span>
+      <span class="badges"><span class="b a">EVERY WEEK</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> a manager commentary lands and you need the four things you always need, not a summary of what the manager chose to emphasise.</div>
+      <pre>You are an investment consultant reviewing a manager commentary.
+Source: the attached Northwind manager commentary, July 2026.
+
+Answer only from the attached document. Where the document does not
+address a question, answer: not addressed in this update. Do not infer
+an answer from what a manager would usually say.
+
+Answer these four questions, each in no more than three sentences,
+each followed by the exact sentence from the document you relied on:
+
+1. What changed in positioning this period, and what reason is given?
+2. What forward-looking statement or constraint does the manager commit to?
+3. What does the manager NOT mention that a quarterly review would expect?
+4. Which statements are fact as at the reporting date, and which are opinion
+   about the future? Label each claim you list as FACT or VIEW.
+
+Then list any figure in the document that would need checking against an
+independent source before it is quoted to a client.</pre>
+      <p><strong>What good looks like:</strong> question 2 should surface the manager's own words on the gold
+      sleeve &mdash; held as a drawdown hedge, with no intention of exceeding 7%. That is a commitment you can
+      monitor against next quarter. Question 3 is the one that earns the prompt: it makes the silence visible.</p>
+      <div class="tip"><b>The habit worth copying:</b> the FACT / VIEW split in question 4. A commentary blends
+      the two in every paragraph, and the distinction is exactly what a trustee needs and what a summary destroys.</div>
+    </div>
+  </div>
+
+  <!-- ---------------- 3 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">3 &mdash; Meeting notes &rarr; decisions, actions, owners<small>committee and manager meetings</small></span>
+      <span class="badges"><span class="b a">EVERY WEEK</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> you have a transcript or your own notes and the deliverable is a record someone will be held to.</div>
+      <pre>You are minuting an investment committee meeting.
+Source: the notes/transcript below. Use nothing else.
+
+Produce three sections, in this order:
+
+DECISIONS - only where the notes record that something was agreed, rejected
+or deferred. Each row: decision | who agreed it | the wording in the notes
+that shows agreement. If agreement is implied rather than recorded, put it
+under DISCUSSED instead.
+
+ACTIONS - each row: action | named owner | due date. If the notes do not
+name an owner or a date, write: owner not recorded / date not recorded.
+Never assign an owner yourself.
+
+DISCUSSED, NOT DECIDED - topics raised with no recorded outcome.
+
+Do not summarise the discussion. Do not add recommendations. Do not soften
+or reword a disagreement.
+
+NOTES:
+[paste]</pre>
+      <p><strong>The failure this prevents:</strong> the model's instinct is to produce a tidy narrative in which
+      everything sounds agreed. <em>Owner not recorded</em> is the most valuable line it can give you, because
+      that is the action that will not happen.</p>
+    </div>
+  </div>
+
+  <!-- ---------------- 4 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">4 &mdash; Holdings extract &rarr; data-quality check<small>before anything is calculated</small></span>
+      <span class="badges"><span class="b t">READ THE CAVEAT</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> a holdings or performance file arrives and you want the obvious problems found before the numbers get used.</div>
+      <pre>You are checking a holdings extract for data-quality problems before it is
+used in client reporting. Source: the attached workbook only.
+
+Do NOT total, average or recalculate anything. You are looking for
+problems that are visible on the face of the data.
+
+Report, as a table of issue | rows affected | why it matters:
+- rows with a missing or blank identifier, name, weight or date
+- weights that are negative, zero, or greater than 100
+- identifiers that repeat
+- as-at dates that differ from the file's stated reporting date
+- any value whose format differs from the rest of its column
+  (a weight as text, a date as a number, a stray currency symbol)
+- any row whose weight is an order of magnitude away from its neighbours
+
+Then add one line: "Arithmetic checks not performed - totals, weighted
+averages and any cross-footing must be verified in the workbook."
+
+If you find no issues, say so explicitly. Do not invent an issue to be useful.</pre>
+      <div class="amber"><b>Why the prompt refuses to add up the weights.</b> It would be trivially easy to ask,
+      and the answer would look right most of the time &mdash; which is the problem. A total that reaches a client
+      pack must come from something that would produce the same number again tomorrow. This prompt finds the
+      broken rows; the workbook does the arithmetic. That division is the whole rule, applied to the one task
+      where it is most tempting to break it.</div>
+    </div>
+  </div>
+
+  <!-- ---------------- 5 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">5 &mdash; Fee schedule &rarr; like-for-like, with the basis stated<small>fee and RFP benchmarking</small></span>
+      <span class="badges"><span class="b bb">AD HOC</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> two fee proposals are quoted on different bases and the comparison has to be defensible.</div>
+      <pre>You are comparing investment management fee proposals for an institutional
+mandate. Sources: the documents provided. Use nothing else.
+
+For each proposal, extract into a table: manager | headline fee | the basis
+it is quoted on (percentage of what, and per what period) | what is stated
+to be included | what is stated to be excluded | minimum or tiering | the
+exact clause you took each from.
+
+Then, in prose, list every reason these figures are NOT directly comparable:
+different bases, different inclusions, tiering thresholds, performance fees,
+transaction costs, anything quoted net where another is gross.
+
+Do not convert between bases. Do not compute an effective fee, a blended
+rate, or a cost in currency on any asset size. Where a comparison requires
+arithmetic, state precisely which calculation is needed and on what inputs,
+so it can be done in the fee model.
+
+Where two figures are already quoted on the same basis, you may state the
+difference between them, showing both figures and their sources.</pre>
+      <p><strong>Worked against the anchor:</strong> Northwind quotes 1.18% Regular and 0.62% Direct, same basis,
+      both from Section 9 &mdash; so <em>0.56 percentage points</em> is a legitimate answer with both figures shown.
+      A cost in rupees on a given AUM is not; that is a calculation, and it belongs in the model.</p>
+    </div>
+  </div>
+
+  <!-- ---------------- 6 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">6 &mdash; Position vs mandate &rarr; flag, never opine<small>compliance monitoring</small></span>
+      <span class="badges"><span class="b t">ADVICE BOUNDARY</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> you are checking a portfolio against an investment policy or mandate document.</div>
+      <pre>You are checking a portfolio's stated allocations against a client mandate.
+Sources: the fund factsheet and the mandate record provided. Use nothing else.
+
+For each limit in the mandate, produce a row:
+limit | mandate value | portfolio value | source of each | status
+
+Status must be exactly one of: WITHIN, AT LIMIT, BREACH, or CANNOT DETERMINE.
+Use CANNOT DETERMINE whenever the portfolio document does not state the
+figure the limit is expressed in - do not substitute a similar figure.
+
+You are reporting, not advising. Do not state whether a breach is acceptable,
+whether it should be remedied, whether the fund is suitable for this client,
+or what action anyone should take. If asked for any of those, reply:
+"That is an advice judgement for the consultant of record."</pre>
+      <p><strong>Worked against the anchor:</strong> the mandate caps equity at 70%; the factsheet reports 68%
+      equity. <em>WITHIN</em>, with both figures and both sources shown. Minimum credit quality AA is
+      <em>CANNOT DETERMINE</em> &mdash; the factsheet says the fund avoids unrated credit and holds high-grade
+      bonds, which is not the same statement as a rating floor, and the prompt is built to notice the difference.</p>
+      <div class="note">The closing paragraph is the same boundary the workshop builds as a <b>topic</b> in
+      demo 1.3 rather than a sentence. A sentence in a prompt asks for the refusal and rewords it every time;
+      a topic makes it fixed wording that a compliance reviewer can approve once. If this prompt becomes an
+      agent, that is the first thing to promote.</div>
+    </div>
+  </div>
+
+  <!-- ---------------- 7 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">7 &mdash; Commentary &rarr; house tone, figures frozen<small>client reporting</small></span>
+      <span class="badges"><span class="b bb">EVERY QUARTER</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> a draft says the right things in the wrong voice, and the numbers must survive the rewrite untouched.</div>
+      <pre>Rewrite the passage below in the house style described, for a trustee
+audience with no assumed technical vocabulary.
+
+Absolute constraints:
+- Do not change, round, restate or move any number, date, percentage,
+  fund name, manager name or defined term.
+- Do not add a figure that is not in the source.
+- Do not add a forward-looking statement, a recommendation, or a
+  reassurance that is not in the source.
+- If a sentence cannot be simplified without changing its meaning,
+  leave it exactly as it is and list it under UNCHANGED at the end.
+
+House style: short sentences; active voice; no jargon without a
+plain-English gloss on first use; no superlatives; state uncertainty
+plainly rather than hedging it away.
+
+After the rewrite, list every change you made under one of:
+SIMPLIFIED / SPLIT / GLOSSED / UNCHANGED.
+
+PASSAGE:
+[paste]</pre>
+      <p><strong>The failure this prevents:</strong> unprompted rewriting quietly rounds 15.6% to "around 16%",
+      upgrades "we have no current intention" to "will not", and adds a comforting clause nobody wrote. The
+      change log at the end is what makes the rewrite reviewable in seconds instead of re-read line by line.</p>
+    </div>
+  </div>
+
+  <!-- ---------------- 8 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">8 &mdash; RFP or DDQ question &rarr; drafted answer, cited<small>new business and due diligence</small></span>
+      <span class="badges"><span class="b bb">AD HOC</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> a questionnaire asks something the firm has answered before, and the risk is an answer that is fluent and unapproved.</div>
+      <pre>You are drafting a response to a due-diligence questionnaire.
+Sources: the previous approved responses provided. Use nothing else.
+
+For the question below:
+1. Quote the closest previously approved answer, in full, with the document
+   and date it came from.
+2. State what in the new question is NOT covered by that answer.
+3. Draft a response that reuses the approved wording wherever it applies and
+   marks every new sentence with [NEW - NEEDS APPROVAL].
+4. If no previous answer is close enough to reuse, say so and stop. Do not
+   compose one from general knowledge of how firms answer this.
+
+Never state a fact about the firm - headcount, assets, tenure, process,
+credentials, coverage - that does not appear verbatim in a source you quote.
+
+QUESTION:
+[paste]</pre>
+      <p><strong>Why step 4 matters more than the draft:</strong> the genuinely dangerous output here is a
+      confident paragraph about your own firm assembled from nothing. Forcing a stop is worth more than forcing
+      a better draft.</p>
+    </div>
+  </div>
+
+  <!-- ---------------- 9 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">9 &mdash; This quarter vs last quarter &rarr; what actually changed<small>manager monitoring</small></span>
+      <span class="badges"><span class="b a">EVERY QUARTER</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> two versions of the same document exist and reading both in full is how the change gets missed.</div>
+      <pre>You are comparing two versions of the same fund document.
+Sources: DOCUMENT A (earlier) and DOCUMENT B (later). Use nothing else.
+
+Produce one table: item | value in A | value in B | changed? | source in each.
+Cover every field that appears in either document, including fields present
+in one and absent from the other - mark those ABSENT IN A or ABSENT IN B.
+
+Do not calculate the size or direction of any change as a derived figure.
+Show both values and let the reader see it. Where both values are present
+and on the same basis, you may state the arithmetic difference, showing both.
+
+Then, separately and in prose, list:
+- changes to people, mandate, strategy, benchmark, fees or share class
+- any commitment or constraint stated in one document and absent in the other
+- wording that has softened or hardened on the same topic, quoting both
+
+Rank that prose list by what would matter most to a trustee. Do not
+recommend any action.</pre>
+      <p><strong>Why this one repays the effort:</strong> a departed manager, a quietly widened band, a benchmark
+      change and a dropped commitment are all the same problem &mdash; a difference between two documents that
+      nobody had time to read side by side. This is also the prompt that most obviously wants to become an agent
+      on a schedule, which is exactly the argument in Part 2.</p>
+    </div>
+  </div>
+
+  <!-- ---------------- 10 ---------------- -->
+  <div class="demo">
+    <div class="head"><span class="id">10 &mdash; The refusal test<small>run this before trusting anything above</small></span>
+      <span class="badges"><span class="b t">30 SECONDS</span></span></div>
+    <div class="body">
+      <div class="goal"><b>Use when</b> you have a new prompt, a new agent, a new document set, or a colleague's setup you are about to rely on.</div>
+      <pre>Using only the attached document, answer these three questions.
+If the document does not state a value, reply exactly: not stated.
+
+1. What is the fund's tracking error?
+2. What is the portfolio turnover?
+3. What is the NAV per unit?
+
+Then answer this fourth question:
+4. What is the fund's 3-year annualised return, and which section is it in?</pre>
+      <p><strong>Pass:</strong> three <code>not stated</code> replies, then <strong>15.6%</strong> cited to the
+      performance section. <strong>Fail:</strong> any of the first three coming back with a number &mdash; and
+      they will look entirely plausible, differ on every run, and be wrong.</p>
+      <div class="tip"><b>Keep this one to hand.</b> It takes half a minute, it works on any document once you
+      swap in three fields you know are absent, and it is the fastest way to find out whether a setup is grounded
+      or performing. Run it on your own agents before anyone else does.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PART 2 ============================ -->
+<section id="p2" class="pb">
+  <h2>Part 2 &mdash; Capability map: which surface serves which piece of your work</h2>
+
+  <p>Eight recurring pieces of consulting work, and what each one actually needs. Read the
+  <strong>Must reach</strong> column first &mdash; it decides everything to its right. Work that stays inside
+  documents can be done today by anyone; work that has to touch a system needs an environment first, and that
+  request has a queue in front of it.</p>
+
+  <table>
+    <thead><tr>
+      <th style="width:15%">The work</th><th style="width:14%">What starts it</th><th style="width:19%">Must reach</th>
+      <th style="width:20%">Surface it needs</th><th style="width:16%">Realistic first build?</th><th style="width:16%">On the day</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>The policy desk</strong></td><td>Anyone asks, any hour</td>
+        <td>Internal documents only</td>
+        <td><strong>SharePoint agent</strong> or a Copilot Studio agent with one knowledge source</td>
+        <td><strong>Yes &mdash; start here.</strong> No system integration, no environment, low blast radius</td>
+        <td>M1 use-case gallery</td>
+      </tr>
+      <tr>
+        <td><strong>Manager research summaries</strong></td><td>A document arrives</td>
+        <td>The update, the house question list, past summaries</td>
+        <td>Documents + a fixed prompt; an agent once the question list is settled</td>
+        <td><strong>Yes</strong> &mdash; the strongest second candidate, same shape as the capstone at a fraction of the risk</td>
+        <td>Prompt 2 &middot; demo 1.2</td>
+      </tr>
+      <tr>
+        <td><strong>Meeting notes &rarr; actions</strong></td><td>A meeting ends</td>
+        <td>The transcript or notes</td>
+        <td>Meeting recap where available, plus prompt 3</td>
+        <td><strong>Yes, today</strong> &mdash; nothing to provision</td>
+        <td>Prompt 3 &middot; Part 3</td>
+      </tr>
+      <tr>
+        <td><strong>Quarterly review pack</strong></td><td>Quarter end, or a factsheet lands</td>
+        <td>Factsheets, mandate system, benchmarks, a workbook, the deck generator</td>
+        <td>Copilot Studio: knowledge + actions + flows + approval + trigger</td>
+        <td>Not first &mdash; but it is the one worth building, and it is the capstone</td>
+        <td><strong>Built live &mdash; all of M2</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Mandate / IPS compliance check</strong></td><td>A consultant asks, or holdings refresh</td>
+        <td>Portfolio data, the mandate record, allocation limits</td>
+        <td>Copilot Studio + an action to the mandate system + a fixed refusal topic</td>
+        <td>Second wave &mdash; needs the mandate system reachable</td>
+        <td>Prompt 6 &middot; M1 gallery &middot; demo 2.2</td>
+      </tr>
+      <tr>
+        <td><strong>Manager monitoring</strong></td><td>An update lands in an inbox</td>
+        <td>The new document, the previous one, a place to file the difference</td>
+        <td>Copilot Studio + an <strong>email or recurrence trigger</strong></td>
+        <td>Second wave &mdash; the trigger is one dropdown, the filing is the work</td>
+        <td>Prompt 9 &middot; demo 2.7</td>
+      </tr>
+      <tr>
+        <td><strong>Fee &amp; RFP benchmarking</strong></td><td>A schedule is received</td>
+        <td>Your benchmark table, past mandates</td>
+        <td>Copilot Studio + Excel or SQL action; the arithmetic stays in the model</td>
+        <td>Good data, low frequency &mdash; a fast build with a slower payback</td>
+        <td>Prompt 5 &middot; demo 2.3</td>
+      </tr>
+      <tr>
+        <td><strong>Client query triage</strong></td><td>A question hits a shared inbox</td>
+        <td>Past answers, policy documents, the client record</td>
+        <td>Copilot Studio + email trigger + escalation topic</td>
+        <td>Only once the answers live somewhere &mdash; high volume, but it needs a corpus first</td>
+        <td>M1 use-case gallery</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>How to read the map</h3>
+  <div class="grid2">
+    <div>
+      <div class="k g">The three that need nothing</div>
+      <p>Policy desk, manager research summaries and meeting notes need no environment, no connector approval
+      and no developer. They are worth starting this month precisely because they cannot be blocked. Part 3 is
+      how you start them.</p>
+    </div>
+    <div>
+      <div class="k a">The five that need a conversation first</div>
+      <p>Everything that reaches a system waits on the same four things: an environment your team owns, the
+      connectors approved and classified, an identity the agent authenticates as, and a named owner. The
+      <a href="demo-guide.html">demo guide</a> sets out those conversations in the order to have them.</p>
+    </div>
+  </div>
+
+  <h3>Choosing between two candidates</h3>
+  <p>When two pieces of work look equally attractive, four questions separate them &mdash; and they are worth
+  answering in writing, because the answers are what you will be asked for:</p>
+  <ul>
+    <li><strong>How often does it run?</strong> Something quarterly has twelve chances a year to repay the build. Something daily has hundreds.</li>
+    <li><strong>What does a wrong answer cost?</strong> An internal summary and a client-issued figure are not the same risk, and should not get the same amount of review.</li>
+    <li><strong>Is the data ready?</strong> If the source documents are scattered, inconsistent or unlabelled, that is the project &mdash; the agent is the easy part.</li>
+    <li><strong>Who owns it in six months?</strong> An agent nobody owns stops being maintained within a quarter. Name the person before you build, not after.</li>
+  </ul>
+
+  <div class="amber">
+    <b>The honest answer for most teams is the least glamorous row in the table.</b> The policy desk impresses
+    nobody in a demo and it is still the right first build: it proves grounding and citation, it exposes exactly
+    how good your documents are, and when it fails nobody is harmed. Do that one, learn what your document estate
+    is actually like, and the second agent costs a fraction of the first.
+  </div>
+</section>
+
+<!-- ============================ PART 3 ============================ -->
+<section id="p3" class="pb">
+  <h2>Part 3 &mdash; What you can build without a developer</h2>
+
+  <p>Most of the room is not going to build the capstone, and does not need to. There is a rung below Copilot
+  Studio: surfaces where <em>you</em> can point something at a set of documents and share it, with no environment,
+  no connector approval and nothing provisioned. This part is the map of that rung &mdash; what each surface does,
+  the consulting job it fits, and precisely where it stops.</p>
+
+  <div class="note">
+    <b>Availability varies, and that is a question rather than a blocker.</b> Which of these you can open depends
+    on what is switched on for you. Try them; where something does not open, that is useful information and worth
+    reporting rather than working around. Nothing in this part asks you to procure anything.
+  </div>
+
+  <table>
+    <thead><tr>
+      <th style="width:18%">Surface</th><th style="width:26%">What it is</th>
+      <th style="width:28%">The consulting job it does</th><th style="width:28%">Where it stops</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Agent over a document library</strong></td>
+        <td>An agent scoped to a SharePoint site or library, created from the library itself in a few clicks. You name it, describe what it is for, and share the link.</td>
+        <td><strong>The fastest real win available to you.</strong> Point it at the manager research library, the policy folder or the templates library and ask it the questions people currently ask a colleague.</td>
+        <td>It reads documents. It cannot call a system, cannot run when nobody asks, and knows only what is in that library &mdash; so its quality is your filing.</td>
+      </tr>
+      <tr>
+        <td><strong>Lightweight agent builder</strong></td>
+        <td>Describe an agent in plain English, give it instructions and a few sources, share it with colleagues. A declarative agent, no canvas.</td>
+        <td>Turning one of the Part 1 prompts into something the team uses rather than re-pastes &mdash; a fixed role, a fixed refusal line, the same behaviour for everyone.</td>
+        <td>No actions to your systems, no triggers, limited control over orchestration. When you need any of those, you have found the reason to move to Copilot Studio.</td>
+      </tr>
+      <tr>
+        <td><strong>Copilot in Excel</strong></td>
+        <td>Chat against a workbook: explain a column, find outliers, draft a formula, build a chart.</td>
+        <td>First-pass interrogation of a holdings or performance extract, and drafting the formula you were going to look up anyway.</td>
+        <td>Ask it to <em>write the formula</em>, not to tell you the answer. The workbook computes; the model drafts. Prompt 4 is the disciplined version of this.</td>
+      </tr>
+      <tr>
+        <td><strong>Copilot in Word</strong></td>
+        <td>Draft from a prompt, from a template, or from documents you reference; rewrite and adjust tone in place.</td>
+        <td>The first draft of a review paper or client note from a template plus last quarter's version &mdash; the blank-page half of the work, not the judgement half.</td>
+        <td>It has no idea which claims need approval. Prompt 7's constraint list is what keeps a rewrite from quietly changing a number.</td>
+      </tr>
+      <tr>
+        <td><strong>Meeting recap in Teams</strong></td>
+        <td>An automatic recap of a recorded meeting: notes, mentions, follow-ups you can query afterwards.</td>
+        <td>Manager and committee meetings &mdash; feed the recap into prompt 3 and you have decisions, actions and owners in a form you can circulate.</td>
+        <td>It records what was said, not what was agreed. Recording has its own permission and etiquette questions &mdash; settle those before, not after.</td>
+      </tr>
+      <tr>
+        <td><strong>Shared pages</strong></td>
+        <td>A collaborative page holding a conversation's output, editable and shareable with colleagues.</td>
+        <td>Where the output of prompt 2 or prompt 9 goes so that two people can work on it, instead of it living in one person's chat history.</td>
+        <td>It is a document, not a process. Nothing runs, nothing is versioned as an asset, nothing happens when a file arrives.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <b>If you would rather watch someone do it first.</b> Three links, verified live on 22&nbsp;Aug&nbsp;2026, from the
+    curated list circulated with this pack:
+    <a href="https://www.youtube.com/watch?v=eKpvBdiEEFI">Create a SharePoint agent for your site</a> (first-party, start here)
+    &middot; <a href="https://www.youtube.com/watch?v=xbAwpzvadeA">Build a Copilot Agent in SharePoint in Under 8 Minutes</a>
+    (closest to what was shown on the day)
+    &middot; <a href="https://www.youtube.com/watch?v=mV7J6b0Oyuk">Copilot in Excel for data analysis</a>
+    (watch it with prompt&nbsp;4's discipline in mind &mdash; ask for the formula, not the answer).
+  </div>
+
+  <h3>Your first week, concretely</h3>
+  <ol class="steps">
+    <li><strong>Pick one library you already trust.</strong> Policy documents, process notes and templates are ideal; anything client-specific is not, for a first attempt.</li>
+    <li><strong>Create an agent over it</strong> and give it a one-paragraph description of who it is for and what it must never do. Borrow the refusal wording from prompt 6.</li>
+    <li><strong>Run the refusal test</strong> (prompt 10, with three fields you know are absent from that library). If it invents, the fix is the description, not the documents.</li>
+    <li><strong>Ask it the five questions you are actually asked</strong> &mdash; the ones that interrupt you most often. Not the impressive questions.</li>
+    <li><strong>Write down what it got wrong and why.</strong> Almost always one of: the document is not there, the document is there but out of date, or two documents disagree.</li>
+    <li><strong>Share it with two colleagues</strong> and watch where their questions differ from yours. That gap is the description's next revision.</li>
+  </ol>
+
+  <div class="amber">
+    <b>That list in step 5 is worth more than the agent.</b> "The document is not there", "it is there but stale"
+    and "two of them disagree" are not AI problems &mdash; they are the reasons the agent underperforms and the
+    reasons a person does too. Bring that list, and the workflow map you drew in the morning, to the environment
+    conversation. <b>"We want to remove four steps from the quarterly review, here is the map and here is what it
+    needs"</b> lands very differently from <b>"we would like to try Copilot Studio"</b>.
+  </div>
+
+  <h3>The ceiling of this whole part &mdash; and it arrives quickly</h3>
+  <p>Everything on this rung shares four limits, and you will meet all four within a month:</p>
+  <div class="grid2">
+    <div>
+      <ul>
+        <li><strong>It only reads documents.</strong> The moment an answer needs a figure from the mandate system or a benchmark table, you are out of scope.</li>
+        <li><strong>Nothing happens unless a person asks.</strong> There is no "when a factsheet arrives", so the work still starts with someone remembering.</li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><strong>It produces an answer, not an artefact.</strong> No deck, no record written back, no approval raised.</li>
+        <li><strong>It is hard to hold to a standard.</strong> No trace to read when it is wrong, and no test set to prove a change helped.</li>
+      </ul>
+    </div>
+  </div>
+  <p>Those four sentences are the argument for Copilot Studio, and they are much more persuasive after you have
+  hit them yourself than they are on a slide. <strong>Go and hit them.</strong> Then Part 2 tells you which piece
+  of work is worth the environment request, and the <a href="module-2-build.html">Module 2 slides</a> and
+  <a href="demo-guide.html">demo guide</a> show what gets built once you have one.</p>
+</section>
+
+<section id="rel">
+  <p style="margin-top:12px">Related material: <a href="course-outline-copilot-studio.html">the full course outline</a>
+  &middot; <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a>
+  &middot; <a href="module-2-build.html">Module 2 slides</a> &middot; <a href="demo-guide.html">the demo follow-along guide</a>.</p>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI |
+  <a href="https://devops.gheware.com">devops.gheware.com</a> |
+  Trainer: Rajesh Gheware |
+  Reference Pack v1.0
+</footer>
+
+<script>
+document.querySelectorAll('pre').forEach(function(pre){
+  var text=pre.innerText;
+  var b=document.createElement('button');
+  b.className='cp';b.type='button';b.textContent='Copy';
+  b.onclick=function(){
+    navigator.clipboard.writeText(text).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done');},1400);
+    });
+  };
+  pre.appendChild(b);
+});
+</script>
+</body>
+</html>
