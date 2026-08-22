@@ -21,12 +21,12 @@
 | `resources.txt` | Curated Copilot Studio **YouTube resource list**, graded simple → advanced; candidate pre-read material |
 | `demo-assets/` | Every synthetic asset the demos use — see the table below |
 | `presentation/course-outline-copilot-studio.html` | **Client-facing course outline** — demo-only, 27 Aug scope. Prints to 5 A4 pages; carries a requirements-coverage table |
-| `presentation/module-1-foundations.html` | **Module 1 slide deck** — 20 slides, per-slide session notes (press N), keyboard/index navigation, hand-authored SVG diagrams. Self-contained, 1280×720 scaled stage |
-| `presentation/module-2-build.html` | **Module 2 slide deck** — 30 slides, per-slide session notes (press N), segmented session progress. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
+| `presentation/module-1-foundations.html` | **Module 1 slide deck** — 18 slides, per-slide session notes (press N), keyboard/index navigation, hand-authored SVG diagrams. Self-contained, 1280×720 scaled stage |
+| `presentation/module-2-build.html` | **Module 2 slide deck** — 32 slides, per-slide session notes (press N), segmented session progress. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
 | `presentation/demo-guide.html` | **Participant demo follow-along guide** — all 11 demos (4 in Module 1, 7 in Module 2), with copy-paste prompts, sample data and troubleshooting |
 | `presentation/pre-reads.html` | **Pre-read pack** sent ahead of the day — Copilot Studio primer, prompting cheat-sheet, agent anatomy, the capstone brief, and a graded video shortlist. ~30 min, 4 A4 pages |
 
-All five `presentation/` files are cross-linked and there is **no `.md` source of truth** for them — the HTML is the deliverable (deliberate, agreed 20 Aug 2026). Both decks print to PDF (20 and 30 pages at 1280×720).
+All five `presentation/` files are cross-linked and there is **no `.md` source of truth** for them — the HTML is the deliverable (deliberate, agreed 20 Aug 2026). Both decks print to PDF (18 and 32 pages at 1280×720).
 
 ## Demo assets
 
