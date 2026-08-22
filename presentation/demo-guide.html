@@ -171,7 +171,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <p>Do this the day before, not on the morning. If any step fails, you are simply on Track B or C &mdash; note which step failed and tell us at the start.</p>
   <ul class="chk">
     <li><strong>Sign in</strong> to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a>. Note what you see: an agent list, a trial offer, or a block.</li>
-    <li><strong>Download the demo assets</strong> &mdash; the <code>demo-assets/</code> folder circulated with this guide. It contains <code>sample-fund-factsheet.pdf</code> (plus <code>.html</code> and <code>.txt</code> versions of the same document), both spreadsheets, both manager updates and the two JSON files. <strong>Nothing has to be typed out by hand.</strong></li>
+    <li><strong>Download the demo assets</strong> &mdash; the <code>demo-assets/</code> folder circulated with this guide. It contains <code>sample-fund-factsheet.pdf</code> (plus <code>.html</code> and <code>.txt</code> versions of the same document), both spreadsheets, both manager updates and the three JSON files. <strong>Nothing has to be typed out by hand.</strong></li>
     <li><strong>Create a working folder</strong> in OneDrive called <code>copilot-workshop</code> and put the factsheet in it.</li>
     <li><strong>Copy <code>holdings.xlsx</code> and <code>benchmarks.xlsx</code></strong> into that folder too. Both already have their ranges formatted as real Excel <em>Tables</em>, which is what the connector needs &mdash; open one and check the ribbon shows <em>Table Design</em>. (If you would rather build them yourself, the rows are in <a href="#assets">the appendix</a>.)</li>
     <li><strong>Check Power Automate opens</strong> at <a href="https://make.powerautomate.com">make.powerautomate.com</a> &mdash; needed for demos 2.2, 2.3, 2.5 and 2.7.</li>
@@ -301,7 +301,7 @@ TER direct | 0.62% | Section 9 Fees</pre>
       </ul>
 
       <div class="k a">Carry this forward</div>
-      <p>Save this prompt. In demo 2.4 the same field list becomes an <em>enforced schema</em> &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
+      <p>Save this prompt. In demo 2.4 that same discipline becomes an <em>enforced schema</em> over a slightly different field list &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
     </div>
   </div>
 
@@ -438,7 +438,7 @@ Should my client invest in this fund?</pre>
 <section id="m2" class="pb">
   <h2>Module 2 demos &mdash; the build track (~10 developers)</h2>
   <div class="note">
-    These six demos extend the <strong>same agent</strong> you built in demo 1.3. Each one adds a capability and leaves the previous ones working.
+    These seven demos extend the <strong>same agent</strong> you built in demo 1.3. Each one adds a capability and leaves the previous ones working.
     Where a step needs a <strong>premium connector</strong> your tenant may not have, the demo says so and gives you a no-premium substitute that teaches the same wiring.
   </div>
 
@@ -465,7 +465,7 @@ Should my client invest in this fund?</pre>
         <li><strong>Now break it on purpose.</strong> Ask question 2 &mdash; deliberately ambiguous about which period and which plan.</li>
         <li><strong>Read the trace again</strong> to see what it assumed, then <strong>fix it with one instruction</strong> (below) and re-ask.</li>
         <li><strong>Now prove the fix, instead of believing it.</strong> Open the <strong>Evaluation</strong> tab &rarr; <em>New evaluation</em> &rarr; <em>Single response</em> &rarr; <strong>Quick question set</strong>. Copilot Studio generates ten questions from your agent's own description, instructions and knowledge. Read them, correct any that are wrong, and run the set.</li>
-        <li><strong>Change exactly one thing and re-run the identical set.</strong> Delete the instruction you added in step 8, run again, compare the two scores. One change per run &mdash; change two and a better score tells you nothing about which one earned it.</li>
+        <li><strong>Change exactly one thing and re-run the identical set.</strong> Delete the instruction you added in step 8, run the identical set again, and compare the two scores &mdash; that removed instruction is your baseline. <strong>Then put the instruction back and re-run</strong> to confirm the score returns, because every demo after this one extends this same agent. One change per run &mdash; change two and a better score tells you nothing about which one earned it.</li>
         <li><strong>Export the set to CSV and keep it.</strong> This is the file you re-run before every future change, and the artefact that makes a change to a published agent defensible rather than hopeful.</li>
       </ol>
 

@@ -46,6 +46,14 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#dbe3ef;
 .slide h2{margin:0 0 14px;font-size:29px;line-height:1.14;color:#0b2545;border-bottom:2px solid #1d4ed8;padding-bottom:9px;font-weight:600}
 .slide h2 .tag{float:right;font-size:12px;background:#1d4ed8;color:#fff;padding:4px 11px;border-radius:12px;font-weight:700;position:relative;top:4px;letter-spacing:.4px}
 .slide h2 .tag.k{background:#b45309}
+.slide h2 .cue{float:right;font-size:10.5px;padding:4px 9px;border-radius:12px;font-weight:700;position:relative;top:5px;letter-spacing:.6px;margin-left:9px;border:1px solid}
+.slide h2 .cue.pre{background:#eff6ff;color:#1e40af;border-color:#93c5fd}
+.slide h2 .cue.post{background:#f0fdf4;color:#166534;border-color:#86efac}
+.slide h2 .cue.go{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+#cuenext.go{color:#fde68a}
+#cuenext.ahead{color:#7f9dc4;font-weight:600}
+#cuenext{color:#fbbf24;font-weight:700;white-space:nowrap}
+#toclist .demorow{display:block;margin:5px 0 5px 0;padding:5px 10px;border-radius:6px;background:#12325c;color:#fbbf24;font-size:11.5px;font-weight:700;letter-spacing:.4px}
 .body{flex:1;display:grid;gap:24px;min-height:0;align-items:center}
 .g64{grid-template-columns:1.42fr 1fr}
 .g46{grid-template-columns:1fr 1.42fr}
@@ -168,7 +176,7 @@ svg{width:100%;height:auto;display:block}
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 415" role="img" aria-label="Map of the day">
-        <text class="lb" x="4" y="14">MORNING &mdash; ALL 25</text>
+        <text class="lb" x="4" y="14">MORNING &mdash; ALL 35</text>
         <rect class="bx" x="4" y="24" width="330" height="196" rx="8"/>
         <text class="tt" x="20" y="48">Module 1 &mdash; Foundations</text>
         <text class="ss" x="20" y="70">1.1  How the model actually behaves</text>
@@ -224,8 +232,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 3 -->
-<section class="slide" data-sec="1.1 Model behaviour" data-title="Why it invents, and the one fix" data-notes="This is the slide behind demo 1.1. Three facts sit along the top and they explain everything below them: the model is never silent, two runs of the same question can differ, and it sees only what you put in front of it. The three rows are the failure modes those facts produce, and the middle row is the one to worry about. A fabricated tracking error is usually caught, because a reviewer knows the factsheet has no such field. A gross-versus-net figure or the wrong share class is not caught, because every number on the page is genuine and nothing looks wrong on review. The third row is not a model failure at all - it is an integration gap, and it is the one Copilot Studio exists to close. Grounding, at the bottom, is the fix you will watch in the demo, and the two columns matter equally: it removes most of the first row and makes every figure checkable, but it does not make the model good at arithmetic, it does not know which period you meant, and it will not refuse unless you tell it to. Those three gaps are what the rest of the day builds controls for.">
-  <h2>Why it invents &mdash; and the one fix that changes everything<span class="tag k">1.1</span></h2>
+<section class="slide" data-sec="1.1 Model behaviour" data-title="Why it invents, and the one fix" data-notes="This is the slide behind demo 1.1. Three facts sit along the top and they explain everything below them: the model is never silent, two runs of the same question can differ, and it sees only what you put in front of it. The three rows are the failure modes those facts produce, and the middle row is the one to worry about. A fabricated tracking error is usually caught, because a reviewer knows the factsheet has no such field. A gross-versus-net figure or the wrong share class is not caught, because every number on the page is genuine and nothing looks wrong on review. The third row is not a model failure at all - it is an integration gap, and it is the one Copilot Studio exists to close. Grounding, at the bottom, is the fix you will watch in the demo, and the two columns matter equally: it removes most of the first row and makes every figure checkable, but it does not make the model good at arithmetic, it does not know which period you meant, and it will not refuse unless you tell it to. Those three gaps are what the rest of the day builds controls for." data-demo="1.1" data-role="pre">
+  <h2>Why it invents &mdash; and the one fix that changes everything<span class="cue pre">PRE &middot; DEMO 1.1</span><span class="tag k">1.1</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 470" role="img" aria-label="Three facts about the model, the three failure modes they cause, and what grounding does and does not fix">
@@ -294,8 +302,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 4 -->
-<section class="slide" data-sec="1.1 Model behaviour" data-title="The accuracy bar in investment consulting" data-notes="Decide the tier before you build - it sets the controls, the review model and whether the agent may act unattended. Teams stall by applying tier 4 standards to tier 2 work, or ship tier 4 output with tier 2 review. The capstone sits at tier 3.">
-  <h2>Setting the accuracy bar: not every output carries the same risk<span class="tag">1.1</span></h2>
+<section class="slide" data-sec="1.1 Model behaviour" data-title="The accuracy bar in investment consulting" data-notes="Decide the tier before you build - it sets the controls, the review model and whether the agent may act unattended. Teams stall by applying tier 4 standards to tier 2 work, or ship tier 4 output with tier 2 review. The capstone sits at tier 3." data-demo="1.1" data-role="post">
+  <h2>Setting the accuracy bar: not every output carries the same risk<span class="cue post">POST &middot; DEMO 1.1</span><span class="tag">1.1</span></h2>
   <div class="body g46">
     <div class="pts">
       <h3>Why this ladder decides everything</h3>
@@ -347,8 +355,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 5 -->
-<section class="slide" data-sec="1.2 Prompting" data-title="Anatomy of a prompt that works" data-notes="Five parts, and the right-hand column is the point: each one exists because dropping it brings back a specific, predictable failure. Context does the most work of the five - use only this document, and if a figure is absent write not stated - and it is the sentence that removes most fabrication on its own. Format is the one people underrate, because a fixed output shape is what makes the next step automatable rather than a person retyping. Example is the one most often skipped, and it has the highest return on effort: one worked row settles formatting faster than three paragraphs of instruction. Two habits worth carrying out of this: always make silence a legal answer, and always ask for the source, because it is free verification and it discourages invention. In Module 2 these five parts do not disappear - they become the agent Instructions block, which means you are already writing agent configuration rather than chat messages.">
-  <h2>Anatomy of a prompt that survives contact with real work<span class="tag">1.2</span></h2>
+<section class="slide" data-sec="1.2 Prompting" data-title="Anatomy of a prompt that works" data-notes="Five parts, and the right-hand column is the point: each one exists because dropping it brings back a specific, predictable failure. Context does the most work of the five - use only this document, and if a figure is absent write not stated - and it is the sentence that removes most fabrication on its own. Format is the one people underrate, because a fixed output shape is what makes the next step automatable rather than a person retyping. Example is the one most often skipped, and it has the highest return on effort: one worked row settles formatting faster than three paragraphs of instruction. Two habits worth carrying out of this: always make silence a legal answer, and always ask for the source, because it is free verification and it discourages invention. In Module 2 these five parts do not disappear - they become the agent Instructions block, which means you are already writing agent configuration rather than chat messages." data-demo="1.2" data-role="pre">
+  <h2>Anatomy of a prompt that survives contact with real work<span class="cue pre">PRE &middot; DEMO 1.2</span><span class="tag">1.2</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 420" role="img" aria-label="Five parts of a structured prompt and the failure each one prevents">
@@ -414,8 +422,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 6 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="What people actually build with it" data-notes="Six agents that exist in firms like yours, before any theory about how they work. Read the middle line of each card first - what it touches. That line is the whole difference between an agent and a chat window: every one of these reaches something outside the conversation, and that is why they change a process rather than saving somebody typing. Notice also how similar they are underneath. Each is the same handful of parts - a knowledge source, a tool or two, something that starts it, and a place people meet it - pointed at a different job. That is the good news and the discipline at once: the second agent is much cheaper than the first, provided you resist the temptation to make one agent do all six jobs. Session 1.4 gives you the criteria for choosing which of these to build first, and the honest answer for most firms is the least glamorous one on this slide.">
-  <h2>What people actually build with it &mdash; six agents from your world<span class="tag">1.3</span></h2>
+<section class="slide" data-sec="1.3 What an agent is" data-title="What people actually build with it" data-notes="Six agents that exist in firms like yours, before any theory about how they work. Read the middle line of each card first - what it touches. That line is the whole difference between an agent and a chat window: every one of these reaches something outside the conversation, and that is why they change a process rather than saving somebody typing. Notice also how similar they are underneath. Each is the same handful of parts - a knowledge source, a tool or two, something that starts it, and a place people meet it - pointed at a different job. That is the good news and the discipline at once: the second agent is much cheaper than the first, provided you resist the temptation to make one agent do all six jobs. Session 1.4 gives you the criteria for choosing which of these to build first, and the honest answer for most firms is the least glamorous one on this slide." data-demo="1.3" data-role="pre">
+  <h2>What people actually build with it &mdash; six agents from your world<span class="cue pre">PRE &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 436" role="img" aria-label="Six investment consulting agent use cases, each showing what starts it, what it touches and what it returns">
@@ -481,8 +489,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 7 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Agent anatomy in Copilot Studio" data-notes="Hold this diagram: instructions, knowledge, topics, actions, wrapped in orchestration and published to a channel. Everything in Module 2 configures one box on it. Note that only Actions involves engineering - the other three are written in English.">
-  <h2>Agent anatomy in Copilot Studio &mdash; the four things you configure<span class="tag">1.3</span></h2>
+<section class="slide" data-sec="1.3 What an agent is" data-title="Agent anatomy in Copilot Studio" data-notes="Hold this diagram: instructions, knowledge, topics, actions, wrapped in orchestration and published to a channel. Everything in Module 2 configures one box on it. Note that only Actions involves engineering - the other three are written in English." data-demo="1.3" data-role="pre">
+  <h2>Agent anatomy in Copilot Studio &mdash; the four things you configure<span class="cue pre">PRE &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 424" role="img" aria-label="Copilot Studio agent anatomy">
@@ -568,8 +576,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 8 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="How the agent decides — the orchestration loop" data-notes="The agent plans each request at runtime rather than following a script. Two ways to drive it: generative for open work, topics where behaviour is non-negotiable. When it goes wrong it is almost always the planning step choosing the wrong action, and the trace shows you which.">
-  <h2>How the agent decides what to do<span class="tag">1.3</span></h2>
+<section class="slide" data-sec="1.3 What an agent is" data-title="How the agent decides — the orchestration loop" data-notes="The agent plans each request at runtime rather than following a script. Two ways to drive it: generative for open work, topics where behaviour is non-negotiable. When it goes wrong it is almost always the planning step choosing the wrong action, and the trace shows you which." data-demo="1.3" data-role="post">
+  <h2>How the agent decides what to do<span class="cue post">POST &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 420" role="img" aria-label="Orchestration loop">
@@ -633,8 +641,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 9 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="What Copilot Studio actually gives you" data-notes="This is the map worth keeping. Read it in four bands: what the agent may read, what it may do, what may start it, and where people meet it - with the platform that builds, tests, ships and watches it running underneath. Three things are worth noticing. First, most of the left column is chosen from lists rather than engineered: knowledge sources and triggers are configuration, and only the tools band involves building anything. Second, the triggers band is what separates an agent from a chat window - if nothing on that list starts your agent, someone has to remember to open it, and adoption becomes a memory problem rather than a capability one. Third, the bottom band is the half that decides whether an agent is still running next year: the test pane tells you what it did, evaluation tells you whether a change helped, and environments and solutions are what let you fix it without breaking somebody's Tuesday. Nothing on this slide is a future release - the constraint on what you build is your tenant's governance and your own clarity about the job, not the product.">
-  <h2>What Copilot Studio actually gives you &mdash; the whole surface<span class="tag">1.3</span></h2>
+<section class="slide" data-sec="1.3 What an agent is" data-title="What Copilot Studio actually gives you" data-notes="This is the map worth keeping. Read it in four bands: what the agent may read, what it may do, what may start it, and where people meet it - with the platform that builds, tests, ships and watches it running underneath. Three things are worth noticing. First, most of the left column is chosen from lists rather than engineered: knowledge sources and triggers are configuration, and only the tools band involves building anything. Second, the triggers band is what separates an agent from a chat window - if nothing on that list starts your agent, someone has to remember to open it, and adoption becomes a memory problem rather than a capability one. Third, the bottom band is the half that decides whether an agent is still running next year: the test pane tells you what it did, evaluation tells you whether a change helped, and environments and solutions are what let you fix it without breaking somebody's Tuesday. Nothing on this slide is a future release - the constraint on what you build is your tenant's governance and your own clarity about the job, not the product." data-demo="1.3" data-role="post">
+  <h2>What Copilot Studio actually gives you &mdash; the whole surface<span class="cue post">POST &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 474" role="img" aria-label="Copilot Studio capability map: knowledge, tools and triggers feeding an agent, published to channels, producing outputs, on a platform that builds, tests, ships, watches and governs it">
@@ -764,8 +772,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 10 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Copilot vs Copilot Studio vs Foundry" data-notes="Three products, one spectrum, and the choice is almost always settled by two questions rather than by features. First: does the job have to reach a system outside Microsoft 365? If it does, the left column is out, however good the writing is. Second: does an engineering team own this, with Azure skills and an Azure budget? If not, the right column is out, however attractive full control sounds. What is left is the middle, which is why the middle is where this day is spent. The effort ratings are about who can realistically build and maintain each one, not about how capable each is - Foundry is the most capable and the least likely to be the right answer for a first agent. It is also worth saying plainly that these coexist. Nothing here replaces the Copilot licences already in use; the left column keeps doing individual drafting while agents take the repeatable pipeline work, in the same tenant, under the same policy.">
-  <h2>Three products, one spectrum &mdash; and where you actually sit<span class="tag">1.3</span></h2>
+<section class="slide" data-sec="1.3 What an agent is" data-title="Copilot vs Copilot Studio vs Foundry" data-notes="Three products, one spectrum, and the choice is almost always settled by two questions rather than by features. First: does the job have to reach a system outside Microsoft 365? If it does, the left column is out, however good the writing is. Second: does an engineering team own this, with Azure skills and an Azure budget? If not, the right column is out, however attractive full control sounds. What is left is the middle, which is why the middle is where this day is spent. The effort ratings are about who can realistically build and maintain each one, not about how capable each is - Foundry is the most capable and the least likely to be the right answer for a first agent. It is also worth saying plainly that these coexist. Nothing here replaces the Copilot licences already in use; the left column keeps doing individual drafting while agents take the repeatable pipeline work, in the same tenant, under the same policy." data-demo="1.3" data-role="post">
+  <h2>Three products, one spectrum &mdash; and where you actually sit<span class="cue post">POST &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 420" role="img" aria-label="Microsoft 365 Copilot compared with Copilot Studio and Microsoft Foundry">
@@ -877,8 +885,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 11 -->
-<section class="slide" data-sec="1.3 What an agent is" data-title="Honest limits of Copilot Studio" data-notes="Stated plainly so nobody builds the wrong thing. The first row is the one most likely to be live in this room: Copilot Studio runs at conversational speed, so ten thousand documents overnight is the wrong shape for it - pilot the logic here and move the volume elsewhere. The second and third rows are the ones teams discover late: orchestration is steered with words rather than code, so a genuinely complex branch gets awkward, and neither regression testing nor a clean dev-to-prod path comes for free - both are deliberate work you will do in sessions 2.1 and 2.6. The fourth row is simply the wrong tool at any volume. Worth knowing where the capstone sits against all this: comfortably inside the envelope, but near its edge on volume - which is exactly why it is a good thing to prove here before anyone commits engineering budget. None of this is a reason not to start. It is the reason to start here rather than somewhere more expensive.">
-  <h2>Honest limits: what Copilot Studio should not be asked to do<span class="tag">1.3</span></h2>
+<section class="slide" data-sec="1.3 What an agent is" data-title="Honest limits of Copilot Studio" data-notes="Stated plainly so nobody builds the wrong thing. The first row is the one most likely to be live in this room: Copilot Studio runs at conversational speed, so ten thousand documents overnight is the wrong shape for it - pilot the logic here and move the volume elsewhere. The second and third rows are the ones teams discover late: orchestration is steered with words rather than code, so a genuinely complex branch gets awkward, and neither regression testing nor a clean dev-to-prod path comes for free - both are deliberate work you will do in sessions 2.1 and 2.6. The fourth row is simply the wrong tool at any volume. Worth knowing where the capstone sits against all this: comfortably inside the envelope, but near its edge on volume - which is exactly why it is a good thing to prove here before anyone commits engineering budget. None of this is a reason not to start. It is the reason to start here rather than somewhere more expensive." data-demo="1.3" data-role="post">
+  <h2>Honest limits: what Copilot Studio should not be asked to do<span class="cue post">POST &middot; DEMO 1.3</span><span class="tag">1.3</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 398" role="img" aria-label="Where Copilot Studio is strong, and the four limits with what to do instead">
@@ -935,8 +943,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 12 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Your workflow, marked up" data-notes="The centrepiece. Green is where cycle time actually falls - repetitive, rule-bound, system-connected work. Amber stays human by design, not by limitation. The report-production column is the capstone target because it scores well on all four criteria, not because it is painful.">
-  <h2>Your workflow, marked up: where an agent belongs &mdash; and where it does not<span class="tag k">1.4</span></h2>
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Your workflow, marked up" data-notes="The centrepiece. Green is where cycle time actually falls - repetitive, rule-bound, system-connected work. Amber stays human by design, not by limitation. The report-production column is the capstone target because it scores well on all four criteria, not because it is painful." data-demo="1.4" data-role="pre">
+  <h2>Your workflow, marked up: where an agent belongs &mdash; and where it does not<span class="cue pre">PRE &middot; DEMO 1.4</span><span class="tag k">1.4</span></h2>
   <div class="body g1">
     <div>
       <svg viewBox="0 0 1180 396" role="img" aria-label="Investment consulting workflow with agent suitability marked">
@@ -1016,8 +1024,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 13 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Why the pilot didn't move the needle" data-notes="The pilot was measured against integration while only assistance was possible. Assistance shaves minutes off each of twenty manual steps; integration removes twelve of them. Same model, same licence, same data - the difference is where it sits in the process.">
-  <h2>Why the Copilot pilot did not move the numbers<span class="tag k">1.4</span></h2>
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Why the pilot didn't move the needle" data-notes="The pilot was measured against integration while only assistance was possible. Assistance shaves minutes off each of twenty manual steps; integration removes twelve of them. Same model, same licence, same data - the difference is where it sits in the process." data-demo="1.4" data-role="pre">
+  <h2>Why the Copilot pilot did not move the numbers<span class="cue pre">PRE &middot; DEMO 1.4</span><span class="tag k">1.4</span></h2>
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 420" role="img" aria-label="Assistance versus integration">
@@ -1078,8 +1086,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 14 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Where the internal GPT tool sits" data-notes="Not rivals. A general assistant answers questions; an agent does a named job the same way every time and produces an artefact. We already have a GPT tool is the most common reason an agent programme never starts, and it is a category error.">
-  <h2>Where the internal GPT tool sits, and what an agent adds<span class="tag k">1.4</span></h2>
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Where the internal GPT tool sits" data-notes="Not rivals. A general assistant answers questions; an agent does a named job the same way every time and produces an artefact. We already have a GPT tool is the most common reason an agent programme never starts, and it is a category error." data-demo="1.4" data-role="pre">
+  <h2>Where the internal GPT tool sits, and what an agent adds<span class="cue pre">PRE &middot; DEMO 1.4</span><span class="tag k">1.4</span></h2>
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 420" role="img" aria-label="Internal GPT tool compared with a workflow agent">
@@ -1135,8 +1143,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 15 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Picking the first agent" data-notes="Four criteria in priority order: repetition, data readiness, value, risk. Data readiness is the most common silent killer - if the input is not in a form a system can reach, nothing else matters. Note the disqualifiers as much as the candidates.">
-  <h2>Picking the first agent: four criteria, one picture<span class="tag k">1.4</span></h2>
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="Picking the first agent" data-notes="Four criteria in priority order: repetition, data readiness, value, risk. Data readiness is the most common silent killer - if the input is not in a form a system can reach, nothing else matters. Note the disqualifiers as much as the candidates." data-demo="1.4" data-role="pre">
+  <h2>Picking the first agent: four criteria, one picture<span class="cue pre">PRE &middot; DEMO 1.4</span><span class="tag k">1.4</span></h2>
   <div class="body g64">
     <div>
       <svg viewBox="0 0 700 420" role="img" aria-label="Candidate agents plotted by data readiness and repetition">
@@ -1194,8 +1202,8 @@ svg{width:100%;height:auto;display:block}
 </section>
 
 <!-- 16 -->
-<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="The governance envelope" data-notes="None of these five layers is new; they already exist for Power Platform in your tenant, and an agent inherits them rather than asking for an exception. That is the single most useful thing to say to a governance forum. Start the connector conversation early - it has a queue. Layer 3 is stronger than it looks: where the data sits in Dataverse, the agent authenticates as the person asking, so rows they may not see never reach the answer - that is row-level security doing the work, not a sentence in the instructions.">
-  <h2>The governance envelope an agent lives inside<span class="tag k">1.4</span></h2>
+<section class="slide" data-sec="1.4 Fit &amp; governance" data-title="The governance envelope" data-notes="None of these five layers is new; they already exist for Power Platform in your tenant, and an agent inherits them rather than asking for an exception. That is the single most useful thing to say to a governance forum. Start the connector conversation early - it has a queue. Layer 3 is stronger than it looks: where the data sits in Dataverse, the agent authenticates as the person asking, so rows they may not see never reach the answer - that is row-level security doing the work, not a sentence in the instructions." data-demo="1.4" data-role="post">
+  <h2>The governance envelope an agent lives inside<span class="cue post">POST &middot; DEMO 1.4</span><span class="tag k">1.4</span></h2>
   <div class="body g46">
     <div class="pts">
       <h3>Read it from the outside in</h3>
@@ -1309,6 +1317,7 @@ svg{width:100%;height:auto;display:block}
   <button class="navbtn" id="next" title="Next (&rarr;)">&#8250;</button>
   <span id="ttl" style="min-width:300px"></span>
   <div id="prog"><div id="progf"></div></div>
+  <span id="cuenext"></span>
   <span style="color:#7f9dc4">&larr; &rarr; &middot; O index &middot; N notes &middot; F full</span>
   <span id="num">1 / 17</span>
 </div>
@@ -1337,6 +1346,28 @@ svg{width:100%;height:auto;display:block}
   });
   var links=[].slice.call(toc.querySelectorAll('a'));
 
+  // demo cue layer: where each demo runs, and what is next from here
+  var DEMOS={'1.1':{t:'Drift, fabrication and the grounding fix',m:'~10 min'},'1.2':{t:'A reusable extraction prompt',m:'~12 min'},'1.3':{t:'Your first agent: Fund Research Assistant',m:'~20 min'},'1.4':{t:'Marking up your own workflow',m:'~10 min'}};
+  var runAfter={};
+  slides.forEach(function(s,k){ if(s.dataset.role==='pre') runAfter[s.dataset.demo]=k; });
+  var demoOrder=Object.keys(runAfter).sort();
+  var elCue=document.getElementById('cuenext');
+  demoOrder.forEach(function(d){
+    var after=slides[runAfter[d]], row=document.createElement('span');
+    row.className='demorow';
+    row.innerHTML='&#9654; DEMO '+d+' &middot; '+DEMOS[d].m+' &middot; '+DEMOS[d].t;
+    var link=links[runAfter[d]];
+    if(link&&link.parentNode) link.parentNode.insertBefore(row, link.nextSibling);
+  });
+  function nextDemo(n){
+    for(var j=0;j<demoOrder.length;j++){ if(runAfter[demoOrder[j]]>=n) return demoOrder[j]; }
+    return null;
+  }
+  demoOrder.forEach(function(d){
+    var c=slides[runAfter[d]].querySelector('h2 .cue');
+    if(c){ c.className='cue pre go'; c.innerHTML='&#9654; RUN DEMO '+d; }
+  });
+
   function go(n){
     i=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach(function(s,k){s.classList.toggle('active',k===i);});
@@ -1346,6 +1377,12 @@ svg{width:100%;height:auto;display:block}
     elTtl.textContent=slides[i].dataset.title||'';
     elProg.style.width=((i+1)/slides.length*100)+'%';
     notesBody.textContent=slides[i].dataset.notes||'No notes for this slide.';
+    var nd=nextDemo(i), here=nd&&runAfter[nd]===i;
+    elCue.className = nd ? (here?'go':'ahead') : '';
+    elCue.innerHTML = nd
+      ? (here ? ('&#9654; RUN DEMO '+nd+' NOW &middot; '+DEMOS[nd].m+' &middot; '+DEMOS[nd].t)
+              : ('demo '+nd+' after slide '+(runAfter[nd]+1)))
+      : '';
     if(history.replaceState)history.replaceState(null,'','#'+(i+1));
   }
   function fit(){
