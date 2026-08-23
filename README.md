@@ -5,7 +5,7 @@
 **Engagement:** senior-led, 1-day (8 hr) hands-on **Microsoft Copilot Studio** workshop.
 **Delivery date:** **27 August 2026** (Thursday), 09:00 – 18:00.
 **Format:** in-person Bangalore for 30, hybrid for 5 joining online.
-**Audience:** 35 participants, mixed skill — all 35 for Module 1, ~10 developers continue into Module 2.
+**Audience:** 35 participants, mixed skill — **all 35 stay for the whole day**. Module 1 is pitched at everyone; Module 2 is pitched at the ~10 developers, with the other 25 observing and keeping it as reference. The split is one of depth, not attendance.
 
 ## Start here
 
@@ -22,13 +22,15 @@
 | `resources.txt` | Curated Copilot Studio **YouTube resource list**, graded simple → advanced; candidate pre-read material |
 | `demo-assets/` | Every synthetic asset the demos use — see the table below |
 | `presentation/course-outline-copilot-studio.html` | **Client-facing course outline** — demo-only, 27 Aug scope. Prints to 5 A4 pages; carries a requirements-coverage table |
-| `presentation/module-1-foundations.html` | **Module 1 slide deck** — 18 slides, per-slide session notes (press N), keyboard/index navigation, hand-authored SVG diagrams. Self-contained, 1280×720 scaled stage |
-| `presentation/module-2-build.html` | **Module 2 slide deck** — 32 slides, per-slide session notes (press N), segmented session progress. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
+| `presentation/module-1-foundations.html` | **Module 1 slide deck** — 18 slides, per-slide session notes (press N), keyboard/index navigation, hand-authored SVG diagrams sized to fill the frame and read from the back of a room. Self-contained, 1280×720 scaled stage |
+| `presentation/module-2-build.html` | **Module 2 slide deck** — 32 slides, per-slide session notes (press N), segmented session progress, same diagram vocabulary as Module 1. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
 | `presentation/demo-guide.html` | **Participant demo follow-along guide** — all 11 demos (4 in Module 1, 7 in Module 2), with copy-paste prompts, sample data and troubleshooting |
 | `presentation/pre-reads.html` | **Pre-read pack** sent ahead of the day — Copilot Studio primer, prompting cheat-sheet, agent anatomy, the capstone brief, and a graded video shortlist. ~30 min, 4 A4 pages |
 | `presentation/reference-pack.html` | **Reference pack** to keep afterwards — a ten-prompt consulting prompt pack (copy buttons), a capability→workflow map for choosing what to build next, and the surfaces you can use without an environment or a developer. 12 A4 pages |
 
-All five `presentation/` files are cross-linked and there is **no `.md` source of truth** for them — the HTML is the deliverable (deliberate, agreed 20 Aug 2026). Both decks print to PDF (18 and 32 pages at 1280×720).
+All six `presentation/` files are cross-linked and there is **no `.md` source of truth** for them — the HTML is the deliverable (deliberate, agreed 20 Aug 2026). Both decks print to PDF (18 and 32 pages at 1280×720).
+
+**Both decks had a visual-clarity pass on 23 August 2026.** Every slide was reviewed as it renders rather than as markup, and three things changed. The smallest type — the notes under each label, used in 59 places — was too pale to survive a projector and was darkened to a readable contrast. A dozen text collisions and box overflows were fixed, along with four unlabelled marker dots that read as errors rather than emphasis. And ten diagrams that were floating small in the middle of the slide were re-proportioned to fill it: the Module 1 roadmap of the afternoon was rebuilt as a 3×2 grid of numbered stages with roughly 35% larger type, and nine tables and card grids were scaled up with it. **Slide counts, page counts and content are unchanged**, so any printout, note or page reference you already hold still matches.
 
 ## Demo assets
 
@@ -51,13 +53,13 @@ All five `presentation/` files are cross-linked and there is **no `.md` source o
 | | |
 |---|---|
 | **Module 1 — Foundations** | ~3 hrs · all 35 · 09:00–12:15 · how models behave, prompting for consulting work, what an agent is in Copilot Studio, where AI fits the IC workflow under governance |
-| **Module 2 — Build** | ~5 hrs · ~10 developers · 13:00–18:00 · orchestration, external + legacy REST APIs, Excel/SQL, unstructured → structured extraction, PowerPoint generation, deploy/trigger/share/govern |
+| **Module 2 — Build** | ~5 hrs · all 35, pitched at ~10 developers · 13:00–18:00 · orchestration, external + legacy REST APIs, Excel/SQL, unstructured → structured extraction, PowerPoint generation, deploy/trigger/share/govern |
 | **Capstone** | The **Investment Report Agent** — built live end to end |
 
 ## Scoping decisions
 
 - **Microsoft-only by governance.** No Claude / open-source / LangChain in scope — Copilot Studio + M365 only. Microsoft Agent Framework positioned as the *longer-term* path, not built.
-- **Two modules** matching the client's own split: foundations for all 25 (~3 hr) + hands-on build for ~10 devs (~5 hr).
+- **Two modules** matching the client's own split: foundations for all 35 (~3 hr) + a hands-on build track pitched at ~10 devs (~5 hr). Nobody leaves at lunch — the whole room sees the build.
 - **One flagship capstone:** the *Investment Report Agent* — replaces the team's manual unstructured-data → structured → PowerPoint pipeline (today: manual + Aspose + custom code).
 - **NO LAB — trainer live demo only** (client instruction, **20 Jul 2026**; supersedes the earlier Gheware-sandbox-for-all plan). Copilot Studio is opened on screen and the use case built live, showing enterprise-workflow linking, agent sharing and deployment. Nothing is provisioned for participants; no client-tenant readiness dependency.
 - **Participants may follow along** on their own machines using `presentation/demo-guide.html` — optional, nothing required or provisioned. The guide has an A/B/C track system for whatever Copilot Studio access a participant turns out to have.
