@@ -74,6 +74,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#dbe3ef;
 .take{margin-top:14px;background:#fffbeb;border-left:4px solid #f59e0b;padding:10px 15px;font-size:15.5px;color:#78350f;border-radius:0 4px 4px 0;line-height:1.4}
 .take b{color:#92400e}
 svg{width:100%;height:auto;display:block}
+svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5px}
+
 .slide.title{background:linear-gradient(135deg,#0b2545 0%,#123a6b 58%,#1d4ed8 155%);color:#fff;justify-content:center;padding:0 80px}
 .slide.title h1{margin:0;font-size:50px;line-height:1.12;font-weight:600}
 .slide.title .sub{margin-top:14px;font-size:23px;color:#bfdbfe;font-weight:600}
@@ -181,8 +183,8 @@ svg{width:100%;height:auto;display:block}
         <text class="tt" x="20" y="60">Fund factsheet (PDF)</text>
         <text class="ss" x="20" y="80">manager updates, house</text>
         <text class="ss" x="20" y="98">methodology, prior reports</text>
-        <text class="ss" x="20" y="124" style="fill:#94a3b8">unstructured, inconsistent,</text>
-        <text class="ss" x="20" y="142" style="fill:#94a3b8">arriving by email today</text>
+        <text class="ss" x="20" y="124" style="fill:#64748b">unstructured, inconsistent,</text>
+        <text class="ss" x="20" y="142" style="fill:#64748b">arriving by email today</text>
 
         <path class="fl" d="M204 95 L236 95"/>
 
@@ -259,7 +261,7 @@ svg{width:100%;height:auto;display:block}
   <h2>Two ways to drive an agent &mdash; and when each is wrong<span class="cue pre">PRE &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Topics compared with generative orchestration">
+      <svg viewBox="0 0 700 452" role="img" aria-label="Topics compared with generative orchestration">
         <rect class="bx" x="6" y="6" width="336" height="196" rx="8"/>
         <text class="lb" x="24" y="30">CLASSIC TOPICS</text>
         <text class="tt" x="24" y="54">You script the path</text>
@@ -294,10 +296,11 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="376" y="298">several tools may combine</text>
         <text class="ss" x="376" y="318">i.e. almost all of your real work</text>
 
-        <rect class="bx a" x="6" y="344" width="688" height="80" rx="8"/>
+        <rect class="bx a" x="6" y="344" width="688" height="98" rx="8"/>
         <text class="lb a" x="24" y="366">THE TEST THAT DECIDES IT</text>
-        <text class="tt" x="24" y="390" style="font-size:14.5px">Can you write down every acceptable path in advance, and would you defend that list in a review?</text>
-        <text class="ss" x="24" y="412">Yes &rarr; topic. No &rarr; generative. &nbsp;Most production agents are generative <tspan style="font-weight:700">with three or four topics guarding the edges</tspan>.</text>
+        <text class="tt" x="24" y="388" style="font-size:14.5px">Can you write down every acceptable path in advance,</text>
+        <text class="tt" x="24" y="408" style="font-size:14.5px">and would you defend that list in a review?</text>
+        <text class="ss" x="24" y="432">Yes &rarr; topic. No &rarr; generative. &nbsp;Most production agents are generative <tspan style="font-weight:700">with three or four topics guarding the edges</tspan>.</text>
       </svg>
     </div>
     <div class="pts">
@@ -414,7 +417,6 @@ svg{width:100%;height:auto;display:block}
         <rect class="bx r" x="16" y="228" width="668" height="64" rx="6"/>
         <text class="lb r" x="32" y="250">THE SAME TRACE, WITH A VAGUE ACTION DESCRIPTION</text>
         <text class="ss" x="32" y="272">2 &nbsp;action &nbsp; <tspan style="font-weight:600;fill:#b91c1c">GetFxRate</tspan> &nbsp;&mdash; wrong tool, called confidently, answer built on it</text>
-        <circle class="pulse" cx="664" cy="258" r="8" style="fill:#dc2626"/>
 
         <rect class="bx a" x="4" y="316" width="692" height="108" rx="8"/>
         <text class="lb a" x="20" y="338">WHAT THE TRACE TELLS YOU, IN ORDER OF USEFULNESS</text>
@@ -770,8 +772,8 @@ svg{width:100%;height:auto;display:block}
         <text class="lb" x="22" y="26">ON-BEHALF-OF THE USER</text>
         <rect class="bx w" x="22" y="38" width="130" height="52" rx="5"/><text class="ss" x="34" y="60">Consultant</text><text class="ss" x="34" y="78">signed in</text>
         <path class="fl" d="M156 64 L204 64"/>
-        <rect class="bx d" x="208" y="38" width="130" height="52" rx="5"/><text class="ss w" x="222" y="60">Agent</text><text class="ss w" x="222" y="78">carries their token</text>
-        <path class="fl" d="M342 64 L390 64"/>
+        <rect class="bx d" x="208" y="38" width="150" height="52" rx="5"/><text class="ss w" x="222" y="60">Agent</text><text class="ss w" x="222" y="78">carries their token</text>
+        <path class="fl" d="M362 64 L390 64"/>
         <rect class="bx w" x="394" y="38" width="140" height="52" rx="5"/><text class="ss" x="406" y="60">System checks</text><text class="ss" x="406" y="78">their permissions</text>
         <rect class="bx g" x="546" y="38" width="132" height="52" rx="5"/><text class="ss" x="558" y="60" style="fill:#047857;font-weight:600">Sees only what</text><text class="ss" x="558" y="78" style="fill:#047857;font-weight:600">they may see</text>
         <text class="ss" x="22" y="112">&#10003; &nbsp;Permissions already exist &mdash; nothing new to grant, nothing new to review</text>
@@ -782,8 +784,8 @@ svg{width:100%;height:auto;display:block}
         <text class="lb a" x="22" y="204">SERVICE IDENTITY</text>
         <rect class="bx w" x="22" y="216" width="130" height="52" rx="5"/><text class="ss" x="34" y="238">Consultant</text><text class="ss" x="34" y="256">asks</text>
         <path class="fl" d="M156 242 L204 242"/>
-        <rect class="bx d" x="208" y="216" width="130" height="52" rx="5"/><text class="ss w" x="222" y="238">Agent</text><text class="ss w" x="222" y="256">uses its own account</text>
-        <path class="fl" d="M342 242 L390 242"/>
+        <rect class="bx d" x="208" y="216" width="150" height="52" rx="5"/><text class="ss w" x="222" y="238">Agent</text><text class="ss w" x="222" y="256">uses its own account</text>
+        <path class="fl" d="M362 242 L390 242"/>
         <rect class="bx w" x="394" y="216" width="140" height="52" rx="5"/><text class="ss" x="406" y="238">System checks</text><text class="ss" x="406" y="256">the service account</text>
         <rect class="bx a" x="546" y="216" width="132" height="52" rx="5"/><text class="ss" x="558" y="238" style="fill:#92400e;font-weight:600">Sees whatever</text><text class="ss" x="558" y="256" style="fill:#92400e;font-weight:600">that account can</text>
         <text class="ss" x="22" y="290">&#10003; &nbsp;Consistent for everyone; can run unattended and on a schedule</text>
@@ -807,57 +809,56 @@ svg{width:100%;height:auto;display:block}
       <svg viewBox="0 0 700 430" role="img" aria-label="Failure modes and their handling">
         <rect class="bx w" x="4" y="4" width="692" height="34" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
         <text class="lb w" x="20" y="26">WHAT GOES WRONG</text>
-        <text class="lb w" x="250" y="26">WHAT THE AGENT MUST DO</text>
+        <text class="lb w" x="262" y="26">WHAT THE AGENT MUST DO</text>
         <text class="lb w" x="520" y="26">WHERE YOU SET IT</text>
 
         <rect class="bx r" x="4" y="42" width="692" height="52" rx="5"/>
         <text class="ss" x="20" y="64" style="font-weight:600;fill:#0b2545">Timeout &mdash; the system is slow</text>
         <text class="ss" x="20" y="84">legacy systems are slow at month end</text>
-        <text class="ss" x="250" y="64">say it timed out, name the action,</text>
-        <text class="ss" x="250" y="84">offer to retry. Never fill the gap.</text>
+        <text class="ss" x="262" y="64">say it timed out, name the action,</text>
+        <text class="ss" x="262" y="84">offer to retry. Never fill the gap.</text>
         <text class="ss" x="520" y="64">flow timeout +</text>
         <text class="ss" x="520" y="84">instruction rule</text>
 
         <rect class="bx r" x="4" y="98" width="692" height="52" rx="5"/>
         <text class="ss" x="20" y="120" style="font-weight:600;fill:#0b2545">429 / 503 &mdash; rate limited</text>
         <text class="ss" x="20" y="140">ten funds in a loop hits every limit</text>
-        <text class="ss" x="250" y="120">back off and retry a bounded number</text>
-        <text class="ss" x="250" y="140">of times, then report honestly</text>
+        <text class="ss" x="262" y="120">back off and retry a bounded number</text>
+        <text class="ss" x="262" y="140">of times, then report honestly</text>
         <text class="ss" x="520" y="120">flow retry policy</text>
         <text class="ss" x="520" y="140">(exponential)</text>
 
         <rect class="bx r" x="4" y="154" width="692" height="52" rx="5"/>
         <text class="ss" x="20" y="176" style="font-weight:600;fill:#0b2545">Empty result &mdash; 200 with nothing</text>
         <text class="ss" x="20" y="196">the most dangerous HTTP 200 there is</text>
-        <text class="ss" x="250" y="176">treat empty as <tspan style="font-weight:700">not stated</tspan>, never as</text>
-        <text class="ss" x="250" y="196">zero, and never as &ldquo;no breach&rdquo;</text>
+        <text class="ss" x="262" y="176">treat empty as <tspan style="font-weight:700">not stated</tspan>, never as</text>
+        <text class="ss" x="262" y="196">zero, and never as &ldquo;no breach&rdquo;</text>
         <text class="ss" x="520" y="176">flow condition +</text>
         <text class="ss" x="520" y="196">instruction rule</text>
 
         <rect class="bx r" x="4" y="210" width="692" height="52" rx="5"/>
         <text class="ss" x="20" y="232" style="font-weight:600;fill:#0b2545">Wrong shape &mdash; schema drifted</text>
         <text class="ss" x="20" y="252">the upstream team renamed a field</text>
-        <text class="ss" x="250" y="232">fail loudly at the parse step; do not</text>
-        <text class="ss" x="250" y="252">let a null become a number</text>
+        <text class="ss" x="262" y="232">fail loudly at the parse step; do not</text>
+        <text class="ss" x="262" y="252">let a null become a number</text>
         <text class="ss" x="520" y="232">flow parse +</text>
         <text class="ss" x="520" y="252">validation (2.4)</text>
 
         <rect class="bx r" x="4" y="266" width="692" height="52" rx="5"/>
         <text class="ss" x="20" y="288" style="font-weight:600;fill:#0b2545">Auth expired &mdash; token or secret</text>
         <text class="ss" x="20" y="308">certificates expire on a Sunday</text>
-        <text class="ss" x="250" y="288">surface it as an operational failure,</text>
-        <text class="ss" x="250" y="308">not as a data answer</text>
+        <text class="ss" x="262" y="288">surface it as an operational failure,</text>
+        <text class="ss" x="262" y="308">not as a data answer</text>
         <text class="ss" x="520" y="288">connection refs +</text>
         <text class="ss" x="520" y="308">monitoring</text>
 
         <rect class="bx r" x="4" y="322" width="692" height="58" rx="5" style="fill:#fee2e2;stroke:#fca5a5"/>
-        <text class="ss" x="20" y="344" style="font-weight:700;fill:#7f1d1d">Partial success &mdash; three of four calls worked</text>
+        <text class="ss" x="20" y="344" style="font-weight:700;fill:#7f1d1d">Partial success &mdash; 3 of 4 calls worked</text>
         <text class="ss" x="20" y="364">the worst one: a deck that is 75% real</text>
-        <text class="ss" x="250" y="344" style="font-weight:600;fill:#7f1d1d">refuse to produce a &ldquo;final&rdquo; artefact.</text>
-        <text class="ss" x="250" y="364" style="font-weight:600;fill:#7f1d1d">List what is missing, in the output.</text>
+        <text class="ss" x="262" y="344" style="font-weight:600;fill:#7f1d1d">refuse to produce a &ldquo;final&rdquo; artefact.</text>
+        <text class="ss" x="262" y="364" style="font-weight:600;fill:#7f1d1d">List what is missing, in the output.</text>
         <text class="ss" x="520" y="344" style="fill:#7f1d1d">the unresolved</text>
         <text class="ss" x="520" y="364" style="fill:#7f1d1d">list (2.5)</text>
-        <circle class="pulse" cx="672" cy="351" r="8" style="fill:#dc2626"/>
 
         <rect class="bx a" x="4" y="388" width="692" height="38" rx="6"/>
         <text class="ss" x="20" y="412" style="font-weight:600;fill:#92400e">One rule underneath all six: an agent may be unhelpful, but it may never be quietly wrong.</text>
@@ -899,10 +900,10 @@ svg{width:100%;height:auto;display:block}
 
         <rect class="bx r" x="4" y="192" width="632" height="176" rx="8"/>
         <text class="lb r" x="22" y="216">A TOOL DOES THIS &mdash; DETERMINISTIC WORK</text>
-        <text class="ss" x="22" y="242">&bull; &nbsp;summing the top five weights &nbsp;<tspan style="fill:#94a3b8">Excel</tspan></text>
-        <text class="ss" x="22" y="266">&bull; &nbsp;excess return, computed once &nbsp;<tspan style="fill:#94a3b8">SQL usp_GetExcessReturn</tspan></text>
-        <text class="ss" x="22" y="290">&bull; &nbsp;currency conversion &nbsp;<tspan style="fill:#94a3b8">FX action</tspan></text>
-        <text class="ss" x="22" y="314">&bull; &nbsp;checking allocation against a mandate limit &nbsp;<tspan style="fill:#94a3b8">flow logic</tspan></text>
+        <text class="ss" x="22" y="242">&bull; &nbsp;summing the top five weights &nbsp;<tspan style="fill:#64748b">Excel</tspan></text>
+        <text class="ss" x="22" y="266">&bull; &nbsp;excess return, computed once &nbsp;<tspan style="fill:#64748b">SQL usp_GetExcessReturn</tspan></text>
+        <text class="ss" x="22" y="290">&bull; &nbsp;currency conversion &nbsp;<tspan style="fill:#64748b">FX action</tspan></text>
+        <text class="ss" x="22" y="314">&bull; &nbsp;checking allocation against a mandate limit &nbsp;<tspan style="fill:#64748b">flow logic</tspan></text>
         <text class="ss" x="22" y="338">&bull; &nbsp;anything that must give the same answer twice</text>
         <text class="ss" x="22" y="360" style="fill:#b91c1c;font-weight:600">if a reader cannot check it at a glance, a system computes it</text>
 
@@ -1073,7 +1074,7 @@ svg{width:100%;height:auto;display:block}
         <text class="lb" x="22" y="26">LABELS VARY</text>
         <text class="ss" x="22" y="50">TER &middot; OCF &middot; expense ratio &middot; annual charge</text>
         <text class="ss" x="22" y="72">&ldquo;total expense ratio (regular plan)&rdquo;</text>
-        <text class="ss" x="22" y="92" style="fill:#94a3b8">one concept, four names, two plans</text>
+        <text class="ss" x="22" y="92" style="fill:#64748b">one concept, four names, two plans</text>
 
         <rect class="bx" x="356" y="4" width="340" height="96" rx="8"/>
         <text class="lb" x="374" y="26">PERIODS ARE IMPLIED</text>
@@ -1085,7 +1086,7 @@ svg{width:100%;height:auto;display:block}
         <text class="lb" x="22" y="132">UNITS AND SCALE DIFFER</text>
         <text class="ss" x="22" y="156">Rs 4,820 crore &middot; INR 48.2bn &middot; $580m</text>
         <text class="ss" x="22" y="178">gross vs net &middot; regular vs direct plan</text>
-        <text class="ss" x="22" y="198" style="fill:#94a3b8">all correct, none comparable</text>
+        <text class="ss" x="22" y="198" style="fill:#64748b">all correct, none comparable</text>
 
         <rect class="bx" x="356" y="110" width="340" height="96" rx="8"/>
         <text class="lb" x="374" y="132">STRUCTURE MOVES</text>
@@ -1200,17 +1201,17 @@ svg{width:100%;height:auto;display:block}
         <rect class="bx" x="20" y="330" width="640" height="76" rx="7"/>
         <text class="lb" x="38" y="352">RUNG 1 &middot; TYPE &amp; PRESENCE &nbsp;&mdash;&nbsp; nearly free</text>
         <text class="ss" x="38" y="374">All 25 keys present? Is a percentage a percentage? Is the date a date?</text>
-        <text class="ss" x="38" y="394" style="fill:#94a3b8">In the flow, before the agent ever sees the record</text>
+        <text class="ss" x="38" y="394" style="fill:#64748b">In the flow, before the agent ever sees the record</text>
 
         <rect class="bx" x="20" y="242" width="640" height="76" rx="7"/>
         <text class="lb" x="38" y="264">RUNG 2 &middot; RANGE &nbsp;&mdash;&nbsp; cheap</text>
         <text class="ss" x="38" y="286">Allocation 0&ndash;100. TER under 5%. Return between &minus;100 and +100. Date not in the future.</text>
-        <text class="ss" x="38" y="306" style="fill:#94a3b8">Catches mis-reads that a type check happily accepts</text>
+        <text class="ss" x="38" y="306" style="fill:#64748b">Catches mis-reads that a type check happily accepts</text>
 
         <rect class="bx a" x="20" y="154" width="640" height="76" rx="7"/>
         <text class="lb a" x="38" y="176">RUNG 3 &middot; CROSS-FIELD &nbsp;&mdash;&nbsp; still deterministic</text>
         <text class="ss" x="38" y="198">Allocations sum to 100 &plusmn;1. Direct TER below regular. 5-year return exists only if inception allows.</text>
-        <text class="ss" x="38" y="218" style="fill:#94a3b8">Catches internally inconsistent extractions &mdash; where each field alone looks right</text>
+        <text class="ss" x="38" y="218" style="fill:#64748b">Catches internally inconsistent extractions &mdash; where each field alone looks right</text>
 
         <rect class="bx r" x="20" y="66" width="640" height="76" rx="7"/>
         <text class="lb r" x="38" y="88">RUNG 4 &middot; BUSINESS SENSE &nbsp;&mdash;&nbsp; needs judgement</text>
@@ -1218,9 +1219,9 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="38" y="130" style="fill:#b91c1c;font-weight:600">The agent flags for review. It does not decide. This rung is where a consultant earns their fee.</text>
 
         <path class="ar" d="M8 406 L8 60"/>
-        <text class="lb" transform="translate(6,300) rotate(-90)" style="font-size:9.5px">COST TO IMPLEMENT &rarr;</text>
+        <text class="lb" transform="translate(12,300) rotate(-90)" style="font-size:9.5px">COST TO IMPLEMENT &rarr;</text>
         <text class="ss" x="20" y="46" style="font-weight:600;fill:#0b2545">A record that fails any rung goes to <tspan style="font-weight:700">needs_review</tspan> &mdash; it never silently becomes a slide.</text>
-        <text class="ss" x="20" y="26" style="fill:#94a3b8">Four rungs, an afternoon of work, and the review step collapses from hours to minutes.</text>
+        <text class="ss" x="20" y="26" style="fill:#64748b">Four rungs, an afternoon of work, and the review step collapses from hours to minutes.</text>
       </svg>
     </div>
   </div>
@@ -1231,50 +1232,49 @@ svg{width:100%;height:auto;display:block}
   <h2>The failure gallery &mdash; what a good extraction refuses to do<span class="cue post">POST &middot; DEMO 2.4</span><span class="tag">2.4</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 400" role="img" aria-label="Extraction failure modes and correct behaviour">
-        <rect class="bx w" x="4" y="4" width="1172" height="32" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
-        <text class="lb w" x="22" y="25">THE DOCUMENT SAYS</text>
-        <text class="lb w" x="440" y="25">A BAD EXTRACTION PRODUCES</text>
-        <text class="lb w" x="800" y="25">A GOOD ONE PRODUCES</text>
+      <svg class="up" viewBox="0 0 1180 560" role="img" aria-label="Extraction failure modes and correct behaviour">
+        <rect class="bx w" x="4" y="5.6" width="1172" height="44.8" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
+        <text class="lb w" x="22" y="35">THE DOCUMENT SAYS</text>
+        <text class="lb w" x="440" y="35">A BAD EXTRACTION PRODUCES</text>
+        <text class="lb w" x="800" y="35">A GOOD ONE PRODUCES</text>
 
-        <rect class="bx" x="4" y="42" width="1172" height="60" rx="5"/>
-        <text class="ss" x="22" y="66" style="fill:#0b2545">&ldquo;delivered 11.4% over the period&rdquo;</text>
-        <text class="ss" x="22" y="86" style="fill:#94a3b8">no period is ever defined in the document</text>
-        <text class="ss" x="440" y="66" style="fill:#b91c1c">return_1y: "11.4%"</text>
-        <text class="ss" x="440" y="86" style="fill:#94a3b8">guessed the most likely period</text>
-        <text class="ss" x="800" y="66" style="fill:#047857">return_1y: "not stated"</text>
-        <text class="ss" x="800" y="86" style="fill:#047857">needs_review: ["return_period_ambiguous"]</text>
+        <rect class="bx" x="4" y="58.8" width="1172" height="84" rx="5"/>
+        <text class="ss" x="22" y="92.4" style="fill:#0b2545">&ldquo;delivered 11.4% over the period&rdquo;</text>
+        <text class="ss" x="22" y="120.4" style="fill:#64748b">no period is ever defined in the document</text>
+        <text class="ss" x="440" y="92.4" style="fill:#b91c1c">return_1y: "11.4%"</text>
+        <text class="ss" x="440" y="120.4" style="fill:#64748b">guessed the most likely period</text>
+        <text class="ss" x="800" y="92.4" style="fill:#047857">return_1y: "not stated"</text>
+        <text class="ss" x="800" y="120.4" style="fill:#047857">needs_review: ["return_period_ambiguous"]</text>
 
-        <rect class="bx" x="4" y="108" width="1172" height="60" rx="5"/>
-        <text class="ss" x="22" y="132" style="fill:#0b2545">&ldquo;charges are 1.05% regular; direct is lower&rdquo;</text>
-        <text class="ss" x="22" y="152" style="fill:#94a3b8">the direct figure is described, never given</text>
-        <text class="ss" x="440" y="132" style="fill:#b91c1c">ter_direct: "0.85%"</text>
-        <text class="ss" x="440" y="152" style="fill:#94a3b8">invented a plausible-looking number</text>
-        <text class="ss" x="800" y="132" style="fill:#047857">ter_direct: "not stated"</text>
-        <text class="ss" x="800" y="152" style="fill:#047857">ter_regular: "1.05%"</text>
+        <rect class="bx" x="4" y="151.2" width="1172" height="84" rx="5"/>
+        <text class="ss" x="22" y="184.8" style="fill:#0b2545">&ldquo;charges are 1.05% regular; direct is lower&rdquo;</text>
+        <text class="ss" x="22" y="212.8" style="fill:#64748b">the direct figure is described, never given</text>
+        <text class="ss" x="440" y="184.8" style="fill:#b91c1c">ter_direct: "0.85%"</text>
+        <text class="ss" x="440" y="212.8" style="fill:#64748b">invented a plausible-looking number</text>
+        <text class="ss" x="800" y="184.8" style="fill:#047857">ter_direct: "not stated"</text>
+        <text class="ss" x="800" y="212.8" style="fill:#047857">ter_regular: "1.05%"</text>
 
-        <rect class="bx" x="4" y="174" width="1172" height="60" rx="5"/>
-        <text class="ss" x="22" y="198" style="fill:#0b2545">&ldquo;approximately Rs 1,900 crore at quarter end&rdquo;</text>
-        <text class="ss" x="22" y="218" style="fill:#94a3b8">hedged, and no date is attached</text>
-        <text class="ss" x="440" y="198" style="fill:#b91c1c">aum: "Rs 1,900 crore"</text>
-        <text class="ss" x="440" y="218" style="fill:#94a3b8">dropped the hedge, invented precision</text>
-        <text class="ss" x="800" y="198" style="fill:#047857">aum: "approximately Rs 1,900 crore"</text>
-        <text class="ss" x="800" y="218" style="fill:#047857">needs_review: ["aum_approximate"]</text>
+        <rect class="bx" x="4" y="243.6" width="1172" height="84" rx="5"/>
+        <text class="ss" x="22" y="277.2" style="fill:#0b2545">&ldquo;approximately Rs 1,900 crore at quarter end&rdquo;</text>
+        <text class="ss" x="22" y="305.2" style="fill:#64748b">hedged, and no date is attached</text>
+        <text class="ss" x="440" y="277.2" style="fill:#b91c1c">aum: "Rs 1,900 crore"</text>
+        <text class="ss" x="440" y="305.2" style="fill:#64748b">dropped the hedge, invented precision</text>
+        <text class="ss" x="800" y="277.2" style="fill:#047857">aum: "approximately Rs 1,900 crore"</text>
+        <text class="ss" x="800" y="305.2" style="fill:#047857">needs_review: ["aum_approximate"]</text>
 
-        <rect class="bx" x="4" y="240" width="1172" height="60" rx="5"/>
-        <text class="ss" x="22" y="264" style="fill:#0b2545">no ISIN, no benchmark, no inception date</text>
-        <text class="ss" x="22" y="284" style="fill:#94a3b8">simply absent from the document</text>
-        <text class="ss" x="440" y="264" style="fill:#b91c1c">isin: "INF209K01XY8"</text>
-        <text class="ss" x="440" y="284" style="fill:#94a3b8">a well-formed, entirely fictional ISIN</text>
-        <text class="ss" x="800" y="264" style="fill:#047857">isin: "not stated" &nbsp;(&times;3 fields)</text>
-        <text class="ss" x="800" y="284" style="fill:#047857">all three listed in needs_review</text>
+        <rect class="bx" x="4" y="336" width="1172" height="84" rx="5"/>
+        <text class="ss" x="22" y="369.6" style="fill:#0b2545">no ISIN, no benchmark, no inception date</text>
+        <text class="ss" x="22" y="397.6" style="fill:#64748b">simply absent from the document</text>
+        <text class="ss" x="440" y="369.6" style="fill:#b91c1c">isin: "INF209K01XY8"</text>
+        <text class="ss" x="440" y="397.6" style="fill:#64748b">a well-formed, entirely fictional ISIN</text>
+        <text class="ss" x="800" y="369.6" style="fill:#047857">isin: "not stated" &nbsp;(&times;3 fields)</text>
+        <text class="ss" x="800" y="397.6" style="fill:#047857">all three listed in needs_review</text>
 
-        <rect class="bx r" x="4" y="306" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="332" style="font-weight:700;fill:#7f1d1d">In all four rows the bad output is more useful-looking, more complete, and more confident. That is precisely the danger.</text>
-        <circle class="pulse" cx="1148" cy="327" r="8" style="fill:#dc2626"/>
+        <rect class="bx r" x="4" y="428.4" width="1172" height="58.8" rx="5"/>
+        <text class="ss" x="22" y="464.8" style="font-weight:700;fill:#7f1d1d">In all four rows the bad output is more useful-looking, more complete, and more confident. That is precisely the danger.</text>
 
-        <rect class="bx a" x="4" y="356" width="1172" height="40" rx="5"/>
-        <text class="ss" x="22" y="382" style="font-weight:600;fill:#92400e">The instruction that produces the right column: &ldquo;Never infer a value from another value. If interpretation of any kind was required, list the key in needs_review.&rdquo;</text>
+        <rect class="bx a" x="4" y="498.4" width="1172" height="56" rx="5"/>
+        <text class="ss" x="22" y="534.8" style="font-weight:600;fill:#92400e">The instruction that produces the right column: &ldquo;Never infer a value from another value. If interpretation of any kind was required, list the key in needs_review.&rdquo;</text>
       </svg>
     </div>
   </div>
@@ -1285,44 +1285,42 @@ svg{width:100%;height:auto;display:block}
   <h2>Your reporting pipeline, before and after<span class="cue pre">PRE &middot; DEMO 2.5</span><span class="tag k">2.5</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 400" role="img" aria-label="Reporting pipeline before and after">
-        <text class="lb r" x="4" y="16">TODAY &mdash; A HUMAN BETWEEN EVERY PAIR OF STEPS</text>
-        <rect class="bx r" x="4" y="24" width="1172" height="132" rx="8"/>
-        <rect class="bx w" x="22" y="44" width="150" height="52" rx="5"/><text class="ss" x="34" y="66">collect docs</text><text class="ss" x="34" y="84" style="fill:#94a3b8">email, portals</text>
-        <text class="ss" x="180" y="74" style="fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="202" y="44" width="150" height="52" rx="5"/><text class="ss" x="214" y="66">read &amp; retype</text><text class="ss" x="214" y="84" style="fill:#94a3b8">into a workbook</text>
-        <text class="ss" x="360" y="74" style="fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="382" y="44" width="150" height="52" rx="5"/><text class="ss" x="394" y="66">check figures</text><text class="ss" x="394" y="84" style="fill:#94a3b8">by eye</text>
-        <text class="ss" x="540" y="74" style="fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="562" y="44" width="150" height="52" rx="5"/><text class="ss" x="574" y="66">calculate</text><text class="ss" x="574" y="84" style="fill:#94a3b8">Excel by hand</text>
-        <text class="ss" x="720" y="74" style="fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="742" y="44" width="150" height="52" rx="5"/><text class="ss" x="754" y="66">Aspose + code</text><text class="ss" x="754" y="84" style="fill:#94a3b8">run the generator</text>
-        <text class="ss" x="900" y="74" style="fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="922" y="44" width="150" height="52" rx="5"/><text class="ss" x="934" y="66">fix the deck</text><text class="ss" x="934" y="84" style="fill:#94a3b8">format, reorder</text>
-        <text class="ss" x="1080" y="74" style="fill:#b91c1c">&#128100;</text>
-        <rect class="bx r" x="22" y="108" width="1050" height="30" rx="4"/>
-        <text class="ss" x="34" y="128" style="font-weight:600;fill:#b91c1c">~4 hours of consultant and developer time per fund review &middot; six hand-offs &middot; every error survives to the next step</text>
-
-        <text class="lb g" x="4" y="188">AFTER &mdash; ONE HUMAN, ONCE, WHERE IT COUNTS</text>
-        <rect class="bx g" x="4" y="196" width="1172" height="132" rx="8"/>
-        <rect class="bx w" x="22" y="216" width="150" height="52" rx="5"/><text class="ss" x="34" y="238">ingest</text><text class="ss" x="34" y="256" style="fill:#94a3b8">knowledge source</text>
-        <path class="flg" d="M176 242 L198 242"/>
-        <rect class="bx w" x="202" y="216" width="150" height="52" rx="5"/><text class="ss" x="214" y="238">extract + validate</text><text class="ss" x="214" y="256" style="fill:#94a3b8">2.4, schema-enforced</text>
-        <path class="flg" d="M356 242 L378 242"/>
-        <rect class="bx w" x="382" y="216" width="150" height="52" rx="5"/><text class="ss" x="394" y="238">enrich</text><text class="ss" x="394" y="256" style="fill:#94a3b8">2.2 APIs &middot; 2.3 Excel</text>
-        <path class="flg" d="M536 242 L558 242"/>
-        <rect class="bx w" x="562" y="216" width="150" height="52" rx="5"/><text class="ss" x="574" y="238">slide plan</text><text class="ss" x="574" y="256" style="fill:#94a3b8">every figure sourced</text>
-        <path class="flg" d="M716 242 L738 242"/>
-        <rect class="bx a" x="742" y="216" width="150" height="52" rx="5"/><text class="ss" x="754" y="238" style="font-weight:600;fill:#92400e">Aspose + code</text><text class="ss" x="754" y="256" style="fill:#92400e">unchanged, now called</text>
-        <path class="flg" d="M896 242 L918 242"/>
-        <rect class="bx a" x="922" y="216" width="150" height="52" rx="5"/><text class="ss" x="934" y="238" style="font-weight:600;fill:#92400e">&#128100; sign-off</text><text class="ss" x="934" y="256" style="fill:#92400e">the one human step</text>
-        <rect class="bx g" x="22" y="280" width="1050" height="30" rx="4"/>
-        <text class="ss" x="34" y="300" style="font-weight:600;fill:#047857">minutes of elapsed time &middot; one hand-off &middot; the two flagged fields are the only thing a human reads before approving</text>
-
-        <rect class="bx d" x="4" y="344" width="1172" height="52" rx="8"/>
-        <text class="tt w" x="24" y="368" style="font-size:15px">Notice what did <tspan style="fill:#fbbf24">not</tspan> change: your Aspose generator, your template, your house format, your review standard.</text>
-        <text class="ss w" x="24" y="388">The code you already trust stays. What disappears is a person standing between every pair of steps, retyping.</text>
-      </svg>
+      <svg viewBox="0 0 1180 580" role="img" aria-label="Reporting pipeline before and after">
+        <text class="lb r" x="6" y="20" style="font-size:12px">TODAY &mdash; A HUMAN BETWEEN EVERY PAIR OF STEPS</text>
+        <rect class="bx r" x="4" y="30" width="1172" height="200" rx="9"/>
+        <rect class="bx w" x="22" y="56" width="172" height="90" rx="6"/><text class="ss" x="36" y="90" style="font-size:15px">collect docs</text><text class="ss" x="36" y="118" style="font-size:13.5px;fill:#64748b">email, portals</text>
+        <text class="ss" x="196" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
+        <rect class="bx w" x="214" y="56" width="172" height="90" rx="6"/><text class="ss" x="228" y="90" style="font-size:15px">read &amp; retype</text><text class="ss" x="228" y="118" style="font-size:13.5px;fill:#64748b">into a workbook</text>
+        <text class="ss" x="388" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
+        <rect class="bx w" x="406" y="56" width="172" height="90" rx="6"/><text class="ss" x="420" y="90" style="font-size:15px">check figures</text><text class="ss" x="420" y="118" style="font-size:13.5px;fill:#64748b">by eye</text>
+        <text class="ss" x="580" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
+        <rect class="bx w" x="598" y="56" width="172" height="90" rx="6"/><text class="ss" x="612" y="90" style="font-size:15px">calculate</text><text class="ss" x="612" y="118" style="font-size:13.5px;fill:#64748b">Excel by hand</text>
+        <text class="ss" x="772" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
+        <rect class="bx w" x="790" y="56" width="172" height="90" rx="6"/><text class="ss" x="804" y="90" style="font-size:15px">Aspose + code</text><text class="ss" x="804" y="118" style="font-size:13.5px;fill:#64748b">run the generator</text>
+        <text class="ss" x="964" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
+        <rect class="bx w" x="982" y="56" width="172" height="90" rx="6"/><text class="ss" x="996" y="90" style="font-size:15px">fix the deck</text><text class="ss" x="996" y="118" style="font-size:13.5px;fill:#64748b">format, reorder</text>
+        <text class="ss" x="1140" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
+        <rect class="bx r" x="22" y="166" width="1132" height="44" rx="5"/>
+        <text class="ss" x="38" y="195" style="font-size:15px;font-weight:600;fill:#b91c1c">~4 hours of consultant and developer time per fund review &middot; six hand-offs &middot; every error survives to the next step</text>
+        <text class="lb g" x="6" y="262" style="font-size:12px">AFTER &mdash; ONE HUMAN, ONCE, WHERE IT COUNTS</text>
+        <rect class="bx g" x="4" y="272" width="1172" height="200" rx="9"/>
+        <rect class="bx w" x="22" y="298" width="172" height="90" rx="6"/><text class="ss" x="36" y="332" style="font-size:15px">ingest</text><text class="ss" x="36" y="360" style="font-size:13.5px;fill:#64748b">knowledge source</text>
+        <path class="flg" d="M196 343 L210 343"/>
+        <rect class="bx w" x="214" y="298" width="172" height="90" rx="6"/><text class="ss" x="228" y="332" style="font-size:15px">extract + validate</text><text class="ss" x="228" y="360" style="font-size:13.5px;fill:#64748b">2.4, schema-enforced</text>
+        <path class="flg" d="M388 343 L402 343"/>
+        <rect class="bx w" x="406" y="298" width="172" height="90" rx="6"/><text class="ss" x="420" y="332" style="font-size:15px">enrich</text><text class="ss" x="420" y="360" style="font-size:13.5px;fill:#64748b">2.2 APIs &middot; 2.3 Excel</text>
+        <path class="flg" d="M580 343 L594 343"/>
+        <rect class="bx w" x="598" y="298" width="172" height="90" rx="6"/><text class="ss" x="612" y="332" style="font-size:15px">slide plan</text><text class="ss" x="612" y="360" style="font-size:13.5px;fill:#64748b">every figure sourced</text>
+        <path class="flg" d="M772 343 L786 343"/>
+        <rect class="bx a" x="790" y="298" width="172" height="90" rx="6"/><text class="ss" x="804" y="332" style="font-size:15px;font-weight:600;fill:#92400e">Aspose + code</text><text class="ss" x="804" y="360" style="font-size:13.5px;fill:#92400e">unchanged, now called</text>
+        <path class="flg" d="M964 343 L978 343"/>
+        <rect class="bx a" x="982" y="298" width="172" height="90" rx="6"/><text class="ss" x="996" y="332" style="font-size:15px;font-weight:600;fill:#92400e">&#128100; sign-off</text><text class="ss" x="996" y="360" style="font-size:13.5px;fill:#92400e">the one human step</text>
+        <rect class="bx g" x="22" y="408" width="1132" height="44" rx="5"/>
+        <text class="ss" x="38" y="437" style="font-size:15px;font-weight:600;fill:#047857">minutes of elapsed time &middot; one hand-off &middot; the two flagged fields are the only thing a human reads before approving</text>
+        <rect class="bx d" x="4" y="496" width="1172" height="78" rx="9"/>
+        <text class="tt w" x="28" y="528" style="font-size:17px">Notice what did <tspan style="fill:#fbbf24">not</tspan> change: your Aspose generator, your template, your house format, your review standard.</text>
+        <text class="ss w" x="28" y="556" style="font-size:14px">The code you already trust stays. What disappears is a person standing between every pair of steps, retyping.</text>
+        </svg>
     </div>
   </div>
 </section>
@@ -1487,7 +1485,7 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="20" y="50">what you edit</text>
         <text class="ss" x="20" y="72">test pane runs this</text>
         <text class="ss" x="20" y="94">changes are instant</text>
-        <text class="ss" x="20" y="118" style="fill:#94a3b8">nobody else sees it</text>
+        <text class="ss" x="20" y="118" style="fill:#64748b">nobody else sees it</text>
 
         <path class="fl" d="M208 68 L246 68"/>
         <text class="ss" x="212" y="58" style="font-size:11px">publish</text>
@@ -1526,7 +1524,7 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="466" y="326">request and decision, one place</text>
         <text class="ss" x="22" y="368">Adoption is not a training problem. An agent that lives where the work already happens gets used;</text>
         <text class="ss" x="22" y="388">one that needs a bookmark does not. This is the least technical and most decisive slide in the session.</text>
-        <text class="ss" x="22" y="408" style="fill:#94a3b8">Teams and M365 Copilot both need an admin step in most tenants &mdash; find that out before you promise a date.</text>
+        <text class="ss" x="22" y="408" style="fill:#64748b">Teams and M365 Copilot both need an admin step in most tenants &mdash; find that out before you promise a date.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1566,7 +1564,7 @@ svg{width:100%;height:auto;display:block}
       <div class="callout">The gap between a working demo and a supported service is almost entirely this slide. It is also the least glamorous and most predictive.</div>
     </div>
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Dev test prod environments with solution promotion">
+      <svg viewBox="0 0 700 430" role="img" aria-label="Dev test prod environments with solution promotion">
         <rect class="bx" x="4" y="30" width="216" height="200" rx="8"/>
         <text class="lb" x="22" y="20">DEV</text>
         <text class="tt" x="22" y="56">You build here</text>
@@ -1579,7 +1577,7 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="34" y="196">Data: none that matters</text>
 
         <path class="fl" d="M224 130 L262 130"/>
-        <text class="ss" x="226" y="120" style="font-size:11px">export</text>
+        <text class="ss" x="228" y="120" style="font-size:10px">export</text>
 
         <rect class="bx" x="266" y="30" width="216" height="200" rx="8"/>
         <text class="lb" x="284" y="20">TEST</text>
@@ -1593,7 +1591,7 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="296" y="196">Data: representative</text>
 
         <path class="fl" d="M486 130 L524 130"/>
-        <text class="ss" x="488" y="120" style="font-size:11px">promote</text>
+        <text class="ss" x="486" y="120" style="font-size:10px">promote</text>
 
         <rect class="bx d" x="528" y="30" width="168" height="200" rx="8"/>
         <text class="lb w" x="546" y="20">PROD</text>
@@ -1611,11 +1609,11 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="22" y="292">the agent &middot; its topics and instructions &middot; the flows &middot; custom connectors &middot; environment variables</text>
         <text class="ss" x="22" y="312"><tspan style="font-weight:700">connection references</tspan> &mdash; so the target environment supplies its own credentials, not yours</text>
 
-        <rect class="bx r" x="4" y="334" width="692" height="82" rx="8"/>
+        <rect class="bx r" x="4" y="334" width="692" height="90" rx="8"/>
         <text class="lb r" x="22" y="356">THE SHORTCUT THAT ALWAYS GETS TAKEN</text>
         <text class="ss" x="22" y="378">&ldquo;We will move it to a proper environment later.&rdquo; Later never comes, because by then it has users,</text>
         <text class="ss" x="22" y="398">embedded credentials and no export path &mdash; and the rebuild costs more than the original build.</text>
-        <text class="ss" x="22" y="414" style="fill:#b91c1c;font-weight:600">Ten minutes of setup now. Weeks saved later.</text>
+        <text class="ss" x="22" y="418" style="fill:#b91c1c;font-weight:600">Ten minutes of setup now. Weeks saved later.</text>
       </svg>
     </div>
   </div>
@@ -1635,10 +1633,10 @@ svg{width:100%;height:auto;display:block}
         <path class="fl" d="M310 66 L338 66"/>
         <rect class="bx a" x="342" y="38" width="130" height="56" rx="5"/><text class="ss" x="354" y="60" style="font-weight:600;fill:#92400e">Approver, in</text><text class="ss" x="354" y="78" style="font-weight:600;fill:#92400e">Teams</text>
         <path class="flg" d="M476 56 L504 56"/>
-        <rect class="bx g" x="508" y="30" width="168" height="34" rx="5"/><text class="ss" x="520" y="52" style="fill:#047857">Approved &rarr; issue + stamp id</text>
+        <rect class="bx g" x="508" y="30" width="184" height="34" rx="5"/><text class="ss" x="520" y="52" style="fill:#047857">Approved &rarr; issue + stamp id</text>
         <path class="ar" d="M476 80 L504 80" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
-        <rect class="bx r" x="508" y="68" width="168" height="34" rx="5"/><text class="ss" x="520" y="90" style="fill:#b91c1c">Rejected &rarr; report, stop</text>
-        <text class="ss" x="22" y="116" style="fill:#94a3b8">Approvals is a standard connector &mdash; no premium licence, and the decision is logged for you.</text>
+        <rect class="bx r" x="508" y="68" width="184" height="34" rx="5"/><text class="ss" x="520" y="90" style="fill:#b91c1c">Rejected &rarr; report, stop</text>
+        <text class="ss" x="22" y="116" style="fill:#64748b">Approvals is a standard connector &mdash; no premium licence, and the decision is logged for you.</text>
 
         <rect class="bx" x="4" y="140" width="692" height="132" rx="8"/>
         <text class="lb" x="22" y="162">WHAT THE APPROVER ACTUALLY SEES &mdash; DESIGN THIS DELIBERATELY</text>
@@ -1646,7 +1644,7 @@ svg{width:100%;height:auto;display:block}
         <text class="ss" x="34" y="196" style="font-weight:600;fill:#b91c1c">A bad card</text>
         <text class="ss" x="34" y="218">&ldquo;Approve deck for CL-4471?&rdquo;</text>
         <text class="ss" x="34" y="240">&nbsp;&nbsp;[Approve] &nbsp;[Reject]</text>
-        <text class="ss" x="34" y="256" style="fill:#94a3b8">approval theatre &mdash; nobody can judge this</text>
+        <text class="ss" x="34" y="256" style="fill:#64748b">approval theatre &mdash; nobody can judge this</text>
         <rect class="bx g" x="358" y="174" width="318" height="86" rx="5"/>
         <text class="ss" x="370" y="196" style="font-weight:600;fill:#047857">A good card</text>
         <text class="ss" x="370" y="216">Northwind Q2 &middot; 6 slides &middot; 14 sourced figures</text>
@@ -1682,54 +1680,54 @@ svg{width:100%;height:auto;display:block}
   <h2>The governance checklist &mdash; worked against what we just built<span class="cue post">POST &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 448" role="img" aria-label="Governance checklist worked example">
-        <rect class="bx w" x="4" y="4" width="1172" height="32" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
-        <text class="lb w" x="22" y="25">THE QUESTION</text>
-        <text class="lb w" x="360" y="25">OUR ANSWER FOR THIS AGENT</text>
-        <text class="lb w" x="880" y="25">WHERE IT IS ENFORCED</text>
+      <svg class="up" viewBox="0 0 1180 560" role="img" aria-label="Governance checklist worked example">
+        <rect class="bx w" x="4" y="5" width="1172" height="40" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
+        <text class="lb w" x="22" y="31.25">THE QUESTION</text>
+        <text class="lb w" x="360" y="31.25">OUR ANSWER FOR THIS AGENT</text>
+        <text class="lb w" x="880" y="31.25">WHERE IT IS ENFORCED</text>
 
-        <rect class="bx g" x="4" y="42" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="68" style="font-weight:600;fill:#0b2545">What data does it read?</text>
-        <text class="ss" x="360" y="68">3 knowledge sources, 6 actions &mdash; all named, all synthetic today</text>
-        <text class="ss" x="880" y="68">knowledge + action list</text>
+        <rect class="bx g" x="4" y="52.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="85" style="font-weight:600;fill:#0b2545">What data does it read?</text>
+        <text class="ss" x="360" y="85">3 knowledge sources, 6 actions &mdash; all named, all synthetic today</text>
+        <text class="ss" x="880" y="85">knowledge + action list</text>
 
-        <rect class="bx g" x="4" y="90" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="116" style="font-weight:600;fill:#0b2545">Can data leave the tenant?</text>
-        <text class="ss" x="360" y="116">Only via the FX endpoint, which receives a date and nothing else</text>
-        <text class="ss" x="880" y="116">DLP connector groups</text>
+        <rect class="bx g" x="4" y="112.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="145" style="font-weight:600;fill:#0b2545">Can data leave the tenant?</text>
+        <text class="ss" x="360" y="145">Only via the FX endpoint, which receives a date and nothing else</text>
+        <text class="ss" x="880" y="145">DLP connector groups</text>
 
-        <rect class="bx g" x="4" y="138" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="164" style="font-weight:600;fill:#0b2545">Which classification of data reaches it?</text>
-        <text class="ss" x="360" y="164">Factsheet public; mandate and holdings are not. Output inherits neither label</text>
-        <text class="ss" x="880" y="164">sensitivity labels + source permissions</text>
+        <rect class="bx g" x="4" y="172.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="205" style="font-weight:600;fill:#0b2545">Which classification of data reaches it?</text>
+        <text class="ss" x="360" y="205">Factsheet public; mandate and holdings are not. Output inherits neither label</text>
+        <text class="ss" x="880" y="205">sensitivity labels + source permissions</text>
 
-        <rect class="bx g" x="4" y="186" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="212" style="font-weight:600;fill:#0b2545">Who can use it? Who can change it?</text>
-        <text class="ss" x="360" y="212">Users: the IC group. Co-authors: two named builders. Rows follow the user</text>
-        <text class="ss" x="880" y="212">sharing roles + row-level security</text>
+        <rect class="bx g" x="4" y="232.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="265" style="font-weight:600;fill:#0b2545">Who can use it? Who can change it?</text>
+        <text class="ss" x="360" y="265">Users: the IC group. Co-authors: two named builders. Rows follow the user</text>
+        <text class="ss" x="880" y="265">sharing roles + row-level security</text>
 
-        <rect class="bx g" x="4" y="234" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="260" style="font-weight:600;fill:#0b2545">What can it do without a human?</text>
-        <text class="ss" x="360" y="260">Read, extract, enrich, draft. Nothing irreversible, nothing issued</text>
-        <text class="ss" x="880" y="260">approval gate + instructions</text>
+        <rect class="bx g" x="4" y="292.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="325" style="font-weight:600;fill:#0b2545">What can it do without a human?</text>
+        <text class="ss" x="360" y="325">Read, extract, enrich, draft. Nothing irreversible, nothing issued</text>
+        <text class="ss" x="880" y="325">approval gate + instructions</text>
 
-        <rect class="bx g" x="4" y="282" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="308" style="font-weight:600;fill:#0b2545">How do we know what it did?</text>
-        <text class="ss" x="360" y="308">Run trace, action inputs and outputs, citations, approval id</text>
-        <text class="ss" x="880" y="308">analytics + flow run history</text>
+        <rect class="bx g" x="4" y="352.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="385" style="font-weight:600;fill:#0b2545">How do we know what it did?</text>
+        <text class="ss" x="360" y="385">Run trace, action inputs and outputs, citations, approval id</text>
+        <text class="ss" x="880" y="385">analytics + flow run history</text>
 
-        <rect class="bx a" x="4" y="330" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="356" style="font-weight:600;fill:#92400e">Who owns it, and who reviews its output?</text>
-        <text class="ss" x="360" y="356" style="fill:#92400e">Named owner + named deputy; reviewer with time allocated</text>
-        <text class="ss" x="880" y="356" style="fill:#92400e">a person, not a setting</text>
+        <rect class="bx a" x="4" y="412.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="445" style="font-weight:600;fill:#92400e">Who owns it, and who reviews its output?</text>
+        <text class="ss" x="360" y="445" style="fill:#92400e">Named owner + named deputy; reviewer with time allocated</text>
+        <text class="ss" x="880" y="445" style="fill:#92400e">a person, not a setting</text>
 
-        <rect class="bx a" x="4" y="378" width="1172" height="42" rx="5"/>
-        <text class="ss" x="22" y="404" style="font-weight:600;fill:#92400e">How does it change safely?</text>
-        <text class="ss" x="360" y="404" style="fill:#92400e">Solution export dev &rarr; test &rarr; prod; eval set re-run before promotion</text>
-        <text class="ss" x="880" y="404" style="fill:#92400e">ALM &mdash; the work that is still ahead of you</text>
+        <rect class="bx a" x="4" y="472.5" width="1172" height="52.5" rx="5"/>
+        <text class="ss" x="22" y="505" style="font-weight:600;fill:#92400e">How does it change safely?</text>
+        <text class="ss" x="360" y="505" style="fill:#92400e">Solution export dev &rarr; test &rarr; prod; eval set re-run before promotion</text>
+        <text class="ss" x="880" y="505" style="fill:#92400e">ALM &mdash; the work that is still ahead of you</text>
 
-        <rect class="bx d" x="4" y="426" width="1172" height="22" rx="4"/>
-        <text class="ss w" x="22" y="442" style="font-size:11.5px">Six rows are settled by configuration. The last two are settled by people &mdash; and those are the two that decide whether this is still running next year.</text>
+        <rect class="bx d" x="4" y="532.5" width="1172" height="27.5" rx="4"/>
+        <text class="ss w" x="22" y="552.5" style="font-size:12.9px">Six rows are settled by configuration. The last two are settled by people &mdash; and those are the two that decide whether this is still running next year.</text>
       </svg>
     </div>
   </div>
@@ -1740,73 +1738,74 @@ svg{width:100%;height:auto;display:block}
   <h2>The trigger &mdash; the difference between a tool and a process<span class="cue pre">PRE &middot; DEMO 2.7</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 400" role="img" aria-label="Chat-initiated agent compared with a triggered agent">
+      <svg class="up" viewBox="0 0 1180 560" role="img" aria-label="Chat-initiated agent compared with a triggered agent">
 
-        <rect class="bx" x="4" y="4" width="1172" height="24" rx="4"/>
-        <text class="ss" x="22" y="21" style="font-weight:600">The test: if nobody opens anything, does the work still happen?</text>
+        <rect class="bx" x="4" y="5.6" width="1172" height="33.6" rx="4"/>
+        <text class="ss" x="22" y="29.4" style="font-weight:600">The test: if nobody opens anything, does the work still happen?</text>
 
-        <text class="lb" x="20" y="56">BESIDE THE WORKFLOW &mdash; WHAT YOU HAVE BUILT SO FAR</text>
-        <rect class="bx" x="4" y="66" width="176" height="76" rx="8"/>
-        <text class="tt" x="22" y="98">A person</text>
-        <text class="ss" x="22" y="120">remembers, opens, types</text>
-        <path class="ar" d="M184 104 L214 104"/>
-        <rect class="bx" x="218" y="66" width="176" height="76" rx="8"/>
-        <text class="tt" x="236" y="98">The agent</text>
-        <text class="ss" x="236" y="120">answers well</text>
-        <path class="ar" d="M398 104 L428 104"/>
-        <rect class="bx" x="432" y="66" width="176" height="76" rx="8"/>
-        <text class="tt" x="450" y="98">A person</text>
-        <text class="ss" x="450" y="120">copies it onward</text>
-        <rect class="bx a" x="620" y="66" width="556" height="76" rx="8"/>
-        <text class="ss" x="638" y="94" style="fill:#92400e;font-weight:600">Real, and worth having &mdash; but it saves typing, not steps.</text>
-        <text class="ss" x="638" y="118" style="fill:#92400e">Adoption depends on memory, and the process on paper is unchanged.</text>
+        <text class="lb" x="20" y="78.4">BESIDE THE WORKFLOW &mdash; WHAT YOU HAVE BUILT SO FAR</text>
+        <rect class="bx" x="4" y="92.4" width="196" height="106.4" rx="8"/>
+        <text class="tt" x="22" y="137.2">A person</text>
+        <text class="ss" x="22" y="168">remembers, opens, types</text>
+        <path class="ar" d="M 184 145.6 L 214 145.6"/>
+        <rect class="bx" x="222" y="92.4" width="196" height="106.4" rx="8"/>
+        <text class="tt" x="236" y="137.2">The agent</text>
+        <text class="ss" x="236" y="168">answers well</text>
+        <path class="ar" d="M 398 145.6 L 428 145.6"/>
+        <rect class="bx" x="440" y="92.4" width="196" height="106.4" rx="8"/>
+        <text class="tt" x="450" y="137.2">A person</text>
+        <text class="ss" x="450" y="168">copies it onward</text>
+        <rect class="bx a" x="650" y="92.4" width="526" height="106.4" rx="8"/>
+        <text class="ss" x="638" y="131.6" style="fill:#92400e;font-weight:600">Real, and worth having &mdash; but it saves typing, not steps.</text>
+        <text class="ss" x="638" y="165.2" style="fill:#92400e">Adoption depends on memory, and the process on paper is unchanged.</text>
 
-        <text class="lb g" x="20" y="184">INSIDE THE WORKFLOW &mdash; SESSION 2.6, DEMO 2.7</text>
-        <rect class="bx g" x="4" y="194" width="150" height="80" rx="8"/>
-        <text class="tt" x="20" y="222">A file lands</text>
-        <text class="ss" x="20" y="242">SharePoint library</text>
-        <text class="ss" x="20" y="260" style="fill:#047857">no human here</text>
-        <path class="flg" d="M158 234 L180 234"/>
-        <rect class="bx g" x="184" y="194" width="150" height="80" rx="8"/>
-        <text class="tt" x="200" y="222">Flow fires</text>
-        <text class="ss" x="200" y="242">automated trigger</text>
-        <text class="ss" x="200" y="260" style="fill:#047857">polls, then runs</text>
-        <path class="flg" d="M338 234 L360 234"/>
-        <rect class="bx g" x="364" y="194" width="150" height="80" rx="8"/>
-        <text class="tt" x="380" y="222">Agent works</text>
-        <text class="ss" x="380" y="242">extract, enrich, plan</text>
-        <text class="ss" x="380" y="260" style="fill:#047857">2.2 &ndash; 2.5, unattended</text>
-        <path class="flg" d="M518 234 L540 234"/>
-        <rect class="bx g" x="544" y="194" width="150" height="80" rx="8"/>
-        <text class="tt" x="560" y="222">Gate holds</text>
-        <text class="ss" x="560" y="242">approval card</text>
-        <text class="ss" x="560" y="260" style="fill:#047857">nothing issued yet</text>
-        <path class="flg" d="M698 234 L720 234"/>
-        <rect class="bx d" x="724" y="194" width="452" height="80" rx="8"/>
-        <text class="lb w" x="742" y="216">THE ONLY HUMAN IN THE CHAIN</text>
-        <text class="tt w" x="742" y="242">A consultant approves a deck that already exists</text>
-        <text class="ss w" x="742" y="262">They arrive at a decision, not at a task &mdash; that is the whole change</text>
+        <text class="lb g" x="20" y="257.6">INSIDE THE WORKFLOW &mdash; SESSION 2.6, DEMO 2.7</text>
+        <rect class="bx g" x="4" y="271.6" width="166" height="112" rx="8"/>
+        <text class="tt" x="20" y="310.8">A file lands</text>
+        <text class="ss" x="20" y="338.8">SharePoint library</text>
+        <text class="ss" x="20" y="364" style="fill:#047857">no human here</text>
+        <path class="flg" d="M 158 327.6 L 180 327.6"/>
+        <rect class="bx g" x="184" y="271.6" width="166" height="112" rx="8"/>
+        <text class="tt" x="200" y="310.8">Flow fires</text>
+        <text class="ss" x="200" y="338.8">automated trigger</text>
+        <text class="ss" x="200" y="364" style="fill:#047857">polls, then runs</text>
+        <path class="flg" d="M 338 327.6 L 360 327.6"/>
+        <rect class="bx g" x="364" y="271.6" width="166" height="112" rx="8"/>
+        <text class="tt" x="380" y="310.8">Agent works</text>
+        <text class="ss" x="380" y="338.8">extract, enrich, plan</text>
+        <text class="ss" x="380" y="364" style="fill:#047857">2.2 &ndash; 2.5, unattended</text>
+        <path class="flg" d="M 518 327.6 L 540 327.6"/>
+        <rect class="bx g" x="544" y="271.6" width="166" height="112" rx="8"/>
+        <text class="tt" x="560" y="310.8">Gate holds</text>
+        <text class="ss" x="560" y="338.8">approval card</text>
+        <text class="ss" x="560" y="364" style="fill:#047857">nothing issued yet</text>
+        <path class="flg" d="M 698 327.6 L 720 327.6"/>
+        <rect class="bx d" x="724" y="271.6" width="452" height="112" rx="8"/>
+        <text class="lb w" x="742" y="302.4">THE ONLY HUMAN IN THE CHAIN</text>
+        <text class="tt w" x="742" y="338.8">A consultant approves a deck that already exists</text>
+        <text class="ss w" x="742" y="366.8">They arrive at a decision, not at a task &mdash; that is the whole change</text>
 
-        <rect class="bx" x="4" y="288" width="384" height="106" rx="8"/>
-        <text class="lb" x="22" y="308">WHAT CAN START AN AGENT</text>
-        <text class="ss" x="22" y="330">A file arriving &middot; a schedule &middot; a record changing</text>
-        <text class="ss" x="22" y="350">an email &middot; an approval completing &middot; another agent</text>
-        <text class="ss" x="22" y="374" style="fill:#94a3b8">Your first candidates are the steps that already</text>
-        <text class="ss" x="22" y="390" style="fill:#94a3b8">begin with the words &ldquo;when something arrives&rdquo;.</text>
+        <rect class="bx" x="4" y="403.2" width="384" height="148.4" rx="8"/>
+        <text class="lb" x="22" y="431.2">WHAT CAN START AN AGENT</text>
+        <text class="ss" x="22" y="462">A file arriving &middot; a schedule &middot; a record changing</text>
+        <text class="ss" x="22" y="490">an email &middot; an approval completing &middot; another agent</text>
+        <text class="ss" x="22" y="523.6" style="fill:#64748b">Your first candidates are the steps that already</text>
+        <text class="ss" x="22" y="546" style="fill:#64748b">begin with the words &ldquo;when something arrives&rdquo;.</text>
 
-        <rect class="bx r" x="396" y="288" width="384" height="106" rx="8"/>
-        <text class="lb r" x="414" y="308">THE RULE FOR UNATTENDED RUNS</text>
-        <text class="ss" x="414" y="330" style="fill:#7f1d1d;font-weight:600">Never ask a clarifying question when</text>
-        <text class="ss" x="414" y="348" style="fill:#7f1d1d;font-weight:600">nobody is there to answer it.</text>
-        <text class="ss" x="414" y="372" style="fill:#7f1d1d">Choose nothing. Record the ambiguity. Let the</text>
-        <text class="ss" x="414" y="390" style="fill:#7f1d1d">gate put it in front of a person.</text>
+        <rect class="bx r" x="396" y="403.2" width="384" height="148.4" rx="8"/>
+        <text class="lb r" x="414" y="431.2">THE RULE FOR UNATTENDED RUNS</text>
+        <text class="ss" x="414" y="462" style="fill:#7f1d1d;font-weight:600">Never ask a clarifying question when</text>
+        <text class="ss" x="414" y="487.2" style="fill:#7f1d1d;font-weight:600">nobody is there to answer it.</text>
+        <text class="ss" x="414" y="520.8" style="fill:#7f1d1d">Choose nothing. Record the ambiguity. Let the</text>
+        <text class="ss" x="414" y="546" style="fill:#7f1d1d">gate put it in front of a person.</text>
 
-        <rect class="bx a" x="788" y="288" width="388" height="106" rx="8"/>
-        <text class="lb a" x="806" y="308">WHAT THIS COSTS YOU</text>
-        <text class="ss" x="806" y="330" style="fill:#92400e">An agent nobody watches needs the run history to be</text>
-        <text class="ss" x="806" y="348" style="fill:#92400e">readable, the failure path to be designed, and an</text>
-        <text class="ss" x="806" y="366" style="fill:#92400e">owner who notices when it stops.</text>
-        <text class="ss" x="806" y="390" style="fill:#92400e;font-weight:600">Autonomy is not a feature. It is a maintenance commitment.</text>
+        <rect class="bx a" x="788" y="403.2" width="388" height="148.4" rx="8"/>
+        <text class="lb a" x="806" y="431.2">WHAT THIS COSTS YOU</text>
+        <text class="ss" x="806" y="456" style="fill:#92400e">An agent nobody watches needs the run history to be</text>
+        <text class="ss" x="806" y="477" style="fill:#92400e">readable, the failure path to be designed, and an</text>
+        <text class="ss" x="806" y="498" style="fill:#92400e">owner who notices when it stops.</text>
+        <text class="ss" x="806" y="521" style="fill:#92400e;font-weight:600">Autonomy is not a feature.</text>
+        <text class="ss" x="806" y="542" style="fill:#92400e;font-weight:600">It is a maintenance commitment.</text>
       </svg>
     </div>
   </div>
@@ -1817,74 +1816,74 @@ svg{width:100%;height:auto;display:block}
   <h2>What we built &mdash; end to end, in one run<span class="cue post">POST &middot; DEMO 2.7</span><span class="tag g">2.7</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 400" role="img" aria-label="The completed capstone pipeline">
-        <rect class="bx g" x="4" y="30" width="152" height="104" rx="8"/>
-        <text class="lb g" x="20" y="20">INGEST</text>
-        <text class="tt" x="20" y="58" style="font-size:13.5px">Factsheet PDF</text>
-        <text class="ss" x="20" y="80">+ manager update</text>
-        <text class="ss" x="20" y="100">+ messy document</text>
-        <text class="ss" x="20" y="124" style="fill:#047857">knowledge, 2.1</text>
-        <path class="flg" d="M160 82 L182 82"/>
-        <rect class="bx g" x="186" y="30" width="152" height="104" rx="8"/>
-        <text class="lb g" x="202" y="20">EXTRACT</text>
-        <text class="tt" x="202" y="58" style="font-size:13.5px">25-key record</text>
-        <text class="ss" x="202" y="80">schema-enforced</text>
-        <text class="ss" x="202" y="100">4 validation rungs</text>
-        <text class="ss" x="202" y="124" style="fill:#047857">2.4</text>
-        <path class="flg" d="M342 82 L364 82"/>
-        <rect class="bx g" x="368" y="30" width="152" height="104" rx="8"/>
-        <text class="lb g" x="384" y="20">ENRICH</text>
-        <text class="tt" x="384" y="58" style="font-size:13.5px">FX + mandate</text>
-        <text class="ss" x="384" y="80">+ holdings, benchmark</text>
-        <text class="ss" x="384" y="100">4 actions, agent-chosen</text>
-        <text class="ss" x="384" y="124" style="fill:#047857">2.2, 2.3</text>
-        <path class="flg" d="M524 82 L546 82"/>
-        <rect class="bx g" x="550" y="30" width="152" height="104" rx="8"/>
-        <text class="lb g" x="566" y="20">PLAN</text>
-        <text class="tt" x="566" y="58" style="font-size:13.5px">Slide plan JSON</text>
-        <text class="ss" x="566" y="80">every figure sourced</text>
-        <text class="ss" x="566" y="100">unresolved listed</text>
-        <text class="ss" x="566" y="124" style="fill:#047857">2.5</text>
-        <path class="flg" d="M706 82 L728 82"/>
-        <rect class="bx g" x="732" y="30" width="152" height="104" rx="8"/>
-        <text class="lb g" x="748" y="20">RENDER</text>
-        <text class="tt" x="748" y="58" style="font-size:13.5px">PowerPoint</text>
-        <text class="ss" x="748" y="80">house template</text>
-        <text class="ss" x="748" y="100">your Aspose code</text>
-        <text class="ss" x="748" y="124" style="fill:#047857">2.5</text>
-        <path class="flg" d="M888 82 L910 82"/>
-        <rect class="bx a" x="914" y="30" width="152" height="104" rx="8"/>
-        <text class="lb a" x="930" y="20">APPROVE</text>
-        <text class="tt" x="930" y="58" style="font-size:13.5px">Human gate</text>
-        <text class="ss" x="930" y="80">2 flags to check</text>
-        <text class="ss" x="930" y="100">decision logged</text>
-        <text class="ss" x="930" y="124" style="fill:#b45309">2.6</text>
-        <path class="flg" d="M1070 82 L1092 82"/>
-        <rect class="bx d" x="1096" y="30" width="80" height="104" rx="8"/>
-        <text class="lb w" x="1108" y="20">ISSUE</text>
-        <text class="ss w" x="1108" y="62">Teams</text>
-        <text class="ss w" x="1108" y="84">filed</text>
-        <text class="ss w" x="1108" y="106">stamped</text>
+      <svg class="up" viewBox="0 0 1180 560" role="img" aria-label="The completed capstone pipeline">
+                <rect class="bx g" x="4" y="42" width="162" height="146" rx="9"/>
+        <text class="lb g" x="16" y="28" style="font-size:11.5px">INGEST</text>
+        <text class="tt" x="16" y="80" style="font-size:15px">Factsheet PDF</text>
+        <text class="ss" x="16" y="110" style="font-size:13px">+ manager update</text>
+        <text class="ss" x="16" y="134" style="font-size:13px">+ messy document</text>
+        <text class="ss" x="16" y="172" style="font-size:13px;fill:#047857">knowledge, 2.1</text>
+        <path class="flg" d="M168 115 L180 115"/>
+        <rect class="bx g" x="184" y="42" width="162" height="146" rx="9"/>
+        <text class="lb g" x="196" y="28" style="font-size:11.5px">EXTRACT</text>
+        <text class="tt" x="196" y="80" style="font-size:15px">25-key record</text>
+        <text class="ss" x="196" y="110" style="font-size:13px">schema-enforced</text>
+        <text class="ss" x="196" y="134" style="font-size:13px">4 validation rungs</text>
+        <text class="ss" x="196" y="172" style="font-size:13px;fill:#047857">2.4</text>
+        <path class="flg" d="M348 115 L360 115"/>
+        <rect class="bx g" x="364" y="42" width="162" height="146" rx="9"/>
+        <text class="lb g" x="376" y="28" style="font-size:11.5px">ENRICH</text>
+        <text class="tt" x="376" y="80" style="font-size:15px">FX + mandate</text>
+        <text class="ss" x="376" y="110" style="font-size:13px">+ holdings, benchmark</text>
+        <text class="ss" x="376" y="134" style="font-size:13px">4 agent-chosen actions</text>
+        <text class="ss" x="376" y="172" style="font-size:13px;fill:#047857">2.2, 2.3</text>
+        <path class="flg" d="M528 115 L540 115"/>
+        <rect class="bx g" x="544" y="42" width="162" height="146" rx="9"/>
+        <text class="lb g" x="556" y="28" style="font-size:11.5px">PLAN</text>
+        <text class="tt" x="556" y="80" style="font-size:15px">Slide plan JSON</text>
+        <text class="ss" x="556" y="110" style="font-size:13px">every figure sourced</text>
+        <text class="ss" x="556" y="134" style="font-size:13px">unresolved listed</text>
+        <text class="ss" x="556" y="172" style="font-size:13px;fill:#047857">2.5</text>
+        <path class="flg" d="M708 115 L720 115"/>
+        <rect class="bx g" x="724" y="42" width="162" height="146" rx="9"/>
+        <text class="lb g" x="736" y="28" style="font-size:11.5px">RENDER</text>
+        <text class="tt" x="736" y="80" style="font-size:15px">PowerPoint</text>
+        <text class="ss" x="736" y="110" style="font-size:13px">house template</text>
+        <text class="ss" x="736" y="134" style="font-size:13px">your Aspose code</text>
+        <text class="ss" x="736" y="172" style="font-size:13px;fill:#047857">2.5</text>
+        <path class="flg" d="M888 115 L900 115"/>
+        <rect class="bx a" x="904" y="42" width="162" height="146" rx="9"/>
+        <text class="lb a" x="916" y="28" style="font-size:11.5px">APPROVE</text>
+        <text class="tt" x="916" y="80" style="font-size:15px">Human gate</text>
+        <text class="ss" x="916" y="110" style="font-size:13px">2 flags to check</text>
+        <text class="ss" x="916" y="134" style="font-size:13px">decision logged</text>
+        <text class="ss" x="916" y="172" style="font-size:13px;fill:#b45309">2.6</text>
+        <path class="flg" d="M1068 115 L1080 115"/>
+        <rect class="bx d" x="1084" y="42" width="96" height="146" rx="9"/>
+        <text class="lb" x="1096" y="28" style="font-size:11.5px;fill:#0b2545">ISSUE</text>
+        <text class="ss w" x="1096" y="86" style="font-size:13px">Teams</text>
+        <text class="ss w" x="1096" y="116" style="font-size:13px">filed</text>
+        <text class="ss w" x="1096" y="146" style="font-size:13px">stamped</text>
 
-        <rect class="bx" x="4" y="156" width="576" height="122" rx="8"/>
-        <text class="lb" x="22" y="178">WHAT IT COST TO BUILD</text>
-        <text class="ss" x="22" y="202">One agent &middot; 6 actions &middot; 3 knowledge sources &middot; 7 flows</text>
-        <text class="ss" x="22" y="224">One page of instructions &middot; one 25-key schema &middot; one approval gate &middot; one trigger</text>
-        <text class="ss" x="22" y="246">Built in an afternoon, in front of you, from an empty screen.</text>
-        <text class="ss" x="22" y="262" style="fill:#94a3b8">In your environment, add the connector approvals and the Aspose wrapper.</text>
+<rect class="bx" x="4" y="218.4" width="576" height="170.8" rx="8"/>
+        <text class="lb" x="22" y="249.2">WHAT IT COST TO BUILD</text>
+        <text class="ss" x="22" y="282.8">One agent &middot; 6 actions &middot; 3 knowledge sources &middot; 7 flows</text>
+        <text class="ss" x="22" y="313.6">One page of instructions &middot; one 25-key schema &middot; one approval gate &middot; one trigger</text>
+        <text class="ss" x="22" y="344.4">Built in an afternoon, in front of you, from an empty screen.</text>
+        <text class="ss" x="22" y="366.8" style="fill:#64748b">In your environment, add the connector approvals and the Aspose wrapper.</text>
 
-        <rect class="bx d" x="600" y="156" width="576" height="122" rx="8"/>
-        <text class="lb w" x="618" y="178">WHAT IT CHANGES</text>
-        <text class="ss w" x="618" y="202">Six hand-offs become one. Four hours become minutes plus a review.</text>
-        <text class="ss w" x="618" y="224">The reviewer reads two flagged fields instead of checking everything.</text>
-        <text class="ss w" x="618" y="248" style="fill:#fbbf24;font-weight:600">And every figure in the pack can be traced to where it came from &mdash;</text>
-        <text class="ss w" x="618" y="266" style="fill:#fbbf24;font-weight:600">which is more than the manual process could ever say.</text>
+        <rect class="bx d" x="600" y="218.4" width="576" height="170.8" rx="8"/>
+        <text class="lb w" x="618" y="249.2">WHAT IT CHANGES</text>
+        <text class="ss w" x="618" y="282.8">Six hand-offs become one. Four hours become minutes plus a review.</text>
+        <text class="ss w" x="618" y="313.6">The reviewer reads two flagged fields instead of checking everything.</text>
+        <text class="ss w" x="618" y="347.2" style="fill:#fbbf24;font-weight:600">And every figure in the pack can be traced to where it came from &mdash;</text>
+        <text class="ss w" x="618" y="372.4" style="fill:#fbbf24;font-weight:600">which is more than the manual process could ever say.</text>
 
-        <rect class="bx a" x="4" y="288" width="1172" height="106" rx="8"/>
-        <text class="lb a" x="22" y="310">THE HONEST CAVEATS, STATED ON THE WAY OUT</text>
-        <text class="ss" x="22" y="334">&bull; &nbsp;This ran on one synthetic fund. Ten real funds will surface document variation we have not seen.</text>
-        <text class="ss" x="22" y="356">&bull; &nbsp;The legacy call was a mock. The real one is a service-identity and gateway conversation.</text>
-        <text class="ss" x="22" y="378">&bull; &nbsp;One test set of ten questions is a start, not a scale test. Before it touches a client, run it on real documents in a test environment.</text>
+        <rect class="bx a" x="4" y="403.2" width="1172" height="148.4" rx="8"/>
+        <text class="lb a" x="22" y="434">THE HONEST CAVEATS, STATED ON THE WAY OUT</text>
+        <text class="ss" x="22" y="467.6">&bull; &nbsp;This ran on one synthetic fund. Ten real funds will surface document variation we have not seen.</text>
+        <text class="ss" x="22" y="498.4">&bull; &nbsp;The legacy call was a mock. The real one is a service-identity and gateway conversation.</text>
+        <text class="ss" x="22" y="529.2">&bull; &nbsp;One test set of ten questions is a start, not a scale test. Before it touches a client, run it on real documents in a test environment.</text>
       </svg>
     </div>
   </div>
@@ -2005,52 +2004,52 @@ svg{width:100%;height:auto;display:block}
   <h2>Monday morning: 30 / 60 / 90 days<span class="tag g">2.7</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 402" role="img" aria-label="Thirty sixty ninety day plan">
-        <rect class="bx" x="4" y="24" width="380" height="240" rx="8"/>
-        <text class="lb" x="22" y="18">FIRST 30 DAYS &mdash; REMOVE THE UNKNOWNS</text>
-        <text class="tt" x="22" y="54" style="font-size:14px">Ask, do not build</text>
-        <text class="ss" x="22" y="78">&bull; &nbsp;Which pattern is the mandate system &mdash; A, B or C?</text>
-        <text class="ss" x="22" y="98">&bull; &nbsp;Request a Power Platform environment for the team</text>
-        <text class="ss" x="22" y="118">&bull; &nbsp;Take the connector list to governance. Start the queue.</text>
-        <text class="ss" x="22" y="138">&bull; &nbsp;Ask who approves an agent into the org catalogue</text>
-        <text class="ss" x="22" y="158">&bull; &nbsp;Name the owner and the reviewer. Out loud, to their manager.</text>
-        <text class="ss" x="22" y="178">&bull; &nbsp;Rebuild today's agent on 3 real factsheets, synthetic client</text>
-        <rect class="bx a" x="22" y="186" width="340" height="64" rx="5"/>
-        <text class="ss" x="34" y="208" style="fill:#92400e;font-weight:600">Success at day 30: you know your timeline,</text>
-        <text class="ss" x="34" y="226" style="fill:#92400e;font-weight:600">and the approvals are already moving.</text>
-        <text class="ss" x="34" y="244" style="fill:#92400e">No code required to achieve any of this.</text>
+      <svg viewBox="0 0 1180 500" role="img" aria-label="Thirty sixty ninety day plan">
+        <rect class="bx" x="4" y="29.85" width="380" height="298.51" rx="8"/>
+        <text class="lb" x="22" y="22.39">FIRST 30 DAYS &mdash; REMOVE THE UNKNOWNS</text>
+        <text class="tt" x="22" y="67.16" style="font-size:15.7px">Ask, do not build</text>
+        <text class="ss" x="22" y="97.01">&bull; &nbsp;Which pattern is the mandate system &mdash; A, B or C?</text>
+        <text class="ss" x="22" y="121.89">&bull; &nbsp;Request a Power Platform environment for the team</text>
+        <text class="ss" x="22" y="146.77">&bull; &nbsp;Take the connector list to governance. Start the queue.</text>
+        <text class="ss" x="22" y="171.64">&bull; &nbsp;Ask who approves an agent into the org catalogue</text>
+        <text class="ss" x="22" y="196.52">&bull; &nbsp;Name the owner and the reviewer. Out loud, to their manager.</text>
+        <text class="ss" x="22" y="221.39">&bull; &nbsp;Rebuild today's agent on 3 real factsheets, synthetic client</text>
+        <rect class="bx a" x="22" y="231.34" width="340" height="79.6" rx="5"/>
+        <text class="ss" x="34" y="258.71" style="fill:#92400e;font-weight:600">Success at day 30: you know your timeline,</text>
+        <text class="ss" x="34" y="281.09" style="fill:#92400e;font-weight:600">and the approvals are already moving.</text>
+        <text class="ss" x="34" y="303.48" style="fill:#92400e">No code required to achieve any of this.</text>
 
-        <rect class="bx" x="400" y="24" width="380" height="240" rx="8"/>
-        <text class="lb" x="418" y="18">DAYS 30&ndash;60 &mdash; PROVE IT ON REAL DOCUMENTS</text>
-        <text class="tt" x="418" y="54" style="font-size:14px">Build narrow, test hard</text>
-        <text class="ss" x="418" y="80">&bull; &nbsp;Extraction + validation on 20 real factsheets</text>
-        <text class="ss" x="418" y="102">&bull; &nbsp;Build the eval set: 20 questions, known-correct answers</text>
-        <text class="ss" x="418" y="124">&bull; &nbsp;Wire the first real internal call, whatever pattern it is</text>
-        <text class="ss" x="418" y="146">&bull; &nbsp;Wrap the Aspose generator behind an endpoint</text>
-        <text class="ss" x="418" y="168">&bull; &nbsp;Measure: how many fields land in needs_review?</text>
-        <rect class="bx a" x="418" y="184" width="340" height="64" rx="5"/>
-        <text class="ss" x="430" y="206" style="fill:#92400e;font-weight:600">Success at day 60: a number you trust for</text>
-        <text class="ss" x="430" y="226" style="fill:#92400e;font-weight:600">extraction accuracy on your own documents.</text>
-        <text class="ss" x="430" y="244" style="fill:#92400e">That number is the whole business case.</text>
+        <rect class="bx" x="400" y="29.85" width="380" height="298.51" rx="8"/>
+        <text class="lb" x="418" y="22.39">DAYS 30&ndash;60 &mdash; PROVE IT ON REAL DOCUMENTS</text>
+        <text class="tt" x="418" y="67.16" style="font-size:15.7px">Build narrow, test hard</text>
+        <text class="ss" x="418" y="99.5">&bull; &nbsp;Extraction + validation on 20 real factsheets</text>
+        <text class="ss" x="418" y="126.87">&bull; &nbsp;Build the eval set: 20 questions, known-correct answers</text>
+        <text class="ss" x="418" y="154.23">&bull; &nbsp;Wire the first real internal call, whatever pattern it is</text>
+        <text class="ss" x="418" y="181.59">&bull; &nbsp;Wrap the Aspose generator behind an endpoint</text>
+        <text class="ss" x="418" y="208.96">&bull; &nbsp;Measure: how many fields land in needs_review?</text>
+        <rect class="bx a" x="418" y="228.86" width="340" height="79.6" rx="5"/>
+        <text class="ss" x="430" y="256.22" style="fill:#92400e;font-weight:600">Success at day 60: a number you trust for</text>
+        <text class="ss" x="430" y="281.09" style="fill:#92400e;font-weight:600">extraction accuracy on your own documents.</text>
+        <text class="ss" x="430" y="303.48" style="fill:#92400e">That number is the whole business case.</text>
 
-        <rect class="bx" x="796" y="24" width="380" height="240" rx="8"/>
-        <text class="lb" x="814" y="18">DAYS 60&ndash;90 &mdash; MAKE IT A SERVICE</text>
-        <text class="tt" x="814" y="54" style="font-size:14px">Ship to a small group</text>
-        <text class="ss" x="814" y="80">&bull; &nbsp;Solution into a test environment; run the eval set</text>
-        <text class="ss" x="814" y="102">&bull; &nbsp;Approval gate live, with a reviewer who has the time</text>
-        <text class="ss" x="814" y="124">&bull; &nbsp;Publish to Teams for 3&ndash;5 consultants, not the whole team</text>
-        <text class="ss" x="814" y="146">&bull; &nbsp;Governance pack: the eight checklist rows, answered</text>
-        <text class="ss" x="814" y="168">&bull; &nbsp;Decide the second agent, using the same four criteria</text>
-        <rect class="bx g" x="814" y="184" width="340" height="64" rx="5"/>
-        <text class="ss" x="826" y="206" style="fill:#047857;font-weight:600">Success at day 90: one agent in real use,</text>
-        <text class="ss" x="826" y="226" style="fill:#047857;font-weight:600">owned, governed, and measurably faster.</text>
-        <text class="ss" x="826" y="244" style="fill:#047857">One. Not five.</text>
+        <rect class="bx" x="796" y="29.85" width="380" height="298.51" rx="8"/>
+        <text class="lb" x="814" y="22.39">DAYS 60&ndash;90 &mdash; MAKE IT A SERVICE</text>
+        <text class="tt" x="814" y="67.16" style="font-size:15.7px">Ship to a small group</text>
+        <text class="ss" x="814" y="99.5">&bull; &nbsp;Solution into a test environment; run the eval set</text>
+        <text class="ss" x="814" y="126.87">&bull; &nbsp;Approval gate live, with a reviewer who has the time</text>
+        <text class="ss" x="814" y="154.23">&bull; &nbsp;Publish to Teams for 3&ndash;5 consultants, not the whole team</text>
+        <text class="ss" x="814" y="181.59">&bull; &nbsp;Governance pack: the eight checklist rows, answered</text>
+        <text class="ss" x="814" y="208.96">&bull; &nbsp;Decide the second agent, using the same four criteria</text>
+        <rect class="bx g" x="814" y="228.86" width="340" height="79.6" rx="5"/>
+        <text class="ss" x="826" y="256.22" style="fill:#047857;font-weight:600">Success at day 90: one agent in real use,</text>
+        <text class="ss" x="826" y="281.09" style="fill:#047857;font-weight:600">owned, governed, and measurably faster.</text>
+        <text class="ss" x="826" y="303.48" style="fill:#047857">One. Not five.</text>
 
-        <rect class="bx d" x="4" y="284" width="1172" height="110" rx="8"/>
-        <text class="tt w" x="24" y="312" style="font-size:16px">The one thing that decides whether any of this happens</text>
-        <text class="ss w" x="24" y="338">Not the tooling, not the licence, not the model. <tspan style="fill:#fbbf24;font-weight:700">A named person whose actual job includes owning this</tspan> &mdash;</text>
-        <text class="ss w" x="24" y="358">and a first agent narrow enough that they can succeed at it within a quarter.</text>
-        <text class="ss w" x="24" y="376" style="fill:#93c5fd">Everything else on this slide is achievable. That one is a decision, and it is not ours to make.</text>
+        <rect class="bx d" x="4" y="353.23" width="1172" height="136.82" rx="8"/>
+        <text class="tt w" x="24" y="388.06" style="font-size:17.9px">The one thing that decides whether any of this happens</text>
+        <text class="ss w" x="24" y="420.4">Not the tooling, not the licence, not the model. <tspan style="fill:#fbbf24;font-weight:700">A named person whose actual job includes owning this</tspan> &mdash;</text>
+        <text class="ss w" x="24" y="445.27">and a first agent narrow enough that they can succeed at it within a quarter.</text>
+        <text class="ss w" x="24" y="467.66" style="fill:#93c5fd">Everything else on this slide is achievable. That one is a decision, and it is not ours to make.</text>
       </svg>
     </div>
   </div>
