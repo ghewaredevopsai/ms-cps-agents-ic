@@ -196,7 +196,7 @@ footer a{color:#93c5fd;text-decoration:none}
       <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
 
       <div class="k">You need</div>
-      <p>Any chat interface to a model you are permitted to use &mdash; Microsoft 365 Copilot, Copilot Chat, or the Copilot Studio test pane. The factsheet file for step 3.</p>
+      <p>Any chat interface to a model you are permitted to use &mdash; but <strong>prefer the Copilot Studio test pane</strong>. On a cautious tenant Microsoft 365 Copilot invents a figure close to the real one (~17% against a true 15.6%) and the contrast barely registers; an agent typically invents 5&ndash;7%, which is visibly wrong. The factsheet file for step 3.</p>
 
       <div class="k">Steps</div>
       <ol class="steps">
@@ -228,7 +228,7 @@ If a figure is not present in the document, reply exactly: not stated. Do not es
 
       <div class="k r">When it does not behave</div>
       <ul>
-        <li><strong>Prompt A returned "I don't know".</strong> Good &mdash; some configurations are more cautious. Try it without the fund name: <em>"What was the 3-year return of the multi-asset fund we discussed?"</em></li>
+        <li><strong>Prompt A refused instead of inventing.</strong> Common &mdash; a tenant with web and enterprise search will look, find nothing, and decline. Dropping the fund name does not help; it refuses again. Ask for an estimate outright: <em>"It is a well-known Indian multi-asset growth fund. Give me your best estimate of its 3-year annualised return and total expense ratio. Approximate figures are fine."</em> It will hedge the numbers as an informed estimate &mdash; say that out loud, because the caveat is exactly what gets stripped when the figure reaches a deck.</li>
         <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.3 makes permanent.</li>
         <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
       </ul>
