@@ -345,7 +345,7 @@ TER direct | 0.62% | Section 9 Fees</pre>
         <li><strong>Retest before doing anything else.</strong> Those two switches are usually enough &mdash; verified on a live tenant, where the same question went from a web answer to a cited factsheet answer on the toggles alone. <strong>Only if it still cites the web:</strong> Topics &rarr; <strong>System</strong> &rarr; switch off <code>Conversational boosting</code>, which answers from a generative fallback and is the step almost everyone misses.</li>
         <li><strong>Test it</strong> in the pane on the right with the three questions below &mdash; in a <strong>new</strong> conversation, always.</li>
         <li><strong>Now make one behaviour non-negotiable.</strong> Question 3 was refused by a <em>sentence in Instructions</em> &mdash; guidance the model weighs against everything else you wrote. For the things compliance signs off, that is not strong enough. <strong>Topics</strong> &rarr; <strong>+ Add a topic</strong> &rarr; <strong>From blank</strong>, named <code>Advice refusal</code>.</li>
-        <li><strong>Add the trigger phrases</strong> below &mdash; six is plenty. They match on <em>meaning</em>, so you need not enumerate every phrasing.</li>
+        <li><strong>Describe when the topic applies.</strong> There is no longer a trigger-phrase list: a blank topic's trigger is <em>"The agent chooses"</em> plus a free-text <strong>"Describe what the topic does"</strong> box. Put the six phrases below into that description as example questions, and add the narrowing sentence so it does not swallow document lookups. They match on <em>meaning</em>, so you need not enumerate every phrasing.</li>
         <li><strong>Add a Message node</strong> and paste the refusal wording below. Nothing on this path is generated, so nothing on it can be re-worded. Save.</li>
         <li><strong>Retest in a new conversation</strong>, asking three ways &mdash; <em>"should we buy this"</em>, <em>"is this a good fund"</em>, <em>"would you recommend it"</em>. Compare with step 8.</li>
       </ol>
@@ -565,26 +565,27 @@ every variant explicitly with its label.</pre>
 
       <div class="k">Part 1 &mdash; the external REST API</div>
       <ol class="steps">
-        <li>Go to <a href="https://make.powerautomate.com">make.powerautomate.com</a> &rarr; <strong>Create</strong> &rarr; <strong>Instant cloud flow</strong> &rarr; trigger: <strong>When Copilot Studio calls a flow</strong>. Name it <code>Get FX Rate</code>.</li>
+        <li>Go to <a href="https://make.powerautomate.com">make.powerautomate.com</a> &rarr; <strong>Create</strong> &rarr; <strong>Instant cloud flow</strong> &rarr; trigger: <strong>When an agent calls the flow</strong>. Name it <code>Get FX Rate</code>.</li>
         <li>Add two inputs to the trigger: text named <code>ratedate</code>, and number named <code>amountinr</code>.</li>
         <li>Add an <strong>HTTP</strong> action. Method <code>GET</code>. URI: the URL below, with the input appended.</li>
         <li><strong>Do the conversion in the flow, not in the agent.</strong> Add a <strong>Compose</strong> action with the expression below &mdash; it divides the rupee amount by the retrieved rate.</li>
-        <li>Add <strong>Respond to Copilot</strong> with two outputs: text <code>fxjson</code> set to the HTTP body, and number <code>amountusd</code> set to the Compose output.</li>
-        <li>Save. In Copilot Studio, open your agent &rarr; <strong>Actions</strong> &rarr; <strong>Add an action</strong> &rarr; pick your flow.</li>
+        <li>Add <strong>Respond to the agent</strong> with two outputs: text <code>fxjson</code> set to the HTTP body, and number <code>amountusd</code> set to the Compose output.</li>
+        <li>Save. In Copilot Studio, open your agent &rarr; <strong>Tools</strong> &rarr; <strong>Add a tool</strong> &rarr; <strong>Workflows</strong> &rarr; pick your flow.</li>
+        <li><strong>Reopen <code>Respond to the agent</code> and check the number output kept its expression.</strong> Publishing silently blanks number-typed outputs; the flow still saves and runs, it just returns one output instead of two. Re-add and republish if empty.</li>
         <li>Give the action a description the agent can route on &mdash; text below. This description is how it decides to call your flow, so write it for a reader, not a machine.</li>
         <li>Test: ask the agent the FX question below.</li>
       </ol>
 
       <div class="k">The API call</div>
-      <pre>https://api.frankfurter.app/2026-06-30?from=USD&to=INR</pre>
-      <p style="font-size:.92em;margin-top:-4px">A free, no-key FX endpoint. Paste it in a browser tab first to see the raw JSON before you wire it up &mdash; always confirm an API works outside the agent before blaming the agent.</p>
+      <pre>https://api.frankfurter.dev/v1/2026-06-30?from=USD&to=INR</pre>
+      <p style="font-size:.92em;margin-top:-4px">A free, no-key FX endpoint. <strong>The older <code>api.frankfurter.app</code> host now returns 301 and the HTTP action does not follow redirects</strong>, so use the <code>.dev</code> host and the <code>/v1/</code> path. Paste it in a browser tab first to see the raw JSON before you wire it up &mdash; always confirm an API works outside the agent before blaming the agent.</p>
 
       <div class="k">The conversion expression &mdash; Compose action</div>
       <pre>div(
-  triggerBody()?['amountinr'],
+  triggerBody()?['number'],
   float(body('HTTP')?['rates']?['INR'])
 )</pre>
-      <p style="font-size:.92em;margin-top:-4px">This is the arithmetic rule from demo 1.3 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
+      <p style="font-size:.92em;margin-top:-4px"><strong>Note the key is <code>number</code>, not <code>amountinr</code>.</strong> On this trigger the names you type are only display titles; the body keys are generic (<code>text</code>, <code>number</code>). Using <code>['amountinr']</code> yields Null and the flow fails. Safest of all: insert the value from the dynamic-content picker rather than hand-writing <code>triggerBody()</code>. This is the arithmetic rule from demo 1.3 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
 
       <div class="k">Action description &mdash; how the agent knows to use it</div>
       <pre>Converts an amount in Indian rupees to US dollars at the exchange rate published
@@ -600,7 +601,7 @@ amount as a plain number, so Rs 4,820 crore is passed as 48200000000.</pre>
       <div class="k g" style="margin-top:10px">What you should see &mdash; part 1</div>
       <ul>
         <li>The agent reads <em>Rs 4,820 crore</em> off the factsheet, converts it to <code>48200000000</code>, and passes that to the action &mdash; the one piece of arithmetic it is allowed, because a crore is a unit, not a calculation.</li>
-        <li>It reports roughly <strong>USD 557.7 million</strong> at a rate of about 86.42, citing the action rather than itself.</li>
+        <li>It reports roughly <strong>USD 509.2 million</strong> at a rate of about <strong>94.66</strong>, citing the action rather than itself. (Rates move &mdash; check the live figure before the session and expect the number on screen to differ from any printed here.)</li>
         <li>Ask it <em>"did you work that out yourself?"</em>. The correct answer is no, and the trace will confirm it.</li>
       </ul>
 
@@ -637,6 +638,7 @@ Input clientid is the internal client reference, for example CL-4471.</pre>
 
       <div class="k r">When it does not behave</div>
       <ul>
+        <li><strong>Your typing lands in the wrong box.</strong> Clicking the canvas <code>+</code> while an action's parameter panel is still open puts the next keystrokes into <em>that panel's field</em> rather than the action search. The tell is stray words beside an expression token. Close the panel first, or check the field before you save.</li>
         <li><strong>The agent never calls the action.</strong> Nine times out of ten the description is too terse. Rewrite it to say <em>when</em> to use it, not just what it does &mdash; the agent routes on that sentence.</li>
         <li><strong>The flow runs but the agent ignores the result.</strong> The output is not being returned as text the agent can read. Check the Respond step actually maps the body, and test the flow standalone in Power Automate first.</li>
         <li><strong>The FX endpoint returns a different date</strong> than you asked for. That is correct behaviour &mdash; it falls back to the last business day. Good material for a conversation about what your agent should say when data is "close enough".</li>
@@ -659,7 +661,7 @@ Input clientid is the internal client reference, for example CL-4471.</pre>
 
       <div class="k">Steps</div>
       <ol class="steps">
-        <li>New flow, <strong>When Copilot Studio calls a flow</strong>, named <code>Get Holdings</code>. No inputs needed.</li>
+        <li>New flow, <strong>When an agent calls the flow</strong>, named <code>Get Holdings</code>. No inputs needed.</li>
         <li>Add <strong>Excel Online (Business)</strong> &rarr; <strong>List rows present in a table</strong>. Point it at <code>holdings.xlsx</code> and its table.</li>
         <li><strong>Compute the top-five total inside the flow.</strong> Add a <strong>Compose</strong> action with the expression below. This is the step people skip, and skipping it is what pushes the arithmetic back into the model.</li>
         <li>Respond to Copilot with two outputs: text <code>holdingsrows</code> (the rows) and number <code>top5weightpct</code> (the Compose output).</li>
@@ -711,7 +713,8 @@ What is the average weight of the fund's top ten holdings?</pre>
       <ul>
         <li><strong>Question 1</strong> &mdash; <strong>22.9%</strong>, quoted from the action's <code>top5weightpct</code> output. Ask <em>"which action produced that?"</em> and it can name one. That is the whole difference between this answer and a plausible one.</li>
         <li><strong>Question 2</strong> &mdash; 13.1% from the benchmark table, 15.6% from the factsheet, and the 2.5% difference labelled as excess return. This one the agent <em>is</em> allowed to subtract, because both operands are on screen with their sources and you can check it by eye.</li>
-        <li><strong>Question 3</strong> &mdash; the interesting one. No action returns an average, so the agent should decline and say an averaging action is missing. If it hands you a number instead, the rule is not holding, and you have found the defect this session exists to prevent.</li>
+        <li><strong>Question 3</strong> &mdash; the interesting one. No action returns an average, so the agent declines. If it hands you a number instead, the rule is not holding, and you have found the defect this session exists to prevent.</li>
+        <li><strong>Expect the decline to be blunt.</strong> With <em>Allow ungrounded responses</em> off, the agent cannot explain <em>why</em> it is stuck &mdash; it falls to the generic <em>"I'm not sure how to help with that."</em> The safety property holds and no average is invented, but the instructive sentence is suppressed. Show the trace instead, or make the point that an agent which declines is a working agent.</li>
       </ul>
 
       <div class="tip">
@@ -750,6 +753,7 @@ What is the average weight of the fund's top ten holdings?</pre>
 
       <div class="k">Steps</div>
       <ol class="steps">
+        <li><strong>Turn <em>Allow ungrounded responses</em> back on</strong> &mdash; Settings &rarr; Generative AI. Demo 1.3 switched it off, and with it off this demo does not run at all: a bare JSON object carries no citations, so the grounding gate suppresses the answer and you get <em>"No information was found that could help answer this."</em> Retrieval succeeds; the reply is blocked after the fact. Say why you are toggling it &mdash; it is the clearest illustration all day of what "grounded" actually enforces.</li>
         <li>Add the extraction instruction block below to your agent's Instructions.</li>
         <li>Ask it to extract the clean factsheet &mdash; command 1. Check every field against the document yourself. Yes, all of them; this is the one demo where you must verify by hand.</li>
         <li>Save the messy document from the appendix as a second file and upload it as knowledge.</li>
@@ -1114,7 +1118,7 @@ Nifty 50 TRI,16.1,17.2,15.4,2026-06-30</pre>
   "amount": 1.0,
   "base": "USD",
   "date": "2026-06-30",
-  "rates": { "INR": 86.42 }
+  "rates": { "INR": 94.66 }
 }</pre>
   <p style="font-size:.92em;margin-top:-4px">Illustrative rate. When the live endpoint is reachable it will return the real published rate, and may fall back to the previous business day &mdash; which is itself worth noticing.</p>
 

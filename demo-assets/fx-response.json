@@ -2,5 +2,7 @@
   "amount": 1.0,
   "base": "USD",
   "date": "2026-06-30",
-  "rates": { "INR": 86.42 }
+  "rates": {
+    "INR": 94.66
+  }
 }
