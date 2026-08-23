@@ -256,7 +256,7 @@ If a figure is not present in the document, reply exactly: not stated. Do not es
         <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
         <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
         <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
-        <li><strong>Break it deliberately.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more. Watch the three absent fields fill themselves in.</li>
+        <li><strong>Break it deliberately &mdash; in the Copilot Studio agent, not in chat.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more, against an agent with <em>Allow ungrounded responses</em> on. Watch the three absent fields fill themselves in.</li>
       </ol>
 
       <div class="k">The vague prompt (run this first, so the contrast lands)</div>
@@ -290,7 +290,7 @@ TER direct | 0.62% | Section 9 Fees</pre>
         <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
         <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
         <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work.</li>
-        <li>With the refusal line deleted, watch those same three rows quietly fill with plausible-looking numbers. That is the entire lesson of this demo, and it is worth running twice.</li>
+        <li>With the refusal line deleted, watch those same three rows quietly fill with plausible-looking numbers. That is the entire lesson of this demo, and it is worth running twice. It only happens on an agent with ungrounded responses allowed &mdash; see the note below before you rely on it live.</li>
       </ul>
 
       <div class="k r">When it does not behave</div>
@@ -298,6 +298,7 @@ TER direct | 0.62% | Section 9 Fees</pre>
         <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
         <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
         <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
+        <li><strong>Step 5 changed nothing &mdash; the fields still read <em>not stated</em>.</strong> Expected in Microsoft 365 Copilot chat with a file attached: it will not invent a field value whichever instruction you delete, and it emits <em>not stated</em> on its own as its convention for an absent field. Deleting the second guard as well makes no difference. Run step 5 against a Copilot Studio agent with <em>Allow ungrounded responses</em> on, or present it as a walkthrough rather than a live result.</li>
       </ul>
 
       <div class="k a">Carry this forward</div>
