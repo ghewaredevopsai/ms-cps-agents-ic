@@ -821,7 +821,7 @@ Rules:
       <div class="amber">
         <strong>Read this before you start.</strong> The last hop &mdash; plan to file &mdash; is the one people assume needs a premium connector. <strong>It does not.</strong>
         A genuine <code>.pptx</code> can be written by anything that reads the plan: the generator you already own, or <code>plan-to-pptx.py</code> from the demo assets, which does it offline with one library and no licence.
-        What matters is that <strong>the plan is the interface</strong>. Everything before it is what you build in Copilot Studio; everything after it is code your team already knows how to write.
+        What matters is that <strong>the plan is the interface</strong>. Everything before it is what you build in Copilot Studio; everything after it is code your team already knows how to write.<br><br><strong>Beside the flow, or inside it.</strong> Run the generator by hand and the chain still needs a person at the end &mdash; which quietly undercuts what demo 2.7 claims. Host the same script behind an HTTP endpoint (an Azure Function in Python takes minutes) and the flow calls it: <em>agent &rarr; flow &rarr; endpoint &rarr; file in OneDrive</em>, no human step. The trainer runs the hosted version; nothing about the plan, the schema or the agent changes. That is the whole point &mdash; the interface is the plan, and where the renderer lives is your team's decision, not the agent's.
       </div>
 
       <div class="k">Steps</div>
@@ -867,14 +867,14 @@ and a short commentary. Then save the plan.</pre>
       <div class="k g">What you should see</div>
       <ul>
         <li>Five to seven slides, every number carrying a source, and an <code>unresolved</code> list that is honest about what it could not find.</li>
-        <li>Commentary that references only figures present on the slides &mdash; the constraint that stops a deck contradicting itself.</li>
+        <li>Commentary that references only figures present on the slides &mdash; the constraint that stops a deck contradicting itself. <strong>Expect this one to break.</strong> On a live run the commentary cited a mandate ceiling of 70% and a floor of 20% &mdash; both real, both from the mandate action, <em>neither on any slide</em>. Read the bullets against the slides before you move on; this is the moment worth slowing down for.</li>
         <li><code>plan.json</code> sitting in your OneDrive folder, ready for whatever builds the file.</li>
         <li>Run through <code>plan-to-pptx.py</code>, that same JSON becomes a seven-slide PowerPoint file: six slides of content with every figure carrying its source, and a closing slide listing what could not be sourced. Compare it against <code>investment-report-sample.pptx</code> in the demo assets. <code>deck-renderer.html</code> renders the identical plan in a browser if you would rather install nothing.</li>
       </ul>
 
       <div class="k r">When it does not behave</div>
       <ul>
-        <li><strong>Commentary contains a number you cannot find on any slide.</strong> The most valuable failure in the whole day. Tighten the rule and run again.</li>
+        <li><strong>Commentary contains a number you cannot find on any slide.</strong> The most valuable failure in the whole day. Show it first, then tighten the rule and run again so the room sees both states. Watch for the sly version: a bullet claiming a &ldquo;neutral allocation target of 65%&rdquo; survives a naive check because <code>65</code> also occurs inside <em>CRISIL Hybrid 35+65 Aggressive Index</em>. Checking by substring is not checking.</li>
         <li><strong>The JSON will not parse.</strong> Usually a stray sentence before the brace. Same fix as demo 2.4.</li>
         <li><strong>Twelve slides.</strong> The agent is being thorough rather than obedient. Constrain harder: <em>"Exactly six slides. No more."</em></li>
       </ul>
