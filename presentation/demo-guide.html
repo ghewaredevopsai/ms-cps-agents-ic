@@ -891,25 +891,29 @@ and a short commentary. Then save the plan.</pre>
 
       <div class="k">Steps</div>
       <ol class="steps">
-        <li>In your agent, select <strong>Publish</strong>. Wait for it to complete &mdash; nothing below works until it has.</li>
-        <li>Go to <strong>Channels</strong> &rarr; <strong>Microsoft Teams</strong> &rarr; turn it on, then <strong>Open the agent in Teams</strong>. Ask it a question from inside Teams.</li>
-        <li><strong>Share it.</strong> Use the Share control to add one colleague. Notice the difference between sharing it to <em>use</em> and adding a <em>co-author</em> &mdash; that distinction is your first governance decision.</li>
-        <li><strong>Open one page you have not looked at yet:</strong> Settings &rarr; <strong>Security</strong> &rarr; <strong>Authentication</strong>. With <em>Authenticate with Microsoft</em> on, knowledge results trim to each asker's own permissions &mdash; a colleague who cannot open a file cannot be cited to it. Off, everyone queries one index and the agent becomes a way to read documents you were never given. Thirty seconds, and it decides whether sharing this agent is safe.</li>
-        <li><strong>Now try the other channel.</strong> Channels &rarr; <strong>Microsoft 365 Copilot</strong> &rarr; tick <em>make the agent available in Microsoft 365 Copilot</em> &rarr; <strong>Add channel</strong>, then publish again. Re-open the channel afterwards and confirm the tick box is still set &mdash; it frequently clears itself during publish, and the symptom is an agent that never appears.</li>
-        <li><strong>Submit it to the organisation catalogue.</strong> Availability options &rarr; choose the audience (your teammates and shared users, or everyone in the organisation) &rarr; submit. The status becomes <em>waiting for approval</em>. <strong>That is the lesson of this step:</strong> you cannot put an agent in front of the firm on your own signature.</li>
-        <li><strong>Look at the other side of the gate.</strong> With admin rights: Microsoft&nbsp;365 admin centre &rarr; <strong>Agents</strong> &rarr; <em>manage requests</em>, where an administrator approves the agent, chooses who may install it, who receives it pre-installed, and which policy templates apply. Without admin rights &mdash; the normal case &mdash; find out <em>who</em> holds that queue. They are on your critical path, and the queue is not short.</li>
-        <li><strong>Add the approval gate.</strong> New flow, the <strong>When an agent calls the flow</strong> trigger, text inputs <code>decksummary</code> and <code>approver</code>. Add <strong>Approvals &rarr; Start and wait for an approval</strong> (Approve/Reject), then <strong>Respond to the agent</strong> with the outcome.</li>
-        <li>Add it as an action, described as: <em>"Sends a finished client deck for human approval before it is issued. Must be used before any output is described as final or client-ready."</em></li>
+        <li>In your agent, select <strong>Publish</strong>. The dialog offers <em>Force newest version</em> &mdash; leave it unticked the first time; it only matters once people already have the agent open in Teams. Wait for it to complete &mdash; nothing below works until it has.</li>
+        <li><strong>Find Channels.</strong> It sits behind the <strong>+2</strong> overflow beside the tab strip, not on the strip itself. Read two things before clicking anything. The banner: because the agent uses Microsoft authentication, only Teams, Microsoft&nbsp;365 and SharePoint are <em>available</em> &mdash; though every other tile, WhatsApp and Slack included, is still on the page, and <em>Web app</em> will hand you an SDK connection string if you ask it to. And above the banner, under <em>Draft agent status</em>: <strong>"Your agent runs tools that use the author's credentials &mdash; anyone you share with can use the original author's credentials"</strong>, beside a <em>View 7 tools</em> button. The product has written your governance argument for you.</li>
+        <li><strong>Turn the channel on &mdash; and notice there is only one.</strong> Teams and Microsoft&nbsp;365 Copilot are now a single tile, <strong>Microsoft 365 and Microsoft Teams</strong>; they used to be two separate channels. Turn it on, then <strong>Open the agent in Teams</strong> and ask it a question from inside Teams. While you are there, read the publisher line under the agent's name: it says <strong>Your developer name</strong> until somebody sets it. The field is <em>Edit details</em> &rarr; <em>Teams settings</em> &rarr; <strong>More</strong> &mdash; collapsed by default, and the only place the app's publisher, website, privacy and terms links can be changed. That placeholder is the first thing a colleague sees.</li>
+        <li><strong>Share it.</strong> Use the Share control to add one colleague: what you grant a person is the <em>use</em> versus <em>co-author</em> decision &mdash; one can run the agent, the other can change it. Then select the group <strong>Everyone in organization</strong> and read its permission aloud: <strong>End user access</strong> &mdash; <em>"can manage connections and configure the agent to either chat with it or allow it to operate autonomously on their behalf"</em> &mdash; against the alternative, <em>No permissions, unless specified</em>. Sharing an agent shares what it can <em>do</em>, not only what it knows. Note the <em>Data permissions</em> line underneath too: your users still need access to the data behind the flows.</li>
+        <li><strong>Open one page you have not looked at yet:</strong> Settings &rarr; <strong>Security</strong> &rarr; <strong>Authentication</strong>. With <em>Authenticate with Microsoft</em> on, knowledge results trim to each asker's own permissions &mdash; a colleague who cannot open a file cannot be cited to it. Off, everyone queries one index and the agent becomes a way to read documents you were never given. Thirty seconds, and it decides whether sharing this agent is safe. On a governed tenant you may find <em>No authentication</em> and <em>Authenticate manually</em> greyed out altogether, and <em>Multi-tenant support</em> disabled &mdash; the decision taken above your head, which is the point rather than a disappointment.</li>
+        <li><strong>Submit it to the organisation catalogue.</strong> <em>Availability options</em> &rarr; <strong>Show in the store</strong> &rarr; pick the audience: <em>Show to my teammates and shared users</em>, which lands in <strong>Built with Power Platform</strong>, or <em>Show to everyone in my org</em>, which lands in <strong>Built by your org</strong> after an admin approves &rarr; <strong>Submit to org catalog</strong>. A dialog asks <em>"Give everyone access to this agent?"</em> &mdash; and answering yes is what put <strong>Everyone in organization</strong> on the share list you just read. The status becomes <strong>waiting for approval from your Teams admin</strong>, against a version number. <strong>That is the lesson of this step:</strong> you cannot put an agent in front of the firm on your own signature.</li>
+        <li><strong>Look at the other side of the gate.</strong> With admin rights: Microsoft&nbsp;365 admin centre &rarr; <strong>Agents</strong> &rarr; <strong>All agents</strong> &rarr; <strong>Requests</strong>, where your submission appears within seconds. Open the row itself &mdash; the &#8942; menu's entries are greyed; the live <em>Publish to store</em> and <em>Reject submission</em> sit in the detail panel. Then read its <strong>Data &amp; tools</strong> tab out loud: knowledge is listed with a <strong>Sensitivity label</strong> column, but <em>Tools</em> reports <strong>"No tools configured"</strong> for an agent with seven, and <em>Permissions</em> reports none from Entra&nbsp;ID. <strong>The person approving your agent cannot see that it calls five flows and an outside endpoint under your credentials</strong> &mdash; so the reviewer's checklist has to come from you, which is what the table below is for. Without admin rights &mdash; the normal case &mdash; find out <em>who</em> holds that queue. They are on your critical path, and the queue is not short.</li>
+        <li><strong>Add the approval gate &mdash; and this is where the product bites.</strong> New flow, the <strong>When an agent calls the flow</strong> trigger, text inputs <code>decksummary</code> and <code>approver</code>. Add <strong>Approvals &rarr; Create an approval</strong> &mdash; <em>not</em> <em>Start and wait for an approval</em>. Then <strong>Respond to the agent</strong> with two text outputs: <code>status</code>, a fixed <code>Pending approval</code>, and <code>approvalid</code>, set to the action's <strong>Approval ID</strong>. Publish the flow.</li>
+        <li><strong>Two things that will otherwise cost you the afternoon.</strong> Approvals asks you to <em>create a connection</em> the first time it is used &mdash; an extra dialog, no credentials typed. And on the tool's <strong>Inputs</strong>, change <code>approver</code> from <em>Dynamically fill with AI</em> to <strong>Custom value</strong> with a real address: left on AI-fill the agent invents a plausible address and the approval silently goes nowhere.</li>
+        <li>Add it as a tool, described as: <em>"Sends a finished client deck for human approval before it is issued. Must be used before any output is described as final or client-ready. It returns as soon as the request is sent, so the outcome is not known yet: report that approval is pending and never describe the output as approved."</em></li>
         <li>Add the governance rule below to Instructions.</li>
-        <li>Ask the agent for a client-ready deck. Watch the approval land in Teams. <strong>Reject it once</strong> and see what the agent does.</li>
+        <li>Ask the agent for a client-ready deck. It should come back <strong>in a few seconds</strong> with an approval id and the word <em>pending</em> &mdash; not hanging, and not calling the deck final.</li>
+        <li><strong>Optional, about four minutes &mdash; cut this first if you are running late.</strong> If you want the agent to report the verdict too, build a second flow <code>Check Deck Approval</code>: agent trigger with one text input <code>approvalid</code> &rarr; <strong>Wait for an approval</strong> &rarr; <strong>Respond to the agent</strong> with <code>outcome</code> and <code>approvercomments</code>. Map that second one carefully: <strong><code>responseSummary</code> does not carry the comment</strong> &mdash; it is only <em>"Approver: name, email, Response: Reject"</em>. Use <code>first(outputs('Wait_for_an_approval')?['body/responses'])?['comments']</code>. Add it as a tool. Now <strong>reject the card</strong> with a reason, then ask the agent what happened to that approval.</li>
         <li>Work the checklist below against what you built.</li>
       </ol>
 
       <div class="k">Instructions to append</div>
       <pre>Nothing you produce is client-ready until a human has approved it. When asked
-for a final or client-ready output, always send it for approval first and report
-the outcome. If approval is rejected, state the reason and do not reissue the
-output. Never describe an unapproved document as final.</pre>
+for a final or client-ready output, always send it for approval first. The
+approval tool returns before any human has answered, so report that approval is
+pending, give the approval id, and never describe the output as approved or
+final. If you are told the approval was rejected, state the reason and do not
+reissue the output.</pre>
 
       <div class="k">The governance checklist &mdash; work it against your own agent</div>
       <table>
@@ -929,15 +933,18 @@ output. Never describe an unapproved document as final.</pre>
       <div class="k g">What you should see</div>
       <ul>
         <li>The agent, in Teams, in your own sidebar &mdash; the moment it stops being a project and becomes a tool.</li>
-        <li>An approval card you must act on before the agent will call anything final.</li>
-        <li>On rejection: the agent reports the rejection and stops. It does not quietly try again, because you told it not to.</li>
+        <li>The agent answering <strong>in seconds</strong>, not hanging: an approval id, the status <em>pending approval</em>, and a plain statement that the deck is not client-ready yet.</li>
+        <li>An approval card carrying the deck summary <em>the agent itself wrote</em> &mdash; slide count, what each slide holds, and which action every figure came from.</li>
+        <li>If you built the optional read-back: on rejection the agent reports the rejection and the approver's reason, and stops. It does not quietly try again, because you told it not to.</li>
       </ul>
 
       <div class="k r">When it does not behave</div>
       <ul>
         <li><strong>Teams channel greyed out.</strong> The agent is not published, or your tenant restricts Teams app publishing. Publishing to the test channel still demonstrates it.</li>
-        <li><strong>The agent never appears in M365 Copilot.</strong> Three usual causes, in this order: the channel tick box cleared itself on publish; the catalogue request is still awaiting an administrator; or the audience you chose does not include you. Check all three before rebuilding anything.</li>
-        <li><strong>Approval never arrives.</strong> The approver address is wrong, or the flow is waiting. Check the run history in Power Automate &mdash; the flow, not the agent, is where the truth is.</li>
+        <li><strong>The agent's call fails with <code>ActionResponseTimedOut</code>, or an HTTP 504.</strong> You used <em>Start and wait for an approval</em>. A flow called by an agent has roughly <strong>100 seconds</strong> to answer; waiting on a human blows straight through it. The giveaway in the run history is cruel: the approval step <em>succeeded</em>, and only <em>Respond to the agent</em> failed &mdash; the human answered, but the agent had already hung up. Swap in <em>Create an approval</em>.</li>
+        <li><strong>The agent never appears in M365 Copilot.</strong> Two usual causes now that Teams and M365 Copilot share one channel: the catalogue request is still awaiting an administrator, or the audience you chose does not include you. Check both before rebuilding anything.</li>
+        <li><strong>Approval never arrives.</strong> Most often the <code>approver</code> input was left on <em>Dynamically fill with AI</em> and the agent invented an address. Otherwise check the run history in Power Automate &mdash; the flow, not the agent, is where the truth is.</li>
+        <li><strong>The agent reports the rejection but no reason.</strong> Not the model being unhelpful &mdash; the flow. <code>approvercomments</code> is bound to <code>responseSummary</code>, which never contains the comment; point it at <code>responses[0].comments</code> instead.</li>
         <li><strong>The agent calls output "final" without approval.</strong> Your rule is in Instructions but the conversation started before you saved. New conversation, retest.</li>
       </ul>
     </div>
@@ -947,25 +954,36 @@ output. Never describe an unapproved document as final.</pre>
   <div class="demo" id="d27">
     <div class="head">
       <span class="id">Demo 2.7 <small>The agent runs without being asked &mdash; the trigger</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b t">~22 min</span></span>
+      <span class="badges"><span class="b a">A</span><span class="b t">~26 min</span></span>
     </div>
     <div class="body">
       <div class="goal"><b>What it proves:</b> this is the one that answers the question you actually asked. Everything so far has been an agent you talk to &mdash; useful, but still something a person has to remember to open. A trigger makes it part of the process: a file lands, the work happens, and a human sees a decision rather than a task.</div>
 
       <div class="k">The scenario</div>
       <p>A new fund factsheet arrives in a SharePoint library, the way one arrives in your world every quarter. Nobody opens Copilot Studio. Nobody types a prompt.
-      The extraction, the enrichment, the slide plan and the approval request all happen because a file appeared &mdash; and the first human involvement is a card in Teams asking a consultant to approve a deck that is already built.</p>
+      The extraction, the enrichment, the slide plan and the approval request all happen because a file appeared &mdash; and the first human involvement is a card in Teams asking a consultant to approve a <em>plan</em>. Approve it and the deck renders itself &mdash; PowerPoint, then PDF, then an email with the PDF attached, in about fifteen seconds. Nothing client-facing exists until somebody has said yes.</p>
 
       <div class="k">Steps</div>
       <ol class="steps">
         <li>Create a SharePoint document library (or a folder in one) called <code>incoming-factsheets</code>. A OneDrive folder works just as well if SharePoint is restricted.</li>
         <li>New flow &mdash; this time an <strong>Automated cloud flow</strong>, not an instant one. Trigger: <strong>When a file is created (properties only)</strong>, pointed at that library. Name it <code>Factsheet Arrived</code>.</li>
-        <li>Add <strong>Get file content</strong> so the flow has the document itself.</li>
-        <li>Add the Copilot Studio action &mdash; in the flow, this is the connector step that <strong>invokes your agent</strong> and passes the file content plus the instruction below.</li>
-        <li>Route the agent's reply into the approval you already built in demo 2.6, so the outcome is a card in Teams rather than a message in a chat window.</li>
-        <li><strong>Test it the honest way:</strong> drop <code>sample-fund-factsheet.pdf</code> into the library and then close the browser tab. Come back in two minutes and look at Teams.</li>
+        <li><strong>No <em>Get file content</em> step is needed</strong> &mdash; this trigger already returns <em>File content</em>, <em>File name</em> and <em>File path</em> among its outputs. One step fewer than you would expect.</li>
+        <li><strong>Call the agent.</strong> The action is not called "the Copilot Studio action": it is <strong>Microsoft Copilot Studio &rarr; Execute Agent and wait</strong>. Pick your agent, then click <em>Show all</em> on the advanced parameters to reveal <strong>Message</strong>, and put the instruction below there with the trigger's <strong>File name</strong> token inside it. First use asks you to create a connection.</li>
+        <li><strong>Put the approval in the flow, not in the agent's hands.</strong> Add <strong>Approvals &rarr; Start and wait for an approval</strong> &mdash; <em>Approve/Reject &ndash; First to respond</em>, assigned to yourself, <em>Details</em> set to the agent's reply. This is not a step backwards from demo 2.6: told to "send the plan for approval" with nobody watching, the agent tends to <em>narrate</em> the approval instead of calling the tool &mdash; writing <em>"Slide plan (pending approval)"</em>, or even replying that no approval system was found in its knowledge. No card is created. <strong>A human gate must not depend on the model choosing to use it.</strong></li>
+        <li><strong>And notice you are allowed to <em>wait</em> here.</strong> Demo 2.6 had to use fire-and-forget because a flow called by an agent gets roughly 100 seconds. Nothing is calling this flow &mdash; a file did &mdash; so it can block on a person for days. On a live run it sat on this step for <strong>5 hours 45 minutes</strong> and resumed correctly the moment the card was answered. Same connector, same action, opposite verdict, and the only thing that changed is who started the flow. That is the most transferable sentence in the afternoon: <strong>what a step is allowed to do depends on what is waiting behind it.</strong></li>
+        <li><strong>Everything after the gate.</strong> Add a <strong>Condition</strong> &mdash; the approval's <code>outcome</code> <em>is equal to</em> <code>Approve</code> &mdash; and put six actions in the <strong>True</strong> branch, in this order. The trainer's copy is already built: walk it rather than building it live unless the session is running early.
+          <ul>
+            <li><strong>Compose</strong> &mdash; the slide plan, split out of the agent's reply between the two markers.</li>
+            <li><strong>HTTP</strong> &mdash; POST that plan to the renderer endpoint.</li>
+            <li><strong>Create file</strong> &mdash; <code>review-deck-&lt;timestamp&gt;.pptx</code>, content = the HTTP body. <em>Timestamped, not fixed:</em> a constant filename overwrites yesterday's deck, and it did &mdash; five successful runs once produced one file.</li>
+            <li><strong>Convert file</strong> &mdash; target type <strong>PDF</strong>, File = the <em>Id</em> the Create file step returned.</li>
+            <li><strong>Create file</strong> again &mdash; the <code>.pdf</code>, named by swapping the extension on the first file's name.</li>
+            <li><strong>Send an email (V2)</strong> &mdash; attachment <em>Name</em> = the PDF's name, <em>Content</em> = the Convert file body.</li>
+          </ul>
+          Then give the <strong>False</strong> branch one action of its own &mdash; another <strong>Send an email (V2)</strong>, saying the deck was rejected, that no PDF was produced and nothing has gone to the client, and pointing at the run history for the reviewer's comment. Without it a rejected run ends silently and nobody is told, which is the kind of gap that only shows up in production. Say why the reason is not in the email itself: getting it there means <code>responses[0].comments</code>, not <code>responseSummary</code> &mdash; the same trap as demo 2.6 step 12 &mdash; and the run history has it either way.</li>
+        <li><strong>Test it the honest way:</strong> drop <code>sample-fund-factsheet.pdf</code> into the folder and then close the browser tab. Come back in <strong>three to five minutes</strong> and look at Teams. The agent's leg is the steady part &mdash; about two and a half minutes, run after run. The polling trigger in front of it is the variable one, taking anything from the same minute as the drop to a couple of minutes. Budget the longer figure.</li>
         <li>Now drop <code>meridian-manager-update.txt</code> in as well &mdash; the messy one &mdash; and watch what a triggered agent does when the document does not cooperate.</li>
-        <li><strong>Change the trigger, and nothing else.</strong> Open the same flow, delete the trigger step, and put a different one in its place. Everything downstream &mdash; get the file, call the agent, route to approval &mdash; is untouched. Do it twice, with the two below.</li>
+        <li><strong>Change the trigger, and nothing else.</strong> Open the same flow, delete the trigger step, and put a different one in its place. Everything downstream &mdash; call the agent, wait for approval, render, convert, email &mdash; is untouched. Do it twice, with the two below.</li>
       </ol>
 
       <div class="k">The two other triggers worth building</div>
@@ -980,13 +998,22 @@ output. Never describe an unapproved document as final.</pre>
 
 
       <div class="k">What the flow asks the agent</div>
-      <pre>A new fund document has arrived. Extract the fund record using the schema in
-your instructions, enrich it with the mandate and benchmark actions, and produce
-a slide plan for a quarterly review.
+      <pre>A new fund document has arrived in the incoming-factsheets folder: [File name].
+Extract the fund record using the schema in your instructions, enrich it with the
+mandate and benchmark actions, and produce a slide plan for a quarterly review.
 
-Do not describe anything as final. Send the plan for approval and report the
-outcome. If more than three fields are in needs_review, do not produce a plan at
-all - report which fields failed and stop.</pre>
+Produce the plan only: do not call the deck-building tool, because this process
+renders the deck itself after a human has approved the plan.
+
+Do not describe anything as final; the flow will send this for approval. Do not
+state an approval id - you will not have one. If more than three fields are in
+needs_review, do not produce a plan at all - report which fields failed and stop.
+
+When you do produce a plan, end your reply with the slide plan as raw JSON
+matching the slide-plan schema in your instructions, wrapped exactly in the
+markers ===PLAN_JSON_START=== and ===PLAN_JSON_END=== with nothing after the
+closing marker.</pre>
+      <div class="tip"><strong>Three of those sentences are scar tissue.</strong> <em>"Produce the plan only"</em> stops the agent calling the deck builder and raising a second approval card for the same deck. <em>"Do not state an approval id"</em> exists because an earlier version of this prompt said <em>report the approval id</em>, and the agent dutifully invented one &mdash; it was the deck's filename. And the markers exist because a flow cannot reliably find JSON inside prose; give it two fences and the extraction is a one-line expression.</div>
 
       <div class="k">Instructions to append</div>
       <pre>When you are invoked by a process rather than by a person, nobody is present to
@@ -996,17 +1023,27 @@ and let the approval step put it in front of a human.</pre>
 
       <div class="k g">What you should see</div>
       <ul>
-        <li>Nothing at all, for about a minute &mdash; which is the point. No window is open. No one is waiting.</li>
-        <li>Then an approval card in Teams, carrying a slide plan built from a file you did nothing with except save it in the right place.</li>
+        <li>Nothing at all, for several minutes &mdash; which is the point. No window is open. No one is waiting.</li>
+        <li>Then an approval card in Teams, carrying the fund record and slide plan the agent built from a file you did nothing with except save it in the right place.</li>
+        <li>In the agent's reply, the ambiguity rule doing its job unprompted: with no client id supplied it does not ask who the client is &mdash; it puts <code>client_mandate</code> in <code>needs_review</code>, records that the mandate action was never called because nothing identified the client, and carries on.</li>
+        <li>A second entry in <code>needs_review</code> you did not plant: <code>isin</code>, because the factsheet prints <code>INF000SAMPLE01 (illustrative)</code> and the agent will not treat a qualified value as confirmed. Two fields, under the threshold, so the plan is still produced &mdash; which shows the <em>counting</em> rule working. The messy document cannot show that: there, everything fails at once.</li>
         <li>With the messy document, the agent stops instead: more than three fields in <code>needs_review</code>, so it reports the failure rather than producing a confident, wrong deck. <strong>An agent that declines to run is a working agent.</strong></li>
-        <li>In the flow's run history: the whole chain, timestamped, with inputs and outputs you can read back months later when somebody asks where a number came from.</li>
+        <li>Then nothing again, until you answer the card &mdash; the run stays open, and the run history shows the wait as a step with a duration. Hours are normal and correct.</li>
+        <li>Within about fifteen seconds of approving: a <code>.pptx</code> and a <code>.pdf</code> in OneDrive, both stamped with the same timestamp, and an email in your inbox with the PDF attached. On the verified run the deck landed 1 second after approval and the PDF 8 seconds after that.</li>
+        <li>Reject instead, and the opposite: no files, no client-facing anything, and an email telling you so. Both outcomes end in somebody being told, which is the difference between an unattended process and an unsupervised one.</li>
+        <li>In the flow's run history: the whole chain, timestamped, with inputs and outputs you can read back months later when somebody asks where a number came from &mdash; including who approved it and when.</li>
       </ul>
 
       <div class="k r">When it does not behave</div>
       <ul>
-        <li><strong>The trigger never fires.</strong> SharePoint triggers poll rather than push &mdash; the default interval means up to a minute of waiting, and a first run can take longer. Check the flow's run history before you change anything; the most common "broken trigger" is an impatient builder.</li>
-        <li><strong>No Copilot Studio action available in the flow.</strong> Feature placement moves between releases and some tenants restrict it. Substitute: have the flow do the extraction by calling the agent's published endpoint, or &mdash; simplest &mdash; run the same chain from a <strong>Scheduled</strong> trigger and demonstrate the identical point. Unattended is unattended, whatever started it.</li>
+        <li><strong>The trigger never fires.</strong> SharePoint and OneDrive triggers poll rather than push, and the wait is not consistent &mdash; the same flow has started in the same minute as the drop and, another time, a couple of minutes later. Check the flow's run history before you change anything; the most common "broken trigger" is an impatient builder.</li>
+        <li><strong>You cannot find the action.</strong> Search the action list for <em>copilot</em>, not for <em>agent</em>: the connector is <strong>Microsoft Copilot Studio</strong> and the action is <strong>Execute Agent and wait</strong> (its siblings are <em>Execute Agent</em> and <em>Evaluate Agent</em>). If your tenant restricts it, run the same chain from a <strong>Scheduled</strong> trigger instead and demonstrate the identical point. Unattended is unattended, whatever started it.</li>
+        <li><strong>You are tempted by plain <em>Execute Agent</em>, without the wait.</strong> Only the waiting version returns <code>body/lastResponse</code> &mdash; which is what puts the fund record, the enrichment table and the slide plan on the approval card. Drop the wait and the reviewer gets a card with nothing to review.</li>
+        <li><strong>You expect this leg to time out too. It does not.</strong> The ~100-second ceiling that forced <em>Create an approval</em> in demo 2.6 applies to an <em>agent calling a flow</em>. This is the other direction &mdash; a flow calling an agent &mdash; and it happily ran for two and a half minutes. Worth saying out loud, because the two look symmetrical and are not.</li>
         <li><strong>It asks a clarifying question and then waits forever.</strong> Exactly the failure the appended instruction prevents. Add it, republish, and drop the file again.</li>
+        <li><strong>Two approval cards arrive for one dropped file.</strong> Your agent still has a deck-building tool with its own approval gate and it called it anyway &mdash; so you have the flow's card <em>and</em> the tool's. Check the <em>"produce the plan only"</em> line is actually in the Message. Do not fix it by deleting the flow's approval: that hands the human gate back to the model, which is what step 5 exists to prevent. And if two similar cards are already queued, read the timestamps &mdash; approving the wrong one leaves the run waiting and looks exactly like a broken flow.</li>
+        <li><strong>The expression editor rejects something that is obviously right.</strong> The designer accepts <code>outputs('X')?['body/Name']</code> in some fields and <code>outputs('X')['body']['Name']</code> in others, and it will not tell you which it wants. Both mean the same thing. Try the other bracket style before you assume the expression is wrong &mdash; it cost real time on the build.</li>
+        <li><strong>The reply names an "approval reference id" that does not work.</strong> It is the deck's <em>filename</em>, and the reply claims the plan was "sent for approval" before the flow had created anything. The model is narrating a step it did not take &mdash; step 5's failure surviving in the prose even when the flow does the real work. Read it out; it argues for the deterministic gate better than any slide.</li>
         <li><strong>Everything is blocked in your tenant.</strong> Read the steps and watch the trainer. The architecture is the transferable part, and it is unchanged whichever button starts it.</li>
       </ul>
 
@@ -1167,7 +1204,7 @@ Note: figures are unaudited and subject to revision.</pre>
 </section>
 
 <section id="trouble">
-  <h2>Troubleshooting &mdash; the thirteen things that actually go wrong</h2>
+  <h2>Troubleshooting &mdash; the fourteen things that actually go wrong</h2>
   <table>
     <thead><tr><th style="width:34%">Symptom</th><th>Cause and fix</th></tr></thead>
     <tbody>
@@ -1178,6 +1215,7 @@ Note: figures are unaudited and subject to revision.</pre>
       <tr><td>The agent never calls your action</td><td>The action description does not say <em>when</em> to use it. Rewrite it as a sentence a colleague would understand, and name the trigger conditions.</td></tr>
       <tr><td>Excel connector cannot see the data</td><td>The range is not formatted as a Table (Ctrl+T), or the file is in personal OneDrive rather than OneDrive for Business.</td></tr>
       <tr><td>Flow succeeds, agent ignores the result</td><td>The Respond step is not returning the value as text the agent can read. Test the flow standalone in Power Automate first &mdash; always isolate before you debug the agent.</td></tr>
+          <tr><td>A flow the agent called fails on its last step</td><td><code>ActionResponseTimedOut</code> or an HTTP 504 on <em>Respond to the agent</em> means the flow took too long. An agent-called flow has roughly <strong>100 seconds</strong>, so anything that waits on a human &mdash; an approval, a form &mdash; will always fail there, even though the step it waited on succeeded. Split it: one flow starts the work and answers immediately, a second reads the result back later.</td></tr>
       <tr><td>"Premium connector required"</td><td>Expected for HTTP and SQL. Use the Compose substitutes in the appendix &mdash; you keep the whole lesson and lose only the live call.</td></tr>
       <tr><td>JSON output will not parse</td><td>A preamble sentence or a markdown fence. Add: <em>"Output must begin with { and end with }. No other characters."</em></td></tr>
       <tr><td>An automated trigger never fires</td><td>SharePoint and OneDrive triggers <em>poll</em>; they do not push. Allow a minute, and longer for a flow's first run. Read the run history before changing anything &mdash; most "broken triggers" are impatience.</td></tr>

@@ -1541,7 +1541,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <li><b>Users</b> can run it. <b>Co-authors</b> can change it. Those are different risks &mdash; and co-authoring an agent that calls a legacy system is a privileged action.</li>
         <li>Share to a group, not to individuals, or maintenance becomes a leaver-process problem.</li>
       </ul>
-      <div class="callout">Reaching <b>M365 Copilot</b> is not a toggle you own: publish, choose the audience, then <em>submit to the org catalogue</em> &mdash; where an administrator approves it, sets who may install it and applies the tenant policy templates. Raise that request in week one, not the week you want to launch.</div>
+      <div class="callout">Teams and <b>M365 Copilot</b> are now a single channel &mdash; but reaching M365 Copilot is still not a toggle you own: publish, choose the audience, then <em>submit to the org catalogue</em> &mdash; where an administrator approves it, sets who may install it and applies the tenant policy templates. Raise that request in week one, not the week you want to launch.</div>
     </div>
   </div>
 </section>
@@ -1621,7 +1621,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 26 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Designing the approval gate" data-notes="The gate is where autonomy is actually set. The design question to carry away: what exactly is the approver looking at, and do they have the time to look? A gate nobody works moves accountability without moving attention." data-demo="2.6" data-role="pre">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Designing the approval gate" data-notes="The gate is where autonomy is actually set. The design question to carry away: what exactly is the approver looking at, and do they have the time to look? A gate nobody works moves accountability without moving attention. One hard product constraint shapes the design: a flow called by an agent has roughly 100 seconds to respond, so an approval that waits for a person always fails on its response step - the approval itself succeeds, and the agent has already stopped listening. The working pattern is fire-and-forget: create the approval, return the id and the word pending immediately, and read the verdict back in a later turn." data-demo="2.6" data-role="pre">
   <h2>The approval gate is where autonomy is actually set<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g64">
     <div>
@@ -1666,6 +1666,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <li><b>Draft freely</b> &mdash; the agent may read, extract, enrich and compose without asking.</li>
         <li><b>Gate the irreversible</b> &mdash; anything that leaves the firm, writes to a system of record, or is described as final.</li>
         <li>That split, written down, <em>is</em> your autonomy policy. It is more concrete and more useful than any statement of principles.</li>
+        <li class="r"><b>The gate cannot block the agent.</b> A flow the agent calls must answer in about <b>100 seconds</b>; a human will not. So the agent <em>requests</em> approval and returns at once, and the verdict is read back afterwards. Human-in-the-loop is asynchronous whether or not you designed it that way.</li>
       </ul>
       <h3 class="g">Why the unresolved list belongs on the card</h3>
       <ul>
@@ -1735,7 +1736,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 28 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The trigger: from chat window to process" data-notes="The slide that answers the question the day was booked on. Everything up to here is an agent someone opens; a trigger makes it part of the process. The test of whether an agent is inside a workflow is simple - if nobody opens anything, does the work still happen? Note the rule for unattended runs: never ask a clarifying question when nobody is there to answer, flag it and let the gate catch it." data-demo="2.7" data-role="pre">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The trigger: from chat window to process" data-notes="The slide that answers the question the day was booked on. Everything up to here is an agent someone opens; a trigger makes it part of the process. The test of whether an agent is inside a workflow is simple - if nobody opens anything, does the work still happen? Note the rule for unattended runs: never ask a clarifying question when nobody is there to answer, flag it and let the gate catch it. Two build details worth naming: the flow calls the agent through the Microsoft Copilot Studio connector, action Execute Agent and wait - which, unlike the agent-to-flow direction, runs for minutes without timing out. And the approval card is created by the flow, not by the agent: asked to send something for approval with nobody watching, the agent tends to describe the approval rather than call the tool, and no card appears. A human gate must not depend on the model choosing to use it. And because nothing is calling this flow, it may use Start and wait for an approval - the roughly 100-second ceiling applies only in the agent-to-flow direction. On a verified run it waited five and three-quarter hours, resumed the moment the card was answered, then rendered the deck, converted it to PDF and emailed it in about fifteen seconds. Nothing client-facing exists until somebody has said yes." data-demo="2.7" data-role="pre">
   <h2>The trigger &mdash; the difference between a tool and a process<span class="cue pre">PRE &middot; DEMO 2.7</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
     <div>
@@ -2099,7 +2100,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   var links=[].slice.call(toc.querySelectorAll('a'));
 
   // demo cue layer: where each demo runs, and what is next from here
-  var DEMOS={'2.1':{t:'Generative orchestration, the trace, and proving a fix',m:'~32 min'},'2.2':{t:'Calling an external API &mdash; and a legacy internal one',m:'~35 min'},'2.3':{t:'Excel and SQL data movement',m:'~25 min'},'2.4':{t:'Unstructured &rarr; structured, with a schema',m:'~30 min'},'2.5':{t:'Generating the report',m:'~30 min'},'2.6':{t:'Publish to Teams, share, approve, govern',m:'~35 min'},'2.7':{t:'The agent runs without being asked &mdash; the trigger',m:'~22 min'}};
+  var DEMOS={'2.1':{t:'Generative orchestration, the trace, and proving a fix',m:'~32 min'},'2.2':{t:'Calling an external API &mdash; and a legacy internal one',m:'~35 min'},'2.3':{t:'Excel and SQL data movement',m:'~25 min'},'2.4':{t:'Unstructured &rarr; structured, with a schema',m:'~30 min'},'2.5':{t:'Generating the report',m:'~30 min'},'2.6':{t:'Publish to Teams, share, approve, govern',m:'~35 min'},'2.7':{t:'The agent runs without being asked &mdash; the trigger',m:'~26 min'}};
   var runAfter={};
   slides.forEach(function(s,k){ if(s.dataset.role==='pre') runAfter[s.dataset.demo]=k; });
   var demoOrder=Object.keys(runAfter).sort();

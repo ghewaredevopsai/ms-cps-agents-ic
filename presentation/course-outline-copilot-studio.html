@@ -416,7 +416,7 @@
           <li>Publishing the agent and <strong>deploying it into Teams</strong> where the team already works &mdash; and into Microsoft&nbsp;365 Copilot via the organisation catalogue, which is an administrator-approved route</li>
           <li><strong>Sharing</strong> the agent: users, roles, co-authors, environments</li>
           <li><strong>Running it without being asked</strong> &mdash; an automated trigger fires the agent when a document arrives, so the work happens inside the process rather than in a chat window</li>
-          <li>Designing for unattended runs: no clarifying questions, flag and escalate, readable run history</li>
+          <li>Designing for unattended runs: no clarifying questions, flag and escalate, readable run history &mdash; and an approval gate whose shape depends on what started the chain &mdash; an agent calling a flow cannot be made to wait while a person decides, so that gate is <strong>asynchronous by design</strong>; a flow started by a document <em>can</em> wait, and does</li>
           <li><strong>Governance checklist</strong>: DLP, tenant data boundary, connector approval, audit trail, human-in-the-loop, dev&nbsp;&rarr;&nbsp;test&nbsp;&rarr;&nbsp;prod</li>
         </ul>
         <span class="demo"><strong>Live demo</strong> &mdash; publish, deploy to Teams, share with a second user; then a factsheet is dropped into a SharePoint library and the agent extracts, enriches, builds the deck and raises an approval card <em>with nobody at the keyboard</em>. Finally the governance checklist, walked item by item against what was just built.</span>
@@ -591,7 +591,7 @@
           <tr>
             <td><strong>ROI test, restated:</strong> agents <em>inside</em> workflows, not beside them</td>
             <td class="where">2.6 (trigger)</td>
-            <td>A document arriving fires the agent unattended &mdash; extraction, enrichment, deck and approval card with nobody at the keyboard. This is the demonstration that separates an agent from a better chat window</td>
+            <td>A document arriving fires the agent unattended &mdash; extraction, enrichment, slide plan and approval card with nobody at the keyboard; approve it and the deck, its PDF and the covering email follow on their own. This is the demonstration that separates an agent from a better chat window</td>
           </tr>
           <tr>
             <td>Governance limits tooling to Microsoft Copilot + Copilot Studio</td>
