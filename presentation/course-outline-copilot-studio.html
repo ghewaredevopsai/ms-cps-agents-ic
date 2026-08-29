@@ -219,7 +219,7 @@
           <h4>What this day deliberately excludes</h4>
           <ul>
             <li><strong>No licensing theory</strong> &mdash; no SKU/entitlement sessions</li>
-            <li><strong>No AI history or background</strong> &mdash; no "evolution of AI" slides</li>
+            <li><strong>No AI history for its own sake</strong> &mdash; one orientation slide places Copilot Studio on the ML &rarr; deep learning &rarr; generative &rarr; RAG &rarr; agentic path, and that is all</li>
             <li><strong>No hype</strong> &mdash; model behaviour is covered only where it changes what you build</li>
             <li><strong>No non-Microsoft tooling</strong> &mdash; nothing you cannot run under current governance</li>
             <li>Microsoft Agent Framework / code-first frameworks are <em>positioned</em> as the graduation path, not built here</li>
@@ -310,47 +310,39 @@
     </div>
     <div class="modules-grid">
       <div class="module">
-        <h4>1.1 How AI Models Actually Behave <span class="time">~45 min</span></h4>
+        <h4>1.1 What an "Agent" Really Is in Copilot Studio <span class="badge core-badge">Core</span> <span class="time">~55 min</span></h4>
         <ul>
-          <li>What the model is doing when it answers &mdash; and what it is not doing</li>
-          <li>Context, grounding, and why answers drift between runs</li>
-          <li>Hallucination in a numbers business: fabricated figures, wrong period, stale data</li>
-          <li>The accuracy bar for client-facing consulting output</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; one fund question, three prompts, on screen: watch the answer drift, then watch grounding fix it. <em>Participants are welcome to follow along on their own machines.</em></span>
-      </div>
-      <div class="module">
-        <h4>1.2 Prompting for Investment-Consulting Work <span class="time">~45 min</span></h4>
-        <ul>
-          <li>Structured prompts: role, context, task, output format, examples</li>
-          <li>Consulting tasks that respond well: factsheet summarisation, manager commentary, meeting notes &rarr; actions</li>
-          <li>Why each part earns its place &mdash; the specific failure that comes back when you drop it</li>
-          <li>Turning a prompt that works into a <strong>team asset</strong> rather than a chat message</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; build a reusable prompt pack for asset-owner reporting: fund summary, manager commentary, data-quality check. <em>Participants are welcome to follow along on their own machines.</em></span>
-      </div>
-      <div class="module">
-        <h4>1.3 What an "Agent" Really Is in Copilot Studio <span class="badge core-badge">Core</span> <span class="time">~45 min</span></h4>
-        <ul>
-          <li><strong>Six agents teams actually build</strong> &mdash; what starts each one, what it touches, what it returns, and which is the realistic first</li>
+          <li>Where Copilot ends, Copilot Studio begins and Microsoft Foundry starts &mdash; three products on one spectrum, and the two questions that settle which one you need</li>
           <li>Agent anatomy: instructions, knowledge, topics, actions, orchestration</li>
-          <li><strong>The whole Copilot Studio surface on one page</strong> &mdash; what an agent can read, do, be started by and appear in, and the platform that builds, tests, ships and governs it</li>
-          <li>Where Copilot ends and Copilot Studio begins &mdash; in practical terms</li>
-          <li>Honest limits: scale, control, latency, and what that means for production use</li>
+          <li><strong>What actually starts an agent</strong> &mdash; a person, a file landing in a library, a schedule, an email, or another agent &mdash; which is what puts the work inside the process rather than beside it</li>
+          <li>How the agent decides what to do at runtime &mdash; and why the trace is the first place you look when it chooses wrongly</li>
+          <li><strong>Six agents teams actually build</strong> &mdash; what starts each one, what it touches, what it returns, and which is the realistic first</li>
         </ul>
         <span class="demo"><strong>Live demo</strong> &mdash; first the three-click version anyone can build over a document library, so the non-developer majority leaves with something they can do unaided; then a Fund Research Assistant built from empty in Copilot Studio: grounded on sample fund factsheets, tested and corrected on screen.</span>
       </div>
       <div class="module">
-        <h4>1.4 Where AI Fits <em>Your</em> Workflow &mdash; Under Enterprise Governance <span class="badge key-badge">Key</span> <span class="time">~35 min</span></h4>
+        <h4>1.2 Prompting for Consulting Work &mdash; and Why Answers Drift <span class="time">~45 min</span></h4>
         <ul>
+          <li>Structured prompts: role, context, task, output format, examples</li>
+          <li>Why each part earns its place &mdash; the specific failure that comes back when you drop it</li>
+          <li>Consulting tasks that respond well: factsheet summarisation, manager commentary, meeting notes &rarr; actions</li>
+          <li>Why figures get invented &mdash; fabrication, the right number for the wrong thing, stale data &mdash; and exactly what grounding fixes and what it leaves to you</li>
+          <li>Turning a prompt that works into a <strong>team asset</strong> rather than a chat message</li>
+        </ul>
+        <span class="demo"><strong>Live demo</strong> &mdash; a reusable prompt pack for asset-owner reporting: fund summary, manager commentary, data-quality check; then one fund question through three prompts, on screen: watch the answer drift, then watch grounding fix it. <em>Participants are welcome to follow along on their own machines.</em></span>
+      </div>
+            <div class="module">
+        <h4>1.3 Where It Fits <em>Your</em> Workflow &mdash; and Which Agent to Build First <span class="badge key-badge">Key</span> <span class="time">~70 min</span></h4>
+        <ul>
+          <li>Honest limits: scale, control, latency, and what that means for production use</li>
           <li>Mapping the IC workflow: research &rarr; analysis &rarr; report &rarr; client</li>
           <li>Why the Copilot pilot has not produced gains &mdash; assistance vs integration</li>
           <li>Positioning the internal <strong>GPT tool</strong>: what it does, what an agent adds</li>
-          <li>Picking the first agent: value, risk, data readiness, repetition volume</li>
+          <li>Picking the first agent: value, risk, data readiness, repetition volume &mdash; and why the least glamorous candidate is usually the right one</li>
         </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; the workflow map drawn live for the reporting pipeline, marking each step as prompt-only, agent-suitable, or human-only.</span>
+        <span class="demo"><strong>Live demo</strong> &mdash; your reporting pipeline drawn on screen and marked step by step (prompt-only, agent-suitable, human-only), then the four criteria applied to pick the first agent actually worth building.</span>
       </div>
-    </div>
+</div>
 
     <!-- MODULE 2 -->
     <div class="day-header page-break">
@@ -510,11 +502,10 @@
           <h4>Morning &mdash; all 35 participants</h4>
           <ul class="agenda">
             <li><strong>09:00</strong> &mdash; Kickoff: the ROI test for the day</li>
-            <li><strong>09:10</strong> &mdash; 1.1 How AI models actually behave</li>
-            <li><strong>09:55</strong> &mdash; 1.2 Prompting for consulting work</li>
-            <li><strong>10:40</strong> &mdash; Break</li>
-            <li><strong>10:55</strong> &mdash; 1.3 What an agent really is in Copilot Studio</li>
-            <li><strong>11:40</strong> &mdash; 1.4 Where AI fits your workflow, under governance</li>
+            <li><strong>09:10</strong> &mdash; 1.1 What an agent really is in Copilot Studio</li>
+            <li><strong>10:05</strong> &mdash; 1.2 Prompting, and why answers drift</li>
+            <li><strong>10:50</strong> &mdash; Break</li>
+            <li><strong>11:05</strong> &mdash; 1.3 Where it fits, and which agent to build first</li>
             <li><strong>12:15</strong> &mdash; Lunch <em>(everyone continues into the afternoon; the build detail is pitched at the ~10 developers)</em></li>
           </ul>
         </div>
@@ -550,7 +541,7 @@
           </tr>
           <tr>
             <td><strong>ROI test:</strong> participants leave able to build agents <em>integrated into workflows</em>, not just better prompting</td>
-            <td class="where">1.4, 2.2, 2.6, Capstone</td>
+            <td class="where">1.3, 2.2, 2.6, Capstone</td>
             <td>Prompting's ceiling is named in 1.2; the rest of the day is integration, deployment and workflow linking</td>
           </tr>
           <tr>
@@ -561,7 +552,7 @@
           <tr>
             <td>Explicitly avoid licensing theory and AI background/history</td>
             <td class="where">Course Overview</td>
-            <td>Stated as an explicit exclusion; neither appears anywhere in the agenda</td>
+            <td>Licensing theory appears nowhere. AI background is one orientation slide placing Copilot Studio against what came before &mdash; there is no history section</td>
           </tr>
           <tr>
             <td>Self-learning pre-reads shared ahead so hands-on time is maximised</td>
@@ -575,12 +566,12 @@
           </tr>
           <tr>
             <td><strong>Pain:</strong> the internal GPT tool gives limited help; not integrated with workflows</td>
-            <td class="where">1.4</td>
+            <td class="where">1.3</td>
             <td>Internal GPT tool positioned against agents: what it covers, what an integrated agent adds</td>
           </tr>
           <tr>
             <td><strong>Pain:</strong> Copilot pilot produced no meaningful productivity gains</td>
-            <td class="where">1.3, 1.4</td>
+            <td class="where">1.1, 1.3</td>
             <td>Diagnosed directly &mdash; assistance vs integration &mdash; then answered by the build track</td>
           </tr>
           <tr>

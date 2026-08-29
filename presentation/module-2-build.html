@@ -58,8 +58,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#dbe3ef;
 .g46{grid-template-columns:1fr 1.42fr}
 .g55{grid-template-columns:1fr 1fr}
 .g1{grid-template-columns:1fr}
-.body.g1{align-items:stretch}
-.body.g1>div:only-child{height:100%;display:flex;flex-direction:column;justify-content:center}
+.body.g1{align-items:stretch;grid-template-rows:minmax(0,1fr)}
+.body.g1>div:only-child{height:100%;min-height:0;display:flex;flex-direction:column;justify-content:center}
 .pts h3{margin:0 0 8px;font-size:13px;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;font-weight:700}
 .pts h3+h3{margin-top:14px}
 .pts h3.g{color:#047857}.pts h3.r{color:#dc2626}.pts h3.a{color:#b45309}
@@ -73,8 +73,21 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#dbe3ef;
 .callout.good{background:#ecfdf5;border-left-color:#059669;color:#064e3b}
 .take{margin-top:14px;background:#fffbeb;border-left:4px solid #f59e0b;padding:10px 15px;font-size:15.5px;color:#78350f;border-radius:0 4px 4px 0;line-height:1.4}
 .take b{color:#92400e}
-svg{width:100%;height:auto;display:block}
+svg{width:100%;height:auto;max-height:100%;display:block}
 svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5px}
+svg.u108 .ss{font-size:13.5px}svg.u108 .tt{font-size:16.2px}svg.u108 .lb{font-size:11.3px}svg.u108 .mn{font-size:12.4px}
+svg.u109 .ss{font-size:13.6px}svg.u109 .tt{font-size:16.4px}svg.u109 .lb{font-size:11.4px}svg.u109 .mn{font-size:12.5px}
+svg.u111 .ss{font-size:13.9px}svg.u111 .tt{font-size:16.7px}svg.u111 .lb{font-size:11.7px}svg.u111 .mn{font-size:12.8px}
+svg.u112 .ss{font-size:14px}svg.u112 .tt{font-size:16.8px}svg.u112 .lb{font-size:11.8px}svg.u112 .mn{font-size:12.9px}
+svg.u113 .ss{font-size:14.1px}svg.u113 .tt{font-size:16.9px}svg.u113 .lb{font-size:11.9px}svg.u113 .mn{font-size:13px}
+svg.u116 .ss{font-size:14.5px}svg.u116 .tt{font-size:17.4px}svg.u116 .lb{font-size:12.2px}svg.u116 .mn{font-size:13.3px}
+svg.u117 .ss{font-size:14.6px}svg.u117 .tt{font-size:17.5px}svg.u117 .lb{font-size:12.3px}svg.u117 .mn{font-size:13.5px}
+svg.u119 .ss{font-size:14.9px}svg.u119 .tt{font-size:17.8px}svg.u119 .lb{font-size:12.5px}svg.u119 .mn{font-size:13.7px}
+svg.u123 .ss{font-size:15.4px}svg.u123 .tt{font-size:18.4px}svg.u123 .lb{font-size:12.9px}svg.u123 .mn{font-size:14.1px}
+svg.u125 .ss{font-size:15.6px}svg.u125 .tt{font-size:18.8px}svg.u125 .lb{font-size:13.1px}svg.u125 .mn{font-size:14.4px}
+svg.u126 .ss{font-size:15.8px}svg.u126 .tt{font-size:18.9px}svg.u126 .lb{font-size:13.2px}svg.u126 .mn{font-size:14.5px}
+svg.u135 .ss{font-size:16.9px}svg.u135 .tt{font-size:20.2px}svg.u135 .lb{font-size:14.2px}svg.u135 .mn{font-size:15.5px}
+svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size:14.3px}svg.u136 .mn{font-size:15.6px}
 
 .slide.title{background:linear-gradient(135deg,#0b2545 0%,#123a6b 58%,#1d4ed8 155%);color:#fff;justify-content:center;padding:0 80px}
 .slide.title h1{margin:0;font-size:50px;line-height:1.12;font-weight:600}
@@ -93,12 +106,12 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 .bx.w{fill:#fff;stroke:#cbd5e1}
 .tt{font-size:15px;font-weight:600;fill:#0b2545}
 .tt.w{fill:#fff}
-.ss{font-size:12.5px;fill:#546b8a}
+.ss{font-size:12.5px;fill:#334155}
 .ss.w{fill:#bfdbfe}
 .mn{font-family:Consolas,Monaco,monospace;font-size:11.5px;fill:#0b2545}
 .mn.w{fill:#a5d8ff}
-.lb{font-size:10.5px;font-weight:700;fill:#1d4ed8;letter-spacing:.7px}
-.lb.a{fill:#b45309}.lb.r{fill:#dc2626}.lb.g{fill:#047857}.lb.w{fill:#93c5fd}
+.lb{font-size:10.5px;font-weight:700;fill:#1e40af;letter-spacing:.7px}
+.lb.a{fill:#92400e}.lb.r{fill:#b91c1c}.lb.g{fill:#065f46}.lb.w{fill:#93c5fd}
 .ar{fill:none;stroke:#9db2ce;stroke-width:2;marker-end:url(#arw)}
 .fl{fill:none;stroke:#1d4ed8;stroke-width:2.5;stroke-dasharray:7 9;marker-end:url(#arb)}
 .flg{fill:none;stroke:#059669;stroke-width:2.5;stroke-dasharray:7 9;marker-end:url(#arg)}
@@ -130,9 +143,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#9db2ce"/></marker>
-  <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1d4ed8"/></marker>
+  <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1e40af"/></marker>
   <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
-  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#b91c1c"/></marker>
 </defs></svg>
 
 <div id="top">
@@ -183,8 +196,8 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="tt" x="20" y="60">Fund factsheet (PDF)</text>
         <text class="ss" x="20" y="80">manager updates, house</text>
         <text class="ss" x="20" y="98">methodology, prior reports</text>
-        <text class="ss" x="20" y="124" style="fill:#64748b">unstructured, inconsistent,</text>
-        <text class="ss" x="20" y="142" style="fill:#64748b">arriving by email today</text>
+        <text class="ss" x="20" y="124" style="fill:#475569">unstructured, inconsistent,</text>
+        <text class="ss" x="20" y="142" style="fill:#475569">arriving by email today</text>
 
         <path class="fl" d="M204 95 L236 95"/>
 
@@ -234,7 +247,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="954" y="186">schema-enforced, validated</text>
         <text class="tt" x="954" y="212" style="font-size:13.5px">Slide plan &rarr; PowerPoint</text>
         <text class="ss" x="954" y="230">every figure carries a source</text>
-        <text class="ss" x="954" y="254" style="fill:#b45309;font-weight:600">the Aspose step, orchestrated</text>
+        <text class="ss" x="954" y="254" style="fill:#92400e;font-weight:600">the Aspose step, orchestrated</text>
 
         <path class="fl" d="M1056 270 L1056 300"/>
         <rect class="bx" x="614" y="336" width="562" height="86" rx="8"/>
@@ -257,9 +270,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 3 -->
-<section class="slide" data-sec="2.1 Orchestration" data-title="Topics vs generative orchestration" data-notes="The mistake is picking one approach and applying it everywhere. The test: can you write down every acceptable path and defend that list in a review? Yes means a topic; no means generative. Regulatory wording is always a topic." data-demo="2.1" data-role="pre">
+<section class="slide" data-sec="2.1 Orchestration" data-title="Topics vs generative orchestration" data-notes="The mistake is picking one approach and applying it everywhere. The test: can you write down every acceptable path and defend that list in a review? Yes means a topic; no means generative. Regulatory wording is always a topic.  From the slide panel: WHAT GENERATIVE ACTUALLY COSTS YOU — Non-determinism. Two identical requests can take different routes. Acceptable for drafting, not for a compliance statement. Description-driven routing. Your action descriptions become the control surface. A vague description is a bug. Debugging shifts from &quot;read the flowchart&quot; to &quot;read the trace&quot;. THE PATTERN WE WILL BUILD — Generative orchestration for the whole reporting pipeline. Topics for exactly three things: the advice refusal, the disclaimer wording, and escalation when a mandate breach is detected. Those three topics are not a limitation of the tool &mdash; they are the places where you have decided, deliberately, that the agent gets no discretion." data-demo="2.1" data-role="pre">
   <h2>Two ways to drive an agent &mdash; and when each is wrong<span class="cue pre">PRE &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
-  <div class="body g64">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 452" role="img" aria-label="Topics compared with generative orchestration">
         <rect class="bx" x="6" y="6" width="336" height="196" rx="8"/>
@@ -303,20 +316,6 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="24" y="432">Yes &rarr; topic. No &rarr; generative. &nbsp;Most production agents are generative <tspan style="font-weight:700">with three or four topics guarding the edges</tspan>.</text>
       </svg>
     </div>
-    <div class="pts">
-      <h3>What generative actually costs you</h3>
-      <ul>
-        <li><b>Non-determinism.</b> Two identical requests can take different routes. Acceptable for drafting, not for a compliance statement.</li>
-        <li><b>Description-driven routing.</b> Your action descriptions become the control surface. A vague description is a bug.</li>
-        <li><b>Debugging shifts</b> from "read the flowchart" to "read the trace".</li>
-      </ul>
-      <h3 class="a">The pattern we will build</h3>
-      <ul>
-        <li>Generative orchestration for the whole reporting pipeline.</li>
-        <li><em>Topics</em> for exactly three things: the advice refusal, the disclaimer wording, and escalation when a mandate breach is detected.</li>
-      </ul>
-      <div class="callout">Those three topics are not a limitation of the tool &mdash; they are the places where you have decided, deliberately, that the agent gets no discretion.</div>
-    </div>
   </div>
 </section>
 
@@ -325,30 +324,30 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Instructions are production code &mdash; annotated<span class="cue pre">PRE &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
   <div class="body g55">
     <div>
-      <svg viewBox="0 0 640 488" role="img" aria-label="Annotated agent instruction block">
-        <rect class="bx d" x="4" y="4" width="632" height="480" rx="8"/>
-        <text class="mn w" x="22" y="30">You are a research assistant for an investment</text>
-        <text class="mn w" x="22" y="48">consulting team.</text>
-        <text class="mn w" x="22" y="80">- Every figure must come from a document or an</text>
-        <text class="mn w" x="22" y="98">&nbsp;&nbsp;action result in this conversation.</text>
-        <text class="mn w" x="22" y="120">- Cite the section or the action after each figure.</text>
-        <text class="mn w" x="22" y="142">- If a figure is absent, reply exactly: not stated.</text>
-        <text class="mn w" x="22" y="164">- Never estimate, infer or annualise a figure.</text>
-        <text class="mn w" x="22" y="186">- Never calculate a total, an average, a weighted figure or a</text>
-        <text class="mn w" x="22" y="204">&nbsp;&nbsp;currency conversion. Retrieve it with an action and quote the action.</text>
-        <text class="mn w" x="22" y="226">- You may state the difference between two figures you retrieved,</text>
-        <text class="mn w" x="22" y="244">&nbsp;&nbsp;provided both are shown with their sources.</text>
-        <text class="mn w" x="22" y="266">- If a question is ambiguous about period, share</text>
-        <text class="mn w" x="22" y="284">&nbsp;&nbsp;class or plan, ask - do not choose silently.</text>
-        <text class="mn w" x="22" y="306">- Decline suitability questions: that is consultant</text>
-        <text class="mn w" x="22" y="324">&nbsp;&nbsp;judgement, not a document lookup.</text>
-        <text class="mn w" x="22" y="346">- Nothing is client-ready until approved.</text>
-        <text class="mn w" x="22" y="368">- On any action failure, say which action failed</text>
-        <text class="mn w" x="22" y="386">&nbsp;&nbsp;and stop. Do not substitute a plausible value.</text>
-        <text class="mn w" x="22" y="408">- Be brief. A consultant reads this between</text>
-        <text class="mn w" x="22" y="426">&nbsp;&nbsp;meetings.</text>
-        <rect class="bx dd" x="22" y="442" width="596" height="34" rx="5"/>
-        <text class="ss w" x="36" y="464" style="fill:#fbbf24">Eleven rules. Every one of them is a bug that has already happened.</text>
+      <svg class="u116" viewBox="0 0 640 566.1" role="img" aria-label="Annotated agent instruction block">
+        <rect class="bx d" x="4" y="4.6" width="632" height="556.8" rx="8"/>
+        <text class="mn w" x="22" y="34.8">You are a research assistant for an investment</text>
+        <text class="mn w" x="22" y="55.7">consulting team.</text>
+        <text class="mn w" x="22" y="92.8">- Every figure must come from a document or an</text>
+        <text class="mn w" x="22" y="113.7">&nbsp;&nbsp;action result in this conversation.</text>
+        <text class="mn w" x="22" y="139.2">- Cite the section or the action after each figure.</text>
+        <text class="mn w" x="22" y="164.7">- If a figure is absent, reply exactly: not stated.</text>
+        <text class="mn w" x="22" y="190.2">- Never estimate, infer or annualise a figure.</text>
+        <text class="mn w" x="22" y="215.8">- Never calculate a total, an average, a weighted figure or a</text>
+        <text class="mn w" x="22" y="236.6">&nbsp;&nbsp;currency conversion. Retrieve it with an action and quote the action.</text>
+        <text class="mn w" x="22" y="262.2">- You may state the difference between two figures you retrieved,</text>
+        <text class="mn w" x="22" y="283">&nbsp;&nbsp;provided both are shown with their sources.</text>
+        <text class="mn w" x="22" y="308.6">- If a question is ambiguous about period, share</text>
+        <text class="mn w" x="22" y="329.4">&nbsp;&nbsp;class or plan, ask - do not choose silently.</text>
+        <text class="mn w" x="22" y="355">- Decline suitability questions: that is consultant</text>
+        <text class="mn w" x="22" y="375.8">&nbsp;&nbsp;judgement, not a document lookup.</text>
+        <text class="mn w" x="22" y="401.4">- Nothing is client-ready until approved.</text>
+        <text class="mn w" x="22" y="426.9">- On any action failure, say which action failed</text>
+        <text class="mn w" x="22" y="447.8">&nbsp;&nbsp;and stop. Do not substitute a plausible value.</text>
+        <text class="mn w" x="22" y="473.3">- Be brief. A consultant reads this between</text>
+        <text class="mn w" x="22" y="494.2">&nbsp;&nbsp;meetings.</text>
+        <rect class="bx dd" x="22" y="512.7" width="596" height="39.4" rx="5"/>
+        <text class="ss w" x="36" y="538.2" style="fill:#fbbf24">Eleven rules. Every one of them is a bug that has already happened.</text>
       </svg>
     </div>
     <div class="pts">
@@ -376,54 +375,54 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Reading the trace: where the ninety-second fix comes from<span class="cue pre">PRE &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Mock agent execution trace">
-        <rect class="bx w" x="4" y="4" width="692" height="300" rx="8"/>
-        <rect x="4" y="4" width="692" height="30" rx="8" style="fill:#0b2545"/>
-        <text class="ss w" x="20" y="24" style="font-weight:600">Run 4f21 &middot; &ldquo;Does Northwind comply with the mandate for CL-4471?&rdquo;</text>
-        <text class="ss w" x="600" y="24">2.4 s</text>
+      <svg class="u126" viewBox="0 0 700 541.8" role="img" aria-label="Mock agent execution trace">
+        <rect class="bx w" x="4" y="5" width="692" height="378" rx="8"/>
+        <rect x="4" y="5" width="692" height="37.8" rx="8" style="fill:#0b2545"/>
+        <text class="ss w" x="20" y="30.2" style="font-weight:600">Run 4f21 &middot; &ldquo;Does Northwind comply with the mandate for CL-4471?&rdquo;</text>
+        <text class="ss w" x="600" y="30.2">2.4 s</text>
 
-        <text class="lb" x="20" y="54">STEP</text><text class="lb" x="120" y="54">WHAT IT CHOSE</text><text class="lb" x="380" y="54">INPUT</text><text class="lb" x="560" y="54">RESULT</text>
-        <line x1="16" y1="60" x2="684" y2="60" style="stroke:#e2e8f0"/>
+        <text class="lb" x="20" y="68">STEP</text><text class="lb" x="120" y="68">WHAT IT CHOSE</text><text class="lb" x="380" y="68">INPUT</text><text class="lb" x="560" y="68">RESULT</text>
+        <line x1="16" y1="75.6" x2="684" y2="75.6" style="stroke:#e2e8f0"/>
 
-        <text class="ss" x="20" y="82">1 &nbsp;plan</text>
-        <text class="ss" x="120" y="82" style="fill:#0b2545">mandate lookup, then factsheet</text>
-        <text class="mn" x="380" y="82">user question</text>
-        <text class="ss" x="560" y="82" style="fill:#047857">2 steps</text>
-        <line x1="16" y1="92" x2="684" y2="92" style="stroke:#f1f5f9"/>
+        <text class="ss" x="20" y="103.3">1 &nbsp;plan</text>
+        <text class="ss" x="120" y="103.3" style="fill:#0b2545">mandate lookup, then factsheet</text>
+        <text class="mn" x="380" y="103.3">user question</text>
+        <text class="ss" x="560" y="103.3" style="fill:#065f46">2 steps</text>
+        <line x1="16" y1="115.9" x2="684" y2="115.9" style="stroke:#f1f5f9"/>
 
-        <text class="ss" x="20" y="114">2 &nbsp;action</text>
-        <text class="ss" x="120" y="114" style="fill:#0b2545;font-weight:600">GetClientMandate</text>
-        <text class="mn" x="380" y="114">clientid: "CL-4471"</text>
-        <text class="ss" x="560" y="114" style="fill:#047857">200 &middot; 0.8 s</text>
-        <line x1="16" y1="124" x2="684" y2="124" style="stroke:#f1f5f9"/>
+        <text class="ss" x="20" y="143.6">2 &nbsp;action</text>
+        <text class="ss" x="120" y="143.6" style="fill:#0b2545;font-weight:600">GetClientMandate</text>
+        <text class="mn" x="380" y="143.6">clientid: "CL-4471"</text>
+        <text class="ss" x="560" y="143.6" style="fill:#065f46">200 &middot; 0.8 s</text>
+        <line x1="16" y1="156.2" x2="684" y2="156.2" style="stroke:#f1f5f9"/>
 
-        <text class="ss" x="20" y="146">3 &nbsp;knowledge</text>
-        <text class="ss" x="120" y="146" style="fill:#0b2545">factsheet &sect;5 asset allocation</text>
-        <text class="mn" x="380" y="146">"asset allocation"</text>
-        <text class="ss" x="560" y="146" style="fill:#047857">1 passage</text>
-        <line x1="16" y1="156" x2="684" y2="156" style="stroke:#f1f5f9"/>
+        <text class="ss" x="20" y="184">3 &nbsp;knowledge</text>
+        <text class="ss" x="120" y="184" style="fill:#0b2545">factsheet &sect;5 asset allocation</text>
+        <text class="mn" x="380" y="184">"asset allocation"</text>
+        <text class="ss" x="560" y="184" style="fill:#065f46">1 passage</text>
+        <line x1="16" y1="196.6" x2="684" y2="196.6" style="stroke:#f1f5f9"/>
 
-        <text class="ss" x="20" y="178">4 &nbsp;check</text>
-        <text class="ss" x="120" y="178" style="fill:#0b2545">68% equity vs 70% limit</text>
-        <text class="mn" x="380" y="178">compare</text>
-        <text class="ss" x="560" y="178" style="fill:#047857">sufficient</text>
-        <line x1="16" y1="188" x2="684" y2="188" style="stroke:#f1f5f9"/>
+        <text class="ss" x="20" y="224.3">4 &nbsp;check</text>
+        <text class="ss" x="120" y="224.3" style="fill:#0b2545">68% equity vs 70% limit</text>
+        <text class="mn" x="380" y="224.3">compare</text>
+        <text class="ss" x="560" y="224.3" style="fill:#065f46">sufficient</text>
+        <line x1="16" y1="236.9" x2="684" y2="236.9" style="stroke:#f1f5f9"/>
 
-        <text class="ss" x="20" y="210">5 &nbsp;respond</text>
-        <text class="ss" x="120" y="210" style="fill:#0b2545">compliant, 2 points of headroom</text>
-        <text class="mn" x="380" y="210">2 citations</text>
-        <text class="ss" x="560" y="210" style="fill:#047857">done</text>
+        <text class="ss" x="20" y="264.6">5 &nbsp;respond</text>
+        <text class="ss" x="120" y="264.6" style="fill:#0b2545">compliant, 2 points of headroom</text>
+        <text class="mn" x="380" y="264.6">2 citations</text>
+        <text class="ss" x="560" y="264.6" style="fill:#065f46">done</text>
 
-        <rect class="bx r" x="16" y="228" width="668" height="64" rx="6"/>
-        <text class="lb r" x="32" y="250">THE SAME TRACE, WITH A VAGUE ACTION DESCRIPTION</text>
-        <text class="ss" x="32" y="272">2 &nbsp;action &nbsp; <tspan style="font-weight:600;fill:#b91c1c">GetFxRate</tspan> &nbsp;&mdash; wrong tool, called confidently, answer built on it</text>
+        <rect class="bx r" x="16" y="287.3" width="668" height="80.6" rx="6"/>
+        <text class="lb r" x="32" y="315">THE SAME TRACE, WITH A VAGUE ACTION DESCRIPTION</text>
+        <text class="ss" x="32" y="342.7">2 &nbsp;action &nbsp; <tspan style="font-weight:600;fill:#b91c1c">GetFxRate</tspan> &nbsp;&mdash; wrong tool, called confidently, answer built on it</text>
 
-        <rect class="bx a" x="4" y="316" width="692" height="108" rx="8"/>
-        <text class="lb a" x="20" y="338">WHAT THE TRACE TELLS YOU, IN ORDER OF USEFULNESS</text>
-        <text class="ss" x="20" y="360">1 &nbsp;<tspan style="font-weight:600">which action it chose</tspan> &mdash; if wrong, fix the description, not the agent</text>
-        <text class="ss" x="20" y="380">2 &nbsp;<tspan style="font-weight:600">what it passed in</tspan> &mdash; if malformed, fix the parameter description or add an example</text>
-        <text class="ss" x="20" y="400">3 &nbsp;<tspan style="font-weight:600">what came back</tspan> &mdash; if empty, the problem is the system, not the agent</text>
-        <text class="ss" x="20" y="418">4 &nbsp;<tspan style="font-weight:600">how it decided it had enough</tspan> &mdash; if premature, tighten the instruction</text>
+        <rect class="bx a" x="4" y="398.2" width="692" height="136.1" rx="8"/>
+        <text class="lb a" x="20" y="425.9">WHAT THE TRACE TELLS YOU, IN ORDER OF USEFULNESS</text>
+        <text class="ss" x="20" y="453.6">1 &nbsp;<tspan style="font-weight:600">which action it chose</tspan> &mdash; if wrong, fix the description, not the agent</text>
+        <text class="ss" x="20" y="478.8">2 &nbsp;<tspan style="font-weight:600">what it passed in</tspan> &mdash; if malformed, fix the parameter description or add an example</text>
+        <text class="ss" x="20" y="504">3 &nbsp;<tspan style="font-weight:600">what came back</tspan> &mdash; if empty, the problem is the system, not the agent</text>
+        <text class="ss" x="20" y="526.7">4 &nbsp;<tspan style="font-weight:600">how it decided it had enough</tspan> &mdash; if premature, tighten the instruction</text>
       </svg>
     </div>
     <div class="pts">
@@ -461,60 +460,60 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       <div class="callout good">This is what turns <em>&ldquo;it feels better&rdquo;</em> into a number you can put in front of a governance forum. <b>Sometimes that number says the change earned nothing</b> &mdash; which is the most useful answer it gives, and the one no amount of watching the chat window would have produced.</div>
     </div>
     <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Where evaluation questions come from, and the improvement loop">
-        <rect class="bx" x="4" y="4" width="692" height="146" rx="8"/>
-        <text class="lb" x="22" y="26">FOUR PLACES THE QUESTIONS COME FROM</text>
+      <svg class="u123" viewBox="0 0 700 528.9" role="img" aria-label="Where evaluation questions come from, and the improvement loop">
+        <rect class="bx" x="4" y="4.9" width="692" height="179.6" rx="8"/>
+        <text class="lb" x="22" y="32">FOUR PLACES THE QUESTIONS COME FROM</text>
 
-        <rect class="bx w" x="20" y="38" width="320" height="44" rx="5"/>
-        <text class="ss" x="32" y="58" style="font-weight:600;fill:#0b2545">A CSV you write yourself</text>
-        <text class="ss" x="32" y="76">your questions, your expected answers</text>
+        <rect class="bx w" x="20" y="46.7" width="320" height="54.1" rx="5"/>
+        <text class="ss" x="32" y="71.3" style="font-weight:600;fill:#0b2545">A CSV you write yourself</text>
+        <text class="ss" x="32" y="93.5">your questions, your expected answers</text>
 
-        <rect class="bx w" x="356" y="38" width="324" height="44" rx="5"/>
-        <text class="ss" x="368" y="58" style="font-weight:600;fill:#0b2545">Generated from the agent itself</text>
-        <text class="ss" x="368" y="76">a quick set of 10, or a full set of up to 100</text>
+        <rect class="bx w" x="356" y="46.7" width="324" height="54.1" rx="5"/>
+        <text class="ss" x="368" y="71.3" style="font-weight:600;fill:#0b2545">Generated from the agent itself</text>
+        <text class="ss" x="368" y="93.5">a quick set of 10, or a full set of up to 100</text>
 
-        <rect class="bx w" x="20" y="90" width="320" height="44" rx="5"/>
-        <text class="ss" x="32" y="110" style="font-weight:600;fill:#0b2545">The manual testing you already did</text>
-        <text class="ss" x="32" y="128">captured as a set, instead of thrown away</text>
+        <rect class="bx w" x="20" y="110.7" width="320" height="54.1" rx="5"/>
+        <text class="ss" x="32" y="135.3" style="font-weight:600;fill:#0b2545">The manual testing you already did</text>
+        <text class="ss" x="32" y="157.4">captured as a set, instead of thrown away</text>
 
-        <rect class="bx w" x="356" y="90" width="324" height="44" rx="5"/>
-        <text class="ss" x="368" y="110" style="font-weight:600;fill:#0b2545">Real sessions, once it is live</text>
-        <text class="ss" x="368" y="128">exported, corrected, replayed as a set</text>
+        <rect class="bx w" x="356" y="110.7" width="324" height="54.1" rx="5"/>
+        <text class="ss" x="368" y="135.3" style="font-weight:600;fill:#0b2545">Real sessions, once it is live</text>
+        <text class="ss" x="368" y="157.4">exported, corrected, replayed as a set</text>
 
-        <rect class="bx" x="4" y="160" width="692" height="150" rx="8"/>
-        <text class="lb" x="22" y="182">THE LOOP &mdash; ONE CHANGE PER RUN</text>
+        <rect class="bx" x="4" y="196.8" width="692" height="184.5" rx="8"/>
+        <text class="lb" x="22" y="223.9">THE LOOP &mdash; ONE CHANGE PER RUN</text>
 
-        <rect class="bx w" x="20" y="194" width="150" height="68" rx="5"/>
-        <text class="ss" x="32" y="216" style="font-weight:600;fill:#0b2545">1 &nbsp;Baseline</text>
-        <text class="ss" x="32" y="236">score the set as</text>
-        <text class="ss" x="32" y="254">it stands today</text>
-        <path class="fl" d="M174 228 L186 228"/>
+        <rect class="bx w" x="20" y="238.6" width="150" height="83.6" rx="5"/>
+        <text class="ss" x="32" y="265.7" style="font-weight:600;fill:#0b2545">1 &nbsp;Baseline</text>
+        <text class="ss" x="32" y="290.3">score the set as</text>
+        <text class="ss" x="32" y="312.4">it stands today</text>
+        <path class="fl" d="M174 280.4L186 280.4"/>
 
-        <rect class="bx a" x="190" y="194" width="150" height="68" rx="5"/>
-        <text class="ss" x="202" y="216" style="font-weight:600;fill:#92400e">2 &nbsp;One change</text>
-        <text class="ss" x="202" y="236">an instruction, a</text>
-        <text class="ss" x="202" y="254">source, the model</text>
-        <path class="fl" d="M344 228 L356 228"/>
+        <rect class="bx a" x="190" y="238.6" width="150" height="83.6" rx="5"/>
+        <text class="ss" x="202" y="265.7" style="font-weight:600;fill:#92400e">2 &nbsp;One change</text>
+        <text class="ss" x="202" y="290.3">an instruction, a</text>
+        <text class="ss" x="202" y="312.4">source, the model</text>
+        <path class="fl" d="M344 280.4L356 280.4"/>
 
-        <rect class="bx w" x="360" y="194" width="150" height="68" rx="5"/>
-        <text class="ss" x="372" y="216" style="font-weight:600;fill:#0b2545">3 &nbsp;Re-run</text>
-        <text class="ss" x="372" y="236">the identical set,</text>
-        <text class="ss" x="372" y="254">in the same order</text>
-        <path class="fl" d="M514 228 L526 228"/>
+        <rect class="bx w" x="360" y="238.6" width="150" height="83.6" rx="5"/>
+        <text class="ss" x="372" y="265.7" style="font-weight:600;fill:#0b2545">3 &nbsp;Re-run</text>
+        <text class="ss" x="372" y="290.3">the identical set,</text>
+        <text class="ss" x="372" y="312.4">in the same order</text>
+        <path class="fl" d="M514 280.4L526 280.4"/>
 
-        <rect class="bx g" x="530" y="194" width="150" height="68" rx="5"/>
-        <text class="ss" x="542" y="216" style="font-weight:600;fill:#047857">4 &nbsp;Compare</text>
-        <text class="ss" x="542" y="236">better, worse, or</text>
-        <text class="ss" x="542" y="254">no real change</text>
+        <rect class="bx g" x="530" y="238.6" width="150" height="83.6" rx="5"/>
+        <text class="ss" x="542" y="265.7" style="font-weight:600;fill:#065f46">4 &nbsp;Compare</text>
+        <text class="ss" x="542" y="290.3">better, worse, or</text>
+        <text class="ss" x="542" y="312.4">no real change</text>
 
-        <path class="fl" d="M605 266 L605 284 L265 284 L265 268"/>
-        <text class="ss" x="22" y="302" style="font-weight:600;fill:#0b2545">Change two things at once and a better score tells you nothing about which one earned it.</text>
+        <path class="fl" d="M605 327.2L605 349.3L265 349.3L265 329.6"/>
+        <text class="ss" x="22" y="371.5" style="font-weight:600;fill:#0b2545">Change two things at once and a better score tells you nothing about which one earned it.</text>
 
-        <rect class="bx a" x="4" y="318" width="692" height="108" rx="8"/>
-        <text class="lb a" x="22" y="340">WHAT A TEST SET ANSWERS THAT A DEMO CANNOT</text>
-        <text class="ss" x="22" y="364">&bull; &nbsp;Did the change help, or did it only help the three questions you happened to ask?</text>
-        <text class="ss" x="22" y="386">&bull; &nbsp;Does it still hold after someone else edits the instructions next month?</text>
-        <text class="ss" x="22" y="410" style="font-weight:600;fill:#92400e">&bull; &nbsp;Can you show a review forum a number rather than an anecdote?</text>
+        <rect class="bx a" x="4" y="391.1" width="692" height="132.8" rx="8"/>
+        <text class="lb a" x="22" y="418.2">WHAT A TEST SET ANSWERS THAT A DEMO CANNOT</text>
+        <text class="ss" x="22" y="447.7">&bull; &nbsp;Did the change help, or did it only help the three questions you happened to ask?</text>
+        <text class="ss" x="22" y="474.8">&bull; &nbsp;Does it still hold after someone else edits the instructions next month?</text>
+        <text class="ss" x="22" y="504.3" style="font-weight:600;fill:#92400e">&bull; &nbsp;Can you show a review forum a number rather than an anecdote?</text>
       </svg>
     </div>
   </div>
@@ -547,7 +546,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       <text class="tt" x="992" y="50" style="font-size:14px">5 &nbsp;Re-run the set</text>
       <text class="ss" x="992" y="72">the identical questions</text>
       <path class="ar" d="M1074 90 L1074 104 L106 104 L106 92"/>
-      <text class="ss" x="500" y="120" style="fill:#1d4ed8;font-weight:600">better, worse, or no real change &mdash; then round again</text>
+      <text class="ss" x="500" y="120" style="fill:#1e40af;font-weight:600">better, worse, or no real change &mdash; then round again</text>
 
       <text class="lb" x="4" y="150">THE FOUR LAYERS, AND THE SYMPTOM THAT POINTS AT EACH</text>
       <rect class="bx w" x="4" y="160" width="1172" height="26" rx="4"/>
@@ -555,21 +554,21 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       <text class="ss" x="24" y="208">It read the wrong document, or ignored one</text>
       <text class="tt" x="420" y="208" style="font-size:13px">Knowledge source</text>
       <text class="ss" x="700" y="208">its display name and description</text>
-      <text class="ss" x="1050" y="208" style="fill:#1d4ed8">demo 2.1</text>
+      <text class="ss" x="1050" y="208" style="fill:#1e40af">demo 2.1</text>
       <text class="ss" x="24" y="234">It silently picked a period, plan or share class</text>
       <text class="tt" x="420" y="234" style="font-size:13px">Instructions</text>
       <text class="ss" x="700" y="234">one sentence naming the ambiguity</text>
-      <text class="ss" x="1050" y="234" style="fill:#1d4ed8">demo 2.1</text>
+      <text class="ss" x="1050" y="234" style="fill:#1e40af">demo 2.1</text>
       <text class="ss" x="24" y="260">It never called your action at all</text>
       <text class="tt" x="420" y="260" style="font-size:13px">Action description</text>
       <text class="ss" x="700" y="260">say <tspan font-style="italic">when</tspan> to use it, not what it is called</text>
-      <text class="ss" x="1050" y="260" style="fill:#b45309">session 2.2</text>
+      <text class="ss" x="1050" y="260" style="fill:#92400e">session 2.2</text>
       <text class="ss" x="24" y="286">It called the action and got nothing back</text>
       <text class="tt" x="420" y="286" style="font-size:13px">The flow itself</text>
       <text class="ss" x="700" y="286">test it standalone, outside the agent</text>
-      <text class="ss" x="1050" y="286" style="fill:#b45309">session 2.2</text>
+      <text class="ss" x="1050" y="286" style="fill:#92400e">session 2.2</text>
       <path class="ar" d="M4 300 L1176 300" style="stroke:#cbd5e1;stroke-width:1;marker-end:none"/>
-      <text class="ss" x="24" y="322" style="fill:#546b8a">Two of the four are descriptions rather than logic &mdash; which is why most &ldquo;agent bugs&rdquo; are fixed in a sentence and why the trace, not the symptom, tells you which sentence.</text>
+      <text class="ss" x="24" y="322" style="fill:#334155">Two of the four are descriptions rather than logic &mdash; which is why most &ldquo;agent bugs&rdquo; are fixed in a sentence and why the trace, not the symptom, tells you which sentence.</text>
 
       <rect class="bx d" x="4" y="336" width="1172" height="84" rx="8"/>
       <text class="ss w" x="24" y="364" style="font-size:14px">Nothing you changed in that demo was code. Three levers did all of it: <tspan font-weight="700" fill="#fbbf24">a name, a sentence, and a set of questions.</tspan></text>
@@ -583,32 +582,32 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Four ways to give an agent hands &mdash; pick deliberately<span class="cue pre">PRE &middot; DEMO 2.2</span><span class="tag">2.2</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Four ways to connect an agent to a system">
-        <rect class="bx g" x="4" y="4" width="692" height="94" rx="8"/>
-        <text class="lb g" x="22" y="26">1 &middot; PREBUILT CONNECTOR &nbsp;&mdash;&nbsp; TRY THIS FIRST, EVERY TIME</text>
-        <text class="tt" x="22" y="50" style="font-size:14px">SharePoint &middot; Excel Online &middot; Outlook &middot; Teams &middot; Dataverse &middot; Approvals &middot; SQL</text>
-        <text class="ss" x="22" y="70">Governed, logged, DLP-classified already. Nothing to build, nothing to review.</text>
-        <text class="ss" x="22" y="88" style="fill:#047857;font-weight:600">Cost: zero engineering &nbsp;&middot;&nbsp; Approval: usually already granted</text>
+      <svg class="u112" viewBox="0 0 700 481.6" role="img" aria-label="Four ways to connect an agent to a system">
+        <rect class="bx g" x="4" y="4.5" width="692" height="105.3" rx="8"/>
+        <text class="lb g" x="22" y="29.1">1 &middot; PREBUILT CONNECTOR &nbsp;&mdash;&nbsp; TRY THIS FIRST, EVERY TIME</text>
+        <text class="tt" x="22" y="56" style="font-size:15.7px">SharePoint &middot; Excel Online &middot; Outlook &middot; Teams &middot; Dataverse &middot; Approvals &middot; SQL</text>
+        <text class="ss" x="22" y="78.4">Governed, logged, DLP-classified already. Nothing to build, nothing to review.</text>
+        <text class="ss" x="22" y="98.6" style="fill:#065f46;font-weight:600">Cost: zero engineering &nbsp;&middot;&nbsp; Approval: usually already granted</text>
 
-        <rect class="bx" x="4" y="106" width="692" height="94" rx="8"/>
-        <text class="lb" x="22" y="128">2 &middot; POWER AUTOMATE FLOW &nbsp;&mdash;&nbsp; THE WORKHORSE</text>
-        <text class="tt" x="22" y="152" style="font-size:14px">Trigger: &ldquo;When an agent calls the flow&rdquo; &rarr; do work &rarr; Respond to the agent</text>
-        <text class="ss" x="22" y="172">Anything multi-step: call an API, shape the response, loop, branch, handle the error.</text>
-        <text class="ss" x="22" y="190" style="fill:#1d4ed8;font-weight:600">Cost: low &nbsp;&middot;&nbsp; Note: the HTTP action is premium &mdash; check before you promise it</text>
+        <rect class="bx" x="4" y="118.7" width="692" height="105.3" rx="8"/>
+        <text class="lb" x="22" y="143.4">2 &middot; POWER AUTOMATE FLOW &nbsp;&mdash;&nbsp; THE WORKHORSE</text>
+        <text class="tt" x="22" y="170.2" style="font-size:15.7px">Trigger: &ldquo;When an agent calls the flow&rdquo; &rarr; do work &rarr; Respond to the agent</text>
+        <text class="ss" x="22" y="192.6">Anything multi-step: call an API, shape the response, loop, branch, handle the error.</text>
+        <text class="ss" x="22" y="212.8" style="fill:#1e40af;font-weight:600">Cost: low &nbsp;&middot;&nbsp; Note: the HTTP action is premium &mdash; check before you promise it</text>
 
-        <rect class="bx" x="4" y="208" width="692" height="94" rx="8"/>
-        <text class="lb" x="22" y="230">3 &middot; CUSTOM CONNECTOR &nbsp;&mdash;&nbsp; WHEN THE API IS YOURS AND REUSED</text>
-        <text class="tt" x="22" y="254" style="font-size:14px">Built from an OpenAPI spec &middot; typed operations &middot; managed auth &middot; reusable across agents</text>
-        <text class="ss" x="22" y="274">The right answer for an internal API of your own that more than one agent will ever call.</text>
-        <text class="ss" x="22" y="292" style="fill:#b45309;font-weight:600">Cost: real engineering &nbsp;&middot;&nbsp; Approval: platform team + DLP classification</text>
+        <rect class="bx" x="4" y="233" width="692" height="105.3" rx="8"/>
+        <text class="lb" x="22" y="257.6">3 &middot; CUSTOM CONNECTOR &nbsp;&mdash;&nbsp; WHEN THE API IS YOURS AND REUSED</text>
+        <text class="tt" x="22" y="284.5" style="font-size:15.7px">Built from an OpenAPI spec &middot; typed operations &middot; managed auth &middot; reusable across agents</text>
+        <text class="ss" x="22" y="306.9">The right answer for an internal API of your own that more than one agent will ever call.</text>
+        <text class="ss" x="22" y="327" style="fill:#92400e;font-weight:600">Cost: real engineering &nbsp;&middot;&nbsp; Approval: platform team + DLP classification</text>
 
-        <rect class="bx" x="4" y="310" width="692" height="76" rx="8"/>
-        <text class="lb" x="22" y="332">4 &middot; MCP SERVER &nbsp;&mdash;&nbsp; EMERGING, CHECK AVAILABILITY IN YOUR TENANT</text>
-        <text class="ss" x="22" y="354">One server exposes many tools to many agents, described once. Attractive when a whole</text>
-        <text class="ss" x="22" y="372">domain of internal capability needs exposing &mdash; not the way to make a single call today.</text>
+        <rect class="bx" x="4" y="347.2" width="692" height="85.1" rx="8"/>
+        <text class="lb" x="22" y="371.8">4 &middot; MCP SERVER &nbsp;&mdash;&nbsp; EMERGING, CHECK AVAILABILITY IN YOUR TENANT</text>
+        <text class="ss" x="22" y="396.5">One server exposes many tools to many agents, described once. Attractive when a whole</text>
+        <text class="ss" x="22" y="416.6">domain of internal capability needs exposing &mdash; not the way to make a single call today.</text>
 
-        <rect class="bx a" x="4" y="394" width="692" height="32" rx="6"/>
-        <text class="ss" x="22" y="415" style="font-weight:600;fill:#92400e">Rule: go down this list, not up. Most teams start at 3 and discover 1 would have done.</text>
+        <rect class="bx a" x="4" y="441.3" width="692" height="35.8" rx="6"/>
+        <text class="ss" x="22" y="464.8" style="font-weight:600;fill:#92400e">Rule: go down this list, not up. Most teams start at 3 and discover 1 would have done.</text>
       </svg>
     </div>
     <div class="pts">
@@ -632,53 +631,53 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Anatomy of a single action call, end to end<span class="cue pre">PRE &middot; DEMO 2.2</span><span class="tag">2.2</span></h2>
   <div class="body g1">
     <div>
-      <svg viewBox="0 0 1180 420" role="img" aria-label="Sequence diagram of an agent action call">
-        <rect class="bx d" x="10" y="6" width="150" height="34" rx="6"/><text class="tt w" x="28" y="29" style="font-size:13px">Consultant</text>
-        <rect class="bx d" x="250" y="6" width="180" height="34" rx="6"/><text class="tt w" x="268" y="29" style="font-size:13px">Agent orchestration</text>
-        <rect class="bx d" x="520" y="6" width="180" height="34" rx="6"/><text class="tt w" x="538" y="29" style="font-size:13px">Action definition</text>
-        <rect class="bx d" x="790" y="6" width="170" height="34" rx="6"/><text class="tt w" x="808" y="29" style="font-size:13px">Power Automate</text>
-        <rect class="bx d" x="1010" y="6" width="160" height="34" rx="6"/><text class="tt w" x="1028" y="29" style="font-size:13px">The system</text>
+      <svg class="u119" viewBox="0 0 1180 499.8" role="img" aria-label="Sequence diagram of an agent action call">
+        <rect class="bx d" x="10" y="7.1" width="150" height="40.5" rx="6"/><text class="tt w" x="28" y="34.5" style="font-size:15.5px">Consultant</text>
+        <rect class="bx d" x="250" y="7.1" width="180" height="40.5" rx="6"/><text class="tt w" x="268" y="34.5" style="font-size:15.5px">Agent orchestration</text>
+        <rect class="bx d" x="520" y="7.1" width="180" height="40.5" rx="6"/><text class="tt w" x="538" y="34.5" style="font-size:15.5px">Action definition</text>
+        <rect class="bx d" x="790" y="7.1" width="170" height="40.5" rx="6"/><text class="tt w" x="808" y="34.5" style="font-size:15.5px">Power Automate</text>
+        <rect class="bx d" x="1010" y="7.1" width="160" height="40.5" rx="6"/><text class="tt w" x="1028" y="34.5" style="font-size:15.5px">The system</text>
 
-        <line x1="85" y1="42" x2="85" y2="404" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
-        <line x1="340" y1="42" x2="340" y2="404" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
-        <line x1="610" y1="42" x2="610" y2="404" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
-        <line x1="875" y1="42" x2="875" y2="404" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
-        <line x1="1090" y1="42" x2="1090" y2="404" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
+        <line x1="85" y1="50" x2="85" y2="480.8" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
+        <line x1="340" y1="50" x2="340" y2="480.8" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
+        <line x1="610" y1="50" x2="610" y2="480.8" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
+        <line x1="875" y1="50" x2="875" y2="480.8" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
+        <line x1="1090" y1="50" x2="1090" y2="480.8" style="stroke:#cbd5e1;stroke-dasharray:4 5"/>
 
-        <path class="fl" d="M85 64 L334 64"/>
-        <text class="ss" x="100" y="58">1 &nbsp;&ldquo;What is the fund size in dollars?&rdquo;</text>
+        <path class="fl" d="M85 76.2L334 76.2"/>
+        <text class="ss" x="100" y="69">1 &nbsp;&ldquo;What is the fund size in dollars?&rdquo;</text>
 
-        <path class="ar" d="M340 104 L604 104"/>
-        <text class="ss" x="356" y="98">2 &nbsp;reads every action <tspan style="font-weight:700;fill:#0b2545">description</tspan> and picks one</text>
-        <rect class="bx a" x="356" y="112" width="242" height="46" rx="5"/>
-        <text class="ss" x="368" y="132" style="fill:#92400e">&ldquo;Use this whenever a rupee value</text>
-        <text class="ss" x="368" y="150" style="fill:#92400e">must be expressed in dollars&rdquo;</text>
+        <path class="ar" d="M340 123.8L604 123.8"/>
+        <text class="ss" x="356" y="116.6">2 &nbsp;reads every action <tspan style="font-weight:700;fill:#0b2545">description</tspan> and picks one</text>
+        <rect class="bx a" x="356" y="133.3" width="242" height="54.7" rx="5"/>
+        <text class="ss" x="368" y="157.1" style="fill:#92400e">&ldquo;Use this whenever a rupee value</text>
+        <text class="ss" x="368" y="178.5" style="fill:#92400e">must be expressed in dollars&rdquo;</text>
 
-        <path class="ar" d="M610 186 L869 186"/>
-        <text class="ss" x="626" y="180">3 &nbsp;invoke with typed inputs</text>
-        <text class="mn" x="626" y="204">ratedate  = "2026-06-30"</text>
-        <text class="mn" x="626" y="222">amountinr = 48200000000</text>
+        <path class="ar" d="M610 221.3L869 221.3"/>
+        <text class="ss" x="626" y="214.2">3 &nbsp;invoke with typed inputs</text>
+        <text class="mn" x="626" y="242.8">ratedate  = "2026-06-30"</text>
+        <text class="mn" x="626" y="264.2">amountinr = 48200000000</text>
 
-        <path class="fl" d="M875 234 L1084 234"/>
-        <text class="ss" x="890" y="228">4 &nbsp;GET /2026-06-30?from=USD&amp;to=INR</text>
+        <path class="fl" d="M875 278.5L1084 278.5"/>
+        <text class="ss" x="890" y="271.3">4 &nbsp;GET /2026-06-30?from=USD&amp;to=INR</text>
 
-        <path class="ar" d="M1090 272 L881 272" style="stroke:#94a8c4"/>
-        <text class="ss" x="900" y="266">5 &nbsp;200 &middot; JSON body</text>
+        <path class="ar" d="M1090 323.7L881 323.7" style="stroke:#94a8c4"/>
+        <text class="ss" x="900" y="316.5">5 &nbsp;200 &middot; JSON body</text>
 
-        <path class="ar" d="M875 310 L616 310"/>
-        <text class="ss" x="640" y="304">6 &nbsp;<tspan style="font-weight:700;fill:#0b2545">Respond to the agent</tspan> &mdash; typed output</text>
-        <text class="mn" x="640" y="328">fxjson    = { rates: { INR: 94.66 } }</text>
-        <text class="mn" x="640" y="346">amountusd = 509190788 &nbsp;<tspan style="fill:#166534">&larr; the flow divided, not the model</tspan></text>
+        <path class="ar" d="M875 368.9L616 368.9"/>
+        <text class="ss" x="640" y="361.8">6 &nbsp;<tspan style="font-weight:700;fill:#0b2545">Respond to the agent</tspan> &mdash; typed output</text>
+        <text class="mn" x="640" y="390.3">fxjson    = { rates: { INR: 94.66 } }</text>
+        <text class="mn" x="640" y="411.7">amountusd = 509190788 &nbsp;<tspan style="fill:#166534">&larr; the flow divided, not the model</tspan></text>
 
-        <path class="ar" d="M610 356 L346 356"/>
-        <text class="ss" x="366" y="350">7 &nbsp;parse, decide: enough to answer?</text>
+        <path class="ar" d="M610 423.6L346 423.6"/>
+        <text class="ss" x="366" y="416.5">7 &nbsp;parse, decide: enough to answer?</text>
 
-        <path class="flg" d="M340 394 L91 394"/>
-        <text class="ss" x="106" y="388">8 &nbsp;&ldquo;USD 509.2 mn&rdquo; &mdash; citing the action, the rate and its date</text>
+        <path class="flg" d="M340 468.9L91 468.9"/>
+        <text class="ss" x="106" y="461.7">8 &nbsp;&ldquo;USD 509.2 mn&rdquo; &mdash; citing the action, the rate and its date</text>
 
-        <rect class="bx r" x="626" y="366" width="540" height="46" rx="6"/>
-        <text class="lb r" x="642" y="386">IF STEP 5 FAILS OR RETURNS EMPTY</text>
-        <text class="ss" x="642" y="404">say which action failed and stop &mdash; never substitute a plausible rate</text>
+        <rect class="bx r" x="626" y="435.5" width="540" height="54.7" rx="6"/>
+        <text class="lb r" x="642" y="459.3">IF STEP 5 FAILS OR RETURNS EMPTY</text>
+        <text class="ss" x="642" y="480.8">say which action failed and stop &mdash; never substitute a plausible rate</text>
       </svg>
     </div>
   </div>
@@ -686,9 +685,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 10 -->
-<section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Reaching a legacy system — three patterns" data-notes="Which pattern you are in decides your timeline far more than anything in Copilot Studio does. Pattern C is where large organisations usually land, and that wrapper is a normal API project with a normal timeline. Legacy access is not a product feature." data-demo="2.2" data-role="pre">
+<section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Reaching a legacy system — three patterns" data-notes="Which pattern you are in decides your timeline far more than anything in Copilot Studio does. Pattern C is where large organisations usually land, and that wrapper is a normal API project with a normal timeline. Legacy access is not a product feature.  From the slide panel: WHY THIS MATTERS MORE THAN THE TOOLING — Which pattern you are in decides your timeline far more than anything in Copilot Studio does. Find out before you promise a date. One conversation with the system owner beats three weeks of optimism. ASK THE SYSTEM OWNER FOUR THINGS — Is there an HTTP endpoint, and is it documented? How does a service authenticate &mdash; not how a person does? What is the rate limit, and what happens when we exceed it? Is the data classified in a way that changes who may read it? The trap: a successful demo against a mock, followed by six months of discovering the real system is pattern C. Do the discovery first &mdash; it costs an afternoon." data-demo="2.2" data-role="pre">
   <h2>Reaching an internal or legacy system &mdash; three honest patterns<span class="cue pre">PRE &middot; DEMO 2.2</span><span class="tag k">2.2</span></h2>
-  <div class="body g64">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 430" role="img" aria-label="Three patterns for reaching legacy systems">
         <rect class="bx g" x="4" y="4" width="692" height="126" rx="8"/>
@@ -699,7 +698,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <path class="fl" d="M344 59 L394 59"/>
         <rect class="bx w" x="398" y="36" width="150" height="46" rx="5"/><text class="ss" x="412" y="64">Internal API</text>
         <text class="ss" x="22" y="102">Best case. You need the URL, the auth method and a service identity.</text>
-        <text class="ss" x="22" y="120" style="fill:#047857;font-weight:600">Timeline: days. This is what we demo today.</text>
+        <text class="ss" x="22" y="120" style="fill:#065f46;font-weight:600">Timeline: days. This is what we demo today.</text>
 
         <rect class="bx a" x="4" y="138" width="692" height="126" rx="8"/>
         <text class="lb a" x="22" y="160">PATTERN B &middot; IT SPEAKS SOMETHING ELSE, BUT IT SPEAKS</text>
@@ -709,7 +708,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <path class="fl" d="M344 193 L394 193"/>
         <rect class="bx w" x="398" y="170" width="150" height="46" rx="5"/><text class="ss" x="412" y="192">SQL / file share /</text><text class="ss" x="412" y="210">SOAP endpoint</text>
         <text class="ss" x="22" y="236">The gateway is installed, registered and owned by your platform team.</text>
-        <text class="ss" x="22" y="254" style="fill:#b45309;font-weight:600">Timeline: weeks. Mostly waiting for approval, not building.</text>
+        <text class="ss" x="22" y="254" style="fill:#92400e;font-weight:600">Timeline: weeks. Mostly waiting for approval, not building.</text>
 
         <rect class="bx r" x="4" y="272" width="692" height="126" rx="8"/>
         <text class="lb r" x="22" y="294">PATTERN C &middot; IT DOES NOT SPEAK AT ALL</text>
@@ -724,21 +723,6 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <rect class="bx d" x="4" y="406" width="692" height="20" rx="4"/>
         <text class="ss w" x="22" y="421" style="font-size:11.5px">In every pattern the agent side is identical &mdash; a flow, a description, a typed response. Only the distance to the data changes.</text>
       </svg>
-    </div>
-    <div class="pts">
-      <h3>Why this matters more than the tooling</h3>
-      <ul>
-        <li>Which pattern you are in decides your timeline far more than anything in Copilot Studio does.</li>
-        <li><b>Find out before you promise a date.</b> One conversation with the system owner beats three weeks of optimism.</li>
-      </ul>
-      <h3 class="a">Ask the system owner four things</h3>
-      <ul>
-        <li>Is there an HTTP endpoint, and is it documented?</li>
-        <li>How does a <em>service</em> authenticate &mdash; not how a person does?</li>
-        <li>What is the rate limit, and what happens when we exceed it?</li>
-        <li>Is the data classified in a way that changes who may read it?</li>
-      </ul>
-      <div class="callout bad"><b>The trap:</b> a successful demo against a mock, followed by six months of discovering the real system is pattern C. Do the discovery first &mdash; it costs an afternoon.</div>
     </div>
   </div>
 </section>
@@ -767,44 +751,44 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       </ul>
     </div>
     <div>
-      <svg viewBox="0 0 700 430" role="img" aria-label="Authentication models compared">
-        <rect class="bx" x="4" y="4" width="692" height="170" rx="8"/>
-        <text class="lb" x="22" y="26">ON-BEHALF-OF THE USER</text>
-        <rect class="bx w" x="22" y="38" width="130" height="52" rx="5"/><text class="ss" x="34" y="60">Consultant</text><text class="ss" x="34" y="78">signed in</text>
-        <path class="fl" d="M156 64 L204 64"/>
-        <rect class="bx d" x="208" y="38" width="150" height="52" rx="5"/><text class="ss w" x="222" y="60">Agent</text><text class="ss w" x="222" y="78">carries their token</text>
-        <path class="fl" d="M362 64 L390 64"/>
-        <rect class="bx w" x="394" y="38" width="140" height="52" rx="5"/><text class="ss" x="406" y="60">System checks</text><text class="ss" x="406" y="78">their permissions</text>
-        <rect class="bx g" x="546" y="38" width="132" height="52" rx="5"/><text class="ss" x="558" y="60" style="fill:#047857;font-weight:600">Sees only what</text><text class="ss" x="558" y="78" style="fill:#047857;font-weight:600">they may see</text>
-        <text class="ss" x="22" y="112">&#10003; &nbsp;Permissions already exist &mdash; nothing new to grant, nothing new to review</text>
-        <text class="ss" x="22" y="132">&#10003; &nbsp;Audit shows a real person behind every call</text>
-        <text class="ss" x="22" y="152">&#10007; &nbsp;Cannot run unattended, and two users get two different answers</text>
+      <svg class="u111" viewBox="0 0 700 477.3" role="img" aria-label="Authentication models compared">
+        <rect class="bx" x="4" y="4.4" width="692" height="188.7" rx="8"/>
+        <text class="lb" x="22" y="28.9">ON-BEHALF-OF THE USER</text>
+        <rect class="bx w" x="22" y="42.2" width="130" height="57.7" rx="5"/><text class="ss" x="34" y="66.6">Consultant</text><text class="ss" x="34" y="86.6">signed in</text>
+        <path class="fl" d="M156 71L204 71"/>
+        <rect class="bx d" x="208" y="42.2" width="150" height="57.7" rx="5"/><text class="ss w" x="222" y="66.6">Agent</text><text class="ss w" x="222" y="86.6">carries their token</text>
+        <path class="fl" d="M362 71L390 71"/>
+        <rect class="bx w" x="394" y="42.2" width="140" height="57.7" rx="5"/><text class="ss" x="406" y="66.6">System checks</text><text class="ss" x="406" y="86.6">their permissions</text>
+        <rect class="bx g" x="546" y="42.2" width="132" height="57.7" rx="5"/><text class="ss" x="558" y="66.6" style="fill:#065f46;font-weight:600">Sees only what</text><text class="ss" x="558" y="86.6" style="fill:#065f46;font-weight:600">they may see</text>
+        <text class="ss" x="22" y="124.3">&#10003; &nbsp;Permissions already exist &mdash; nothing new to grant, nothing new to review</text>
+        <text class="ss" x="22" y="146.5">&#10003; &nbsp;Audit shows a real person behind every call</text>
+        <text class="ss" x="22" y="168.7">&#10007; &nbsp;Cannot run unattended, and two users get two different answers</text>
 
-        <rect class="bx" x="4" y="182" width="692" height="170" rx="8"/>
-        <text class="lb a" x="22" y="204">SERVICE IDENTITY</text>
-        <rect class="bx w" x="22" y="216" width="130" height="52" rx="5"/><text class="ss" x="34" y="238">Consultant</text><text class="ss" x="34" y="256">asks</text>
-        <path class="fl" d="M156 242 L204 242"/>
-        <rect class="bx d" x="208" y="216" width="150" height="52" rx="5"/><text class="ss w" x="222" y="238">Agent</text><text class="ss w" x="222" y="256">uses its own account</text>
-        <path class="fl" d="M362 242 L390 242"/>
-        <rect class="bx w" x="394" y="216" width="140" height="52" rx="5"/><text class="ss" x="406" y="238">System checks</text><text class="ss" x="406" y="256">the service account</text>
-        <rect class="bx a" x="546" y="216" width="132" height="52" rx="5"/><text class="ss" x="558" y="238" style="fill:#92400e;font-weight:600">Sees whatever</text><text class="ss" x="558" y="256" style="fill:#92400e;font-weight:600">that account can</text>
-        <text class="ss" x="22" y="290">&#10003; &nbsp;Consistent for everyone; can run unattended and on a schedule</text>
-        <text class="ss" x="22" y="310">&#10007; &nbsp;A new privileged identity to scope, rotate, monitor and defend</text>
-        <text class="ss" x="22" y="330" style="fill:#b91c1c;font-weight:600">&#10007; &nbsp;Scope it to the one dataset it needs. Never to the whole system &ldquo;for now&rdquo;.</text>
+        <rect class="bx" x="4" y="202" width="692" height="188.7" rx="8"/>
+        <text class="lb a" x="22" y="226.4">SERVICE IDENTITY</text>
+        <rect class="bx w" x="22" y="239.8" width="130" height="57.7" rx="5"/><text class="ss" x="34" y="264.2">Consultant</text><text class="ss" x="34" y="284.2">asks</text>
+        <path class="fl" d="M156 268.6L204 268.6"/>
+        <rect class="bx d" x="208" y="239.8" width="150" height="57.7" rx="5"/><text class="ss w" x="222" y="264.2">Agent</text><text class="ss w" x="222" y="284.2">uses its own account</text>
+        <path class="fl" d="M362 268.6L390 268.6"/>
+        <rect class="bx w" x="394" y="239.8" width="140" height="57.7" rx="5"/><text class="ss" x="406" y="264.2">System checks</text><text class="ss" x="406" y="284.2">the service account</text>
+        <rect class="bx a" x="546" y="239.8" width="132" height="57.7" rx="5"/><text class="ss" x="558" y="264.2" style="fill:#92400e;font-weight:600">Sees whatever</text><text class="ss" x="558" y="284.2" style="fill:#92400e;font-weight:600">that account can</text>
+        <text class="ss" x="22" y="321.9">&#10003; &nbsp;Consistent for everyone; can run unattended and on a schedule</text>
+        <text class="ss" x="22" y="344.1">&#10007; &nbsp;A new privileged identity to scope, rotate, monitor and defend</text>
+        <text class="ss" x="22" y="366.3" style="fill:#b91c1c;font-weight:600">&#10007; &nbsp;Scope it to the one dataset it needs. Never to the whole system &ldquo;for now&rdquo;.</text>
 
-        <rect class="bx d" x="4" y="360" width="692" height="66" rx="8"/>
-        <text class="lb w" x="22" y="382">TAKE THIS TO YOUR PLATFORM TEAM</text>
-        <text class="ss w" x="22" y="404">&ldquo;This agent calls <tspan style="fill:#fbbf24">these three endpoints</tspan>, as <tspan style="fill:#fbbf24">this identity</tspan>, for <tspan style="fill:#fbbf24">these users</tspan>,</text>
-        <text class="ss w" x="22" y="422">and every call is logged with the requesting user.&rdquo; &nbsp;That sentence gets approved. Vagueness does not.</text>
+        <rect class="bx d" x="4" y="399.6" width="692" height="73.3" rx="8"/>
+        <text class="lb w" x="22" y="424">TAKE THIS TO YOUR PLATFORM TEAM</text>
+        <text class="ss w" x="22" y="448.4">&ldquo;This agent calls <tspan style="fill:#fbbf24">these three endpoints</tspan>, as <tspan style="fill:#fbbf24">this identity</tspan>, for <tspan style="fill:#fbbf24">these users</tspan>,</text>
+        <text class="ss w" x="22" y="468.4">and every call is logged with the requesting user.&rdquo; &nbsp;That sentence gets approved. Vagueness does not.</text>
       </svg>
     </div>
   </div>
 </section>
 
 <!-- 12 -->
-<section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Failure engineering" data-notes="The most under-taught topic in agent building - every row is a real incident pattern. The last one matters most: partial success is worse than outright failure, because it produces a confident, half-right deck." data-demo="2.2" data-role="post">
+<section class="slide" data-sec="2.2 Actions &amp; APIs" data-title="Failure engineering" data-notes="The most under-taught topic in agent building - every row is a real incident pattern. The last one matters most: partial success is worse than outright failure, because it produces a confident, half-right deck.  From the slide panel: WHERE EACH CONTROL LIVES — In the flow: retry policy, timeout, Configure run after, and a condition that checks for empty before responding. In the instructions: what to say and what never to substitute. In the output contract: the unresolved list, so partial data cannot masquerade as complete. TEST IT DELIBERATELY — Point one action at a URL that does not exist. Watch what the agent says. Return an empty array on purpose. Watch whether &ldquo;no holdings&rdquo; becomes &ldquo;0%&rdquo;. If you have not seen your agent fail, you do not know what it does when it fails. In regulated reporting, a refusal is cheap and a confident wrong number is not. Engineer for that asymmetry." data-demo="2.2" data-role="post">
   <h2>Failure engineering &mdash; the part that separates a demo from a system<span class="cue post">POST &middot; DEMO 2.2</span><span class="tag k">2.2</span></h2>
-  <div class="body g64">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 430" role="img" aria-label="Failure modes and their handling">
         <rect class="bx w" x="4" y="4" width="692" height="34" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
@@ -864,21 +848,6 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="20" y="412" style="font-weight:600;fill:#92400e">One rule underneath all six: an agent may be unhelpful, but it may never be quietly wrong.</text>
       </svg>
     </div>
-    <div class="pts">
-      <h3>Where each control lives</h3>
-      <ul>
-        <li><b>In the flow:</b> retry policy, timeout, <em>Configure run after</em>, and a condition that checks for empty before responding.</li>
-        <li><b>In the instructions:</b> what to say and what never to substitute.</li>
-        <li><b>In the output contract:</b> the <em>unresolved</em> list, so partial data cannot masquerade as complete.</li>
-      </ul>
-      <h3 class="r">Test it deliberately</h3>
-      <ul>
-        <li>Point one action at a URL that does not exist. Watch what the agent says.</li>
-        <li>Return an empty array on purpose. Watch whether &ldquo;no holdings&rdquo; becomes &ldquo;0%&rdquo;.</li>
-        <li><b>If you have not seen your agent fail, you do not know what it does when it fails.</b></li>
-      </ul>
-      <div class="callout">In regulated reporting, a refusal is cheap and a confident wrong number is not. Engineer for that asymmetry.</div>
-    </div>
   </div>
 </section>
 
@@ -887,28 +856,28 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>The numbers boundary: where the model stops and a system starts<span class="cue pre">PRE &middot; DEMO 2.3</span><span class="tag">2.3</span></h2>
   <div class="body g55">
     <div>
-      <svg viewBox="0 0 640 400" role="img" aria-label="Division between model work and tool work">
-        <rect class="bx g" x="4" y="4" width="632" height="176" rx="8"/>
-        <text class="lb g" x="22" y="28">THE MODEL DOES THIS &mdash; LANGUAGE-SHAPED WORK</text>
-        <text class="ss" x="22" y="48">&bull; &nbsp;reading a factsheet and locating a field</text>
-        <text class="ss" x="22" y="67">&bull; &nbsp;deciding which tool answers this question</text>
-        <text class="ss" x="22" y="86">&bull; &nbsp;writing commentary from figures it was given</text>
-        <text class="ss" x="22" y="105">&bull; &nbsp;explaining what a breach means in plain English</text>
-        <text class="ss" x="22" y="124">&bull; &nbsp;noticing that a required field is absent</text>
-        <text class="ss" x="22" y="143">&bull; &nbsp;stating a difference between two figures it just showed you</text>
-        <text class="ss" x="22" y="166" style="fill:#047857;font-weight:600;font-size:11.5px">language work &mdash; plus the one subtraction a reader can check by eye</text>
+      <svg class="u136" viewBox="0 0 640 544" role="img" aria-label="Division between model work and tool work">
+        <rect class="bx g" x="4" y="5.4" width="632" height="239.4" rx="8"/>
+        <text class="lb g" x="22" y="38.1">THE MODEL DOES THIS &mdash; LANGUAGE-SHAPED WORK</text>
+        <text class="ss" x="22" y="65.3">&bull; &nbsp;reading a factsheet and locating a field</text>
+        <text class="ss" x="22" y="91.1">&bull; &nbsp;deciding which tool answers this question</text>
+        <text class="ss" x="22" y="117">&bull; &nbsp;writing commentary from figures it was given</text>
+        <text class="ss" x="22" y="142.8">&bull; &nbsp;explaining what a breach means in plain English</text>
+        <text class="ss" x="22" y="168.6">&bull; &nbsp;noticing that a required field is absent</text>
+        <text class="ss" x="22" y="194.5">&bull; &nbsp;stating a difference between two figures it just showed you</text>
+        <text class="ss" x="22" y="225.8" style="fill:#065f46;font-weight:600;font-size:15.6px">language work &mdash; plus the one subtraction a reader can check by eye</text>
 
-        <rect class="bx r" x="4" y="192" width="632" height="176" rx="8"/>
-        <text class="lb r" x="22" y="216">A TOOL DOES THIS &mdash; DETERMINISTIC WORK</text>
-        <text class="ss" x="22" y="242">&bull; &nbsp;summing the top five weights &nbsp;<tspan style="fill:#64748b">Excel</tspan></text>
-        <text class="ss" x="22" y="266">&bull; &nbsp;excess return, computed once &nbsp;<tspan style="fill:#64748b">SQL usp_GetExcessReturn</tspan></text>
-        <text class="ss" x="22" y="290">&bull; &nbsp;currency conversion &nbsp;<tspan style="fill:#64748b">FX action</tspan></text>
-        <text class="ss" x="22" y="314">&bull; &nbsp;checking allocation against a mandate limit &nbsp;<tspan style="fill:#64748b">flow logic</tspan></text>
-        <text class="ss" x="22" y="338">&bull; &nbsp;anything that must give the same answer twice</text>
-        <text class="ss" x="22" y="360" style="fill:#b91c1c;font-weight:600">if a reader cannot check it at a glance, a system computes it</text>
+        <rect class="bx r" x="4" y="261.1" width="632" height="239.4" rx="8"/>
+        <text class="lb r" x="22" y="293.8">A TOOL DOES THIS &mdash; DETERMINISTIC WORK</text>
+        <text class="ss" x="22" y="329.1">&bull; &nbsp;summing the top five weights &nbsp;<tspan style="fill:#475569">Excel</tspan></text>
+        <text class="ss" x="22" y="361.8">&bull; &nbsp;excess return, computed once &nbsp;<tspan style="fill:#475569">SQL usp_GetExcessReturn</tspan></text>
+        <text class="ss" x="22" y="394.4">&bull; &nbsp;currency conversion &nbsp;<tspan style="fill:#475569">FX action</tspan></text>
+        <text class="ss" x="22" y="427">&bull; &nbsp;checking allocation against a mandate limit &nbsp;<tspan style="fill:#475569">flow logic</tspan></text>
+        <text class="ss" x="22" y="459.7">&bull; &nbsp;anything that must give the same answer twice</text>
+        <text class="ss" x="22" y="489.6" style="fill:#b91c1c;font-weight:600">if a reader cannot check it at a glance, a system computes it</text>
 
-        <rect class="bx d" x="4" y="378" width="632" height="20" rx="4"/>
-        <text class="ss w" x="22" y="393" style="font-size:11.5px">Nobody re-adds a column to check it &mdash; which is exactly why totals belong in a system.</text>
+        <rect class="bx d" x="4" y="514.1" width="632" height="27.2" rx="4"/>
+        <text class="ss w" x="22" y="534.5" style="font-size:15.6px">Nobody re-adds a column to check it &mdash; which is exactly why totals belong in a system.</text>
       </svg>
     </div>
     <div class="pts">
@@ -929,9 +898,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 14 -->
-<section class="slide" data-sec="2.3 Excel &amp; SQL" data-title="Reading from Excel and SQL" data-notes="The range must be a real Excel Table or the connector cannot see it - the single most common failure in this demo. Then shape the result: five well-named fields beat two hundred rows, which cost tokens, latency and routing accuracy at once." data-demo="2.3" data-role="pre">
+<section class="slide" data-sec="2.3 Excel &amp; SQL" data-title="Reading from Excel and SQL" data-notes="The range must be a real Excel Table or the connector cannot see it - the single most common failure in this demo. Then shape the result: five well-named fields beat two hundred rows, which cost tokens, latency and routing accuracy at once.  From the slide panel: WHY SHAPING MATTERS MORE THAN YOU EXPECT — Everything you return becomes context the agent must reason over. Two hundred rows costs tokens, latency and accuracy at once. Do the filtering where filtering is cheap &mdash; in the query or the flow, not in the model. THE TWO FAILURES YOU WILL ACTUALLY HIT — Not a Table. The connector cannot see a plain range. Ctrl+T, every time. Wrong OneDrive. Excel Online (Business) reads OneDrive for Business and SharePoint &mdash; not personal OneDrive. Once numbers arrive from a system, the whole agent changes character: it stops being a document reader and starts being a participant in your data." data-demo="2.3" data-role="pre">
   <h2>Reading real data: Excel and SQL, without surprises<span class="cue pre">PRE &middot; DEMO 2.3</span><span class="tag">2.3</span></h2>
-  <div class="body g64">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 430" role="img" aria-label="Excel and SQL read patterns">
         <rect class="bx" x="4" y="4" width="692" height="150" rx="8"/>
@@ -946,13 +915,13 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="238" y="60" style="font-weight:600;fill:#0b2545">List rows present in a table</text>
         <text class="ss" x="238" y="82">must be a real Excel Table</text>
         <text class="ss" x="238" y="100">(Ctrl+T) &mdash; a range is invisible</text>
-        <text class="ss" x="238" y="122" style="fill:#dc2626;font-weight:600">failure #1 in every workshop</text>
+        <text class="ss" x="238" y="122" style="fill:#b91c1c;font-weight:600">failure #1 in every workshop</text>
         <path class="fl" d="M430 86 L476 86"/>
         <rect class="bx g" x="480" y="38" width="200" height="96" rx="5"/>
         <text class="ss" x="492" y="60" style="font-weight:600;fill:#065f46">Shape before you respond</text>
         <text class="ss" x="492" y="82">filter, top-N, select columns</text>
         <text class="ss" x="492" y="100">return 5 fields, not 40</text>
-        <text class="ss" x="492" y="122" style="fill:#047857">the agent reads what you return</text>
+        <text class="ss" x="492" y="122" style="fill:#065f46">the agent reads what you return</text>
 
         <rect class="bx" x="4" y="162" width="692" height="150" rx="8"/>
         <text class="lb a" x="22" y="184">SQL SERVER &mdash; PREMIUM CONNECTOR, SAME SHAPE</text>
@@ -981,19 +950,6 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss w" x="22" y="410">3 &nbsp;<tspan style="font-weight:700">Name fields for a human.</tspan> <tspan class="mn w">weight_pct</tspan> routes better than <tspan class="mn w">col_7</tspan> &mdash; the agent reads names too.</text>
       </svg>
     </div>
-    <div class="pts">
-      <h3>Why shaping matters more than you expect</h3>
-      <ul>
-        <li>Everything you return becomes context the agent must reason over. Two hundred rows costs tokens, latency and accuracy at once.</li>
-        <li><b>Do the filtering where filtering is cheap</b> &mdash; in the query or the flow, not in the model.</li>
-      </ul>
-      <h3 class="r">The two failures you will actually hit</h3>
-      <ul>
-        <li><b>Not a Table.</b> The connector cannot see a plain range. Ctrl+T, every time.</li>
-        <li><b>Wrong OneDrive.</b> Excel Online (Business) reads OneDrive for Business and SharePoint &mdash; not personal OneDrive.</li>
-      </ul>
-      <div class="callout good">Once numbers arrive from a system, the whole agent changes character: it stops being a document reader and starts being a participant in your data.</div>
-    </div>
   </div>
 </section>
 
@@ -1002,45 +958,45 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Writing back to a system of record &mdash; safely<span class="cue post">POST &middot; DEMO 2.3</span><span class="tag k">2.3</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Safe write-back pattern">
-        <rect class="bx r" x="4" y="4" width="692" height="112" rx="8"/>
-        <text class="lb r" x="22" y="26">THE FAILURE NOBODY DESIGNS FOR</text>
-        <rect class="bx w" x="22" y="36" width="140" height="64" rx="5"/><text class="ss" x="34" y="60">Agent writes</text><text class="ss" x="34" y="80">the review record</text>
-        <path class="fl" d="M166 68 L206 68"/>
-        <rect class="bx w" x="210" y="36" width="150" height="64" rx="5"/><text class="ss" x="222" y="60">System commits it</text><text class="ss" x="222" y="80">&mdash; then times out</text>
-        <path class="ar" d="M364 68 L404 68" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
-        <rect class="bx r" x="408" y="36" width="150" height="64" rx="5"/><text class="ss" x="420" y="60" style="fill:#b91c1c">Agent retries,</text><text class="ss" x="420" y="80" style="fill:#b91c1c">believing it failed</text>
-        <rect class="bx r" x="566" y="36" width="112" height="64" rx="5"/><text class="ss" x="578" y="68" style="fill:#b91c1c;font-weight:700">Two records</text>
+      <svg class="u117" viewBox="0 0 700 491.4" role="img" aria-label="Safe write-back pattern">
+        <rect class="bx r" x="4" y="4.7" width="692" height="131" rx="8"/>
+        <text class="lb r" x="22" y="30.4">THE FAILURE NOBODY DESIGNS FOR</text>
+        <rect class="bx w" x="22" y="42.1" width="140" height="74.9" rx="5"/><text class="ss" x="34" y="70.2">Agent writes</text><text class="ss" x="34" y="93.6">the review record</text>
+        <path class="fl" d="M166 79.6L206 79.6"/>
+        <rect class="bx w" x="210" y="42.1" width="150" height="74.9" rx="5"/><text class="ss" x="222" y="70.2">System commits it</text><text class="ss" x="222" y="93.6">&mdash; then times out</text>
+        <path class="ar" d="M364 79.6L404 79.6" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
+        <rect class="bx r" x="408" y="42.1" width="150" height="74.9" rx="5"/><text class="ss" x="420" y="70.2" style="fill:#b91c1c">Agent retries,</text><text class="ss" x="420" y="93.6" style="fill:#b91c1c">believing it failed</text>
+        <rect class="bx r" x="566" y="42.1" width="112" height="74.9" rx="5"/><text class="ss" x="578" y="79.6" style="fill:#b91c1c;font-weight:700">Two records</text>
 
-        <rect class="bx g" x="4" y="124" width="692" height="164" rx="8"/>
-        <text class="lb g" x="22" y="146">THE PATTERN THAT FIXES IT</text>
-        <rect class="bx w" x="22" y="158" width="200" height="112" rx="5"/>
-        <text class="ss" x="34" y="180" style="font-weight:600;fill:#0b2545">1 &nbsp;Idempotency key</text>
-        <text class="mn" x="34" y="202">CL-4471:NORTHWIND:</text>
-        <text class="mn" x="34" y="220">2026-Q2</text>
-        <text class="ss" x="34" y="244">derived from the business</text>
-        <text class="ss" x="34" y="262">facts, not from a timestamp</text>
-        <path class="flg" d="M226 214 L262 214"/>
-        <rect class="bx w" x="266" y="158" width="200" height="112" rx="5"/>
-        <text class="ss" x="278" y="180" style="font-weight:600;fill:#0b2545">2 &nbsp;Upsert, never insert</text>
-        <text class="ss" x="278" y="204">the same key twice updates</text>
-        <text class="ss" x="278" y="222">one record instead of</text>
-        <text class="ss" x="278" y="240">creating a second</text>
-        <text class="ss" x="278" y="262" style="fill:#047857">retry becomes harmless</text>
-        <path class="flg" d="M470 214 L506 214"/>
-        <rect class="bx w" x="510" y="158" width="168" height="112" rx="5"/>
-        <text class="ss" x="522" y="180" style="font-weight:600;fill:#0b2545">3 &nbsp;Stamp the row</text>
-        <text class="ss" x="522" y="204">requesting user</text>
-        <text class="ss" x="522" y="222">agent + version</text>
-        <text class="ss" x="522" y="240">run id, approval id</text>
-        <text class="ss" x="522" y="262" style="fill:#047857">now it is auditable</text>
+        <rect class="bx g" x="4" y="145.1" width="692" height="191.9" rx="8"/>
+        <text class="lb g" x="22" y="170.8">THE PATTERN THAT FIXES IT</text>
+        <rect class="bx w" x="22" y="184.9" width="200" height="131" rx="5"/>
+        <text class="ss" x="34" y="210.6" style="font-weight:600;fill:#0b2545">1 &nbsp;Idempotency key</text>
+        <text class="mn" x="34" y="236.3">CL-4471:NORTHWIND:</text>
+        <text class="mn" x="34" y="257.4">2026-Q2</text>
+        <text class="ss" x="34" y="285.5">derived from the business</text>
+        <text class="ss" x="34" y="306.5">facts, not from a timestamp</text>
+        <path class="flg" d="M226 250.4L262 250.4"/>
+        <rect class="bx w" x="266" y="184.9" width="200" height="131" rx="5"/>
+        <text class="ss" x="278" y="210.6" style="font-weight:600;fill:#0b2545">2 &nbsp;Upsert, never insert</text>
+        <text class="ss" x="278" y="238.7">the same key twice updates</text>
+        <text class="ss" x="278" y="259.7">one record instead of</text>
+        <text class="ss" x="278" y="280.8">creating a second</text>
+        <text class="ss" x="278" y="306.5" style="fill:#065f46">retry becomes harmless</text>
+        <path class="flg" d="M470 250.4L506 250.4"/>
+        <rect class="bx w" x="510" y="184.9" width="168" height="131" rx="5"/>
+        <text class="ss" x="522" y="210.6" style="font-weight:600;fill:#0b2545">3 &nbsp;Stamp the row</text>
+        <text class="ss" x="522" y="238.7">requesting user</text>
+        <text class="ss" x="522" y="259.7">agent + version</text>
+        <text class="ss" x="522" y="280.8">run id, approval id</text>
+        <text class="ss" x="522" y="306.5" style="fill:#065f46">now it is auditable</text>
 
-        <rect class="bx a" x="4" y="296" width="692" height="118" rx="8"/>
-        <text class="lb a" x="22" y="318">BEFORE YOU LET AN AGENT WRITE ANYTHING</text>
-        <text class="ss" x="22" y="342">&bull; &nbsp;Can the write be reversed, and by whom?</text>
-        <text class="ss" x="22" y="364">&bull; &nbsp;Does a human approve <tspan style="font-weight:600">before</tspan> the write, or review after it? Decide explicitly.</text>
-        <text class="ss" x="22" y="386">&bull; &nbsp;Is the target a system of record, or a staging area you can safely clear?</text>
-        <text class="ss" x="22" y="408" style="font-weight:600;fill:#92400e">&bull; &nbsp;Start with staging. Earn the system of record.</text>
+        <rect class="bx a" x="4" y="346.3" width="692" height="138.1" rx="8"/>
+        <text class="lb a" x="22" y="372.1">BEFORE YOU LET AN AGENT WRITE ANYTHING</text>
+        <text class="ss" x="22" y="400.1">&bull; &nbsp;Can the write be reversed, and by whom?</text>
+        <text class="ss" x="22" y="425.9">&bull; &nbsp;Does a human approve <tspan style="font-weight:600">before</tspan> the write, or review after it? Decide explicitly.</text>
+        <text class="ss" x="22" y="451.6">&bull; &nbsp;Is the target a system of record, or a staging area you can safely clear?</text>
+        <text class="ss" x="22" y="477.4" style="font-weight:600;fill:#92400e">&bull; &nbsp;Start with staging. Earn the system of record.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1069,48 +1025,48 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Extraction is hard for one reason: everything varies<span class="cue pre">PRE &middot; DEMO 2.4</span><span class="tag">2.4</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Sources of variation across fund documents">
-        <rect class="bx" x="4" y="4" width="340" height="96" rx="8"/>
-        <text class="lb" x="22" y="26">LABELS VARY</text>
-        <text class="ss" x="22" y="50">TER &middot; OCF &middot; expense ratio &middot; annual charge</text>
-        <text class="ss" x="22" y="72">&ldquo;total expense ratio (regular plan)&rdquo;</text>
-        <text class="ss" x="22" y="92" style="fill:#64748b">one concept, four names, two plans</text>
+      <svg class="u112" viewBox="0 0 700 470.4" role="img" aria-label="Sources of variation across fund documents">
+        <rect class="bx" x="4" y="4.5" width="340" height="107.5" rx="8"/>
+        <text class="lb" x="22" y="29.1">LABELS VARY</text>
+        <text class="ss" x="22" y="56">TER &middot; OCF &middot; expense ratio &middot; annual charge</text>
+        <text class="ss" x="22" y="80.6">&ldquo;total expense ratio (regular plan)&rdquo;</text>
+        <text class="ss" x="22" y="103" style="fill:#475569">one concept, four names, two plans</text>
 
-        <rect class="bx" x="356" y="4" width="340" height="96" rx="8"/>
-        <text class="lb" x="374" y="26">PERIODS ARE IMPLIED</text>
-        <text class="ss" x="374" y="50">&ldquo;returned 11.4% over the period&rdquo;</text>
-        <text class="ss" x="374" y="72">which period? quarter, year, since launch?</text>
-        <text class="ss" x="374" y="92" style="fill:#dc2626;font-weight:600">the failure that survives review</text>
+        <rect class="bx" x="356" y="4.5" width="340" height="107.5" rx="8"/>
+        <text class="lb" x="374" y="29.1">PERIODS ARE IMPLIED</text>
+        <text class="ss" x="374" y="56">&ldquo;returned 11.4% over the period&rdquo;</text>
+        <text class="ss" x="374" y="80.6">which period? quarter, year, since launch?</text>
+        <text class="ss" x="374" y="103" style="fill:#b91c1c;font-weight:600">the failure that survives review</text>
 
-        <rect class="bx" x="4" y="110" width="340" height="96" rx="8"/>
-        <text class="lb" x="22" y="132">UNITS AND SCALE DIFFER</text>
-        <text class="ss" x="22" y="156">Rs 4,820 crore &middot; INR 48.2bn &middot; $580m</text>
-        <text class="ss" x="22" y="178">gross vs net &middot; regular vs direct plan</text>
-        <text class="ss" x="22" y="198" style="fill:#64748b">all correct, none comparable</text>
+        <rect class="bx" x="4" y="123.2" width="340" height="107.5" rx="8"/>
+        <text class="lb" x="22" y="147.8">UNITS AND SCALE DIFFER</text>
+        <text class="ss" x="22" y="174.7">Rs 4,820 crore &middot; INR 48.2bn &middot; $580m</text>
+        <text class="ss" x="22" y="199.4">gross vs net &middot; regular vs direct plan</text>
+        <text class="ss" x="22" y="221.8" style="fill:#475569">all correct, none comparable</text>
 
-        <rect class="bx" x="356" y="110" width="340" height="96" rx="8"/>
-        <text class="lb" x="374" y="132">STRUCTURE MOVES</text>
-        <text class="ss" x="374" y="156">tables become paragraphs; sections</text>
-        <text class="ss" x="374" y="178">get renumbered; a figure lives in a</text>
-        <text class="ss" x="374" y="198">footnote this quarter</text>
+        <rect class="bx" x="356" y="123.2" width="340" height="107.5" rx="8"/>
+        <text class="lb" x="374" y="147.8">STRUCTURE MOVES</text>
+        <text class="ss" x="374" y="174.7">tables become paragraphs; sections</text>
+        <text class="ss" x="374" y="199.4">get renumbered; a figure lives in a</text>
+        <text class="ss" x="374" y="221.8">footnote this quarter</text>
 
-        <rect class="bx r" x="4" y="216" width="340" height="96" rx="8"/>
-        <text class="lb r" x="22" y="238">FIELDS ARE SIMPLY ABSENT</text>
-        <text class="ss" x="22" y="262">no ISIN &middot; no benchmark named</text>
-        <text class="ss" x="22" y="284">no inception date &middot; no allocation split</text>
-        <text class="ss" x="22" y="304" style="fill:#b91c1c;font-weight:600">absence must survive to the output</text>
+        <rect class="bx r" x="4" y="241.9" width="340" height="107.5" rx="8"/>
+        <text class="lb r" x="22" y="266.6">FIELDS ARE SIMPLY ABSENT</text>
+        <text class="ss" x="22" y="293.4">no ISIN &middot; no benchmark named</text>
+        <text class="ss" x="22" y="318.1">no inception date &middot; no allocation split</text>
+        <text class="ss" x="22" y="340.5" style="fill:#b91c1c;font-weight:600">absence must survive to the output</text>
 
-        <rect class="bx r" x="356" y="216" width="340" height="96" rx="8"/>
-        <text class="lb r" x="374" y="238">TWO CANDIDATE VALUES</text>
-        <text class="ss" x="374" y="262">1.18% regular and 0.62% direct</text>
-        <text class="ss" x="374" y="284">both true; picking silently is the bug</text>
-        <text class="ss" x="374" y="304" style="fill:#b91c1c;font-weight:600">ambiguity must be flagged, not resolved</text>
+        <rect class="bx r" x="356" y="241.9" width="340" height="107.5" rx="8"/>
+        <text class="lb r" x="374" y="266.6">TWO CANDIDATE VALUES</text>
+        <text class="ss" x="374" y="293.4">1.18% regular and 0.62% direct</text>
+        <text class="ss" x="374" y="318.1">both true; picking silently is the bug</text>
+        <text class="ss" x="374" y="340.5" style="fill:#b91c1c;font-weight:600">ambiguity must be flagged, not resolved</text>
 
-        <rect class="bx d" x="4" y="322" width="692" height="94" rx="8"/>
-        <text class="lb w" x="22" y="344">WHY A HUMAN COPES AND A SCRIPT DOES NOT</text>
-        <text class="ss w" x="22" y="368">Your developers read around all six of these without noticing. Regex and parsers cannot &mdash;</text>
-        <text class="ss w" x="22" y="390">which is why the conversion is still manual today, at four hours a review.</text>
-        <text class="ss w" x="22" y="410" style="fill:#fbbf24;font-weight:600">A model reads around them too. The difference is that it must be forced to admit when it could not.</text>
+        <rect class="bx d" x="4" y="360.6" width="692" height="105.3" rx="8"/>
+        <text class="lb w" x="22" y="385.3">WHY A HUMAN COPES AND A SCRIPT DOES NOT</text>
+        <text class="ss w" x="22" y="412.2">Your developers read around all six of these without noticing. Regex and parsers cannot &mdash;</text>
+        <text class="ss w" x="22" y="436.8">which is why the conversion is still manual today, at four hours a review.</text>
+        <text class="ss w" x="22" y="459.2" style="fill:#fbbf24;font-weight:600">A model reads around them too. The difference is that it must be forced to admit when it could not.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1135,28 +1091,28 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>The schema is the contract the rest of the pipeline relies on<span class="cue pre">PRE &middot; DEMO 2.4</span><span class="tag k">2.4</span></h2>
   <div class="body g55">
     <div>
-      <svg viewBox="0 0 640 430" role="img" aria-label="Extraction output schema">
-        <rect class="bx d" x="4" y="4" width="632" height="422" rx="8"/>
-        <text class="mn w" x="22" y="30">{</text>
-        <text class="mn w" x="22" y="50">&nbsp;&nbsp;"fund_name":      "Northwind Multi-Asset Growth Fund",</text>
-        <text class="mn w" x="22" y="70">&nbsp;&nbsp;"isin":           "INF000SAMPLE01",</text>
-        <text class="mn w" x="22" y="90">&nbsp;&nbsp;"share_class":    "Institutional",</text>
-        <text class="mn w" x="22" y="110">&nbsp;&nbsp;"aum":            "Rs 4,820 crore",</text>
-        <text class="mn w" x="22" y="130">&nbsp;&nbsp;"currency":       "INR (inferred)",</text>
-        <text class="mn w" x="22" y="150">&nbsp;&nbsp;"benchmark":      "CRISIL Hybrid 35+65 Aggressive",</text>
-        <text class="mn w" x="22" y="170">&nbsp;&nbsp;"ter_regular":    "1.18%",</text>
-        <text class="mn w" x="22" y="190">&nbsp;&nbsp;"ter_direct":     "0.62%",</text>
-        <text class="mn w" x="22" y="210">&nbsp;&nbsp;"return_3y":      "15.6%",</text>
-        <text class="mn w" x="22" y="230">&nbsp;&nbsp;"benchmark_3y":   "13.1%",</text>
-        <text class="mn w" x="22" y="250">&nbsp;&nbsp;"alloc_equity":   "68%",</text>
-        <text class="mn w" x="22" y="270">&nbsp;&nbsp;"as_of_date":     "2026-06-30",</text>
-        <rect class="bx dd" x="18" y="282" width="600" height="52" rx="5"/>
-        <text class="mn w" x="30" y="304" style="fill:#fbbf24">&nbsp;&nbsp;"source_document": "sample-fund-factsheet.pdf",</text>
-        <text class="mn w" x="30" y="326" style="fill:#fbbf24">&nbsp;&nbsp;"needs_review":    ["currency"]</text>
-        <text class="mn w" x="22" y="356">}</text>
-        <rect class="bx dd" x="18" y="368" width="600" height="48" rx="5"/>
-        <text class="ss w" x="30" y="390">Same 25 keys every time. Absent values are the string <tspan style="font-weight:700">not stated</tspan>.</text>
-        <text class="ss w" x="30" y="410">Where a figure was inferred rather than printed, the key is flagged for review.</text>
+      <svg class="u135" viewBox="0 0 640 580.5" role="img" aria-label="Extraction output schema">
+        <rect class="bx d" x="4" y="5.4" width="632" height="569.7" rx="8"/>
+        <text class="mn w" x="22" y="40.5">{</text>
+        <text class="mn w" x="22" y="67.5">&nbsp;&nbsp;"fund_name":      "Northwind Multi-Asset Growth Fund",</text>
+        <text class="mn w" x="22" y="94.5">&nbsp;&nbsp;"isin":           "INF000SAMPLE01",</text>
+        <text class="mn w" x="22" y="121.5">&nbsp;&nbsp;"share_class":    "Institutional",</text>
+        <text class="mn w" x="22" y="148.5">&nbsp;&nbsp;"aum":            "Rs 4,820 crore",</text>
+        <text class="mn w" x="22" y="175.5">&nbsp;&nbsp;"currency":       "INR (inferred)",</text>
+        <text class="mn w" x="22" y="202.5">&nbsp;&nbsp;"benchmark":      "CRISIL Hybrid 35+65 Aggressive",</text>
+        <text class="mn w" x="22" y="229.5">&nbsp;&nbsp;"ter_regular":    "1.18%",</text>
+        <text class="mn w" x="22" y="256.5">&nbsp;&nbsp;"ter_direct":     "0.62%",</text>
+        <text class="mn w" x="22" y="283.5">&nbsp;&nbsp;"return_3y":      "15.6%",</text>
+        <text class="mn w" x="22" y="310.5">&nbsp;&nbsp;"benchmark_3y":   "13.1%",</text>
+        <text class="mn w" x="22" y="337.5">&nbsp;&nbsp;"alloc_equity":   "68%",</text>
+        <text class="mn w" x="22" y="364.5">&nbsp;&nbsp;"as_of_date":     "2026-06-30",</text>
+        <rect class="bx dd" x="18" y="380.7" width="600" height="70.2" rx="5"/>
+        <text class="mn w" x="30" y="410.4" style="fill:#fbbf24">&nbsp;&nbsp;"source_document": "sample-fund-factsheet.pdf",</text>
+        <text class="mn w" x="30" y="440.1" style="fill:#fbbf24">&nbsp;&nbsp;"needs_review":    ["currency"]</text>
+        <text class="mn w" x="22" y="480.6">}</text>
+        <rect class="bx dd" x="18" y="496.8" width="600" height="64.8" rx="5"/>
+        <text class="ss w" x="30" y="526.5">Same 25 keys every time. Absent values are the string <tspan style="font-weight:700">not stated</tspan>.</text>
+        <text class="ss w" x="30" y="553.5">Where a figure was inferred rather than printed, the key is flagged for review.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1197,31 +1153,31 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       <div class="callout">Every one of those would have looked plausible on a slide. That is the point of the ladder.</div>
     </div>
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Four rungs of validation">
-        <rect class="bx" x="20" y="330" width="640" height="76" rx="7"/>
-        <text class="lb" x="38" y="352">RUNG 1 &middot; TYPE &amp; PRESENCE &nbsp;&mdash;&nbsp; nearly free</text>
-        <text class="ss" x="38" y="374">All 25 keys present? Is a percentage a percentage? Is the date a date?</text>
-        <text class="ss" x="38" y="394" style="fill:#64748b">In the flow, before the agent ever sees the record</text>
+      <svg class="u109" viewBox="0 0 700 457.8" role="img" aria-label="Four rungs of validation">
+        <rect class="bx" x="20" y="359.7" width="640" height="82.8" rx="7"/>
+        <text class="lb" x="38" y="383.7">RUNG 1 &middot; TYPE &amp; PRESENCE &nbsp;&mdash;&nbsp; nearly free</text>
+        <text class="ss" x="38" y="407.7">All 25 keys present? Is a percentage a percentage? Is the date a date?</text>
+        <text class="ss" x="38" y="429.5" style="fill:#475569">In the flow, before the agent ever sees the record</text>
 
-        <rect class="bx" x="20" y="242" width="640" height="76" rx="7"/>
-        <text class="lb" x="38" y="264">RUNG 2 &middot; RANGE &nbsp;&mdash;&nbsp; cheap</text>
-        <text class="ss" x="38" y="286">Allocation 0&ndash;100. TER under 5%. Return between &minus;100 and +100. Date not in the future.</text>
-        <text class="ss" x="38" y="306" style="fill:#64748b">Catches mis-reads that a type check happily accepts</text>
+        <rect class="bx" x="20" y="263.8" width="640" height="82.8" rx="7"/>
+        <text class="lb" x="38" y="287.8">RUNG 2 &middot; RANGE &nbsp;&mdash;&nbsp; cheap</text>
+        <text class="ss" x="38" y="311.7">Allocation 0&ndash;100. TER under 5%. Return between &minus;100 and +100. Date not in the future.</text>
+        <text class="ss" x="38" y="333.5" style="fill:#475569">Catches mis-reads that a type check happily accepts</text>
 
-        <rect class="bx a" x="20" y="154" width="640" height="76" rx="7"/>
-        <text class="lb a" x="38" y="176">RUNG 3 &middot; CROSS-FIELD &nbsp;&mdash;&nbsp; still deterministic</text>
-        <text class="ss" x="38" y="198">Allocations sum to 100 &plusmn;1. Direct TER below regular. 5-year return exists only if inception allows.</text>
-        <text class="ss" x="38" y="218" style="fill:#64748b">Catches internally inconsistent extractions &mdash; where each field alone looks right</text>
+        <rect class="bx a" x="20" y="167.9" width="640" height="82.8" rx="7"/>
+        <text class="lb a" x="38" y="191.8">RUNG 3 &middot; CROSS-FIELD &nbsp;&mdash;&nbsp; still deterministic</text>
+        <text class="ss" x="38" y="215.8">Allocations sum to 100 &plusmn;1. Direct TER below regular. 5-year return exists only if inception allows.</text>
+        <text class="ss" x="38" y="237.6" style="fill:#475569">Catches internally inconsistent extractions &mdash; where each field alone looks right</text>
 
-        <rect class="bx r" x="20" y="66" width="640" height="76" rx="7"/>
-        <text class="lb r" x="38" y="88">RUNG 4 &middot; BUSINESS SENSE &nbsp;&mdash;&nbsp; needs judgement</text>
-        <text class="ss" x="38" y="110">Is the excess return plausible for this asset class? Are fund and benchmark on the same basis?</text>
-        <text class="ss" x="38" y="130" style="fill:#b91c1c;font-weight:600">The agent flags for review. It does not decide. This rung is where a consultant earns their fee.</text>
+        <rect class="bx r" x="20" y="71.9" width="640" height="82.8" rx="7"/>
+        <text class="lb r" x="38" y="95.9">RUNG 4 &middot; BUSINESS SENSE &nbsp;&mdash;&nbsp; needs judgement</text>
+        <text class="ss" x="38" y="119.9">Is the excess return plausible for this asset class? Are fund and benchmark on the same basis?</text>
+        <text class="ss" x="38" y="141.7" style="fill:#b91c1c;font-weight:600">The agent flags for review. It does not decide. This rung is where a consultant earns their fee.</text>
 
-        <path class="ar" d="M8 406 L8 60"/>
-        <text class="lb" transform="translate(12,300) rotate(-90)" style="font-size:9.5px">COST TO IMPLEMENT &rarr;</text>
-        <text class="ss" x="20" y="46" style="font-weight:600;fill:#0b2545">A record that fails any rung goes to <tspan style="font-weight:700">needs_review</tspan> &mdash; it never silently becomes a slide.</text>
-        <text class="ss" x="20" y="26" style="fill:#64748b">Four rungs, an afternoon of work, and the review step collapses from hours to minutes.</text>
+        <path class="ar" d="M8 442.5L8 65.4"/>
+        <text class="lb" transform="translate(12,327) rotate(-90)" style="font-size:10.4px">COST TO IMPLEMENT &rarr;</text>
+        <text class="ss" x="20" y="50.1" style="font-weight:600;fill:#0b2545">A record that fails any rung goes to <tspan style="font-weight:700">needs_review</tspan> &mdash; it never silently becomes a slide.</text>
+        <text class="ss" x="20" y="28.3" style="fill:#475569">Four rungs, an afternoon of work, and the review step collapses from hours to minutes.</text>
       </svg>
     </div>
   </div>
@@ -1240,35 +1196,35 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 
         <rect class="bx" x="4" y="58.8" width="1172" height="84" rx="5"/>
         <text class="ss" x="22" y="92.4" style="fill:#0b2545">&ldquo;delivered 11.4% over the period&rdquo;</text>
-        <text class="ss" x="22" y="120.4" style="fill:#64748b">no period is ever defined in the document</text>
+        <text class="ss" x="22" y="120.4" style="fill:#475569">no period is ever defined in the document</text>
         <text class="ss" x="440" y="92.4" style="fill:#b91c1c">return_1y: "11.4%"</text>
-        <text class="ss" x="440" y="120.4" style="fill:#64748b">guessed the most likely period</text>
-        <text class="ss" x="800" y="92.4" style="fill:#047857">return_1y: "not stated"</text>
-        <text class="ss" x="800" y="120.4" style="fill:#047857">needs_review: ["return_period_ambiguous"]</text>
+        <text class="ss" x="440" y="120.4" style="fill:#475569">guessed the most likely period</text>
+        <text class="ss" x="800" y="92.4" style="fill:#065f46">return_1y: "not stated"</text>
+        <text class="ss" x="800" y="120.4" style="fill:#065f46">needs_review: ["return_period_ambiguous"]</text>
 
         <rect class="bx" x="4" y="151.2" width="1172" height="84" rx="5"/>
         <text class="ss" x="22" y="184.8" style="fill:#0b2545">&ldquo;charges are 1.05% regular; direct is lower&rdquo;</text>
-        <text class="ss" x="22" y="212.8" style="fill:#64748b">the direct figure is described, never given</text>
+        <text class="ss" x="22" y="212.8" style="fill:#475569">the direct figure is described, never given</text>
         <text class="ss" x="440" y="184.8" style="fill:#b91c1c">ter_direct: "0.85%"</text>
-        <text class="ss" x="440" y="212.8" style="fill:#64748b">invented a plausible-looking number</text>
-        <text class="ss" x="800" y="184.8" style="fill:#047857">ter_direct: "not stated"</text>
-        <text class="ss" x="800" y="212.8" style="fill:#047857">ter_regular: "1.05%"</text>
+        <text class="ss" x="440" y="212.8" style="fill:#475569">invented a plausible-looking number</text>
+        <text class="ss" x="800" y="184.8" style="fill:#065f46">ter_direct: "not stated"</text>
+        <text class="ss" x="800" y="212.8" style="fill:#065f46">ter_regular: "1.05%"</text>
 
         <rect class="bx" x="4" y="243.6" width="1172" height="84" rx="5"/>
         <text class="ss" x="22" y="277.2" style="fill:#0b2545">&ldquo;approximately Rs 1,900 crore at quarter end&rdquo;</text>
-        <text class="ss" x="22" y="305.2" style="fill:#64748b">hedged, and no date is attached</text>
+        <text class="ss" x="22" y="305.2" style="fill:#475569">hedged, and no date is attached</text>
         <text class="ss" x="440" y="277.2" style="fill:#b91c1c">aum: "Rs 1,900 crore"</text>
-        <text class="ss" x="440" y="305.2" style="fill:#64748b">dropped the hedge, invented precision</text>
-        <text class="ss" x="800" y="277.2" style="fill:#047857">aum: "approximately Rs 1,900 crore"</text>
-        <text class="ss" x="800" y="305.2" style="fill:#047857">needs_review: ["aum_approximate"]</text>
+        <text class="ss" x="440" y="305.2" style="fill:#475569">dropped the hedge, invented precision</text>
+        <text class="ss" x="800" y="277.2" style="fill:#065f46">aum: "approximately Rs 1,900 crore"</text>
+        <text class="ss" x="800" y="305.2" style="fill:#065f46">needs_review: ["aum_approximate"]</text>
 
         <rect class="bx" x="4" y="336" width="1172" height="84" rx="5"/>
         <text class="ss" x="22" y="369.6" style="fill:#0b2545">no ISIN, no benchmark, no inception date</text>
-        <text class="ss" x="22" y="397.6" style="fill:#64748b">simply absent from the document</text>
+        <text class="ss" x="22" y="397.6" style="fill:#475569">simply absent from the document</text>
         <text class="ss" x="440" y="369.6" style="fill:#b91c1c">isin: "INF209K01XY8"</text>
-        <text class="ss" x="440" y="397.6" style="fill:#64748b">a well-formed, entirely fictional ISIN</text>
-        <text class="ss" x="800" y="369.6" style="fill:#047857">isin: "not stated" &nbsp;(&times;3 fields)</text>
-        <text class="ss" x="800" y="397.6" style="fill:#047857">all three listed in needs_review</text>
+        <text class="ss" x="440" y="397.6" style="fill:#475569">a well-formed, entirely fictional ISIN</text>
+        <text class="ss" x="800" y="369.6" style="fill:#065f46">isin: "not stated" &nbsp;(&times;3 fields)</text>
+        <text class="ss" x="800" y="397.6" style="fill:#065f46">all three listed in needs_review</text>
 
         <rect class="bx r" x="4" y="428.4" width="1172" height="58.8" rx="5"/>
         <text class="ss" x="22" y="464.8" style="font-weight:700;fill:#7f1d1d">In all four rows the bad output is more useful-looking, more complete, and more confident. That is precisely the danger.</text>
@@ -1288,35 +1244,35 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       <svg viewBox="0 0 1180 580" role="img" aria-label="Reporting pipeline before and after">
         <text class="lb r" x="6" y="20" style="font-size:12px">TODAY &mdash; A HUMAN BETWEEN EVERY PAIR OF STEPS</text>
         <rect class="bx r" x="4" y="30" width="1172" height="200" rx="9"/>
-        <rect class="bx w" x="22" y="56" width="172" height="90" rx="6"/><text class="ss" x="36" y="90" style="font-size:15px">collect docs</text><text class="ss" x="36" y="118" style="font-size:13.5px;fill:#64748b">email, portals</text>
+        <rect class="bx w" x="22" y="56" width="172" height="90" rx="6"/><text class="ss" x="36" y="90" style="font-size:15px">collect docs</text><text class="ss" x="36" y="118" style="font-size:13.5px;fill:#475569">email, portals</text>
         <text class="ss" x="196" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="214" y="56" width="172" height="90" rx="6"/><text class="ss" x="228" y="90" style="font-size:15px">read &amp; retype</text><text class="ss" x="228" y="118" style="font-size:13.5px;fill:#64748b">into a workbook</text>
+        <rect class="bx w" x="214" y="56" width="172" height="90" rx="6"/><text class="ss" x="228" y="90" style="font-size:15px">read &amp; retype</text><text class="ss" x="228" y="118" style="font-size:13.5px;fill:#475569">into a workbook</text>
         <text class="ss" x="388" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="406" y="56" width="172" height="90" rx="6"/><text class="ss" x="420" y="90" style="font-size:15px">check figures</text><text class="ss" x="420" y="118" style="font-size:13.5px;fill:#64748b">by eye</text>
+        <rect class="bx w" x="406" y="56" width="172" height="90" rx="6"/><text class="ss" x="420" y="90" style="font-size:15px">check figures</text><text class="ss" x="420" y="118" style="font-size:13.5px;fill:#475569">by eye</text>
         <text class="ss" x="580" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="598" y="56" width="172" height="90" rx="6"/><text class="ss" x="612" y="90" style="font-size:15px">calculate</text><text class="ss" x="612" y="118" style="font-size:13.5px;fill:#64748b">Excel by hand</text>
+        <rect class="bx w" x="598" y="56" width="172" height="90" rx="6"/><text class="ss" x="612" y="90" style="font-size:15px">calculate</text><text class="ss" x="612" y="118" style="font-size:13.5px;fill:#475569">Excel by hand</text>
         <text class="ss" x="772" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="790" y="56" width="172" height="90" rx="6"/><text class="ss" x="804" y="90" style="font-size:15px">Aspose + code</text><text class="ss" x="804" y="118" style="font-size:13.5px;fill:#64748b">run the generator</text>
+        <rect class="bx w" x="790" y="56" width="172" height="90" rx="6"/><text class="ss" x="804" y="90" style="font-size:15px">Aspose + code</text><text class="ss" x="804" y="118" style="font-size:13.5px;fill:#475569">run the generator</text>
         <text class="ss" x="964" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
-        <rect class="bx w" x="982" y="56" width="172" height="90" rx="6"/><text class="ss" x="996" y="90" style="font-size:15px">fix the deck</text><text class="ss" x="996" y="118" style="font-size:13.5px;fill:#64748b">format, reorder</text>
+        <rect class="bx w" x="982" y="56" width="172" height="90" rx="6"/><text class="ss" x="996" y="90" style="font-size:15px">fix the deck</text><text class="ss" x="996" y="118" style="font-size:13.5px;fill:#475569">format, reorder</text>
         <text class="ss" x="1140" y="110" style="font-size:17px;fill:#b91c1c">&#128100;</text>
         <rect class="bx r" x="22" y="166" width="1132" height="44" rx="5"/>
         <text class="ss" x="38" y="195" style="font-size:15px;font-weight:600;fill:#b91c1c">~4 hours of consultant and developer time per fund review &middot; six hand-offs &middot; every error survives to the next step</text>
         <text class="lb g" x="6" y="262" style="font-size:12px">AFTER &mdash; ONE HUMAN, ONCE, WHERE IT COUNTS</text>
         <rect class="bx g" x="4" y="272" width="1172" height="200" rx="9"/>
-        <rect class="bx w" x="22" y="298" width="172" height="90" rx="6"/><text class="ss" x="36" y="332" style="font-size:15px">ingest</text><text class="ss" x="36" y="360" style="font-size:13.5px;fill:#64748b">knowledge source</text>
+        <rect class="bx w" x="22" y="298" width="172" height="90" rx="6"/><text class="ss" x="36" y="332" style="font-size:15px">ingest</text><text class="ss" x="36" y="360" style="font-size:13.5px;fill:#475569">knowledge source</text>
         <path class="flg" d="M196 343 L210 343"/>
-        <rect class="bx w" x="214" y="298" width="172" height="90" rx="6"/><text class="ss" x="228" y="332" style="font-size:15px">extract + validate</text><text class="ss" x="228" y="360" style="font-size:13.5px;fill:#64748b">2.4, schema-enforced</text>
+        <rect class="bx w" x="214" y="298" width="172" height="90" rx="6"/><text class="ss" x="228" y="332" style="font-size:15px">extract + validate</text><text class="ss" x="228" y="360" style="font-size:13.5px;fill:#475569">2.4, schema-enforced</text>
         <path class="flg" d="M388 343 L402 343"/>
-        <rect class="bx w" x="406" y="298" width="172" height="90" rx="6"/><text class="ss" x="420" y="332" style="font-size:15px">enrich</text><text class="ss" x="420" y="360" style="font-size:13.5px;fill:#64748b">2.2 APIs &middot; 2.3 Excel</text>
+        <rect class="bx w" x="406" y="298" width="172" height="90" rx="6"/><text class="ss" x="420" y="332" style="font-size:15px">enrich</text><text class="ss" x="420" y="360" style="font-size:13.5px;fill:#475569">2.2 APIs &middot; 2.3 Excel</text>
         <path class="flg" d="M580 343 L594 343"/>
-        <rect class="bx w" x="598" y="298" width="172" height="90" rx="6"/><text class="ss" x="612" y="332" style="font-size:15px">slide plan</text><text class="ss" x="612" y="360" style="font-size:13.5px;fill:#64748b">every figure sourced</text>
+        <rect class="bx w" x="598" y="298" width="172" height="90" rx="6"/><text class="ss" x="612" y="332" style="font-size:15px">slide plan</text><text class="ss" x="612" y="360" style="font-size:13.5px;fill:#475569">every figure sourced</text>
         <path class="flg" d="M772 343 L786 343"/>
         <rect class="bx a" x="790" y="298" width="172" height="90" rx="6"/><text class="ss" x="804" y="332" style="font-size:15px;font-weight:600;fill:#92400e">Aspose + code</text><text class="ss" x="804" y="360" style="font-size:13.5px;fill:#92400e">unchanged, now called</text>
         <path class="flg" d="M964 343 L978 343"/>
         <rect class="bx a" x="982" y="298" width="172" height="90" rx="6"/><text class="ss" x="996" y="332" style="font-size:15px;font-weight:600;fill:#92400e">&#128100; sign-off</text><text class="ss" x="996" y="360" style="font-size:13.5px;fill:#92400e">the one human step</text>
         <rect class="bx g" x="22" y="408" width="1132" height="44" rx="5"/>
-        <text class="ss" x="38" y="437" style="font-size:15px;font-weight:600;fill:#047857">minutes of elapsed time &middot; one hand-off &middot; the two flagged fields are the only thing a human reads before approving</text>
+        <text class="ss" x="38" y="437" style="font-size:15px;font-weight:600;fill:#065f46">minutes of elapsed time &middot; one hand-off &middot; the two flagged fields are the only thing a human reads before approving</text>
         <rect class="bx d" x="4" y="496" width="1172" height="78" rx="9"/>
         <text class="tt w" x="28" y="528" style="font-size:17px">Notice what did <tspan style="fill:#fbbf24">not</tspan> change: your Aspose generator, your template, your house format, your review standard.</text>
         <text class="ss w" x="28" y="556" style="font-size:14px">The code you already trust stays. What disappears is a person standing between every pair of steps, retyping.</text>
@@ -1326,9 +1282,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 21 -->
-<section class="slide" data-sec="2.5 Report generation" data-title="The slide plan as interface" data-notes="An intermediate representation beats letting the agent drive PowerPoint directly: reviewable before a file exists, testable as JSON, and the renderer becomes swappable. It also keeps the model away from layout, which it is bad at." data-demo="2.5" data-role="pre">
+<section class="slide" data-sec="2.5 Report generation" data-title="The slide plan as interface" data-notes="An intermediate representation beats letting the agent drive PowerPoint directly: reviewable before a file exists, testable as JSON, and the renderer becomes swappable. It also keeps the model away from layout, which it is bad at.  From the slide panel: TWO CONSTRAINTS THAT CARRY THE QUALITY — Every figure carries a source string. If it cannot be sourced, it cannot go on a slide &mdash; it goes to unresolved. Commentary may only reference figures already on a slide. This one rule stops the classic failure: a narrative paragraph containing a number that appears nowhere else in the deck. WHAT THE REVIEWER NOW DOES — Reads the unresolved list first &mdash; that is the whole job. Spot-checks two sourced figures against the citation. Approves. Minutes, not hours, because the plan is honest about what it does not know. This is an ordinary engineering idea &mdash; an intermediate representation with a contract &mdash; applied to a place your team has not applied it yet." data-demo="2.5" data-role="pre">
   <h2>Never let the agent build the deck. Let it write the plan.<span class="cue pre">PRE &middot; DEMO 2.5</span><span class="tag k">2.5</span></h2>
-  <div class="body g55">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 640 430" role="img" aria-label="Slide plan as an intermediate representation">
         <rect class="bx d" x="4" y="4" width="632" height="252" rx="8"/>
@@ -1364,45 +1320,31 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="20" y="418" style="fill:#92400e">Content and presentation stay separated, exactly as they would in any other system you build.</text>
       </svg>
     </div>
-    <div class="pts">
-      <h3>Two constraints that carry the quality</h3>
-      <ul>
-        <li><b>Every figure carries a source string.</b> If it cannot be sourced, it cannot go on a slide &mdash; it goes to <span class="mono">unresolved</span>.</li>
-        <li><b>Commentary may only reference figures already on a slide.</b> This one rule stops the classic failure: a narrative paragraph containing a number that appears nowhere else in the deck.</li>
-      </ul>
-      <h3 class="a">What the reviewer now does</h3>
-      <ul>
-        <li>Reads the <span class="mono">unresolved</span> list first &mdash; that is the whole job.</li>
-        <li>Spot-checks two sourced figures against the citation.</li>
-        <li>Approves. <b>Minutes, not hours</b>, because the plan is honest about what it does not know.</li>
-      </ul>
-      <div class="callout good">This is an ordinary engineering idea &mdash; an intermediate representation with a contract &mdash; applied to a place your team has not applied it yet.</div>
-    </div>
   </div>
 </section>
 
 <!-- 22 -->
-<section class="slide" data-sec="2.5 Report generation" data-title="Rendering: four options compared" data-notes="Option A is the recommendation: wrap the generator you already own behind an endpoint. It preserves the investment, needs no new licence and no new data path, and the work is a thin API wrapper your own team can build. Two things worth knowing about option C: Office Scripts is Excel-only and cannot build a PowerPoint file at all, and Microsoft Graph exposes a .pptx as a file to upload, download and convert &mdash; it has no API that authors slide content. That is why the first-party route is the Open XML SDK, which means writing OOXML parts yourself." data-demo="2.5" data-role="post">
+<section class="slide" data-sec="2.5 Report generation" data-title="Rendering: four options compared" data-notes="Option A is the recommendation: wrap the generator you already own behind an endpoint. It preserves the investment, needs no new licence and no new data path, and the work is a thin API wrapper your own team can build. Two things worth knowing about option C: Office Scripts is Excel-only and cannot build a PowerPoint file at all, and Microsoft Graph exposes a .pptx as a file to upload, download and convert &mdash; it has no API that authors slide content. That is why the first-party route is the Open XML SDK, which means writing OOXML parts yourself.  From the slide panel: WHY OPTION A WINS FOR YOU SPECIFICALLY — Your Aspose code encodes years of house-format decisions. That is an asset, not legacy. Nothing new to license, nothing new to procure, no new data path to defend in a DLP review. The wrapper is a normal internal API &mdash; the same conversation as pattern A in session 2.2. If the licence is the objection, python-pptx writes the same file from the same plan. The architecture does not move &mdash; only what sits behind the endpoint. WHAT CHANGES FOR YOUR DEVELOPERS — They stop running the generator and start maintaining it as a service. The interesting work moves up: the schema, the validation rules, the sourcing discipline. They test it with the agent's output, not with a fixture. The first live call to a hosted renderer failed on an em-dash in the deck title &mdash; every local test had passed on ASCII. Today you see it both ways: plan-to-pptx.py run locally &mdash; one library, no licence, no tenant &mdash; and the same script hosted behind an endpoint the flow calls, so the chain completes with nobody at the keyboard. In your environment, that box is already built." data-demo="2.5" data-role="post">
   <h2>Turning the plan into a deck: four options, honestly compared<span class="cue post">POST &middot; DEMO 2.5</span><span class="tag">2.5</span></h2>
-  <div class="body g64">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 430" role="img" aria-label="Four rendering options compared">
         <rect class="bx a" x="4" y="4" width="692" height="106" rx="8" style="stroke-width:3"/>
         <text class="lb a" x="22" y="26">OPTION A &middot; YOUR OWN GENERATOR, EXPOSED AS AN ACTION &nbsp;&mdash;&nbsp; RECOMMENDED</text>
         <text class="ss" x="22" y="50">Wrap the generator you already own behind a small HTTP endpoint. The agent posts the plan; it returns a file.</text>
-        <text class="ss" x="22" y="72" style="fill:#047857">&#10003; keeps your template, your house format, your years of edge cases &nbsp; &#10003; no new licence &nbsp; &#10003; your team owns it</text>
-        <text class="ss" x="22" y="94" style="fill:#b45309">&mdash; Aspose or python-pptx behind it; either way a thin wrapper and a service identity. Days, not months.</text>
+        <text class="ss" x="22" y="72" style="fill:#065f46">&#10003; keeps your template, your house format, your years of edge cases &nbsp; &#10003; no new licence &nbsp; &#10003; your team owns it</text>
+        <text class="ss" x="22" y="94" style="fill:#92400e">&mdash; Aspose or python-pptx behind it; either way a thin wrapper and a service identity. Days, not months.</text>
 
         <rect class="bx" x="4" y="118" width="692" height="94" rx="8"/>
         <text class="lb" x="22" y="140">OPTION B &middot; PREMIUM DOCUMENT-GENERATION CONNECTOR</text>
         <text class="ss" x="22" y="162">A marketplace connector fills a PowerPoint template from JSON.</text>
-        <text class="ss" x="22" y="182" style="fill:#047857">&#10003; fastest to a working file &nbsp; &#10003; no code at all</text>
+        <text class="ss" x="22" y="182" style="fill:#065f46">&#10003; fastest to a working file &nbsp; &#10003; no code at all</text>
         <text class="ss" x="22" y="200" style="fill:#b91c1c">&#10007; third-party licence, procurement, and a DLP review of a new data path</text>
 
         <rect class="bx" x="4" y="220" width="692" height="94" rx="8"/>
         <text class="lb" x="22" y="242">OPTION C &middot; OPEN XML SDK / OFFICE ADD-IN (OFFICE.JS)</text>
         <text class="ss" x="22" y="264">Build the file with Microsoft&rsquo;s own libraries &mdash; no Graph API authors PowerPoint content.</text>
-        <text class="ss" x="22" y="284" style="fill:#047857">&#10003; first-party and free &nbsp; &#10003; no third-party licence</text>
+        <text class="ss" x="22" y="284" style="fill:#065f46">&#10003; first-party and free &nbsp; &#10003; no third-party licence</text>
         <text class="ss" x="22" y="302" style="fill:#b91c1c">&#10007; Open XML means authoring OOXML parts by hand; Office.js has no native chart API</text>
 
         <rect class="bx r" x="4" y="322" width="692" height="94" rx="8"/>
@@ -1412,22 +1354,6 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="22" y="406" style="fill:#b91c1c;font-weight:700">Do not do this. It demos beautifully and fails in production, which is the worst combination there is.</text>
       </svg>
     </div>
-    <div class="pts">
-      <h3>Why option A wins for you specifically</h3>
-      <ul>
-        <li>Your Aspose code encodes years of house-format decisions. <b>That is an asset, not legacy.</b></li>
-        <li>Nothing new to license, nothing new to procure, no new data path to defend in a DLP review.</li>
-        <li>The wrapper is a normal internal API &mdash; the same conversation as pattern A in session 2.2.</li>
-        <li><b>If the licence is the objection</b>, python-pptx writes the same file from the same plan. The architecture does not move &mdash; only what sits behind the endpoint.</li>
-      </ul>
-      <h3 class="a">What changes for your developers</h3>
-      <ul>
-        <li>They stop <em>running</em> the generator and start <em>maintaining</em> it as a service.</li>
-        <li>The interesting work moves up: the schema, the validation rules, the sourcing discipline.</li>
-        <li><b>They test it with the agent's output, not with a fixture.</b> The first live call to a hosted renderer failed on an em-dash in the deck title &mdash; every local test had passed on ASCII.</li>
-      </ul>
-      <div class="callout">Today you see it both ways: <span class="mono">plan-to-pptx.py</span> run locally &mdash; one library, no licence, no tenant &mdash; and <b>the same script hosted behind an endpoint the flow calls</b>, so the chain completes with nobody at the keyboard. In your environment, <b>that box is already built.</b></div>
-    </div>
   </div>
 </section>
 
@@ -1436,24 +1362,24 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>What stays in code &mdash; and should<span class="cue post">POST &middot; DEMO 2.5</span><span class="tag">2.5</span></h2>
   <div class="body g55">
     <div>
-      <svg viewBox="0 0 640 400" role="img" aria-label="What moves to the agent and what stays in code">
-        <rect class="bx g" x="4" y="4" width="632" height="182" rx="8"/>
-        <text class="lb g" x="22" y="28">MOVES TO THE AGENT</text>
-        <text class="ss" x="22" y="54">&bull; &nbsp;reading documents that keep changing shape</text>
-        <text class="ss" x="22" y="78">&bull; &nbsp;deciding which source answers this question</text>
-        <text class="ss" x="22" y="102">&bull; &nbsp;drafting commentary from validated figures</text>
-        <text class="ss" x="22" y="126">&bull; &nbsp;orchestrating the sequence of calls</text>
-        <text class="ss" x="22" y="150">&bull; &nbsp;explaining, in the conversation, what it could not resolve</text>
-        <text class="ss" x="22" y="176" style="fill:#047857;font-weight:600">work that was manual because it needed a person to read and judge</text>
+      <svg class="u125" viewBox="0 0 640 500" role="img" aria-label="What moves to the agent and what stays in code">
+        <rect class="bx g" x="4" y="5" width="632" height="227.5" rx="8"/>
+        <text class="lb g" x="22" y="35">MOVES TO THE AGENT</text>
+        <text class="ss" x="22" y="67.5">&bull; &nbsp;reading documents that keep changing shape</text>
+        <text class="ss" x="22" y="97.5">&bull; &nbsp;deciding which source answers this question</text>
+        <text class="ss" x="22" y="127.5">&bull; &nbsp;drafting commentary from validated figures</text>
+        <text class="ss" x="22" y="157.5">&bull; &nbsp;orchestrating the sequence of calls</text>
+        <text class="ss" x="22" y="187.5">&bull; &nbsp;explaining, in the conversation, what it could not resolve</text>
+        <text class="ss" x="22" y="220" style="fill:#065f46;font-weight:600">work that was manual because it needed a person to read and judge</text>
 
-        <rect class="bx r" x="4" y="198" width="632" height="196" rx="8"/>
-        <text class="lb r" x="22" y="222">STAYS IN CODE</text>
-        <text class="ss" x="22" y="248">&bull; &nbsp;the PowerPoint generator and the house template</text>
-        <text class="ss" x="22" y="272">&bull; &nbsp;performance and attribution calculations</text>
-        <text class="ss" x="22" y="296">&bull; &nbsp;anything run in bulk overnight &mdash; agents are conversational, not batch</text>
-        <text class="ss" x="22" y="320">&bull; &nbsp;anything requiring exact reproducibility for an audit</text>
-        <text class="ss" x="22" y="344">&bull; &nbsp;integrations that already work and nobody is complaining about</text>
-        <text class="ss" x="22" y="370" style="fill:#b91c1c;font-weight:600">deterministic, high-volume or precision-critical &mdash; three reasons to leave it alone</text>
+        <rect class="bx r" x="4" y="247.5" width="632" height="245" rx="8"/>
+        <text class="lb r" x="22" y="277.5">STAYS IN CODE</text>
+        <text class="ss" x="22" y="310">&bull; &nbsp;the PowerPoint generator and the house template</text>
+        <text class="ss" x="22" y="340">&bull; &nbsp;performance and attribution calculations</text>
+        <text class="ss" x="22" y="370">&bull; &nbsp;anything run in bulk overnight &mdash; agents are conversational, not batch</text>
+        <text class="ss" x="22" y="400">&bull; &nbsp;anything requiring exact reproducibility for an audit</text>
+        <text class="ss" x="22" y="430">&bull; &nbsp;integrations that already work and nobody is complaining about</text>
+        <text class="ss" x="22" y="462.5" style="fill:#b91c1c;font-weight:600">deterministic, high-volume or precision-critical &mdash; three reasons to leave it alone</text>
       </svg>
     </div>
     <div class="pts">
@@ -1480,52 +1406,52 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>Publishing: what actually happens, and where people meet it<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 420" role="img" aria-label="Publish flow and channels">
-        <rect class="bx" x="4" y="4" width="200" height="130" rx="8"/>
-        <text class="lb" x="20" y="26">AUTHORING COPY</text>
-        <text class="ss" x="20" y="50">what you edit</text>
-        <text class="ss" x="20" y="72">test pane runs this</text>
-        <text class="ss" x="20" y="94">changes are instant</text>
-        <text class="ss" x="20" y="118" style="fill:#64748b">nobody else sees it</text>
+      <svg class="u108" viewBox="0 0 700 453.6" role="img" aria-label="Publish flow and channels">
+        <rect class="bx" x="4" y="4.3" width="200" height="140.4" rx="8"/>
+        <text class="lb" x="20" y="28.1">AUTHORING COPY</text>
+        <text class="ss" x="20" y="54">what you edit</text>
+        <text class="ss" x="20" y="77.8">test pane runs this</text>
+        <text class="ss" x="20" y="101.5">changes are instant</text>
+        <text class="ss" x="20" y="127.4" style="fill:#475569">nobody else sees it</text>
 
-        <path class="fl" d="M208 68 L246 68"/>
-        <text class="ss" x="212" y="58" style="font-size:11px">publish</text>
+        <path class="fl" d="M208 73.4L246 73.4"/>
+        <text class="ss" x="212" y="62.6" style="font-size:11.9px">publish</text>
 
-        <rect class="bx d" x="250" y="4" width="200" height="130" rx="8"/>
-        <text class="lb w" x="266" y="26">PUBLISHED VERSION</text>
-        <text class="ss w" x="266" y="50">a snapshot, frozen</text>
-        <text class="ss w" x="266" y="72">what every user gets</text>
-        <text class="ss w" x="266" y="94">rollback target</text>
-        <text class="ss w" x="266" y="118" style="fill:#fbbf24">edits do NOT reach users</text>
+        <rect class="bx d" x="250" y="4.3" width="200" height="140.4" rx="8"/>
+        <text class="lb w" x="266" y="28.1">PUBLISHED VERSION</text>
+        <text class="ss w" x="266" y="54">a snapshot, frozen</text>
+        <text class="ss w" x="266" y="77.8">what every user gets</text>
+        <text class="ss w" x="266" y="101.5">rollback target</text>
+        <text class="ss w" x="266" y="127.4" style="fill:#fbbf24">edits do NOT reach users</text>
 
-        <path class="fl" d="M454 68 L492 68"/>
-        <rect class="bx g" x="496" y="4" width="200" height="130" rx="8"/>
-        <text class="lb g" x="512" y="26">CHANNELS</text>
-        <text class="ss" x="512" y="50">Microsoft Teams</text>
-        <text class="ss" x="512" y="72">M365 Copilot</text>
-        <text class="ss" x="512" y="94">web chat &middot; custom app</text>
-        <text class="ss" x="512" y="118" style="fill:#047857;font-weight:600">where the work happens</text>
+        <path class="fl" d="M454 73.4L492 73.4"/>
+        <rect class="bx g" x="496" y="4.3" width="200" height="140.4" rx="8"/>
+        <text class="lb g" x="512" y="28.1">CHANNELS</text>
+        <text class="ss" x="512" y="54">Microsoft Teams</text>
+        <text class="ss" x="512" y="77.8">M365 Copilot</text>
+        <text class="ss" x="512" y="101.5">web chat &middot; custom app</text>
+        <text class="ss" x="512" y="127.4" style="fill:#065f46;font-weight:600">where the work happens</text>
 
-        <rect class="bx a" x="4" y="148" width="692" height="88" rx="8"/>
-        <text class="lb a" x="22" y="170">THE MISUNDERSTANDING THAT COSTS AN AFTERNOON</text>
-        <text class="tt" x="22" y="194" style="font-size:14px">&ldquo;I fixed it, but the team still sees the old behaviour.&rdquo;</text>
-        <text class="ss" x="22" y="216">You changed the authoring copy. Until you publish, users are on the snapshot &mdash; which is the</text>
-        <text class="ss" x="22" y="230">whole point: your edits cannot break their Tuesday.</text>
+        <rect class="bx a" x="4" y="159.8" width="692" height="95" rx="8"/>
+        <text class="lb a" x="22" y="183.6">THE MISUNDERSTANDING THAT COSTS AN AFTERNOON</text>
+        <text class="tt" x="22" y="209.5" style="font-size:15.1px">&ldquo;I fixed it, but the team still sees the old behaviour.&rdquo;</text>
+        <text class="ss" x="22" y="233.3">You changed the authoring copy. Until you publish, users are on the snapshot &mdash; which is the</text>
+        <text class="ss" x="22" y="248.4">whole point: your edits cannot break their Tuesday.</text>
 
-        <rect class="bx" x="4" y="250" width="692" height="164" rx="8"/>
-        <text class="lb" x="22" y="272">WHY TEAMS IS THE CHANNEL THAT MATTERS FOR YOU</text>
-        <rect class="bx w" x="22" y="284" width="200" height="60" rx="5"/>
-        <text class="ss" x="34" y="306" style="font-weight:600;fill:#0b2545">Already open</text>
-        <text class="ss" x="34" y="326">no new tab, no new habit</text>
-        <rect class="bx w" x="238" y="284" width="200" height="60" rx="5"/>
-        <text class="ss" x="250" y="306" style="font-weight:600;fill:#0b2545">Identity comes free</text>
-        <text class="ss" x="250" y="326">the agent knows who asked</text>
-        <rect class="bx w" x="454" y="284" width="222" height="60" rx="5"/>
-        <text class="ss" x="466" y="306" style="font-weight:600;fill:#0b2545">Approvals land there too</text>
-        <text class="ss" x="466" y="326">request and decision, one place</text>
-        <text class="ss" x="22" y="368">Adoption is not a training problem. An agent that lives where the work already happens gets used;</text>
-        <text class="ss" x="22" y="388">one that needs a bookmark does not. This is the least technical and most decisive slide in the session.</text>
-        <text class="ss" x="22" y="408" style="fill:#64748b">Teams and M365 Copilot both need an admin step in most tenants &mdash; find that out before you promise a date.</text>
+        <rect class="bx" x="4" y="270" width="692" height="177.1" rx="8"/>
+        <text class="lb" x="22" y="293.8">WHY TEAMS IS THE CHANNEL THAT MATTERS FOR YOU</text>
+        <rect class="bx w" x="22" y="306.7" width="200" height="64.8" rx="5"/>
+        <text class="ss" x="34" y="330.5" style="font-weight:600;fill:#0b2545">Already open</text>
+        <text class="ss" x="34" y="352.1">no new tab, no new habit</text>
+        <rect class="bx w" x="238" y="306.7" width="200" height="64.8" rx="5"/>
+        <text class="ss" x="250" y="330.5" style="font-weight:600;fill:#0b2545">Identity comes free</text>
+        <text class="ss" x="250" y="352.1">the agent knows who asked</text>
+        <rect class="bx w" x="454" y="306.7" width="222" height="64.8" rx="5"/>
+        <text class="ss" x="466" y="330.5" style="font-weight:600;fill:#0b2545">Approvals land there too</text>
+        <text class="ss" x="466" y="352.1">request and decision, one place</text>
+        <text class="ss" x="22" y="397.4">Adoption is not a training problem. An agent that lives where the work already happens gets used;</text>
+        <text class="ss" x="22" y="419">one that needs a bookmark does not. This is the least technical and most decisive slide in the session.</text>
+        <text class="ss" x="22" y="440.6" style="fill:#475569">Teams and M365 Copilot both need an admin step in most tenants &mdash; find that out before you promise a date.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1547,23 +1473,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 25 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Environments, solutions, ALM" data-notes="Short and firm: build in the default environment and you will regret it. Solutions and connection references are what make an agent movable between environments, and what stop your personal credentials travelling to production." data-demo="2.6" data-role="pre">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Environments, solutions, ALM" data-notes="Short and firm: build in the default environment and you will regret it. Solutions and connection references are what make an agent movable between environments, and what stop your personal credentials travelling to production.  From the slide panel: THREE RULES, LEARNED EXPENSIVELY — Never build in the default environment. It is shared with the entire tenant, it cannot be governed properly, and moving out later is a rebuild. Put the agent in a solution from day one. A solution is what makes it exportable, importable and versionable. Use connection references, not embedded connections &mdash; otherwise the agent carries your credentials to production, which is both a security finding and a single point of failure when you take leave. WHAT DLP ACTUALLY DOES HERE — Connectors sit in business, non-business or blocked groups, and a flow may not combine across groups. That is the mechanism your governance forum will use to say yes &mdash; so bring them the connector list, not a description of the idea. The gap between a working demo and a supported service is almost entirely this slide. It is also the least glamorous and most predictive." data-demo="2.6" data-role="pre">
   <h2>Environments and ALM: the part that decides whether this survives<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag">2.6</span></h2>
-  <div class="body g46">
-    <div class="pts">
-      <h3>Three rules, learned expensively</h3>
-      <ul>
-        <li><b>Never build in the default environment.</b> It is shared with the entire tenant, it cannot be governed properly, and moving out later is a rebuild.</li>
-        <li><b>Put the agent in a solution</b> from day one. A solution is what makes it exportable, importable and versionable.</li>
-        <li><b>Use connection references</b>, not embedded connections &mdash; otherwise the agent carries <em>your</em> credentials to production, which is both a security finding and a single point of failure when you take leave.</li>
-      </ul>
-      <h3 class="a">What DLP actually does here</h3>
-      <ul>
-        <li>Connectors sit in <em>business</em>, <em>non-business</em> or <em>blocked</em> groups, and a flow may not combine across groups.</li>
-        <li>That is the mechanism your governance forum will use to say yes &mdash; so bring them <b>the connector list</b>, not a description of the idea.</li>
-      </ul>
-      <div class="callout">The gap between a working demo and a supported service is almost entirely this slide. It is also the least glamorous and most predictive.</div>
-    </div>
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 430" role="img" aria-label="Dev test prod environments with solution promotion">
         <rect class="bx" x="4" y="30" width="216" height="200" rx="8"/>
@@ -1621,9 +1533,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
 </section>
 
 <!-- 26 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Designing the approval gate" data-notes="The gate is where autonomy is actually set. The design question to carry away: what exactly is the approver looking at, and do they have the time to look? A gate nobody works moves accountability without moving attention. One hard product constraint shapes the design: a flow called by an agent has roughly 100 seconds to respond, so an approval that waits for a person always fails on its response step - the approval itself succeeds, and the agent has already stopped listening. The working pattern is fire-and-forget: create the approval, return the id and the word pending immediately, and read the verdict back in a later turn." data-demo="2.6" data-role="pre">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Designing the approval gate" data-notes="The gate is where autonomy is actually set. The design question to carry away: what exactly is the approver looking at, and do they have the time to look? A gate nobody works moves accountability without moving attention. One hard product constraint shapes the design: a flow called by an agent has roughly 100 seconds to respond, so an approval that waits for a person always fails on its response step - the approval itself succeeds, and the agent has already stopped listening. The working pattern is fire-and-forget: create the approval, return the id and the word pending immediately, and read the verdict back in a later turn.  From the slide panel: AUTONOMY IS A DIAL, NOT A SWITCH — Draft freely &mdash; the agent may read, extract, enrich and compose without asking. Gate the irreversible &mdash; anything that leaves the firm, writes to a system of record, or is described as final. That split, written down, is your autonomy policy. It is more concrete and more useful than any statement of principles. WHY THE UNRESOLVED LIST BELONGS ON THE CARD — It gives the approver something specific to do, which is the difference between review and ritual. It also creates the feedback loop: repeated flags on the same field tell you which action to build next." data-demo="2.6" data-role="pre">
   <h2>The approval gate is where autonomy is actually set<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
-  <div class="body g64">
+  <div class="body g1">
     <div>
       <svg viewBox="0 0 700 420" role="img" aria-label="Approval gate design">
         <rect class="bx" x="4" y="4" width="692" height="124" rx="8"/>
@@ -1634,10 +1546,10 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <path class="fl" d="M310 66 L338 66"/>
         <rect class="bx a" x="342" y="38" width="130" height="56" rx="5"/><text class="ss" x="354" y="60" style="font-weight:600;fill:#92400e">Approver, in</text><text class="ss" x="354" y="78" style="font-weight:600;fill:#92400e">Teams</text>
         <path class="flg" d="M476 56 L504 56"/>
-        <rect class="bx g" x="508" y="30" width="184" height="34" rx="5"/><text class="ss" x="520" y="52" style="fill:#047857">Approved &rarr; issue + stamp id</text>
+        <rect class="bx g" x="508" y="30" width="184" height="34" rx="5"/><text class="ss" x="520" y="52" style="fill:#065f46">Approved &rarr; issue + stamp id</text>
         <path class="ar" d="M476 80 L504 80" style="stroke:#f0a3a3;marker-end:url(#arr)"/>
         <rect class="bx r" x="508" y="68" width="184" height="34" rx="5"/><text class="ss" x="520" y="90" style="fill:#b91c1c">Rejected &rarr; report, stop</text>
-        <text class="ss" x="22" y="116" style="fill:#64748b">Approvals is a standard connector &mdash; no premium licence, and the decision is logged for you.</text>
+        <text class="ss" x="22" y="116" style="fill:#475569">Approvals is a standard connector &mdash; no premium licence, and the decision is logged for you.</text>
 
         <rect class="bx" x="4" y="140" width="692" height="132" rx="8"/>
         <text class="lb" x="22" y="162">WHAT THE APPROVER ACTUALLY SEES &mdash; DESIGN THIS DELIBERATELY</text>
@@ -1645,11 +1557,11 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="34" y="196" style="font-weight:600;fill:#b91c1c">A bad card</text>
         <text class="ss" x="34" y="218">&ldquo;Approve deck for CL-4471?&rdquo;</text>
         <text class="ss" x="34" y="240">&nbsp;&nbsp;[Approve] &nbsp;[Reject]</text>
-        <text class="ss" x="34" y="256" style="fill:#64748b">approval theatre &mdash; nobody can judge this</text>
+        <text class="ss" x="34" y="256" style="fill:#475569">approval theatre &mdash; nobody can judge this</text>
         <rect class="bx g" x="358" y="174" width="318" height="86" rx="5"/>
-        <text class="ss" x="370" y="196" style="font-weight:600;fill:#047857">A good card</text>
+        <text class="ss" x="370" y="196" style="font-weight:600;fill:#065f46">A good card</text>
         <text class="ss" x="370" y="216">Northwind Q2 &middot; 6 slides &middot; 14 sourced figures</text>
-        <text class="ss" x="370" y="234" style="fill:#b45309">2 unresolved: tracking_error, portfolio_turnover</text>
+        <text class="ss" x="370" y="234" style="fill:#92400e">2 unresolved: tracking_error, portfolio_turnover</text>
         <text class="ss" x="370" y="252">link to the plan &nbsp; [Approve] [Reject + reason]</text>
 
         <rect class="bx d" x="4" y="284" width="692" height="132" rx="8"/>
@@ -1659,20 +1571,6 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss w" x="22" y="378">3 &nbsp;<tspan style="font-weight:700">What happens on timeout?</tspan> No answer is not approval. Escalate or fail &mdash; decide which, in advance.</text>
         <text class="ss w" x="22" y="404" style="fill:#fbbf24;font-weight:600">A gate nobody has time to work is worse than no gate: it moves the accountability without moving the attention.</text>
       </svg>
-    </div>
-    <div class="pts">
-      <h3>Autonomy is a dial, not a switch</h3>
-      <ul>
-        <li><b>Draft freely</b> &mdash; the agent may read, extract, enrich and compose without asking.</li>
-        <li><b>Gate the irreversible</b> &mdash; anything that leaves the firm, writes to a system of record, or is described as final.</li>
-        <li>That split, written down, <em>is</em> your autonomy policy. It is more concrete and more useful than any statement of principles.</li>
-        <li class="r"><b>The gate cannot block the agent.</b> A flow the agent calls must answer in about <b>100 seconds</b>; a human will not. So the agent <em>requests</em> approval and returns at once, and the verdict is read back afterwards. Human-in-the-loop is asynchronous whether or not you designed it that way.</li>
-      </ul>
-      <h3 class="g">Why the unresolved list belongs on the card</h3>
-      <ul>
-        <li>It gives the approver something specific to do, which is the difference between review and ritual.</li>
-        <li>It also creates the feedback loop: repeated flags on the same field tell you which action to build next.</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -1765,22 +1663,22 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <rect class="bx g" x="4" y="271.6" width="166" height="112" rx="8"/>
         <text class="tt" x="20" y="310.8">A file lands</text>
         <text class="ss" x="20" y="338.8">SharePoint library</text>
-        <text class="ss" x="20" y="364" style="fill:#047857">no human here</text>
+        <text class="ss" x="20" y="364" style="fill:#065f46">no human here</text>
         <path class="flg" d="M 158 327.6 L 180 327.6"/>
         <rect class="bx g" x="184" y="271.6" width="166" height="112" rx="8"/>
         <text class="tt" x="200" y="310.8">Flow fires</text>
         <text class="ss" x="200" y="338.8">automated trigger</text>
-        <text class="ss" x="200" y="364" style="fill:#047857">polls, then runs</text>
+        <text class="ss" x="200" y="364" style="fill:#065f46">polls, then runs</text>
         <path class="flg" d="M 338 327.6 L 360 327.6"/>
         <rect class="bx g" x="364" y="271.6" width="166" height="112" rx="8"/>
         <text class="tt" x="380" y="310.8">Agent works</text>
         <text class="ss" x="380" y="338.8">extract, enrich, plan</text>
-        <text class="ss" x="380" y="364" style="fill:#047857">2.2 &ndash; 2.5, unattended</text>
+        <text class="ss" x="380" y="364" style="fill:#065f46">2.2 &ndash; 2.5, unattended</text>
         <path class="flg" d="M 518 327.6 L 540 327.6"/>
         <rect class="bx g" x="544" y="271.6" width="166" height="112" rx="8"/>
         <text class="tt" x="560" y="310.8">Gate holds</text>
         <text class="ss" x="560" y="338.8">approval card</text>
-        <text class="ss" x="560" y="364" style="fill:#047857">nothing issued yet</text>
+        <text class="ss" x="560" y="364" style="fill:#065f46">nothing issued yet</text>
         <path class="flg" d="M 698 327.6 L 720 327.6"/>
         <rect class="bx d" x="724" y="271.6" width="452" height="112" rx="8"/>
         <text class="lb w" x="742" y="302.4">THE ONLY HUMAN IN THE CHAIN</text>
@@ -1791,8 +1689,8 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="lb" x="22" y="431.2">WHAT CAN START AN AGENT</text>
         <text class="ss" x="22" y="462">A file arriving &middot; a schedule &middot; a record changing</text>
         <text class="ss" x="22" y="490">an email &middot; an approval completing &middot; another agent</text>
-        <text class="ss" x="22" y="523.6" style="fill:#64748b">Your first candidates are the steps that already</text>
-        <text class="ss" x="22" y="546" style="fill:#64748b">begin with the words &ldquo;when something arrives&rdquo;.</text>
+        <text class="ss" x="22" y="523.6" style="fill:#475569">Your first candidates are the steps that already</text>
+        <text class="ss" x="22" y="546" style="fill:#475569">begin with the words &ldquo;when something arrives&rdquo;.</text>
 
         <rect class="bx r" x="396" y="403.2" width="384" height="148.4" rx="8"/>
         <text class="lb r" x="414" y="431.2">THE RULE FOR UNATTENDED RUNS</text>
@@ -1824,42 +1722,42 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="tt" x="16" y="80" style="font-size:15px">Factsheet PDF</text>
         <text class="ss" x="16" y="110" style="font-size:13px">+ manager update</text>
         <text class="ss" x="16" y="134" style="font-size:13px">+ messy document</text>
-        <text class="ss" x="16" y="172" style="font-size:13px;fill:#047857">knowledge, 2.1</text>
+        <text class="ss" x="16" y="172" style="font-size:13px;fill:#065f46">knowledge, 2.1</text>
         <path class="flg" d="M168 115 L180 115"/>
         <rect class="bx g" x="184" y="42" width="162" height="146" rx="9"/>
         <text class="lb g" x="196" y="28" style="font-size:11.5px">EXTRACT</text>
         <text class="tt" x="196" y="80" style="font-size:15px">25-key record</text>
         <text class="ss" x="196" y="110" style="font-size:13px">schema-enforced</text>
         <text class="ss" x="196" y="134" style="font-size:13px">4 validation rungs</text>
-        <text class="ss" x="196" y="172" style="font-size:13px;fill:#047857">2.4</text>
+        <text class="ss" x="196" y="172" style="font-size:13px;fill:#065f46">2.4</text>
         <path class="flg" d="M348 115 L360 115"/>
         <rect class="bx g" x="364" y="42" width="162" height="146" rx="9"/>
         <text class="lb g" x="376" y="28" style="font-size:11.5px">ENRICH</text>
         <text class="tt" x="376" y="80" style="font-size:15px">FX + mandate</text>
         <text class="ss" x="376" y="110" style="font-size:13px">+ holdings, benchmark</text>
         <text class="ss" x="376" y="134" style="font-size:13px">4 agent-chosen actions</text>
-        <text class="ss" x="376" y="172" style="font-size:13px;fill:#047857">2.2, 2.3</text>
+        <text class="ss" x="376" y="172" style="font-size:13px;fill:#065f46">2.2, 2.3</text>
         <path class="flg" d="M528 115 L540 115"/>
         <rect class="bx g" x="544" y="42" width="162" height="146" rx="9"/>
         <text class="lb g" x="556" y="28" style="font-size:11.5px">PLAN</text>
         <text class="tt" x="556" y="80" style="font-size:15px">Slide plan JSON</text>
         <text class="ss" x="556" y="110" style="font-size:13px">every figure sourced</text>
         <text class="ss" x="556" y="134" style="font-size:13px">unresolved listed</text>
-        <text class="ss" x="556" y="172" style="font-size:13px;fill:#047857">2.5</text>
+        <text class="ss" x="556" y="172" style="font-size:13px;fill:#065f46">2.5</text>
         <path class="flg" d="M708 115 L720 115"/>
         <rect class="bx g" x="724" y="42" width="162" height="146" rx="9"/>
         <text class="lb g" x="736" y="28" style="font-size:11.5px">RENDER</text>
         <text class="tt" x="736" y="80" style="font-size:15px">PowerPoint</text>
         <text class="ss" x="736" y="110" style="font-size:13px">house template</text>
         <text class="ss" x="736" y="134" style="font-size:13px">your Aspose code</text>
-        <text class="ss" x="736" y="172" style="font-size:13px;fill:#047857">2.5</text>
+        <text class="ss" x="736" y="172" style="font-size:13px;fill:#065f46">2.5</text>
         <path class="flg" d="M888 115 L900 115"/>
         <rect class="bx a" x="904" y="42" width="162" height="146" rx="9"/>
         <text class="lb a" x="916" y="28" style="font-size:11.5px">APPROVE</text>
         <text class="tt" x="916" y="80" style="font-size:15px">Human gate</text>
         <text class="ss" x="916" y="110" style="font-size:13px">2 flags to check</text>
         <text class="ss" x="916" y="134" style="font-size:13px">decision logged</text>
-        <text class="ss" x="916" y="172" style="font-size:13px;fill:#b45309">2.6</text>
+        <text class="ss" x="916" y="172" style="font-size:13px;fill:#92400e">2.6</text>
         <path class="flg" d="M1068 115 L1080 115"/>
         <rect class="bx d" x="1084" y="42" width="96" height="146" rx="9"/>
         <text class="lb" x="1096" y="28" style="font-size:11.5px;fill:#0b2545">ISSUE</text>
@@ -1872,7 +1770,7 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="22" y="282.8">One agent &middot; 6 actions &middot; 3 knowledge sources &middot; 7 flows</text>
         <text class="ss" x="22" y="313.6">One page of instructions &middot; one 25-key schema &middot; one approval gate &middot; one trigger</text>
         <text class="ss" x="22" y="344.4">Built in an afternoon, in front of you, from an empty screen.</text>
-        <text class="ss" x="22" y="366.8" style="fill:#64748b">In your environment, add the connector approvals and the Aspose wrapper.</text>
+        <text class="ss" x="22" y="366.8" style="fill:#475569">In your environment, add the connector approvals and the Aspose wrapper.</text>
 
         <rect class="bx d" x="600" y="218.4" width="576" height="170.8" rx="8"/>
         <text class="lb w" x="618" y="249.2">WHAT IT CHANGES</text>
@@ -1896,34 +1794,34 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
   <h2>When to graduate &mdash; and how you will know<span class="tag">2.7</span></h2>
   <div class="body g64">
     <div>
-      <svg viewBox="0 0 700 520" role="img" aria-label="Signals that you have outgrown Copilot Studio">
-        <rect class="bx g" x="4" y="4" width="692" height="126" rx="8"/>
-        <text class="lb g" x="22" y="26">STAY IN COPILOT STUDIO WHILE</text>
-        <text class="ss" x="22" y="50">&bull; &nbsp;a human is in the loop and volumes are human-scale</text>
-        <text class="ss" x="22" y="72">&bull; &nbsp;the data lives in Microsoft 365 or behind a connector you already have</text>
-        <text class="ss" x="22" y="94">&bull; &nbsp;the value is still being proven and the process may change</text>
-        <text class="ss" x="22" y="116" style="fill:#047857;font-weight:600">&bull; &nbsp;which describes almost everything you will build in the next twelve months</text>
+      <svg class="u108" viewBox="0 0 700 561.6" role="img" aria-label="Signals that you have outgrown Copilot Studio">
+        <rect class="bx g" x="4" y="4.3" width="692" height="136.1" rx="8"/>
+        <text class="lb g" x="22" y="28.1">STAY IN COPILOT STUDIO WHILE</text>
+        <text class="ss" x="22" y="54">&bull; &nbsp;a human is in the loop and volumes are human-scale</text>
+        <text class="ss" x="22" y="77.8">&bull; &nbsp;the data lives in Microsoft 365 or behind a connector you already have</text>
+        <text class="ss" x="22" y="101.5">&bull; &nbsp;the value is still being proven and the process may change</text>
+        <text class="ss" x="22" y="125.3" style="fill:#065f46;font-weight:600">&bull; &nbsp;which describes almost everything you will build in the next twelve months</text>
 
-        <rect class="bx a" x="4" y="138" width="692" height="146" rx="8"/>
-        <text class="lb a" x="22" y="160">FIVE SIGNALS YOU HAVE OUTGROWN IT</text>
-        <text class="ss" x="22" y="184">1 &nbsp;You are fighting orchestration with ever-longer instructions to force one path</text>
-        <text class="ss" x="22" y="206">2 &nbsp;You need thousands of documents processed overnight, not a conversation</text>
-        <text class="ss" x="22" y="228">3 &nbsp;You need real regression testing, versioned prompts and CI before every release</text>
-        <text class="ss" x="22" y="250">4 &nbsp;Latency matters to the user, and you cannot get under it</text>
-        <text class="ss" x="22" y="272">5 &nbsp;The logic has become genuinely complex and lives in prose rather than in code</text>
+        <rect class="bx a" x="4" y="149" width="692" height="157.7" rx="8"/>
+        <text class="lb a" x="22" y="172.8">FIVE SIGNALS YOU HAVE OUTGROWN IT</text>
+        <text class="ss" x="22" y="198.7">1 &nbsp;You are fighting orchestration with ever-longer instructions to force one path</text>
+        <text class="ss" x="22" y="222.5">2 &nbsp;You need thousands of documents processed overnight, not a conversation</text>
+        <text class="ss" x="22" y="246.2">3 &nbsp;You need real regression testing, versioned prompts and CI before every release</text>
+        <text class="ss" x="22" y="270">4 &nbsp;Latency matters to the user, and you cannot get under it</text>
+        <text class="ss" x="22" y="293.8">5 &nbsp;The logic has become genuinely complex and lives in prose rather than in code</text>
 
-        <rect class="bx" x="4" y="292" width="692" height="124" rx="8"/>
-        <text class="lb" x="22" y="314">WHAT GRADUATION LOOKS LIKE</text>
-        <text class="ss" x="22" y="338">Microsoft Agent Framework or a code-first stack, owned by engineering, in source control,</text>
-        <text class="ss" x="22" y="358">with tests and a deployment pipeline. Same concepts &mdash; instructions, tools, orchestration, traces &mdash;</text>
-        <text class="ss" x="22" y="378">expressed in code instead of configuration.</text>
-        <text class="ss" x="22" y="404" style="font-weight:600;fill:#0b2545">Everything you learned today transfers. The vocabulary does not change; only who maintains it does.</text>
+        <rect class="bx" x="4" y="315.4" width="692" height="133.9" rx="8"/>
+        <text class="lb" x="22" y="339.1">WHAT GRADUATION LOOKS LIKE</text>
+        <text class="ss" x="22" y="365">Microsoft Agent Framework or a code-first stack, owned by engineering, in source control,</text>
+        <text class="ss" x="22" y="386.6">with tests and a deployment pipeline. Same concepts &mdash; instructions, tools, orchestration, traces &mdash;</text>
+        <text class="ss" x="22" y="408.2">expressed in code instead of configuration.</text>
+        <text class="ss" x="22" y="436.3" style="font-weight:600;fill:#0b2545">Everything you learned today transfers. The vocabulary does not change; only who maintains it does.</text>
 
-        <rect class="bx a" x="4" y="428" width="692" height="88" rx="8"/>
-        <text class="lb a" x="22" y="450">BEFORE YOU GRADUATE &mdash; THE STEP MOST TEAMS SKIP</text>
-        <text class="ss" x="22" y="472" style="fill:#92400e">Signal 1 usually means one agent is doing four jobs. Split it before you leave the product:</text>
-        <text class="ss" x="22" y="492" style="fill:#92400e">a research agent, a mandate-compliance agent, a report agent &mdash; each with its own knowledge,</text>
-        <text class="ss" x="22" y="512" style="fill:#92400e;font-weight:600">tools and instructions &mdash; and one agent calling the others as tools. Still Copilot Studio. Still no code.</text>
+        <rect class="bx a" x="4" y="462.2" width="692" height="95" rx="8"/>
+        <text class="lb a" x="22" y="486">BEFORE YOU GRADUATE &mdash; THE STEP MOST TEAMS SKIP</text>
+        <text class="ss" x="22" y="509.8" style="fill:#92400e">Signal 1 usually means one agent is doing four jobs. Split it before you leave the product:</text>
+        <text class="ss" x="22" y="531.4" style="fill:#92400e">a research agent, a mandate-compliance agent, a report agent &mdash; each with its own knowledge,</text>
+        <text class="ss" x="22" y="553" style="fill:#92400e;font-weight:600">tools and instructions &mdash; and one agent calling the others as tools. Still Copilot Studio. Still no code.</text>
       </svg>
     </div>
     <div class="pts">
@@ -1963,39 +1861,39 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
       </ul>
     </div>
     <div>
-      <svg viewBox="0 0 700 536" role="img" aria-label="Worked ROI arithmetic">
-        <rect class="bx" x="4" y="4" width="692" height="136" rx="8"/>
-        <text class="lb" x="22" y="26">THE COST TODAY &mdash; USE YOUR OWN NUMBERS, NOT THESE</text>
-        <text class="ss" x="22" y="52">Fund reviews per quarter</text><text class="tt" x="480" y="52" style="font-size:14px">40</text>
-        <text class="ss" x="22" y="76">Hours per review, end to end</text><text class="tt" x="480" y="76" style="font-size:14px">4.0</text>
-        <text class="ss" x="22" y="100">Hours per quarter</text><text class="tt" x="480" y="100" style="font-size:14px">160</text>
-        <text class="ss" x="22" y="126">Annual</text><text class="tt" x="480" y="126" style="font-size:14px">640 hours</text>
-        <rect x="560" y="36" width="118" height="92" rx="6" style="fill:#fee2e2;stroke:#fca5a5"/>
-        <text class="ss" x="574" y="76" style="fill:#b91c1c;font-weight:700">4 hrs</text>
-        <text class="ss" x="574" y="98" style="fill:#b91c1c">per review</text>
+      <svg class="u113" viewBox="0 0 700 605.7" role="img" aria-label="Worked ROI arithmetic">
+        <rect class="bx" x="4" y="4.5" width="692" height="153.7" rx="8"/>
+        <text class="lb" x="22" y="29.4">THE COST TODAY &mdash; USE YOUR OWN NUMBERS, NOT THESE</text>
+        <text class="ss" x="22" y="58.8">Fund reviews per quarter</text><text class="tt" x="480" y="58.8" style="font-size:15.8px">40</text>
+        <text class="ss" x="22" y="85.9">Hours per review, end to end</text><text class="tt" x="480" y="85.9" style="font-size:15.8px">4.0</text>
+        <text class="ss" x="22" y="113">Hours per quarter</text><text class="tt" x="480" y="113" style="font-size:15.8px">160</text>
+        <text class="ss" x="22" y="142.4">Annual</text><text class="tt" x="480" y="142.4" style="font-size:15.8px">640 hours</text>
+        <rect x="560" y="40.7" width="118" height="104" rx="6" style="fill:#fee2e2;stroke:#fca5a5"/>
+        <text class="ss" x="574" y="85.9" style="fill:#b91c1c;font-weight:700">4 hrs</text>
+        <text class="ss" x="574" y="110.7" style="fill:#b91c1c">per review</text>
 
-        <rect class="bx g" x="4" y="148" width="692" height="136" rx="8"/>
-        <text class="lb g" x="22" y="170">THE COST AFTER</text>
-        <text class="ss" x="22" y="196">Agent run, elapsed</text><text class="tt" x="480" y="196" style="font-size:14px">~3 min</text>
-        <text class="ss" x="22" y="220">Human review of flagged fields</text><text class="tt" x="480" y="220" style="font-size:14px">0.5 hr</text>
-        <text class="ss" x="22" y="244">Hours per quarter</text><text class="tt" x="480" y="244" style="font-size:14px">22</text>
-        <text class="ss" x="22" y="270">Annual saving</text><text class="tt" x="480" y="270" style="font-size:14px;fill:#047857">~550 hours</text>
-        <rect x="560" y="180" width="118" height="92" rx="6" style="fill:#d1fae5;stroke:#6ee7b7"/>
-        <text class="ss" x="574" y="220" style="fill:#047857;font-weight:700">0.5 hrs</text>
-        <text class="ss" x="574" y="242" style="fill:#047857">per review</text>
+        <rect class="bx g" x="4" y="167.2" width="692" height="153.7" rx="8"/>
+        <text class="lb g" x="22" y="192.1">THE COST AFTER</text>
+        <text class="ss" x="22" y="221.5">Agent run, elapsed</text><text class="tt" x="480" y="221.5" style="font-size:15.8px">~3 min</text>
+        <text class="ss" x="22" y="248.6">Human review of flagged fields</text><text class="tt" x="480" y="248.6" style="font-size:15.8px">0.5 hr</text>
+        <text class="ss" x="22" y="275.7">Hours per quarter</text><text class="tt" x="480" y="275.7" style="font-size:15.8px">22</text>
+        <text class="ss" x="22" y="305.1">Annual saving</text><text class="tt" x="480" y="305.1" style="font-size:15.8px;fill:#065f46">~550 hours</text>
+        <rect x="560" y="203.4" width="118" height="104" rx="6" style="fill:#d1fae5;stroke:#6ee7b7"/>
+        <text class="ss" x="574" y="248.6" style="fill:#065f46;font-weight:700">0.5 hrs</text>
+        <text class="ss" x="574" y="273.5" style="fill:#065f46">per review</text>
 
-        <rect class="bx a" x="4" y="292" width="692" height="124" rx="8"/>
-        <text class="lb a" x="22" y="314">THE BUILD COST &mdash; COUNT ALL OF IT</text>
-        <text class="ss" x="22" y="338">Agent, actions, schema, validation</text><text class="tt" x="480" y="338" style="font-size:14px">2&ndash;3 weeks</text>
-        <text class="ss" x="22" y="360">Aspose wrapper API</text><text class="tt" x="480" y="360" style="font-size:14px">1&ndash;2 weeks</text>
-        <text class="ss" x="22" y="382">Connector approval, DLP, environment</text><text class="tt" x="480" y="382" style="font-size:14px">elapsed, not effort</text>
-        <text class="ss" x="22" y="406" style="font-weight:600;fill:#92400e">Ongoing: an owner, a reviewer, and a re-run of the eval set at each change.</text>
+        <rect class="bx a" x="4" y="330" width="692" height="140.1" rx="8"/>
+        <text class="lb a" x="22" y="354.8">THE BUILD COST &mdash; COUNT ALL OF IT</text>
+        <text class="ss" x="22" y="381.9">Agent, actions, schema, validation</text><text class="tt" x="480" y="381.9" style="font-size:15.8px">2&ndash;3 weeks</text>
+        <text class="ss" x="22" y="406.8">Aspose wrapper API</text><text class="tt" x="480" y="406.8" style="font-size:15.8px">1&ndash;2 weeks</text>
+        <text class="ss" x="22" y="431.7">Connector approval, DLP, environment</text><text class="tt" x="480" y="431.7" style="font-size:15.8px">elapsed, not effort</text>
+        <text class="ss" x="22" y="458.8" style="font-weight:600;fill:#92400e">Ongoing: an owner, a reviewer, and a re-run of the eval set at each change.</text>
 
-        <rect class="bx d" x="4" y="428" width="692" height="98" rx="8"/>
-        <text class="lb w" x="22" y="450">WHERE THE ACTUALS COME FROM &mdash; AFTER LAUNCH</text>
-        <text class="ss w" x="22" y="472">Everything above is an estimate until the agent has run. Three places hold the real numbers:</text>
-        <text class="ss w" x="22" y="492">The <tspan style="fill:#fbbf24">Analytics</tspan> tab &mdash; sessions, engagement, and the share that ended with no answer at all.</text>
-        <text class="ss w" x="22" y="512">Session <tspan style="fill:#fbbf24">transcripts</tspan> in Dataverse &mdash; what people actually asked. Flow run history &mdash; elapsed per run.</text>
+        <rect class="bx d" x="4" y="483.6" width="692" height="110.7" rx="8"/>
+        <text class="lb w" x="22" y="508.5">WHERE THE ACTUALS COME FROM &mdash; AFTER LAUNCH</text>
+        <text class="ss w" x="22" y="533.4">Everything above is an estimate until the agent has run. Three places hold the real numbers:</text>
+        <text class="ss w" x="22" y="556">The <tspan style="fill:#fbbf24">Analytics</tspan> tab &mdash; sessions, engagement, and the share that ended with no answer at all.</text>
+        <text class="ss w" x="22" y="578.6">Session <tspan style="fill:#fbbf24">transcripts</tspan> in Dataverse &mdash; what people actually asked. Flow run history &mdash; elapsed per run.</text>
       </svg>
     </div>
   </div>
@@ -2043,9 +1941,9 @@ svg.up .ss{font-size:14px}svg.up .tt{font-size:16.5px}svg.up .lb{font-size:11.5p
         <text class="ss" x="814" y="181.59">&bull; &nbsp;Governance pack: the eight checklist rows, answered</text>
         <text class="ss" x="814" y="208.96">&bull; &nbsp;Decide the second agent, using the same four criteria</text>
         <rect class="bx g" x="814" y="228.86" width="340" height="79.6" rx="5"/>
-        <text class="ss" x="826" y="256.22" style="fill:#047857;font-weight:600">Success at day 90: one agent in real use,</text>
-        <text class="ss" x="826" y="281.09" style="fill:#047857;font-weight:600">owned, governed, and measurably faster.</text>
-        <text class="ss" x="826" y="303.48" style="fill:#047857">One. Not five.</text>
+        <text class="ss" x="826" y="256.22" style="fill:#065f46;font-weight:600">Success at day 90: one agent in real use,</text>
+        <text class="ss" x="826" y="281.09" style="fill:#065f46;font-weight:600">owned, governed, and measurably faster.</text>
+        <text class="ss" x="826" y="303.48" style="fill:#065f46">One. Not five.</text>
 
         <rect class="bx d" x="4" y="353.23" width="1172" height="136.82" rx="8"/>
         <text class="tt w" x="24" y="388.06" style="font-size:17.9px">The one thing that decides whether any of this happens</text>

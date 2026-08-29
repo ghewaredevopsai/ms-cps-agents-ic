@@ -119,7 +119,7 @@ footer a{color:#93c5fd;text-decoration:none}
       <tr>
         <td><span class="b bb">B</span> <strong>Copilot only</strong></td>
         <td>Microsoft 365 Copilot / Copilot Chat, but no Copilot Studio</td>
-        <td>Demos 1.1, 1.2 and 1.4 in full. For the rest, follow the steps as reading &mdash; they are written so the logic lands without the clicks.</td>
+        <td>Demos 1.2, 1.3 and 1.4 in full. For the rest, follow the steps as reading &mdash; they are written so the logic lands without the clicks.</td>
       </tr>
       <tr>
         <td><span class="b c">C</span> <strong>Watch &amp; replay</strong></td>
@@ -148,9 +148,9 @@ footer a{color:#93c5fd;text-decoration:none}
   <h2>The eleven demos</h2>
   <div class="toc">
     <ol>
-      <li><a href="#d11">1.1 &mdash; Drift, fabrication and the grounding fix</a></li>
+      <li><a href="#d11">1.1 &mdash; Your first agent: Fund Research Assistant</a></li>
       <li><a href="#d12">1.2 &mdash; A reusable extraction prompt</a></li>
-      <li><a href="#d13">1.3 &mdash; Your first agent: Fund Research Assistant</a></li>
+      <li><a href="#d13">1.3 &mdash; Drift, fabrication and the grounding fix</a></li>
       <li><a href="#d14">1.4 &mdash; Marking up your own workflow</a></li>
       <li><a href="#d21">2.1 &mdash; Generative orchestration and the trace</a></li>
       <li><a href="#d22">2.2 &mdash; Calling an external and a legacy REST API</a></li>
@@ -189,127 +189,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <!-- D1.1 -->
   <div class="demo" id="d11">
     <div class="head">
-      <span class="id">Demo 1.1 <small>Drift, fabrication and the grounding fix</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~10 min</span></span>
-    </div>
-    <div class="body">
-      <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
-
-      <div class="k">You need</div>
-      <p>Any chat interface to a model you are permitted to use &mdash; but <strong>prefer the Copilot Studio test pane</strong>. On a cautious tenant Microsoft 365 Copilot invents a figure close to the real one (~17% against a true 15.6%) and the contrast barely registers; an agent typically invents 5&ndash;7%, which is visibly wrong. The factsheet file for step 3.</p>
-
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li><strong>Ask with no context at all.</strong> Open a fresh chat and paste prompt A. Note the answer.</li>
-        <li><strong>Ask again in a new chat.</strong> Paste exactly the same prompt A a second time. Compare the two answers word by word.</li>
-        <li><strong>Now ground it.</strong> Attach <code>sample-fund-factsheet.pdf</code> to the chat and paste prompt B. Compare against what the document actually says.</li>
-        <li><strong>Ask for the impossible.</strong> With the file still attached, paste prompt C &mdash; it asks for two figures that are <em>not</em> in the document and cannot be worked out from it.</li>
-      </ol>
-
-      <div class="k">Prompt A &mdash; ungrounded</div>
-      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
-
-      <div class="k">Prompt B &mdash; grounded</div>
-      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
-For each figure, quote the section of the document it came from.
-If a figure is not present in the document, reply exactly: not stated.</pre>
-
-      <div class="k">Prompt C &mdash; the refusal test</div>
-      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
-and its portfolio turnover ratio.
-If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
-
-      <div class="k g">What you should see</div>
-      <ul>
-        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
-        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
-        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
-      </ul>
-
-      <div class="k r">When it does not behave</div>
-      <ul>
-        <li><strong>Prompt A refused instead of inventing.</strong> Common &mdash; a tenant with web and enterprise search will look, find nothing, and decline. Dropping the fund name does not help; it refuses again. Ask for an estimate outright: <em>"It is a well-known Indian multi-asset growth fund. Give me your best estimate of its 3-year annualised return and total expense ratio. Approximate figures are fine."</em> It will hedge the numbers as an informed estimate &mdash; say that out loud, because the caveat is exactly what gets stripped when the figure reaches a deck.</li>
-        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.3 makes permanent.</li>
-        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
-      </ul>
-
-      <div class="k a">Carry this forward</div>
-      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.3. That single sentence removes most fabrication.</p>
-    </div>
-  </div>
-
-  <!-- D1.2 -->
-  <div class="demo" id="d12">
-    <div class="head">
-      <span class="id">Demo 1.2 <small>A reusable extraction prompt</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
-    </div>
-    <div class="body">
-      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
-
-      <div class="k">You need</div>
-      <p>The same chat interface, with <code>sample-fund-factsheet.pdf</code> attached.</p>
-
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
-        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
-        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
-        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
-        <li><strong>Break it deliberately &mdash; in the Copilot Studio agent, not in chat.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more, against an agent with <em>Allow ungrounded responses</em> on. Watch the three absent fields fill themselves in.</li>
-      </ol>
-
-      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
-      <pre>Summarise the key points of this fund factsheet.</pre>
-
-      <div class="k">The structured prompt</div>
-      <pre>You are an investment consultant preparing a quarterly fund review for an
-institutional client - a long-horizon retirement portfolio.
-
-Use only the attached Northwind factsheet (data as of 30 June 2026).
-If a value is not present in the document, write: not stated.
-Do not estimate, infer or calculate any figure.
-
-Extract exactly these fields:
-  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
-  inception date, TER regular, TER direct, exit load,
-  return 1yr, return 3yr, return 5yr, return since inception,
-  benchmark 1yr, benchmark 3yr, benchmark 5yr,
-  equity allocation, debt allocation, gold allocation, cash allocation,
-  top holding name, top holding weight,
-  tracking error, portfolio turnover, NAV per unit
-
-Return a markdown table with exactly three columns: field | value | source section.
-One row per field, in the order listed above.
-
-Example row:
-TER direct | 0.62% | Section 9 Fees</pre>
-
-      <div class="k g">What you should see</div>
-      <ul>
-        <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
-        <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
-        <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work.</li>
-        <li>With the refusal line deleted, watch those same three rows quietly fill with plausible-looking numbers. That is the entire lesson of this demo, and it is worth running twice. It only happens on an agent with ungrounded responses allowed &mdash; see the note below before you rely on it live.</li>
-      </ul>
-
-      <div class="k r">When it does not behave</div>
-      <ul>
-        <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
-        <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
-        <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
-        <li><strong>Step 5 changed nothing &mdash; the fields still read <em>not stated</em>.</strong> Expected in Microsoft 365 Copilot chat with a file attached: it will not invent a field value whichever instruction you delete, and it emits <em>not stated</em> on its own as its convention for an absent field. Deleting the second guard as well makes no difference. Run step 5 against a Copilot Studio agent with <em>Allow ungrounded responses</em> on, or present it as a walkthrough rather than a live result.</li>
-      </ul>
-
-      <div class="k a">Carry this forward</div>
-      <p>Save this prompt. In demo 2.4 that same discipline becomes an <em>enforced schema</em> over a slightly different field list &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
-    </div>
-  </div>
-
-  <!-- D1.3 -->
-  <div class="demo" id="d13">
-    <div class="head">
-      <span class="id">Demo 1.3 <small>Your first agent: the Fund Research Assistant</small></span>
+      <span class="id">Demo 1.1 <small>Your first agent: the Fund Research Assistant</small></span>
       <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~31 min</span></span>
     </div>
     <div class="body">
@@ -339,7 +219,7 @@ TER direct | 0.62% | Section 9 Fees</pre>
         <li>Go to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> and confirm the environment shown top-right is the one you intend to build in.</li>
         <li>Select <strong>Create</strong> &rarr; <strong>New agent</strong>. If offered a describe-it-in-words flow, choose to <strong>skip to configure</strong> instead &mdash; you want to see the four boxes, not have them filled in for you.</li>
         <li><strong>Name it</strong> <code>Fund Research Assistant</code> and give it the description below.</li>
-        <li><strong>Paste the Instructions</strong> below. This is demo 1.2's prompt, made permanent.</li>
+        <li><strong>Paste the Instructions</strong> below. This is the extraction prompt demo 1.2 takes apart next, made permanent here first.</li>
         <li><strong>Add Knowledge:</strong> under Knowledge, choose <strong>Add knowledge</strong> &rarr; upload <code>sample-fund-factsheet.pdf</code>. Wait until its status shows ready &mdash; this takes a minute or two.</li>
         <li><strong>Close both doors to the open web.</strong> Settings &rarr; <strong>Generative AI</strong>. Switch <strong>Allow ungrounded responses</strong> to <em>off</em> &mdash; that blocks any answer not built from a knowledge source or a tool. Then switch <strong>Use information from the Web</strong> to <em>off</em>. Both, not one. <strong>Note where this switch goes next:</strong> demo 2.4 turns <em>Allow ungrounded responses</em> back on, and cannot run without it &mdash; the pair of demos is the clearest illustration all day of what &ldquo;grounded&rdquo; actually enforces, so plan to toggle it live rather than leaving it one way all day.</li>
         <li><strong>Retest before doing anything else.</strong> Those two switches are usually enough &mdash; verified on a live tenant, where the same question went from a web answer to a cited factsheet answer on the toggles alone. <strong>Only if it still cites the web:</strong> Topics &rarr; <strong>System</strong> &rarr; switch off <code>Conversational boosting</code>, which answers from a generative fallback and is the step almost everyone misses.</li>
@@ -440,6 +320,126 @@ Should my client invest in this fund?</pre>
   </div>
 
   <!-- D1.4 -->
+  <div class="demo" id="d12">
+    <div class="head">
+      <span class="id">Demo 1.2 <small>A reusable extraction prompt</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
+
+      <div class="k">You need</div>
+      <p>The same chat interface, with <code>sample-fund-factsheet.pdf</code> attached.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
+        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
+        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
+        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
+        <li><strong>Break it deliberately &mdash; in the Copilot Studio agent, not in chat.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more, against an agent with <em>Allow ungrounded responses</em> on. Watch the three absent fields fill themselves in.</li>
+      </ol>
+
+      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
+      <pre>Summarise the key points of this fund factsheet.</pre>
+
+      <div class="k">The structured prompt</div>
+      <pre>You are an investment consultant preparing a quarterly fund review for an
+institutional client - a long-horizon retirement portfolio.
+
+Use only the attached Northwind factsheet (data as of 30 June 2026).
+If a value is not present in the document, write: not stated.
+Do not estimate, infer or calculate any figure.
+
+Extract exactly these fields:
+  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
+  inception date, TER regular, TER direct, exit load,
+  return 1yr, return 3yr, return 5yr, return since inception,
+  benchmark 1yr, benchmark 3yr, benchmark 5yr,
+  equity allocation, debt allocation, gold allocation, cash allocation,
+  top holding name, top holding weight,
+  tracking error, portfolio turnover, NAV per unit
+
+Return a markdown table with exactly three columns: field | value | source section.
+One row per field, in the order listed above.
+
+Example row:
+TER direct | 0.62% | Section 9 Fees</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
+        <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
+        <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work.</li>
+        <li>With the refusal line deleted, watch those same three rows quietly fill with plausible-looking numbers. That is the entire lesson of this demo, and it is worth running twice. It only happens on an agent with ungrounded responses allowed &mdash; see the note below before you rely on it live.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
+        <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
+        <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
+        <li><strong>Step 5 changed nothing &mdash; the fields still read <em>not stated</em>.</strong> Expected in Microsoft 365 Copilot chat with a file attached: it will not invent a field value whichever instruction you delete, and it emits <em>not stated</em> on its own as its convention for an absent field. Deleting the second guard as well makes no difference. Run step 5 against a Copilot Studio agent with <em>Allow ungrounded responses</em> on, or present it as a walkthrough rather than a live result.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Save this prompt. In demo 2.4 that same discipline becomes an <em>enforced schema</em> over a slightly different field list &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
+    </div>
+  </div>
+
+  <!-- D1.3 -->
+  <div class="demo" id="d13">
+    <div class="head">
+      <span class="id">Demo 1.3 <small>Drift, fabrication and the grounding fix</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
+
+      <div class="k">You need</div>
+      <p>Any chat interface to a model you are permitted to use &mdash; but <strong>prefer the Copilot Studio test pane</strong>. On a cautious tenant Microsoft 365 Copilot invents a figure close to the real one (~17% against a true 15.6%) and the contrast barely registers; an agent typically invents 5&ndash;7%, which is visibly wrong. The factsheet file for step 3.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask with no context at all.</strong> Open a fresh chat and paste prompt A. Note the answer.</li>
+        <li><strong>Ask again in a new chat.</strong> Paste exactly the same prompt A a second time. Compare the two answers word by word.</li>
+        <li><strong>Now ground it.</strong> Attach <code>sample-fund-factsheet.pdf</code> to the chat and paste prompt B. Compare against what the document actually says.</li>
+        <li><strong>Ask for the impossible.</strong> With the file still attached, paste prompt C &mdash; it asks for two figures that are <em>not</em> in the document and cannot be worked out from it.</li>
+      </ol>
+
+      <div class="k">Prompt A &mdash; ungrounded</div>
+      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
+
+      <div class="k">Prompt B &mdash; grounded</div>
+      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
+For each figure, quote the section of the document it came from.
+If a figure is not present in the document, reply exactly: not stated.</pre>
+
+      <div class="k">Prompt C &mdash; the refusal test</div>
+      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
+and its portfolio turnover ratio.
+If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
+        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
+        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Prompt A refused instead of inventing.</strong> Common &mdash; a tenant with web and enterprise search will look, find nothing, and decline. Dropping the fund name does not help; it refuses again. Ask for an estimate outright: <em>"It is a well-known Indian multi-asset growth fund. Give me your best estimate of its 3-year annualised return and total expense ratio. Approximate figures are fine."</em> It will hedge the numbers as an informed estimate &mdash; say that out loud, because the caveat is exactly what gets stripped when the figure reaches a deck.</li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.1 already made permanent.</li>
+        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; is the line you already put into your agent's Instructions in demo 1.1. That single sentence removes most fabrication.</p>
+    </div>
+  </div>
+
+  <!-- D1.2 -->
   <div class="demo" id="d14">
     <div class="head">
       <span class="id">Demo 1.4 <small>Marking up your own workflow</small></span>
@@ -483,7 +483,7 @@ Should my client invest in this fund?</pre>
 <section id="m2" class="pb">
   <h2>Module 2 demos &mdash; the build track (pitched at the ~10 developers; everyone is in the room)</h2>
   <div class="note">
-    These seven demos extend the <strong>same agent</strong> you built in demo 1.3. Each one adds a capability and leaves the previous ones working.
+    These seven demos extend the <strong>same agent</strong> you built in demo 1.1. Each one adds a capability and leaves the previous ones working.
     Where a step needs a <strong>premium connector</strong> your tenant may not have, the demo says so and gives you a no-premium substitute that teaches the same wiring.
   </div>
 
@@ -497,7 +497,7 @@ Should my client invest in this fund?</pre>
       <div class="goal"><b>What it proves:</b> the agent chooses its own path through your knowledge and tools &mdash; and when it chooses wrongly, the trace tells you exactly where, so the fix is a sentence rather than a rebuild.</div>
 
       <div class="k">You need</div>
-      <p>Your Fund Research Assistant from demo 1.3. The second document, <code>manager-update-jul-2026.txt</code>, from <a href="#assets">the appendix</a>.</p>
+      <p>Your Fund Research Assistant from demo 1.1. The second document, <code>manager-update-jul-2026.txt</code>, from <a href="#assets">the appendix</a>.</p>
 
       <div class="k">Steps</div>
       <ol class="steps">
@@ -583,7 +583,7 @@ every variant explicitly with its label.</pre>
   triggerBody()?['number'],
   float(body('HTTP')?['rates']?['INR'])
 )</pre>
-      <p style="font-size:.92em;margin-top:-4px"><strong>Note the key is <code>number</code>, not <code>amountinr</code>.</strong> On this trigger the names you type are only display titles; the body keys are generic (<code>text</code>, <code>number</code>). Using <code>['amountinr']</code> yields Null and the flow fails. Safest of all: insert the value from the dynamic-content picker rather than hand-writing <code>triggerBody()</code>. This is the arithmetic rule from demo 1.3 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
+      <p style="font-size:.92em;margin-top:-4px"><strong>Note the key is <code>number</code>, not <code>amountinr</code>.</strong> On this trigger the names you type are only display titles; the body keys are generic (<code>text</code>, <code>number</code>). Using <code>['amountinr']</code> yields Null and the flow fails. Safest of all: insert the value from the dynamic-content picker rather than hand-writing <code>triggerBody()</code>. This is the arithmetic rule from demo 1.1 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
 
       <div class="k">Action description &mdash; how the agent knows to use it</div>
       <pre>Converts an amount in Indian rupees to US dollars at the exchange rate published
@@ -752,7 +752,7 @@ What is the average weight of the fund's top ten holdings?</pre>
 
       <div class="k">Steps</div>
       <ol class="steps">
-        <li><strong>Turn <em>Allow ungrounded responses</em> back on</strong> &mdash; Settings &rarr; Generative AI. Demo 1.3 switched it off, and with it off this demo does not run at all: a bare JSON object carries no citations, so the grounding gate suppresses the answer and you get <em>"No information was found that could help answer this."</em> Retrieval succeeds; the reply is blocked after the fact. Say why you are toggling it &mdash; it is the clearest illustration all day of what "grounded" actually enforces.</li>
+        <li><strong>Turn <em>Allow ungrounded responses</em> back on</strong> &mdash; Settings &rarr; Generative AI. Demo 1.1 switched it off, and with it off this demo does not run at all: a bare JSON object carries no citations, so the grounding gate suppresses the answer and you get <em>"No information was found that could help answer this."</em> Retrieval succeeds; the reply is blocked after the fact. Say why you are toggling it &mdash; it is the clearest illustration all day of what "grounded" actually enforces.</li>
         <li>Add the extraction instruction block below to your agent's Instructions.</li>
         <li>Ask it to extract the clean factsheet &mdash; command 1. Check every field against the document yourself. Yes, all of them; this is the one demo where you must verify by hand.</li>
         <li>Save the messy document from the appendix as a second file and upload it as knowledge.</li>
