@@ -175,19 +175,19 @@ If a figure is not present in the document, reply exactly: not stated. Do not es
       <div class="k r">When it does not behave</div>
       <ul>
         <li><strong>Prompt A returned "I don't know".</strong> Good &mdash; some configurations are more cautious. Try it without the fund name: <em>"What was the 3-year return of the multi-asset fund we discussed?"</em></li>
-        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.1 makes permanent on the day.</li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.8 makes permanent.</li>
         <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
       </ul>
 
       <div class="k a">Carry this forward</div>
-      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.1 on the day. That single sentence removes most fabrication.</p>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.8. That single sentence removes most fabrication.</p>
     </div>
   </div>
 
   <!-- D1.2 -->
-  <div class="demo" id="d12">
+  <div class="demo" id="d11">
     <div class="head">
-      <span class="id">Demo 1.2 <small>A reusable extraction prompt</small></span>
+      <span class="id">Demo 1.1 <small>A reusable extraction prompt</small></span>
       <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
     </div>
     <div class="body">
@@ -391,7 +391,7 @@ or what action anyone should take. If asked for any of those, reply:
       <em>CANNOT DETERMINE</em> &mdash; the factsheet says the fund avoids unrated credit and holds high-grade
       bonds, which is not the same statement as a rating floor, and the prompt is built to notice the difference.</p>
       <div class="note">The closing paragraph is the same boundary the workshop builds as a <b>topic</b> in
-      demo 1.1 rather than a sentence. A sentence in a prompt asks for the refusal and rewords it every time;
+      demo 1.8 rather than a sentence. A sentence in a prompt asks for the refusal and rewords it every time;
       a topic makes it fixed wording that a compliance reviewer can approve once. If this prompt becomes an
       agent, that is the first thing to promote.</div>
     </div>
@@ -542,7 +542,7 @@ Then answer this fourth question:
         <td>The update, the house question list, past summaries</td>
         <td>Documents + a fixed prompt; an agent once the question list is settled</td>
         <td><strong>Yes</strong> &mdash; the strongest second candidate, same shape as the capstone at a fraction of the risk</td>
-        <td>Prompt 2 &middot; demo 1.2</td>
+        <td>Prompt 2 &middot; demo 1.1</td>
       </tr>
       <tr>
         <td><strong>Meeting notes &rarr; actions</strong></td><td>A meeting ends</td>

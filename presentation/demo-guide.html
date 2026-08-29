@@ -85,7 +85,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <div class="meta">
     <span class="d">1 Day &middot; 27 August 2026</span> |
     <span>Investment Consulting</span> |
-    <span>11 demos</span> |
+    <span>15 demos</span> |
     <span>Trainer: Rajesh Gheware</span>
   </div>
 </header>
@@ -114,12 +114,12 @@ footer a{color:#93c5fd;text-decoration:none}
       <tr>
         <td><span class="b a">A</span> <strong>Full build</strong></td>
         <td>Copilot Studio access &mdash; a licence, or a trial you can start</td>
-        <td>All eleven demos. You will finish the day with your own working Fund Research Assistant &mdash; and, by demo 2.7, one that runs without being asked.</td>
+        <td>All fifteen demos. You will finish the day with your own working Fund Research Assistant &mdash; and, by demo 2.7, one that runs without being asked.</td>
       </tr>
       <tr>
         <td><span class="b bb">B</span> <strong>Copilot only</strong></td>
         <td>Microsoft 365 Copilot / Copilot Chat, but no Copilot Studio</td>
-        <td>Demos 1.2, 1.3 and 1.4 in full. For the rest, follow the steps as reading &mdash; they are written so the logic lands without the clicks.</td>
+        <td>Demos 1.1 through 1.7 in full. For the rest, follow the steps as reading &mdash; they are written so the logic lands without the clicks.</td>
       </tr>
       <tr>
         <td><span class="b c">C</span> <strong>Watch &amp; replay</strong></td>
@@ -145,13 +145,17 @@ footer a{color:#93c5fd;text-decoration:none}
 </section>
 
 <section id="toc">
-  <h2>The eleven demos</h2>
+  <h2>The fifteen demos</h2>
   <div class="toc">
     <ol>
-      <li><a href="#d11">1.1 &mdash; Your first agent: Fund Research Assistant</a></li>
-      <li><a href="#d12">1.2 &mdash; A reusable extraction prompt</a></li>
-      <li><a href="#d13">1.3 &mdash; Drift, fabrication and the grounding fix</a></li>
-      <li><a href="#d14">1.4 &mdash; Marking up your own workflow</a></li>
+      <li><a href="#d11">1.1 &mdash; A reusable extraction prompt</a></li>
+      <li><a href="#d12">1.2 &mdash; Manager update &rarr; the house question list</a>
+      <a href="#d13">1.3 &mdash; Meeting notes &rarr; decisions, actions, owners</a>
+      <a href="#d14">1.4 &mdash; Holdings extract &rarr; data-quality check</a>
+      <a href="#d15">1.5 &mdash; Draft commentary &rarr; house tone</a>
+      <a href="#d16">1.6 &mdash; Drift, fabrication and the grounding fix</a></li>
+      <li><a href="#d17">1.7 &mdash; Marking up your own workflow</a></li>
+      <li><a href="#d18">1.8 &mdash; Your first agent: Fund Research Assistant</a></li>
       <li><a href="#d21">2.1 &mdash; Generative orchestration and the trace</a></li>
       <li><a href="#d22">2.2 &mdash; Calling an external and a legacy REST API</a></li>
       <li><a href="#d23">2.3 &mdash; Excel and SQL data movement</a></li>
@@ -162,7 +166,7 @@ footer a{color:#93c5fd;text-decoration:none}
     </ol>
   </div>
   <p style="margin-top:10px;font-size:.92em;color:#546b8a">
-    Demos 1.1&ndash;1.4 run in the morning. Demos 2.1&ndash;2.7 run in the afternoon &mdash; the whole room is present for both; the build detail in the afternoon is pitched at the ~10 developers, and everything is written so that anyone can replay it later.
+    Demos 1.1&ndash;1.8 run in the morning. Demos 2.1&ndash;2.7 run in the afternoon &mdash; the whole room is present for both; the build detail in the afternoon is pitched at the ~10 developers, and everything is written so that anyone can replay it later.
   </p>
 </section>
 
@@ -176,7 +180,7 @@ footer a{color:#93c5fd;text-decoration:none}
     <li><strong>Copy <code>holdings.xlsx</code> and <code>benchmarks.xlsx</code></strong> into that folder too. Both already have their ranges formatted as real Excel <em>Tables</em>, which is what the connector needs &mdash; open one and check the ribbon shows <em>Table Design</em>. (If you would rather build them yourself, the rows are in <a href="#assets">the appendix</a>.)</li>
     <li><strong>Check Power Automate opens</strong> at <a href="https://make.powerautomate.com">make.powerautomate.com</a> &mdash; needed for demos 2.2, 2.3, 2.5 and 2.7.</li>
     <li><strong>Have Teams open</strong> &mdash; demos 2.6 and 2.7 publish and trigger there.</li>
-    <li><strong>Bring one real question</strong> from your own work that you would like an agent to answer. You will use it in demo 1.4.</li>
+    <li><strong>Bring one real question</strong> from your own work that you would like an agent to answer. You will use it in demo 1.7.</li>
   </ul>
   <div class="tip">
     <strong>Nothing to install.</strong> Everything is browser-based. If your laptop can open Teams and OneDrive, it can do every demo in this guide.
@@ -189,7 +193,388 @@ footer a{color:#93c5fd;text-decoration:none}
   <!-- D1.1 -->
   <div class="demo" id="d11">
     <div class="head">
-      <span class="id">Demo 1.1 <small>Your first agent: the Fund Research Assistant</small></span>
+      <span class="id">Demo 1.1 <small>A reusable extraction prompt</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
+
+      <div class="k">You need</div>
+      <p>A <strong>bare surface with no Instructions</strong> &mdash; a scratch Copilot Studio agent with an empty Instructions box is the most reliable, and Copilot chat works if your tenant will fabricate. <code>sample-fund-factsheet.pdf</code> attached. Nothing has been built yet, and that is the point: everything you see here is the prompt doing the work, unaided. In <strong>demo 1.8</strong> this same prompt becomes an agent&rsquo;s Instructions.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
+        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
+        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
+        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
+      </ol>
+
+      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
+      <pre>Summarise the key points of this fund factsheet.</pre>
+
+      <div class="k">The structured prompt</div>
+      <pre>You are an investment consultant preparing a quarterly fund review for an
+institutional client - a long-horizon retirement portfolio.
+
+Use only the attached Northwind factsheet (data as of 30 June 2026).
+If a value is not present in the document, write: not stated.
+Do not estimate, infer or calculate any figure.
+
+Extract exactly these fields:
+  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
+  inception date, TER regular, TER direct, exit load,
+  return 1yr, return 3yr, return 5yr, return since inception,
+  benchmark 1yr, benchmark 3yr, benchmark 5yr,
+  equity allocation, debt allocation, gold allocation, cash allocation,
+  top holding name, top holding weight,
+  tracking error, portfolio turnover, NAV per unit
+
+Return a markdown table with exactly three columns: field | value | source section.
+One row per field, in the order listed above.
+
+Example row:
+TER direct | 0.62% | Section 9 Fees</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
+        <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
+        <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work. Demo 1.8 deletes that line and shows what fills the gap.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
+        <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
+        <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
+        <li><strong>Step 5 changed nothing &mdash; the fields still read <em>not stated</em>.</strong> Expected in Microsoft 365 Copilot chat with a file attached: it will not invent a field value whichever instruction you delete, and it emits <em>not stated</em> on its own as its convention for an absent field. Deleting the second guard as well makes no difference. Run step 5 against a Copilot Studio agent with <em>Allow ungrounded responses</em> on, or present it as a walkthrough rather than a live result.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Save this prompt. In demo 2.4 that same discipline becomes an <em>enforced schema</em> over a slightly different field list &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
+    </div>
+  </div>
+
+  <!-- D1.3 -->
+  <div class="demo" id="d12">
+    <div class="head">
+      <span class="id">Demo 1.2 <small>Manager update &rarr; the house question list</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the five parts are not specific to factsheets. Same anatomy, a different document, and a fixed question list &mdash; which is what makes manager A and manager D comparable at all.</div>
+
+      <div class="k">You need</div>
+      <p>The same bare surface as demo 1.1 &mdash; still no Instructions &mdash; with <code>meridian-manager-update.txt</code> attached (it is in <code>demo-assets/</code>). It is also the second knowledge source on the Fund Research Assistant, but run this one outside that agent for the same reason as 1.2.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> <em>"What does this manager update say?"</em> You will get the manager&rsquo;s own emphasis, in the manager&rsquo;s own order.</li>
+        <li><strong>Now paste the structured prompt.</strong> Same five parts as the slide, pointed at a different job.</li>
+        <li><strong>Read the headings, not the prose.</strong> They are in <em>your</em> order now, and one of them should say <em>Not addressed</em>.</li>
+      </ol>
+
+      <div class="k">The prompt</div>
+      <pre>You are an investment consultant reviewing a manager's quarterly update
+for an institutional client.
+
+Use only the attached manager update (July 2026). If the update does not
+address something, write: not addressed. Do not infer it from tone.
+
+Answer the house question list, in this order:
+  1. what changed in the team
+  2. what changed in the process
+  3. what drove performance this quarter
+  4. the manager's own explanation of the worst quarter
+
+One heading per question. Two sentences maximum under each.
+Write "Not addressed" wherever the update is silent.
+
+Example:
+Team - Two analysts left the credit desk in May; no replacement named. Section 3</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Four headings, in the order you asked for &mdash; not the order the manager wrote in.</li>
+        <li><strong>At least one <em>Not addressed</em>.</strong> That is the finding: the thing the update quietly skipped is now visible instead of absent.</li>
+        <li>Run it against a second manager update and the two are comparable line for line. That is the whole point of a house list.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It answers in the manager&rsquo;s order.</strong> Repeat the constraint at the end: <em>"Answer the four questions in the order given, even where the update covers them in a different order."</em></li>
+        <li><strong>It infers a reason from tone.</strong> The CONTEXT line is doing the work. Strengthen it: <em>"If the update does not state a reason, write: not addressed. Do not construct one."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d13">
+    <div class="head">
+      <span class="id">Demo 1.3 <small>Meeting notes &rarr; decisions, actions, owners</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the FORMAT line is the whole value here. Three lists with an owner-and-date rule turn a readable summary into a record somebody can be held to.</div>
+
+      <div class="k">You need</div>
+      <p>Nothing attached. Same bare surface &mdash; paste the synthetic notes below, then the prompt underneath them.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Paste the notes.</strong> They are deliberately messy, the way real notes are.</li>
+        <li><strong>Paste the prompt.</strong> Note that it demands an owner and a date on every action line.</li>
+        <li><strong>Count the <em>not stated</em> entries.</strong> Those are the actions that would have quietly gone nowhere.</li>
+      </ol>
+
+      <div class="k">The notes to paste first</div>
+      <pre>IC meeting, 14 July. Present: three of five.
+Northwind - 3yr 15.6% vs benchmark 13.1%. Committee comfortable. Equity 68%,
+mandate ceiling 70%, agreed to keep watching but no action for now.
+Someone to get the latest fee schedule off the manager - direct plan TER
+looked like 0.62% but nobody had it in writing. Before end of September.
+Question raised about whether the gold sleeve is still doing anything.
+Parked. Agreed to revisit the whole allocation at the October meeting.
+Chair asked for the Q3 pack a week earlier than usual this time.</pre>
+
+      <div class="k">The prompt</div>
+      <pre>You are the secretary of an investment committee, writing the record
+for people who were not in the room.
+
+Use only the notes above. Do not add context you believe to be true but
+that nobody actually said.
+
+Separate the notes into three lists: decisions taken, actions agreed,
+and questions left open.
+
+Three headed lists. Every action line carries an owner and a date. Where
+either is missing, write: owner not stated, or: date not stated.
+
+Example:
+Action - Request the fee schedule from the manager | Owner: not stated | By: 30 Sep</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Three lists, and the split is cleaner than the notes felt.</li>
+        <li><strong>The fee-schedule action comes back as <em>owner not stated</em>.</strong> In the notes it reads as agreed; in the record it reads as nobody&rsquo;s job. That is the demo.</li>
+        <li>The gold-sleeve question lands under <em>open</em>, not under <em>decisions</em> &mdash; "parked" is not a decision.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It invents an owner.</strong> Usually the chair. Add: <em>"Never attribute an action to a person who is not named in the notes."</em></li>
+        <li><strong>It merges decisions and actions.</strong> Add one line of definition: <em>"A decision is a conclusion reached. An action is something a named person must do."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d14">
+    <div class="head">
+      <span class="id">Demo 1.4 <small>Holdings extract &rarr; data-quality check</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the CONTEXT line holding the arithmetic back. This is the task where totalling the column is most tempting and a wrong total is least visible.</div>
+
+      <div class="k">You need</div>
+      <p>Same bare surface. <code>holdings.xlsx</code> from <code>demo-assets/</code>, or just paste half a dozen rows of it &mdash; either works.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Paste the prompt with the holdings rows.</strong></li>
+        <li><strong>Check what it did <em>not</em> do.</strong> It should flag rows and refuse to total the weight column.</li>
+        <li><strong>Optional, ~30 seconds:</strong> delete the sentence beginning <em>"Do not calculate"</em> and run again. Watch a total appear that nobody asked for and nobody will re-add.</li>
+      </ol>
+
+      <div class="k">The prompt</div>
+      <pre>You are a portfolio analyst checking a holdings file before it is used
+in a client report.
+
+Use only the rows in the attached extract. Do not calculate totals,
+averages or weighted figures, and do not convert currencies.
+
+Flag: duplicate identifiers, missing sector or currency, blank weights,
+and any row whose currency differs from the fund's stated currency.
+
+Return a table - row number | field | what is wrong | why it matters.
+Nothing else: no summary, no total row.
+
+Example:
+14 | currency | blank | cannot be aggregated or converted</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>A table of flagged rows, and <strong>no total anywhere</strong>.</li>
+        <li><strong>If a total appears, the CONTEXT line was dropped or overridden.</strong> That is worth showing deliberately &mdash; the number will look entirely reasonable.</li>
+        <li>This is the same tiered rule as the rest of the day: the model may state a difference between two figures it can show you; totals, averages and weighted figures come from an action.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It totals the weights anyway.</strong> Move the refusal to the last line of the prompt. Position matters more than wording here.</li>
+        <li><strong>It invents a sector for a blank cell.</strong> Add: <em>"A blank cell is a finding, not a gap to fill."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d15">
+    <div class="head">
+      <span class="id">Demo 1.5 <small>Draft commentary &rarr; house tone, figures frozen</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> one worked line settles tone faster than a style guide &mdash; and that a rewrite is the easiest place in the day to lose a number without noticing.</div>
+
+      <div class="k">You need</div>
+      <p>Nothing attached. Same bare surface &mdash; paste the draft below, then the prompt.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Paste the draft.</strong> It is deliberately written in the wrong voice.</li>
+        <li><strong>Paste the prompt</strong>, including the worked example line.</li>
+        <li><strong>Compare the figures, not the prose.</strong> Every number in the output should be byte-identical to the draft.</li>
+      </ol>
+
+      <div class="k">The draft to paste first</div>
+      <pre>The fund had a truly excellent three years, delivering a stellar 15.6%
+annualised and comfortably crushing its benchmark's 13.1%. Equity exposure
+ended the period at a healthy 68%, and we remain very confident that this
+positioning will continue to reward patient investors going forward. Fees
+remain highly competitive at 1.18% regular and just 0.62% direct.</pre>
+
+      <div class="k">The prompt</div>
+      <pre>You are writing quarterly commentary in your firm's house voice
+for an institutional client.
+
+Use only the figures in the draft above. Do not change, round or
+re-express any number, and do not add a figure that is not already there.
+
+Rewrite the draft in house tone: plain, specific, no superlatives,
+and no forward-looking claims.
+
+Three paragraphs, 120 words maximum each. Every figure exactly as written.
+
+Example of house tone:
+The fund returned 15.6% over three years, against 13.1% for the benchmark.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>&ldquo;Truly excellent&rdquo;, &ldquo;stellar&rdquo;, &ldquo;crushing&rdquo; and &ldquo;healthy&rdquo; all gone; the sentences got shorter and more specific.</li>
+        <li><strong>The forward-looking claim disappears</strong> &mdash; <em>"we remain very confident this positioning will continue to reward"</em> is exactly the sentence a consultant cannot sign.</li>
+        <li><strong>15.6, 13.1, 68, 1.18 and 0.62 all survive untouched.</strong> Check them one by one. This is the failure to watch for, because rounding reads as tidying.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>15.6% becomes &ldquo;approximately 16%&rdquo;.</strong> The most common failure, and the most plausible-looking. Repeat the constraint last: <em>"Quote every figure exactly as it appears. Do not round."</em></li>
+        <li><strong>It keeps a superlative you did not notice.</strong> Give it the list: <em>"Remove: excellent, stellar, strong, robust, healthy, comfortably, significantly."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d16">
+    <div class="head">
+      <span class="id">Demo 1.6 <small>Drift, fabrication and the grounding fix</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
+
+      <div class="k">You need</div>
+      <p>Any chat interface to a model you are permitted to use &mdash; but <strong>prefer the Copilot Studio test pane</strong>. On a cautious tenant Microsoft 365 Copilot invents a figure close to the real one (~17% against a true 15.6%) and the contrast barely registers; an agent typically invents 5&ndash;7%, which is visibly wrong. The factsheet file for step 3.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask with no context at all.</strong> Open a fresh chat and paste prompt A. Note the answer.</li>
+        <li><strong>Ask again in a new chat.</strong> Paste exactly the same prompt A a second time. Compare the two answers word by word.</li>
+        <li><strong>Now ground it.</strong> Attach <code>sample-fund-factsheet.pdf</code> to the chat and paste prompt B. Compare against what the document actually says.</li>
+        <li><strong>Ask for the impossible.</strong> With the file still attached, paste prompt C &mdash; it asks for two figures that are <em>not</em> in the document and cannot be worked out from it.</li>
+      </ol>
+
+      <div class="k">Prompt A &mdash; ungrounded</div>
+      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
+
+      <div class="k">Prompt B &mdash; grounded</div>
+      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
+For each figure, quote the section of the document it came from.
+If a figure is not present in the document, reply exactly: not stated.</pre>
+
+      <div class="k">Prompt C &mdash; the refusal test</div>
+      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
+and its portfolio turnover ratio.
+If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
+        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
+        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Prompt A refused instead of inventing.</strong> Common &mdash; a tenant with web and enterprise search will look, find nothing, and decline. Dropping the fund name does not help; it refuses again. Ask for an estimate outright: <em>"It is a well-known Indian multi-asset growth fund. Give me your best estimate of its 3-year annualised return and total expense ratio. Approximate figures are fine."</em> It will hedge the numbers as an informed estimate &mdash; say that out loud, because the caveat is exactly what gets stripped when the figure reaches a deck.</li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.8 makes permanent.</li>
+        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.8. That single sentence removes most fabrication.</p>
+    </div>
+  </div>
+
+  <!-- D1.2 -->
+  <div class="demo" id="d17">
+    <div class="head">
+      <span class="id">Demo 1.7 <small>Marking up your own workflow</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b c">C</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the judgement, not the tooling, is the scarce skill. Two people with the same tool and different workflow maps will get completely different value out of the afternoon.</div>
+
+      <div class="k">You need</div>
+      <p>Paper, or the table below in a blank document. No AI required &mdash; this one is deliberately manual.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>List the steps</strong> of one process you personally run &mdash; a quarterly review, a manager screen, a client pack. Aim for 6&ndash;12 steps, each one a verb.</li>
+        <li><strong>Time each step</strong> honestly, and note how often the whole process runs per year.</li>
+        <li><strong>Colour each step</strong> using the three categories from the slide: <span style="color:#1d4ed8;font-weight:600">prompting helps today</span>, <span style="color:#047857;font-weight:600">agent-suitable</span>, <span style="color:#b45309;font-weight:600">stays human</span>.</li>
+        <li><strong>Apply the four criteria</strong> to your green steps: repetition, data readiness, value, risk tier.</li>
+        <li><strong>Write one sentence:</strong> <em>"The first agent I would build is ___ because ___."</em> Bring it to the afternoon, or to your own team afterwards.</li>
+      </ol>
+
+      <table>
+        <thead><tr><th>Step</th><th>Mins</th><th>&times;/year</th><th>Category</th><th>Data ready?</th><th>Risk tier (1&ndash;4)</th></tr></thead>
+        <tbody>
+          <tr><td>e.g. pull latest factsheets</td><td>20</td><td>4</td><td>agent-suitable</td><td>yes &mdash; email + portal</td><td>2</td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="k g">What you should see</div>
+      <p>Usually two things surprise people. First, the steps that cost the most time are rarely the ones that felt hardest. Second, at least one step you assumed needed judgement turns out to be a lookup with a judgement attached to the end of it &mdash; and those split cleanly.</p>
+
+      <div class="k a">Carry this forward</div>
+      <p>Your green steps with high repetition and ready data are the shortlist. The capstone this afternoon is <em>our</em> answer to this exercise, run on your reporting pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<section id="m2" class="pb">
+  <h2>Module 2 demos &mdash; the build track (pitched at the ~10 developers; everyone is in the room)</h2>
+  <div class="note">
+    These seven demos extend the <strong>same agent</strong> you built in demo 1.8. Each one adds a capability and leaves the previous ones working.
+    Where a step needs a <strong>premium connector</strong> your tenant may not have, the demo says so and gives you a no-premium substitute that teaches the same wiring.
+  </div>
+
+  <!-- D2.1 -->
+  <div class="demo" id="d18">
+    <div class="head">
+      <span class="id">Demo 1.8 <small>Your first agent: the Fund Research Assistant</small></span>
       <span class="badges"><span class="b a">A</span><span class="b c">C</span><span class="b t">~31 min</span></span>
     </div>
     <div class="body">
@@ -219,7 +604,7 @@ footer a{color:#93c5fd;text-decoration:none}
         <li>Go to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> and confirm the environment shown top-right is the one you intend to build in.</li>
         <li>Select <strong>Create</strong> &rarr; <strong>New agent</strong>. If offered a describe-it-in-words flow, choose to <strong>skip to configure</strong> instead &mdash; you want to see the four boxes, not have them filled in for you.</li>
         <li><strong>Name it</strong> <code>Fund Research Assistant</code> and give it the description below.</li>
-        <li><strong>Paste the Instructions</strong> below. This is the extraction prompt demo 1.2 takes apart next, made permanent here first.</li>
+        <li><strong>Paste the Instructions</strong> below. This is demo 1.1's prompt, made permanent.</li>
         <li><strong>Add Knowledge:</strong> under Knowledge, choose <strong>Add knowledge</strong> &rarr; upload <code>sample-fund-factsheet.pdf</code>. Wait until its status shows ready &mdash; this takes a minute or two.</li>
         <li><strong>Close both doors to the open web.</strong> Settings &rarr; <strong>Generative AI</strong>. Switch <strong>Allow ungrounded responses</strong> to <em>off</em> &mdash; that blocks any answer not built from a knowledge source or a tool. Then switch <strong>Use information from the Web</strong> to <em>off</em>. Both, not one. <strong>Note where this switch goes next:</strong> demo 2.4 turns <em>Allow ungrounded responses</em> back on, and cannot run without it &mdash; the pair of demos is the clearest illustration all day of what &ldquo;grounded&rdquo; actually enforces, so plan to toggle it live rather than leaving it one way all day.</li>
         <li><strong>Retest before doing anything else.</strong> Those two switches are usually enough &mdash; verified on a live tenant, where the same question went from a web answer to a cited factsheet answer on the toggles alone. <strong>Only if it still cites the web:</strong> Topics &rarr; <strong>System</strong> &rarr; switch off <code>Conversational boosting</code>, which answers from a generative fallback and is the step almost everyone misses.</li>
@@ -228,6 +613,7 @@ footer a{color:#93c5fd;text-decoration:none}
         <li><strong>Describe when the topic applies.</strong> There is no longer a trigger-phrase list: a blank topic's trigger is <em>"The agent chooses"</em> plus a free-text <strong>"Describe what the topic does"</strong> box. Put the six phrases below into that description as example questions, and add the narrowing sentence so it does not swallow document lookups. They match on <em>meaning</em>, so you need not enumerate every phrasing.</li>
         <li><strong>Add a Message node</strong> and paste the refusal wording below. Nothing on this path is generated, so nothing on it can be re-worded. Save.</li>
         <li><strong>Retest in a new conversation</strong>, asking three ways &mdash; <em>"should we buy this"</em>, <em>"is this a good fund"</em>, <em>"would you recommend it"</em>. Compare with step 8.</li>
+        <li><strong>Break it deliberately.</strong> In this agent&rsquo;s Instructions, delete the line beginning <em>"If a value is not present"</em>, turn <em>Allow ungrounded responses</em> on, and re-run demo 1.1&rsquo;s structured prompt. Watch tracking error, portfolio turnover and NAV per unit quietly fill with plausible numbers that change every run. Put the line back afterwards.</li>
       </ol>
 
       <div class="k">Description</div>
@@ -297,6 +683,7 @@ Should my client invest in this fund?</pre>
 
       <div class="k g">What you should see</div>
       <ul>
+        <li>With the refusal line deleted, the three deliberately-absent fields fill with plausible-looking numbers &mdash; different ones each run. <strong>That contrast is the reason demo 1.1 ran on a bare surface first:</strong> you have now seen the same prompt with and without an Instructions box behind it.</li>
         <li><strong>Question 1</strong> &mdash; 15.6% fund, 13.1% benchmark, excess return 2.5%, with a citation to the performance section.</li>
         <li><strong>Question 2</strong> &mdash; <em>not stated</em>. The factsheet has no tracking error. This is the agent doing its job.</li>
         <li><strong>Question 3</strong> &mdash; a polite decline that points at consultant judgement. You have just drawn the line between analysis and advice, in configuration rather than in policy.</li>
@@ -320,174 +707,6 @@ Should my client invest in this fund?</pre>
   </div>
 
   <!-- D1.4 -->
-  <div class="demo" id="d12">
-    <div class="head">
-      <span class="id">Demo 1.2 <small>A reusable extraction prompt</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
-    </div>
-    <div class="body">
-      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
-
-      <div class="k">You need</div>
-      <p>The same chat interface, with <code>sample-fund-factsheet.pdf</code> attached.</p>
-
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
-        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
-        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
-        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
-        <li><strong>Break it deliberately &mdash; in the Copilot Studio agent, not in chat.</strong> Delete the line beginning <em>"If a value is not present"</em> and run once more, against an agent with <em>Allow ungrounded responses</em> on. Watch the three absent fields fill themselves in.</li>
-      </ol>
-
-      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
-      <pre>Summarise the key points of this fund factsheet.</pre>
-
-      <div class="k">The structured prompt</div>
-      <pre>You are an investment consultant preparing a quarterly fund review for an
-institutional client - a long-horizon retirement portfolio.
-
-Use only the attached Northwind factsheet (data as of 30 June 2026).
-If a value is not present in the document, write: not stated.
-Do not estimate, infer or calculate any figure.
-
-Extract exactly these fields:
-  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
-  inception date, TER regular, TER direct, exit load,
-  return 1yr, return 3yr, return 5yr, return since inception,
-  benchmark 1yr, benchmark 3yr, benchmark 5yr,
-  equity allocation, debt allocation, gold allocation, cash allocation,
-  top holding name, top holding weight,
-  tracking error, portfolio turnover, NAV per unit
-
-Return a markdown table with exactly three columns: field | value | source section.
-One row per field, in the order listed above.
-
-Example row:
-TER direct | 0.62% | Section 9 Fees</pre>
-
-      <div class="k g">What you should see</div>
-      <ul>
-        <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
-        <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
-        <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work.</li>
-        <li>With the refusal line deleted, watch those same three rows quietly fill with plausible-looking numbers. That is the entire lesson of this demo, and it is worth running twice. It only happens on an agent with ungrounded responses allowed &mdash; see the note below before you rely on it live.</li>
-      </ul>
-
-      <div class="k r">When it does not behave</div>
-      <ul>
-        <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
-        <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
-        <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
-        <li><strong>Step 5 changed nothing &mdash; the fields still read <em>not stated</em>.</strong> Expected in Microsoft 365 Copilot chat with a file attached: it will not invent a field value whichever instruction you delete, and it emits <em>not stated</em> on its own as its convention for an absent field. Deleting the second guard as well makes no difference. Run step 5 against a Copilot Studio agent with <em>Allow ungrounded responses</em> on, or present it as a walkthrough rather than a live result.</li>
-      </ul>
-
-      <div class="k a">Carry this forward</div>
-      <p>Save this prompt. In demo 2.4 that same discipline becomes an <em>enforced schema</em> over a slightly different field list &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
-    </div>
-  </div>
-
-  <!-- D1.3 -->
-  <div class="demo" id="d13">
-    <div class="head">
-      <span class="id">Demo 1.3 <small>Drift, fabrication and the grounding fix</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~10 min</span></span>
-    </div>
-    <div class="body">
-      <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
-
-      <div class="k">You need</div>
-      <p>Any chat interface to a model you are permitted to use &mdash; but <strong>prefer the Copilot Studio test pane</strong>. On a cautious tenant Microsoft 365 Copilot invents a figure close to the real one (~17% against a true 15.6%) and the contrast barely registers; an agent typically invents 5&ndash;7%, which is visibly wrong. The factsheet file for step 3.</p>
-
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li><strong>Ask with no context at all.</strong> Open a fresh chat and paste prompt A. Note the answer.</li>
-        <li><strong>Ask again in a new chat.</strong> Paste exactly the same prompt A a second time. Compare the two answers word by word.</li>
-        <li><strong>Now ground it.</strong> Attach <code>sample-fund-factsheet.pdf</code> to the chat and paste prompt B. Compare against what the document actually says.</li>
-        <li><strong>Ask for the impossible.</strong> With the file still attached, paste prompt C &mdash; it asks for two figures that are <em>not</em> in the document and cannot be worked out from it.</li>
-      </ol>
-
-      <div class="k">Prompt A &mdash; ungrounded</div>
-      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
-
-      <div class="k">Prompt B &mdash; grounded</div>
-      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
-For each figure, quote the section of the document it came from.
-If a figure is not present in the document, reply exactly: not stated.</pre>
-
-      <div class="k">Prompt C &mdash; the refusal test</div>
-      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
-and its portfolio turnover ratio.
-If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
-
-      <div class="k g">What you should see</div>
-      <ul>
-        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
-        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
-        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
-      </ul>
-
-      <div class="k r">When it does not behave</div>
-      <ul>
-        <li><strong>Prompt A refused instead of inventing.</strong> Common &mdash; a tenant with web and enterprise search will look, find nothing, and decline. Dropping the fund name does not help; it refuses again. Ask for an estimate outright: <em>"It is a well-known Indian multi-asset growth fund. Give me your best estimate of its 3-year annualised return and total expense ratio. Approximate figures are fine."</em> It will hedge the numbers as an informed estimate &mdash; say that out loud, because the caveat is exactly what gets stripped when the figure reaches a deck.</li>
-        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.1 already made permanent.</li>
-        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
-      </ul>
-
-      <div class="k a">Carry this forward</div>
-      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; is the line you already put into your agent's Instructions in demo 1.1. That single sentence removes most fabrication.</p>
-    </div>
-  </div>
-
-  <!-- D1.2 -->
-  <div class="demo" id="d14">
-    <div class="head">
-      <span class="id">Demo 1.4 <small>Marking up your own workflow</small></span>
-      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b c">C</span><span class="b t">~10 min</span></span>
-    </div>
-    <div class="body">
-      <div class="goal"><b>What it proves:</b> the judgement, not the tooling, is the scarce skill. Two people with the same tool and different workflow maps will get completely different value out of the afternoon.</div>
-
-      <div class="k">You need</div>
-      <p>Paper, or the table below in a blank document. No AI required &mdash; this one is deliberately manual.</p>
-
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li><strong>List the steps</strong> of one process you personally run &mdash; a quarterly review, a manager screen, a client pack. Aim for 6&ndash;12 steps, each one a verb.</li>
-        <li><strong>Time each step</strong> honestly, and note how often the whole process runs per year.</li>
-        <li><strong>Colour each step</strong> using the three categories from the slide: <span style="color:#1d4ed8;font-weight:600">prompting helps today</span>, <span style="color:#047857;font-weight:600">agent-suitable</span>, <span style="color:#b45309;font-weight:600">stays human</span>.</li>
-        <li><strong>Apply the four criteria</strong> to your green steps: repetition, data readiness, value, risk tier.</li>
-        <li><strong>Write one sentence:</strong> <em>"The first agent I would build is ___ because ___."</em> Bring it to the afternoon, or to your own team afterwards.</li>
-      </ol>
-
-      <table>
-        <thead><tr><th>Step</th><th>Mins</th><th>&times;/year</th><th>Category</th><th>Data ready?</th><th>Risk tier (1&ndash;4)</th></tr></thead>
-        <tbody>
-          <tr><td>e.g. pull latest factsheets</td><td>20</td><td>4</td><td>agent-suitable</td><td>yes &mdash; email + portal</td><td>2</td></tr>
-          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        </tbody>
-      </table>
-
-      <div class="k g">What you should see</div>
-      <p>Usually two things surprise people. First, the steps that cost the most time are rarely the ones that felt hardest. Second, at least one step you assumed needed judgement turns out to be a lookup with a judgement attached to the end of it &mdash; and those split cleanly.</p>
-
-      <div class="k a">Carry this forward</div>
-      <p>Your green steps with high repetition and ready data are the shortlist. The capstone this afternoon is <em>our</em> answer to this exercise, run on your reporting pipeline.</p>
-    </div>
-  </div>
-</section>
-
-<section id="m2" class="pb">
-  <h2>Module 2 demos &mdash; the build track (pitched at the ~10 developers; everyone is in the room)</h2>
-  <div class="note">
-    These seven demos extend the <strong>same agent</strong> you built in demo 1.1. Each one adds a capability and leaves the previous ones working.
-    Where a step needs a <strong>premium connector</strong> your tenant may not have, the demo says so and gives you a no-premium substitute that teaches the same wiring.
-  </div>
-
-  <!-- D2.1 -->
   <div class="demo" id="d21">
     <div class="head">
       <span class="id">Demo 2.1 <small>Generative orchestration, the trace, and proving a fix</small></span>
@@ -497,7 +716,7 @@ If a figure is not present in the document, reply exactly: not stated. Do not es
       <div class="goal"><b>What it proves:</b> the agent chooses its own path through your knowledge and tools &mdash; and when it chooses wrongly, the trace tells you exactly where, so the fix is a sentence rather than a rebuild.</div>
 
       <div class="k">You need</div>
-      <p>Your Fund Research Assistant from demo 1.1. The second document, <code>manager-update-jul-2026.txt</code>, from <a href="#assets">the appendix</a>.</p>
+      <p>Your Fund Research Assistant from demo 1.8. The second document, <code>manager-update-jul-2026.txt</code>, from <a href="#assets">the appendix</a>.</p>
 
       <div class="k">Steps</div>
       <ol class="steps">
@@ -583,7 +802,7 @@ every variant explicitly with its label.</pre>
   triggerBody()?['number'],
   float(body('HTTP')?['rates']?['INR'])
 )</pre>
-      <p style="font-size:.92em;margin-top:-4px"><strong>Note the key is <code>number</code>, not <code>amountinr</code>.</strong> On this trigger the names you type are only display titles; the body keys are generic (<code>text</code>, <code>number</code>). Using <code>['amountinr']</code> yields Null and the flow fails. Safest of all: insert the value from the dynamic-content picker rather than hand-writing <code>triggerBody()</code>. This is the arithmetic rule from demo 1.1 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
+      <p style="font-size:.92em;margin-top:-4px"><strong>Note the key is <code>number</code>, not <code>amountinr</code>.</strong> On this trigger the names you type are only display titles; the body keys are generic (<code>text</code>, <code>number</code>). Using <code>['amountinr']</code> yields Null and the flow fails. Safest of all: insert the value from the dynamic-content picker rather than hand-writing <code>triggerBody()</code>. This is the arithmetic rule from demo 1.8 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
 
       <div class="k">Action description &mdash; how the agent knows to use it</div>
       <pre>Converts an amount in Indian rupees to US dollars at the exchange rate published
@@ -752,7 +971,7 @@ What is the average weight of the fund's top ten holdings?</pre>
 
       <div class="k">Steps</div>
       <ol class="steps">
-        <li><strong>Turn <em>Allow ungrounded responses</em> back on</strong> &mdash; Settings &rarr; Generative AI. Demo 1.1 switched it off, and with it off this demo does not run at all: a bare JSON object carries no citations, so the grounding gate suppresses the answer and you get <em>"No information was found that could help answer this."</em> Retrieval succeeds; the reply is blocked after the fact. Say why you are toggling it &mdash; it is the clearest illustration all day of what "grounded" actually enforces.</li>
+        <li><strong>Turn <em>Allow ungrounded responses</em> back on</strong> &mdash; Settings &rarr; Generative AI. Demo 1.8 switched it off, and with it off this demo does not run at all: a bare JSON object carries no citations, so the grounding gate suppresses the answer and you get <em>"No information was found that could help answer this."</em> Retrieval succeeds; the reply is blocked after the fact. Say why you are toggling it &mdash; it is the clearest illustration all day of what "grounded" actually enforces.</li>
         <li>Add the extraction instruction block below to your agent's Instructions.</li>
         <li>Ask it to extract the clean factsheet &mdash; command 1. Check every field against the document yourself. Yes, all of them; this is the one demo where you must verify by hand.</li>
         <li>Save the messy document from the appendix as a second file and upload it as knowledge.</li>
@@ -1050,7 +1269,7 @@ and let the approval step put it in front of a human.</pre>
       <div class="k a">Carry this forward</div>
       <p>This is the shape to take to your platform team, because it is the shape that changes a working week. An agent in a chat window saves a person some typing;
       an agent on a trigger removes a step from the process and puts a human at the decision instead of the keyboard.
-      When you map your own workflow &mdash; demo 1.4 &mdash; the steps worth automating first are the ones that begin with <em>"when X arrives"</em>, because those already have a trigger waiting to be used.</p>
+      When you map your own workflow &mdash; demo 1.7 &mdash; the steps worth automating first are the ones that begin with <em>"when X arrives"</em>, because those already have a trigger waiting to be used.</p>
 
       <div class="note">
         <strong>Where the evidence lives &mdash; open these three once before you leave.</strong>
@@ -1239,7 +1458,7 @@ Note: figures are unaudited and subject to revision.</pre>
   </ol>
 
   <div class="note">
-    Bring your workflow map from demo 1.4 to that conversation. A request framed as <em>"we want to remove four steps from the quarterly review, here is the map and here is what it needs"</em> lands very differently from <em>"we would like to try Copilot Studio"</em>.
+    Bring your workflow map from demo 1.7 to that conversation. A request framed as <em>"we want to remove four steps from the quarterly review, here is the map and here is what it needs"</em> lands very differently from <em>"we would like to try Copilot Studio"</em>.
   </div>
 
   <h3>Three defects that will find you the first time you write to Dataverse</h3>
