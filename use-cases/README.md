@@ -1,11 +1,10 @@
 # use-cases/
 
 **Build it yourself.** One self-contained HTML page per use case: simple, concise steps you
-can follow in your own environment, after the day, at your own pace.
+can follow in your own environment, at your own pace.
 
-These are not part of the workshop. Nothing on 27 August depends on them and nothing here was
-provisioned for you — that is the point. Each page assumes you have your own Copilot Studio
-environment and starts from an empty agent.
+Each page assumes you have your own Copilot Studio environment and starts from an empty agent.
+Nothing is provisioned for you — that is the point.
 
 Every page is written to the same shape: *what you are building &rarr; before you start &rarr;
 staged steps with the exact text to paste &rarr; two tests, one of which is supposed to fail
@@ -18,14 +17,14 @@ staged steps with the exact text to paste &rarr; two tests, one of which is supp
 Each page prints cleanly to A4 if you would rather work from paper
 (`autonomous-support-agent.html` is 5 pages).
 
-## How these relate to the workshop
+## How these relate to the rest of the material
 
-The demos on the day are in [`../presentation/demo-guide.html`](../presentation/demo-guide.html),
+The demos are in [`../presentation/demo-guide.html`](../presentation/demo-guide.html),
 and they all use the **Northwind** fund anchor so the figures line up across the decks and the
 guide. These pages deliberately do **not** use that anchor — they are different jobs, on
 different data, so nothing you build here can be confused with a demo figure.
 
-The Autonomous Support Agent covers ground the day only names in passing:
+The Autonomous Support Agent covers ground the decks only name in passing:
 
 - a **connector used directly as a tool**, rather than through a flow you wrote;
 - a **trigger that is not a person** — the shape behind session 2.6's unattended run, at a size
