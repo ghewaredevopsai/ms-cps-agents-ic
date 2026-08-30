@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build It Yourself — Multi-Agent: Parent, Child, Connected</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px;white-space:pre-wrap}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.stage{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.stage>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stage>.head .id{font-weight:700;font-size:1.02em}
+.stage>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.stage>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:26px;position:relative}
+.chk li::before{content:"\2610";position:absolute;left:0;top:-1px;font-size:17px;color:#1d4ed8}
+.flow{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:12px 14px;margin:10px 0}
+.flow svg{display:block;width:100%;height:auto}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  pre .cp{display:none}
+  .stage,.warn,.note,.tip,.amber,table,.flow{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .stage{page-break-inside:avoid}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Multi-Agent: Parent, Child, Connected</h1>
+  <div class="tagline">Build it yourself &mdash; Microsoft Copilot Studio</div>
+  <div class="meta">
+    <span class="d">~40 minutes</span> |
+    <span>No code</span> |
+    <span>1 parent &middot; 1 child &middot; 1 connected agent</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="warn">
+  <b>Use synthetic Account records.</b> This agent reads customer rows out of Dataverse and repeats them back in chat.
+  Build it against sample data or a table you have populated yourself &mdash; never against live customer records
+  until you have worked through <em>Before you use this for real</em> at the end.
+</div>
+
+<section>
+  <h2>What you are building</h2>
+  <div class="goal">
+    <b>Three agents, one conversation.</b> A parent agent takes the question. It keeps some skills <em>inside</em> itself as a
+    <strong>child agent</strong>, and delegates the rest to a separately published <strong>connected agent</strong> that
+    queries Dataverse. The person typing sees one assistant.
+  </div>
+  <p>
+    The point of this build is not the data lookup &mdash; it is watching the orchestrator <strong>choose</strong>, at run time,
+    which agent should handle a question, based only on the descriptions you wrote.
+  </p>
+
+  <div class="flow">
+<svg viewBox="0 0 880 280" role="img" aria-label="A person asks the parent agent, which routes either to a child agent held inside it or to a separately published connected agent that queries Dataverse">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/>
+    </marker>
+  </defs>
+
+  <rect x="14" y="112" width="104" height="56" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="66" y="136" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">PERSON</text>
+  <text x="66" y="154" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">asks once</text>
+
+  <line x1="120" y1="140" x2="150" y2="140" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="154" y="100" width="196" height="80" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
+  <text x="252" y="124" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#93c5fd;letter-spacing:.8px">PARENT AGENT</text>
+  <text x="252" y="145" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#fff">Sales Assistant</text>
+  <text x="252" y="164" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#bfdbfe">orchestrates &#183; routes</text>
+
+  <path d="M352,124 C392,124 392,66 424,66" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <path d="M352,158 C392,158 392,216 424,216" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="428" y="26" width="222" height="80" rx="6" style="fill:#ecfdf5;stroke:#059669;stroke-width:1.4"/>
+  <text x="539" y="49" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.8px">CHILD AGENT</text>
+  <text x="539" y="70" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Product Information</text>
+  <text x="539" y="90" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">lives inside the parent</text>
+
+  <rect x="428" y="176" width="222" height="80" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.4"/>
+  <text x="539" y="199" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.8px">CONNECTED AGENT</text>
+  <text x="539" y="220" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Account Lookup</text>
+  <text x="539" y="240" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">published on its own</text>
+
+  <line x1="652" y1="216" x2="694" y2="216" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="698" y="176" width="166" height="80" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="781" y="199" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">DATAVERSE</text>
+  <text x="781" y="220" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">Account table</text>
+  <text x="781" y="240" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">via search</text>
+</svg>
+  </div>
+
+  <h3>The distinction that decides everything</h3>
+  <table>
+    <tr><th style="width:16%">&nbsp;</th><th>Child agent</th><th>Connected agent</th></tr>
+    <tr><td><b>Where it lives</b></td><td>Inside the parent. It has no separate existence.</td><td>Its own agent, in the same environment.</td></tr>
+    <tr><td><b>Publishing</b></td><td>Published with the parent.</td><td>Published on its own. The parent only ever sees its <b>last published</b> version.</td></tr>
+    <tr><td><b>Reuse</b></td><td>Belongs to one parent.</td><td>Any number of parents can connect to it.</td></tr>
+    <tr><td><b>Pick it when</b></td><td>You are grouping instructions and tools for one job, managed by one person.</td><td>A different team owns it, or you want it usable directly and by other agents.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Before you start</h2>
+  <ul class="chk">
+    <li><strong>Copilot Studio</strong>, in an environment you are allowed to build in &mdash; and both agents must be in the <strong>same environment</strong>. Cross-environment connections are not supported.</li>
+    <li><strong>Dataverse with rows in the Account table.</strong> Sample data is fine and is the fastest route (Power Platform admin centre &rarr; your environment &rarr; <em>Settings &rarr; Data management &rarr; Sample data &rarr; Install</em>).</li>
+    <li>Permission to <strong>turn on Dataverse search</strong> and to <strong>edit Quick Find views</strong> for the Account table.</li>
+    <li>Permission to create a <strong>Microsoft Dataverse connection</strong>. It is a premium connector &mdash; availability varies by licence, and that is a question for your admin rather than a blocker to reading on.</li>
+  </ul>
+  <div class="note">
+    No knowledge sources are needed anywhere in this build. Both agents answer from a live table or from their own instructions.
+  </div>
+</section>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 1 <small>Make Dataverse searchable</small></span><span class="b t">~10 min</span></div>
+  <div class="body">
+    <p>Do this first. Every later stage looks broken if you skip it, and the error you get will not mention search.</p>
+    <ol class="steps">
+      <li>In the <strong>Power Platform admin centre</strong>, open your environment &rarr; <strong>Settings &rarr; Product &rarr; Features</strong>.</li>
+      <li>Under <strong>Dataverse search</strong>, turn <strong>on</strong> search indexing. Newer tenants show two checkboxes rather than one switch &mdash; tick the one that turns on indexing for <em>search experiences</em>, not only the AI one. Save.</li>
+      <li>Go to <a href="https://make.powerapps.com">make.powerapps.com</a> &rarr; <strong>Tables &rarr; Account &rarr; Views</strong> and open <strong>Quick Find Active Accounts</strong>.</li>
+      <li>Add the columns you want returned to the view: <em>Address 1: State/Province</em>, <em>Address 1: ZIP/Postal Code</em>, <em>Annual Revenue</em>, <em>Currency</em>.</li>
+      <li>Now the step that actually matters &mdash; open <strong>Edit find table columns</strong> and add <em>Address 1: City</em>, <em>Address 1: State/Province</em> and <em>Address 1: ZIP/Postal Code</em> to <strong>Find by</strong>.</li>
+      <li><strong>Save and publish</strong>, and do not navigate away until it finishes. Then, from <strong>Solutions</strong>, run <strong>Publish all customizations</strong>.</li>
+    </ol>
+    <div class="amber">
+      <b>View columns and find columns are not the same list.</b> What the search can <em>match on</em> comes from
+      <strong>Find by</strong>. What it can <em>return</em> comes from the view columns. Add a state to the view but not to
+      Find by, and the agent will cheerfully tell you there are no accounts in that state.
+    </div>
+    <div class="tip">
+      <b>Verify before moving on.</b> The modern designer will not offer some address columns at all &mdash; if a column
+      you need is missing from the picker, use <strong>Switch to classic</strong> on that view, which lists every one of them.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 2 <small>Build the lookup agent</small></span><span class="b t">~12 min</span></div>
+  <div class="body">
+    <p>This one becomes the connected agent. Build and prove it on its own before anything else points at it.</p>
+    <ol class="steps">
+      <li>In Copilot Studio choose <strong>Create &rarr; New agent</strong>, then <strong>Skip to configure</strong>. Name it <code>Account Lookup</code>.</li>
+      <li>Give it a description. Other agents route on this text, so say what it is <em>for</em>:
+        <pre><button class="cp">Copy</button>Looks up account records — company name, city, state, postal code and revenue — from the sales system.</pre>
+      </li>
+      <li>Paste the <strong>Instructions</strong>:
+        <pre><button class="cp">Copy</button>You look up account records for sales colleagues.
+
+Always use your account lookup tool to answer. Never answer from memory.
+Report only the fields the tool returns. If the tool returns nothing, say
+plainly that no matching account was found. Do not invent an account,
+an address or a figure.</pre>
+      </li>
+      <li>Open <strong>Tools &rarr; Add a tool</strong>, search for <code>Perform an unbound action</code>, and choose the <strong>Microsoft Dataverse</strong> one. Create a connection when prompted, then <strong>Add and configure</strong>.</li>
+      <li>Rename it <code>Find Account</code> and describe it &mdash; the parent's orchestrator reads this too:
+        <pre><button class="cp">Copy</button>Finds an account by city, state, postal code or account name.</pre>
+      </li>
+      <li>Set the first two inputs to <strong>Custom value</strong>:
+        <table>
+          <tr><th style="width:26%">Input</th><th>Value</th></tr>
+          <tr><td><code>organization</code></td><td>Pick <b>your environment by name</b> from the list &mdash; do <b>not</b> leave it on <code>(Current)</code>.</td></tr>
+          <tr><td><code>actionName</code></td><td><code>searchquery</code> &mdash; type it with <em>Enter custom value</em> if the list is empty.</td></tr>
+        </table>
+      </li>
+      <li>Use <strong>+ Add input</strong> to add <code>entities</code>, set it to <strong>Custom value</strong>, and paste:
+        <pre><button class="cp">Copy</button>[{"name":"account","selectColumns":["name","accountid","address1_city","address1_stateorprovince","address1_postalcode","telephone1","emailaddress1","revenue"],"searchColumns":["name","address1_city","address1_stateorprovince","address1_postalcode"]}]</pre>
+      </li>
+      <li>Add <code>search</code> as an input, leave it on <strong>Dynamically fill with AI</strong>, and click <strong>Customize</strong> to give it a description. This sentence is what converts &ldquo;Texas&rdquo; into <code>TX</code>:
+        <pre><button class="cp">Copy</button>Search query that includes state in the format of two digit state code in all caps, 5 digit zip code, city, and/or the account name</pre>
+      </li>
+      <li><strong>Save</strong>, then open the test pane and ask a question that uses the tool.</li>
+      <li><b>Accept the consent prompt.</b> The first real call raises a panel headed <em>Microsoft Dataverse &mdash; This connection can&hellip;</em>. Click <strong>Allow</strong>. Nothing works until you do.</li>
+      <li>Go to <strong>Settings &rarr; Generative AI</strong> and turn on <strong>Let other agents connect to and use this one</strong>.</li>
+      <li><strong>Publish</strong> the agent.</li>
+    </ol>
+    <div class="warn">
+      <b>Step 10 is the one that catches everyone.</b> Until you click <strong>Allow</strong>, every call fails with
+      <code>HTTP 403 &mdash; connectorAuthorizationError</code>, and the message blames the connection even though the connection
+      is perfectly healthy. You can confirm the state under <strong>Settings &rarr; Connection Settings</strong>: before consent
+      it reads <em>&ldquo;There are no permissions associated with this agent&rdquo;</em>.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 3 <small>Build the parent and its child agent</small></span><span class="b t">~10 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li>Create a second agent named <code>Sales Assistant</code> with these <strong>Instructions</strong>:
+        <pre><button class="cp">Copy</button>You help sales colleagues find what they need.
+
+Delegate product questions to the product agent, and any question about
+an account, customer or company to the account lookup agent. Do not
+answer account questions yourself. Keep replies short and factual.</pre>
+      </li>
+      <li>Open the <strong>Agents</strong> tab &rarr; <strong>Add an agent</strong> &rarr; <strong>New child agent</strong>. Name it <code>Product Information</code>.</li>
+      <li>Give the child a description &mdash; this is the only thing the orchestrator uses to route to it:
+        <pre><button class="cp">Copy</button>Answers questions about our products: what they do, who they suit and how they differ from each other.</pre>
+      </li>
+      <li>Give the child its own instructions, and a knowledge source if you have one. Keep it deliberately narrow &mdash; a child that claims to do everything will steal questions meant for the connected agent.</li>
+      <li><strong>Publish</strong> the parent.</li>
+    </ol>
+    <div class="note">
+      Notice what you did <em>not</em> do: the child agent was never published separately and has no settings page of its own.
+      That is the whole difference between the two kinds.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 4 <small>Connect the two agents</small></span><span class="b t">~5 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li>In <code>Sales Assistant</code>, go to <strong>Agents &rarr; Add an agent</strong>.</li>
+      <li>Under <em>Connect to an external agent</em>, choose <strong>Copilot Studio</strong>, then pick <code>Account Lookup</code> from the list.</li>
+      <li>Read the description it carries across, and sharpen it if it overlaps the child agent. <b>This copy is local</b> &mdash; later edits to the source agent's description will not flow through.</li>
+      <li>Leave <strong>Pass conversation history to this agent</strong> ticked, so the lookup agent can see what was already asked.</li>
+      <li><strong>Add and configure</strong>, then <strong>Publish</strong> the parent again.</li>
+    </ol>
+    <div class="amber">
+      <b>Not in the list?</b> A connected agent only appears if it is (1) in the same environment, (2) <b>published</b>, and
+      (3) has <em>Let other agents connect to and use this one</em> switched on. All three, not any one.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 5 <small>Test both paths</small></span><span class="b t">~5 min</span></div>
+  <div class="body">
+    <p>Test from the <strong>parent</strong>, never from the lookup agent. You are testing the routing, not the query.</p>
+
+    <div class="k g">Test 1 &mdash; should work</div>
+    <pre><button class="cp">Copy</button>What are the accounts in Texas?</pre>
+    <p>
+      Open the activity map beside the answer. You should see the parent hand off to <strong>Account Lookup</strong>, which calls
+      <strong>Find Account</strong>, which completes in about two seconds and returns real rows. Three hops, one answer.
+    </p>
+
+    <div class="k r">Test 2 &mdash; should refuse</div>
+    <pre><button class="cp">Copy</button>What is the credit rating of the largest account in Texas?</pre>
+    <p>
+      Credit rating is not in your <code>selectColumns</code>, so the tool cannot return it. A healthy agent says it does not have
+      that field. An agent that answers anyway has just invented a number about a customer &mdash; and it will do that in front of
+      a client too. If it invents, tighten the last line of the lookup agent's instructions and run it again.
+    </p>
+    <div class="tip">
+      <b>Also worth trying:</b> ask a product question and confirm it goes to the <em>child</em> agent instead. If both agents
+      answer, or the wrong one does, your two descriptions overlap &mdash; fix the descriptions, not the instructions.
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2>When nothing comes back</h2>
+  <p>Work down this list in order. The first two rows catch nearly all of it.</p>
+  <table>
+    <tr><th style="width:26%">Symptom</th><th>What is happening</th><th>What to do</th></tr>
+    <tr>
+      <td><b><code>HTTP 403</code> &mdash; connector returned an authorization error</b></td>
+      <td>The agent was never granted consent to use the connection &mdash; the message blames the connection, which is fine. Tools that arrive by <b>importing a solution</b> never raise the prompt at all.</td>
+      <td>Run the tool from the test pane and click <strong>Allow</strong>. If no prompt appears, delete the tool and add it again from scratch &mdash; a freshly created tool raises it.</td>
+    </tr>
+    <tr>
+      <td>Action list is empty, or <code>entities</code> and <code>search</code> never appear as inputs</td>
+      <td>Same cause &mdash; the designer is reading Dataverse metadata over that unconsented connection.</td>
+      <td>Fix the consent first. The inputs appear under <strong>+ Add input</strong> as soon as the schema can be read.</td>
+    </tr>
+    <tr>
+      <td><code>HTTP 400 &mdash; Required field 'search' is missing</code></td>
+      <td>Consent is now fine and the call is reaching Dataverse &mdash; you are simply missing an input.</td>
+      <td>Add <code>search</code> and <code>entities</code> as in Stage 2, steps 7 and 8.</td>
+    </tr>
+    <tr>
+      <td>&ldquo;No accounts were found&rdquo; but you can see the rows in the table</td>
+      <td>Either the search term does not match the stored format (states are stored as <code>TX</code>, not <code>Texas</code>), or the column is not in <b>Find by</b>.</td>
+      <td>Check the <code>search</code> input has the description from Stage 2 step 8, and re-check Stage 1 step 5.</td>
+    </tr>
+    <tr>
+      <td>An error naming a column you do not recognise</td>
+      <td>Your <code>selectColumns</code> lists a column that does not exist in <em>your</em> environment &mdash; common when copying a definition from somewhere else.</td>
+      <td>Remove it. Only stock Account columns are used in the block in Stage 2.</td>
+    </tr>
+    <tr>
+      <td>The parent answers account questions itself</td>
+      <td>Routing, not plumbing. The parent's own instructions or the child's description are broad enough to swallow the question.</td>
+      <td>Narrow the child's description and keep the parent's <em>&ldquo;do not answer account questions yourself&rdquo;</em> line.</td>
+    </tr>
+    <tr>
+      <td>Changes to the connected agent have no effect</td>
+      <td>The parent uses the connected agent's <b>last published</b> version.</td>
+      <td>Publish the connected agent after every change, then retest from the parent.</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Before you use this for real</h2>
+  <p>What you have built works. These are the gaps between it and something you would put in front of colleagues.</p>
+  <ul>
+    <li><strong>Everyone sees the maker's rows.</strong> The tool runs on maker-provided credentials, so every user gets the same
+      results regardless of their own permissions. Row-level security in Dataverse is the fix, and it is a design decision rather than a switch.</li>
+    <li><strong>Connected agents are one level deep.</strong> An agent that already has connected agents cannot itself be connected to a third.</li>
+    <li><strong>Every hop costs latency.</strong> The parent orchestrates, then the connected agent orchestrates again &mdash; noticeably slower, for reasons the user cannot see.</li>
+    <li><strong>Descriptions are the routing logic</strong>, and they are prose, so they degrade quietly as you add agents. Past roughly
+      30&ndash;40 choices an agent stops discriminating well; that, not tidiness, is the signal to split.</li>
+    <li><strong>Nothing here is versioned.</strong> Instructions, descriptions and that <code>entities</code> block live only in the maker
+      portal. Decide where the source of truth lives before a second person edits it.</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI | devops.gheware.com | Trainer: Rajesh Gheware | Multi-Agent Account Lookup v1
+</footer>
+
+<script>
+document.querySelectorAll('pre .cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.parentNode.cloneNode(true);
+    t.querySelector('.cp').remove();
+    navigator.clipboard.writeText(t.textContent.trim()).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>
