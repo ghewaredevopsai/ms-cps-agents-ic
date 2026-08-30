@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build It Yourself — Autonomous Support Agent</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px;white-space:pre-wrap}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.stage{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.stage>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stage>.head .id{font-weight:700;font-size:1.02em}
+.stage>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.stage>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:26px;position:relative}
+.chk li::before{content:"\2610";position:absolute;left:0;top:-1px;font-size:17px;color:#1d4ed8}
+.flow{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:12px 14px;margin:10px 0}
+.flow svg{display:block;width:100%;height:auto}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  pre .cp{display:none}
+  .stage,.warn,.note,.tip,.amber,table,.flow{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .stage{page-break-inside:avoid}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Autonomous Support Agent</h1>
+  <div class="tagline">Build it yourself &mdash; Microsoft Copilot Studio</div>
+  <div class="meta">
+    <span class="d">~35 minutes</span> |
+    <span>No code</span> |
+    <span>3 connector tools &middot; 1 event trigger</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="warn">
+  <b>Use a test mailbox and synthetic tickets.</b> This agent reads mail and <b>sends mail on its own</b>, choosing the recipient itself.
+  Build it against a mailbox you do not mind it replying from, and a project whose tickets contain nothing confidential.
+  Do not point it at a shared or team inbox until you have worked through <em>Before you use this for real</em> at the end.
+</div>
+
+<section>
+  <h2>What you are building</h2>
+  <div class="goal">
+    <b>An agent nobody talks to.</b> A support request arrives by email. The agent wakes up on its own, reads the request,
+    looks the ticket up in Jira, and replies &mdash; or says clearly that it found nothing. No chat window, no person in the loop.
+  </div>
+  <p>
+    Everything else you will build in Copilot Studio starts because a human typed something. This one starts because
+    <strong>an event happened</strong>. That is the difference between an agent that sits beside your process and one that sits inside it.
+  </p>
+  <p>It is also the shortest route to seeing a <strong>connector used directly as a tool</strong> &mdash; no cloud flow written by you in between.</p>
+
+  <div class="flow">
+<svg viewBox="0 0 880 318" role="img" aria-label="An email arriving triggers the agent, which calls three connector tools and replies by mail">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/>
+    </marker>
+  </defs>
+
+  <rect x="20" y="16" width="120" height="52" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="80" y="40" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">MAILBOX</text>
+  <text x="80" y="57" text-anchor="middle" style="font:600 14px 'Segoe UI',sans-serif;fill:#0b2545">Inbox</text>
+
+  <line x1="142" y1="42" x2="296" y2="42" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <text x="219" y="33" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#475569">subject contains &#8220;Support&#8221;</text>
+
+  <rect x="300" y="16" width="300" height="52" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.4"/>
+  <text x="450" y="37" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.8px">TRIGGER &#183; NOBODY CLICKS ANYTHING</text>
+  <text x="450" y="57" text-anchor="middle" style="font:600 14px 'Segoe UI',sans-serif;fill:#0b2545">When a new email arrives (V3)</text>
+
+  <line x1="450" y1="70" x2="450" y2="96" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="250" y="98" width="400" height="54" rx="6" style="fill:#0b2545"/>
+  <text x="450" y="122" text-anchor="middle" style="font:700 15px 'Segoe UI',sans-serif;fill:#ffffff">Autonomous Support Agent</text>
+  <text x="450" y="140" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#bfdbfe">instructions only &#8212; no knowledge, no custom topics</text>
+
+  <line x1="450" y1="152" x2="450" y2="174" style="stroke:#1e40af;stroke-width:1.6"/>
+  <line x1="153" y1="174" x2="727" y2="174" style="stroke:#1e40af;stroke-width:1.6"/>
+  <line x1="153" y1="174" x2="153" y2="200" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <line x1="440" y1="174" x2="440" y2="200" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <line x1="727" y1="174" x2="727" y2="200" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="22" y="202" width="262" height="56" rx="6" style="fill:#ffffff;stroke:#d7e0ee;stroke-width:1.2"/>
+  <text x="153" y="222" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">JIRA</text>
+  <text x="153" y="242" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Get issue by key (V2)</text>
+
+  <rect x="309" y="202" width="262" height="56" rx="6" style="fill:#ffffff;stroke:#d7e0ee;stroke-width:1.2;stroke-dasharray:4 3"/>
+  <text x="440" y="222" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#475569;letter-spacing:.8px">OUTLOOK &#183; OPTIONAL</text>
+  <text x="440" y="242" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#475569">Get emails (V3)</text>
+
+  <rect x="596" y="202" width="262" height="56" rx="6" style="fill:#ffffff;stroke:#d7e0ee;stroke-width:1.2"/>
+  <text x="727" y="222" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">OUTLOOK</text>
+  <text x="727" y="242" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Send an email (V2)</text>
+
+  <rect x="22" y="272" width="836" height="34" rx="5" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.2"/>
+  <text x="440" y="294" text-anchor="middle" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#065f46">The reply leaves the mailbox without a person seeing it first. That is the whole point &#8212; and the whole risk.</text>
+</svg>
+  </div>
+  <p style="margin-top:12px">
+    Standalone &mdash; nothing on the workshop day depends on this, and it uses none of the Northwind figures.
+    The demos from the day are in <a href="../presentation/demo-guide.html">demo-guide.html</a>.
+  </p>
+</section>
+
+<section>
+  <h2>Before you start</h2>
+  <ul class="chk">
+    <li><strong>Copilot Studio</strong>, in an environment you are allowed to build in &mdash; not your organisation's Default environment if you can avoid it.</li>
+    <li>A <strong>mailbox you can send test mail to</strong>, and a second address to send it from.</li>
+    <li>A <strong>Jira Cloud</strong> site with at least one issue, and the issue key to hand (for example <code>ABC-1</code>).</li>
+    <li>Permission to create <strong>connections</strong> for Office 365 Outlook and Jira. The Jira connector is a premium connector &mdash; availability varies by licence, and that is a question for your admin rather than a blocker to reading on.</li>
+  </ul>
+  <div class="note">
+    No knowledge sources are needed. This agent answers from a live system, not from documents &mdash; which is exactly why its tool descriptions matter so much.
+  </div>
+</section>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 1 <small>Create the agent</small></span><span class="b t">~5 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li>In <strong>Copilot Studio</strong>, choose <strong>Create &rarr; New agent</strong>, then <strong>Skip to configure</strong> so you land on the settings page rather than the description chat.</li>
+      <li>Name it <code>Autonomous Support Agent</code>.</li>
+      <li>Set the description &mdash; this is what other agents and makers see, so say what it is for, not how it works:
+        <pre><button class="cp">Copy</button>This agent provides responses to the support related queries received via email by looking up resources like Jira.</pre>
+      </li>
+      <li>Paste the <strong>Instructions</strong>. These are the whole brain of this agent &mdash; there is no knowledge source and there are no custom topics, so every rule it follows is in this box:
+        <pre><button class="cp">Copy</button>You are a Support Assistant. You would get queries via email having "Support" keyword contained in the subject. You would then use the connectors like Jira to get info regarding that ticket and respond appropriate to that email. If no relevant information found from the support ticket portals like Jira - then clearly respond saying "No information found for your query" but do not manufacture any facts.
+
+Your communication should be polite, professional and concise.</pre>
+      </li>
+      <li>Click <strong>Create</strong>, then <strong>Publish</strong> once so the agent exists in a state a trigger can call.</li>
+    </ol>
+    <div class="amber">
+      <b>Read the second sentence of those instructions again.</b> <em>"Do not manufacture any facts"</em> is the only thing standing between a
+      missing ticket and an invented one. It is a request, not a control. Stage 5 shows you how to test whether it is actually being honoured.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 2 <small>Add the Jira tool</small></span><span class="b t">~8 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li>Open <strong>Tools &rarr; Add a tool &rarr; Connector</strong> and search for <code>Jira</code>.</li>
+      <li>Choose <strong>Get issue by key (V2)</strong> and add it. Create or pick a Jira connection when prompted.</li>
+      <li>Open the tool and set its inputs. This is the step people skip, and it is the one that decides whether the agent works:
+        <table>
+          <tr><th>Input</th><th>Set it to</th><th>Why</th></tr>
+          <tr><td><code>Jira instance</code></td><td><strong>A fixed value</strong> &mdash; pick your site from the list</td><td>There is exactly one right answer and it never changes. Anything you can pin, pin.</td></tr>
+          <tr><td><code>Issue key</code></td><td><strong>Filled by the model</strong> (dynamically)</td><td>It comes out of the email, so only the model can supply it.</td></tr>
+        </table>
+      </li>
+      <li>Give the tool a <strong>description</strong>. The agent reads this to decide when to call it, so write it for the agent, not for a colleague:
+        <pre><button class="cp">Copy</button>This tool can be used to fetch Jira issue using issue KEY</pre>
+      </li>
+    </ol>
+    <div class="tip">
+      <b>The rule worth taking away:</b> every input is either <em>fixed by you</em> or <em>invented by the model</em>. There is no third option.
+      Anything that has one correct value should never be left to the model &mdash; and this agent has three more such inputs coming in Stage 3.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 3 <small>Add the mail tool</small></span><span class="b t">~5 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li><strong>Tools &rarr; Add a tool &rarr; Connector</strong>, search <code>Office 365 Outlook</code>, add <strong>Send an email (V2)</strong>.</li>
+      <li>Describe it in terms of the job, not the mechanism &mdash; this is what makes the agent reach for it after a Jira lookup rather than just printing an answer into the void:
+        <pre><button class="cp">Copy</button>Support queries received over an email should be responded via email and this tool is meant for responding to support queries.</pre>
+      </li>
+      <li><strong>Publish</strong> the agent again.</li>
+    </ol>
+    <div class="note">
+      <b>Optional, and worth skipping the first time:</b> <em>Get emails (V3)</em> can be added the same way. The reference build has it, but the
+      triggering message is already handed to the agent in Stage 4 &mdash; so the tool is redundant, and it lets the agent read other mail in the
+      folder. Add it only if you want to watch orchestration choose between two plausible tools.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 4 <small>Make it autonomous</small></span><span class="b t">~8 min</span></div>
+  <div class="body">
+    <p>Everything so far is an ordinary agent. This stage is the one that matters.</p>
+    <ol class="steps">
+      <li>On the agent's <strong>Overview</strong> page find <strong>Triggers</strong>, and choose <strong>Add a trigger</strong>.</li>
+      <li>Pick <strong>When a new email arrives (V3)</strong>. Confirm the Office 365 Outlook connection.</li>
+      <li>Set the trigger's conditions:
+        <table>
+          <tr><th>Field</th><th>Value</th></tr>
+          <tr><td>Folder</td><td><code>Inbox</code></td></tr>
+          <tr><td>Subject filter</td><td><code>Support</code></td></tr>
+        </table>
+      </li>
+      <li>Set the <strong>message sent to the agent</strong> when the trigger fires. Start with the simplest possible version, so you can see for yourself why it is not enough:
+        <pre><button class="cp">Copy</button>Use content from the email that just arrived.</pre>
+      </li>
+      <li><strong>Save</strong> the trigger and <strong>Publish</strong> the agent. Copilot Studio builds a cloud flow behind the scenes &mdash; you will find it in Power Automate under the trigger's name.</li>
+    </ol>
+    <div class="amber">
+      <b>You have just built something that acts without being asked.</b> From this point the agent can send mail while you are not looking at it.
+      If you need to stop it, turn the flow <strong>Off</strong> in Power Automate &mdash; unpublishing the agent is not the switch.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 5 <small>Test both paths</small></span><span class="b t">~9 min</span></div>
+  <div class="body">
+    <p>Two tests, and the second one is the important one.</p>
+
+    <div class="k g">Test 1 &mdash; it should answer</div>
+    <p>From your second address, send mail to the triggering mailbox. Put a real issue key in <em>both</em> the subject and the body:</p>
+    <pre><button class="cp">Copy</button>Subject:  Support - give me details of issue having key ABC-1
+
+give me full details of this issue having Key ABC-1</pre>
+    <p><strong>Expect</strong> a reply within a few minutes carrying the issue's real summary, type, project, status and priority. Check one field against Jira itself.</p>
+
+    <div class="k r">Test 2 &mdash; it should refuse</div>
+    <p>Now ask for something that does not exist. No key, nothing to look up:</p>
+    <pre><button class="cp">Copy</button>Subject:  Support - need info on jira setup request
+
+please give me details on the jira setup request</pre>
+    <p><strong>Expect</strong> a polite reply saying it could not find relevant information. <strong>Do not accept a plausible-sounding answer here.</strong>
+    If it invents a ticket, that is the finding &mdash; the instruction did not hold, and you have learned more from this test than from the first one.</p>
+
+    <div class="tip">
+      <b>Run test 1 three times</b> with identical text before you call it done. This shape is not deterministic, and one green run proves less than you think.
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2>When nothing comes back</h2>
+  <p>Work down this list in order. The first row catches most of it.</p>
+  <table>
+    <tr><th>Symptom</th><th>What is happening</th><th>What to do</th></tr>
+    <tr>
+      <td><b>The flow run says Succeeded and no mail arrived</b></td>
+      <td>This is the normal case, not a contradiction. The trigger flow hands the prompt over and returns immediately &mdash; roughly <code>202 Accepted</code> in under a second. It never learns what the agent did.</td>
+      <td>Do not trust the flow's green tick. Open the agent's <strong>Activity</strong> / session transcript to see what it actually did with the message.</td>
+    </tr>
+    <tr>
+      <td>Same email, works sometimes</td>
+      <td>The prompt in Stage 4 is vague, so the agent has to infer both the task and the ticket key from a raw message.</td>
+      <td>Rewrite the trigger message to name the fields and state the task explicitly. See the next section.</td>
+    </tr>
+    <tr>
+      <td>Nothing triggers at all</td>
+      <td>Subject filter not matched, or the flow is Off.</td>
+      <td>The filter is a plain substring &mdash; <code>Support</code> matches <em>"Support - …"</em>. Check the flow is <strong>On</strong> in Power Automate.</td>
+    </tr>
+    <tr>
+      <td>Jira call fails or returns the wrong site</td>
+      <td>The <code>Jira instance</code> input was left for the model to fill.</td>
+      <td>Go back to Stage 2 and pin it to a fixed value.</td>
+    </tr>
+    <tr>
+      <td>The reply goes to the wrong person</td>
+      <td>Nothing constrains the recipient &mdash; the model chooses it.</td>
+      <td>Expected behaviour of this build. See the next section.</td>
+    </tr>
+    <tr>
+      <td>It replies to its own replies</td>
+      <td>Your reply goes out as <em>"RE: Support &mdash; …"</em>. A response to that lands back in the Inbox and matches the filter again.</td>
+      <td>Turn the flow off, then tighten the filter or move handled mail to another folder.</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Before you use this for real</h2>
+  <p>
+    What you have built works, and it is deliberately the simple version. Six things stand between it and something you would let loose on a real support inbox.
+    None of them is hard; all of them are invisible until they bite.
+  </p>
+  <table>
+    <tr><th>#</th><th>Gap</th><th>The fix</th></tr>
+    <tr><td>1</td><td><b>Nothing checks the outcome.</b> The flow reports success whether or not the agent replied.</td>
+        <td>Have the flow <em>wait</em> for the agent instead of firing and forgetting, then branch on the response. Nothing calls this flow, so waiting is allowed here.</td></tr>
+    <tr><td>2</td><td><b>The trigger message is vague.</b> Handing over a whole raw email and hoping is what makes runs inconsistent.</td>
+        <td>Pass the subject, body and sender as named values, with one sentence saying what to do with them.</td></tr>
+    <tr><td>3</td><td><b>The recipient is chosen by the model.</b></td>
+        <td>Bind the reply address to the sender of the triggering mail, the way you pinned the Jira instance.</td></tr>
+    <tr><td>4</td><td><b>The refusal is reworded every run</b>, and an unrecognised request never reaches it &mdash; it falls through to the product's stock <em>"I'm not sure how to help with that."</em></td>
+        <td>Put the refusal in a <strong>topic</strong> with fixed wording, and change the Fallback topic to return that wording too. A sentence in Instructions is a preference; a topic is a guarantee.</td></tr>
+    <tr><td>5</td><td><b>It runs as whoever built it.</b> Every requester gets the builder's Jira and mailbox visibility.</td>
+        <td>Decide deliberately whose credentials each tool uses, and check what an agent shared with someone else would expose.</td></tr>
+    <tr><td>6</td><td><b>Handled mail is not marked or moved</b>, so there is no record of what was processed.</td>
+        <td>Mark as read or move to a folder as the last step, and keep the session transcripts &mdash; they are the only place the whole conversation exists.</td></tr>
+  </table>
+  <div class="note">
+    <b>The one sentence to keep.</b> A green run tells you a message was accepted. It does not tell you the work was done.
+    An agent that acts without being asked needs something watching it that is not the thing that started it.
+  </div>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI | devops.gheware.com | Trainer: Rajesh Gheware | Autonomous Support Agent v1
+</footer>
+
+<script>
+document.querySelectorAll('pre .cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.parentNode.cloneNode(true);
+    t.querySelector('.cp').remove();
+    navigator.clipboard.writeText(t.textContent.trim()).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>

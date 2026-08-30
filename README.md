@@ -12,6 +12,7 @@
 - **Attending?** Read `presentation/pre-reads.html` first (~30 min), then open `presentation/demo-guide.html` — it has the pre-flight checklist and every demo step.
 - **Want the shape of the day?** `presentation/course-outline-copilot-studio.html`.
 - **The slides** are `presentation/module-1-foundations.html` and `module-2-build.html`. Press **N** on any slide for that slide's notes, **O** for the index.
+- **Want to build one yourself afterwards?** `use-cases/` has step-by-step guides you can follow in your own environment.
 - **Not a developer?** `presentation/reference-pack.html` Part 3 is the part for you — what you can build on your own, without waiting for anything to be provisioned. Part 1 is ten prompts you can use today.
 
 ## Files
@@ -21,6 +22,7 @@
 | `training-requirements.txt` | **Requirements source of truth** — client requirements, constraints, open actions. *Internal; not included in this repo* |
 | `resources.txt` | Curated Copilot Studio **YouTube resource list**, graded simple → advanced; candidate pre-read material |
 | `demo-assets/` | Every synthetic asset the demos use — see the table below |
+| `use-cases/` | **Build-it-yourself guides**, added after the day — one self-contained HTML page per use case, each a set of concise steps for rebuilding an agent in your own environment. Not part of the workshop; see its `README.md` |
 | `presentation/course-outline-copilot-studio.html` | **Client-facing course outline** — demo-only, 27 Aug scope. Prints to 5 A4 pages; carries a requirements-coverage table |
 | `presentation/module-1-foundations.html` | **Module 1 slide deck** — 18 slides, per-slide session notes (press N), keyboard/index navigation, hand-authored SVG diagrams sized to fill the frame and read from the back of a room. Self-contained, 1280×720 scaled stage |
 | `presentation/module-2-build.html` | **Module 2 slide deck** — 32 slides, per-slide session notes (press N), segmented session progress, same diagram vocabulary as Module 1. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
