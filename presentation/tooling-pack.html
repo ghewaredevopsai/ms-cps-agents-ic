@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tooling Pack — Copilot Studio from the Command Line</title>
+<style>
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.4px;line-height:1.55;margin:8px 0 12px;white-space:pre-wrap}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.demo{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.demo>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.demo>.head .id{font-weight:700;font-size:1.02em}
+.demo>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.demo>.head .badges{display:flex;gap:6px;flex-wrap:wrap}
+.demo>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.a{background:#059669;color:#fff}
+.b.bb{background:#1d4ed8;color:#fff}
+.b.c{background:#78716c;color:#fff}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}.k.a{color:#b45309}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.toc{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:14px 18px}
+.toc ol{margin:0;padding-left:20px}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:9.4px}
+  pre .cp{display:none}
+  .demo,.warn,.note,.tip,.amber,table{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .demo{page-break-inside:avoid}
+  .pb{page-break-before:always}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>Tooling Pack</h1>
+  <div class="tagline">Copilot Studio from the Command Line &mdash; with GitHub Copilot CLI</div>
+  <div class="meta">
+    <span class="d">Take away from 27 August 2026</span> |
+    <span>Eight parts</span> |
+    <span>For the developer track</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="note">
+  <b>What this is.</b> Everything demonstrated on the day was <i>clicked</i> &mdash; the maker portal, a
+  browser, a human driving each step. That is the right way to learn the product and the wrong way to run it
+  once more than one person depends on it. This pack is the other route: <b>the same agent as files on disk</b>,
+  driven from a terminal, with <b>GitHub Copilot CLI</b> as the agent that does the driving.
+  <b>Everything here is Microsoft tooling</b> and works against your own environment.
+</div>
+
+<div class="amber">
+  <b>Read this before you start clicking things in a terminal.</b> The portal is still the place to
+  <i>learn</i> an agent and the fastest place to try one idea. Command-line tooling earns its keep at the
+  point where you need three things the portal cannot give you: <b>a reviewable diff</b> of what changed,
+  <b>a repeatable deployment</b> into a second environment, and <b>a way to notice</b> that someone edited
+  production last Thursday. If none of those three is a problem for you yet, bookmark this and carry on
+  clicking &mdash; you are not missing anything.
+</div>
+
+<section id="toc">
+  <h2>What is in the pack</h2>
+  <div class="toc">
+    <ol>
+      <li><a href="#p1">The tools &mdash; what each one is actually for</a></li>
+      <li><a href="#p2">MCP, the other way round &mdash; giving your terminal agent hands</a></li>
+      <li><a href="#p3">The agent as files &mdash; what a clone actually contains</a></li>
+      <li><a href="#p4">What <code>pac</code> can and cannot do &mdash; four facts worth knowing first</a></li>
+      <li><a href="#p5">Testing &mdash; proving a change helped</a></li>
+      <li><a href="#p6">Shipping and drift &mdash; solutions, variables, and noticing edits</a></li>
+      <li><a href="#p7">The things that will stop you &mdash; setup and authentication</a></li>
+      <li><a href="#p8">A worked loop &mdash; what to actually ask Copilot CLI</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================================ PART 1 -->
+<section id="p1">
+  <h2>1 &middot; The tools &mdash; what each one is actually for</h2>
+
+  <p>Six command-line tools matter here. They are not alternatives to each other; each owns a different part
+  of the picture, and the common mistake is reaching for the wrong one and concluding the job is impossible.</p>
+
+  <table>
+    <tr>
+      <th style="width:20%">Tool</th>
+      <th style="width:24%">Install</th>
+      <th style="width:32%">What it does for a Copilot Studio agent</th>
+      <th style="width:24%">When you need it</th>
+    </tr>
+    <tr>
+      <td><b>GitHub Copilot CLI</b><br><code>copilot</code></td>
+      <td><code>npm i -g @github/copilot</code></td>
+      <td>The agent that drives everything else. Reads and writes files, runs commands with your approval,
+        and loads MCP servers as extra tools.</td>
+      <td>Always. This is the thing you talk to; the rest are what it calls.</td>
+    </tr>
+    <tr>
+      <td><b>Power Platform CLI</b><br><code>pac</code></td>
+      <td><code>dotnet tool install --global Microsoft.PowerApps.CLI.Tool</code></td>
+      <td><b>The only programmatic surface for a Copilot Studio agent.</b> Clone it to disk, push changes
+        back, pack it into a solution, export and import.</td>
+      <td>Any time the agent definition itself is the thing you are changing.</td>
+    </tr>
+    <tr>
+      <td><b>CLI for Microsoft 365</b><br><code>m365</code></td>
+      <td><code>npm i -g @pnp/cli-microsoft365</code></td>
+      <td>Inventory and surroundings &mdash; list every agent in an environment, list and export solutions,
+        upload a file into the SharePoint library your agent reads from.</td>
+      <td>Auditing what exists, and moving the <i>data</i> an agent works on.</td>
+    </tr>
+    <tr>
+      <td><b>Azure CLI</b><br><code>az</code></td>
+      <td>Your platform's package manager, or <code>pip install azure-cli</code></td>
+      <td>Everything behind a custom action &mdash; the resource group, the function app, the app
+        registration an unattended caller signs in with.</td>
+      <td>Only if your agent calls an endpoint you own.</td>
+    </tr>
+    <tr>
+      <td><b>Azure Functions Core Tools</b><br><code>func</code></td>
+      <td><code>npm i -g azure-functions-core-tools@4</code></td>
+      <td>Run that endpoint on your laptop before it exists in the cloud, then publish it.</td>
+      <td>Same condition as <code>az</code>, one layer up.</td>
+    </tr>
+    <tr>
+      <td><b>Git</b><br><code>git</code>, <code>gh</code></td>
+      <td>Almost certainly already installed</td>
+      <td>Where the cloned agent lives once it is files. This is the whole point of the exercise.</td>
+      <td>Always.</td>
+    </tr>
+  </table>
+
+  <div class="tip">
+    <b>The one-line summary if you remember nothing else.</b> <code>pac</code> is for the <b>agent</b>,
+    <code>m365</code> is for <b>everything around it</b>, <code>az</code> is for <b>what it calls</b>, and
+    <b>Copilot CLI is what saves you from having to remember any of their syntax</b>. You describe the
+    outcome; it assembles the commands and shows them to you before running them.
+  </div>
+
+  <h3>Why GitHub Copilot CLI rather than just typing the commands</h3>
+  <p>Because the syntax is the least interesting part of the job and the easiest to get wrong. The commands
+  in this pack have awkward edges &mdash; an identifier that means two different things in two different
+  APIs, a subcommand that silently does nothing without a sibling directory, a flag whose absence changes
+  the result rather than producing an error. An agent that can read the error, re-read the file it just
+  wrote, and try the other form is worth more than a memorised cheat-sheet. Your part is to know
+  <i>what should happen</i>, which is what the rest of this pack is for.</p>
+
+  <div class="note">
+    <b>Approval, not autonomy.</b> Copilot CLI asks before it runs a command that changes anything. Keep it
+    that way while you are learning the surface &mdash; the useful failures in Part 4 are ones you want to
+    <i>see</i>, not ones you want quietly retried five times.
+  </div>
+</section>
+
+<!-- ============================================ PART 2 -->
+<section id="p2" class="pb">
+  <h2>2 &middot; MCP, the other way round</h2>
+
+  <p>You met MCP on the day as something a Copilot Studio agent <b>consumes</b>: a server exposes tools, and
+  your agent calls them. Here it is inverted. The <b>terminal</b> agent is the consumer, and MCP servers are
+  how it reaches Azure, Microsoft&nbsp;365 and GitHub without you pasting output between windows.</p>
+
+  <table>
+    <tr>
+      <th style="width:26%">MCP server</th>
+      <th style="width:40%">What it gives Copilot CLI</th>
+      <th style="width:34%">Worth adding?</th>
+    </tr>
+    <tr>
+      <td><b>Azure MCP Server</b><br><code>@azure/mcp</code></td>
+      <td>Subscriptions, resource groups, storage, Key Vault, monitoring and log queries &mdash; plus a
+        passthrough for anything it does not model directly.</td>
+      <td>Yes, if your agent calls an endpoint you host.</td>
+    </tr>
+    <tr>
+      <td><b>Microsoft 365 / Graph</b></td>
+      <td>Mail, SharePoint, OneDrive, Teams, Excel &mdash; the systems your agent's knowledge and actions
+        actually touch.</td>
+      <td>Yes. Most useful for staging the <i>documents</i> a demo depends on.</td>
+    </tr>
+    <tr>
+      <td><b>GitHub</b></td>
+      <td>Repositories, pull requests, issues.</td>
+      <td>Yes, once the agent definition is in source control &mdash; which is Part 6.</td>
+    </tr>
+  </table>
+
+  <p>Configuration is a JSON file listing servers and how to start each one. The exact path is a Copilot CLI
+  setting rather than something to memorise &mdash; ask it: <i>"where is your MCP configuration file, and
+  what servers are loaded right now?"</i></p>
+
+<pre>{
+  "mcpServers": {
+    "azure": {
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    }
+  }
+}</pre>
+
+  <div class="warn">
+    <b>There is no Copilot Studio authoring MCP server, and you should not wait for one.</b> Copilot Studio
+    <i>exposes</i> nothing for an outside agent to author against &mdash; it is an MCP client, not an MCP
+    server. Anything that changes an agent definition goes through <code>pac</code>. If a terminal agent
+    ever tells you it has connected to Copilot Studio directly, it has misunderstood the question; check
+    what it actually ran.
+  </div>
+
+  <div class="amber">
+    <b>An MCP server inherits your permissions, not more.</b> It signs in as you and can do what you can do.
+    That is a reason to be careful, not a reason to be relaxed: a terminal agent with the Microsoft&nbsp;365
+    server loaded can read every document you can read. Everything the day said about sensitivity labels and
+    source permissions applies here unchanged &mdash; and, as on the day, <b>nothing it generates inherits a
+    label</b>.
+  </div>
+</section>
+
+<!-- ============================================ PART 3 -->
+<section id="p3">
+  <h2>3 &middot; The agent as files</h2>
+
+  <p>This is the idea that makes the rest possible, and it surprises people: <b>a Copilot Studio agent can
+  be cloned to a directory, edited as text, and pushed back.</b> Source control is not something you
+  graduate to after leaving Copilot Studio. It is available on day one.</p>
+
+<pre>pac auth create
+pac copilot list
+pac copilot clone --environment &lt;your-environment-id&gt; --bot-id &lt;agent-id&gt;</pre>
+
+  <p>What lands on disk:</p>
+
+  <table>
+    <tr><th style="width:32%">Path</th><th>What it holds</th></tr>
+    <tr><td><code>agent.mcs.yml</code></td>
+      <td>The agent itself &mdash; its name, its description, its model hint, and the web-browsing capability
+        flag.</td></tr>
+    <tr><td><code>settings.mcs.yml</code></td>
+      <td>The switches, including the one that decides whether the agent may answer from the model when
+        your knowledge does not cover the question.</td></tr>
+    <tr><td><code>topics/</code></td>
+      <td>One file per topic &mdash; the fixed-wording refusal you authored is a file you can diff.</td></tr>
+    <tr><td><code>knowledge/</code></td>
+      <td>The sources, including which one is marked authoritative.</td></tr>
+    <tr><td><code>actions/</code>, <code>workflows/</code></td>
+      <td>The tools and the flows behind them.</td></tr>
+  </table>
+
+  <div class="tip">
+    <b>The two switches from the day live in these files.</b> <i>Allow ungrounded responses</i> and
+    <i>Use information from the Web</i> &mdash; the pair that decides whether your agent says
+    <i>"not stated"</i> or invents a plausible number &mdash; are fields in <code>settings.mcs.yml</code> and
+    <code>agent.mcs.yml</code>. Which means the most consequential governance decision in the whole product is
+    <b>reviewable in a pull request</b> rather than a checkbox someone flipped and nobody noticed.
+    Marking a knowledge source <i>official</i> is likewise a field, not a click.
+  </div>
+
+  <div class="note">
+    <b>Ask Copilot CLI to explain the diff, not just produce it.</b> A useful prompt after any clone:
+    <i>"compare this against the last committed version and tell me, in plain English, what would behave
+    differently for someone asking the agent a question."</i> That is the review question. A raw YAML diff
+    answers a different and less useful one.
+  </div>
+</section>
+
+<!-- ============================================ PART 4 -->
+<section id="p4" class="pb">
+  <h2>4 &middot; What <code>pac</code> can and cannot do</h2>
+
+  <p>Four facts, each of which costs an hour to discover and ten seconds to read. They are the difference
+  between "this tooling is broken" and "I was holding it wrong".</p>
+
+  <div class="demo">
+    <div class="head"><span class="id">Fact 1 <small>the one that wastes the most time</small></span>
+      <span class="badges"><span class="b bb">create</span></span></div>
+    <div class="body">
+      <p><b><code>pac copilot push</code> cannot create an agent.</b> It only updates one that already exists,
+      because it needs the sync state that <code>clone</code> writes. Scaffolding a directory and pushing it
+      fails with a complaint about no synced workspace &mdash; which reads like a bug and is not one.</p>
+      <p style="margin:0">If you want an agent to exist because a <i>file</i> says it should, the path runs
+      through a <b>solution import</b>, not through push. Ask Copilot CLI for the sequence rather than
+      memorising it; the point to carry is that <b>create and update are different operations</b>.</p>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="head"><span class="id">Fact 2 <small>silent, and therefore nasty</small></span>
+      <span class="badges"><span class="b t">packaging</span></span></div>
+    <div class="body">
+      <p><b><code>pac copilot pack</code> rejects any directory it does not recognise.</b> It accepts the
+      agent and settings files, <code>topics/</code> and the icon. Anything else &mdash; including
+      directories it created itself on the way in, and including one you invent with a harmless name
+      &mdash; makes it refuse.</p>
+      <p style="margin:0">The practical consequence: <b>pack from a filtered copy</b>, not from your working
+      directory. This is exactly the kind of chore to hand to Copilot CLI, which will not forget the
+      filtering step the second time.</p>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="head"><span class="id">Fact 3 <small>the one identifier that lies</small></span>
+      <span class="badges"><span class="b c">identity</span></span></div>
+    <div class="body">
+      <p><b>A flow has two different ids.</b> The one the Power Automate API knows it by is <i>not</i> the one
+      the underlying data platform knows it by. Adding a flow to a solution with the wrong one fails with
+      <i>"because it does not exist"</i>, which is true and unhelpful.</p>
+      <p style="margin:0">Whenever a command insists something does not exist and you can see it on screen,
+      <b>suspect the identifier before you suspect the tool</b>.</p>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="head"><span class="id">Fact 4 <small>useful, with two caveats</small></span>
+      <span class="badges"><span class="b a">cloning</span></span></div>
+    <div class="body">
+      <p><b>There is a template extract-and-create pair</b> that copies an agent wholesale &mdash; instructions,
+      topics, tools, knowledge references &mdash; which is the fastest way to stand up a second copy for
+      experiments.</p>
+      <p style="margin:0">Two things it does not do: knowledge sources come across as <b>references without
+      their bytes</b>, so files still need uploading; and any literal braces in your instructions come back
+      <b>doubled</b>, because the template format uses them for substitution. If a carefully-written schema
+      arrives mangled, that is why.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ PART 5 -->
+<section id="p5">
+  <h2>5 &middot; Testing &mdash; proving a change helped</h2>
+
+  <p>The Evaluation tab and its test sets were the answer on the day: a fixed set of questions, one change
+  per run, re-run the same set. Nothing about moving to a terminal changes that discipline &mdash; it makes
+  it cheaper to keep.</p>
+
+  <h3>The comparison the portal cannot give you</h3>
+  <p>Once an agent is files, "did my change do what I intended?" has a second, sharper answer alongside the
+  test-set score: <b>clone the agent again and diff it against the version you started from</b>. The score
+  tells you whether behaviour improved. The diff tells you <i>what actually changed</i> &mdash; including the
+  changes you did not intend.</p>
+
+  <div class="amber">
+    <b>Some portal actions change more than one thing.</b> Marking a knowledge source as official also
+    rewrites the agent's instructions. If you are holding yourself to one change per evaluation run, that is
+    two &mdash; and the second one is invisible unless you diff. This is the single best argument for keeping
+    a cloned copy alongside your portal session.
+  </div>
+
+  <h3>A baseline worth keeping</h3>
+  <p>Clone the agent at a moment you are happy with, commit it, and call that the baseline. Then a rebuild
+  &mdash; yours or a colleague's, in a workshop or in anger &mdash; can be scored against it rather than
+  judged by eye:</p>
+
+  <ol class="steps">
+    <li>Clone the agent you want to check into a scratch directory.</li>
+    <li>Ask Copilot CLI to compare it against the baseline and report differences <b>by category</b> &mdash;
+      instructions, knowledge sources (including which is official), tools, topics.</li>
+    <li>Read the categories, not the raw diff. "Two tools missing, refusal topic absent" is a finding;
+      forty lines of reordered YAML is not.</li>
+  </ol>
+
+  <div class="tip">
+    <b>Expect a good baseline to report differences that are not faults.</b> If your baseline is an agent as
+    it stood at the <i>end</i> of a build, anything compared against it mid-build will legitimately be
+    missing the later pieces. A comparison is a prompt for judgement, not a pass mark.
+  </div>
+
+  <div class="note">
+    <b>The 30-second test that needs no tooling at all.</b> It is still the best one, and it is in the
+    <a href="reference-pack.html">reference pack</a>: ask any new agent for three fields your source
+    genuinely does not contain. An agent that answers all three is not ready, whatever its evaluation score
+    says.
+  </div>
+</section>
+
+<!-- ============================================ PART 6 -->
+<section id="p6" class="pb">
+  <h2>6 &middot; Shipping and drift</h2>
+
+  <h3>Solutions are the unit that moves</h3>
+  <p>An agent, its flows and its variables travel between environments as a <b>solution</b> &mdash; exported
+  from one, imported into the next. Exported solutions are zip files, which diff about as well as any other
+  zip file; <b>unpack them</b> and the contents become reviewable text. That single step is what turns
+  "we deployed something" into "here is what changed".</p>
+
+  <h3>Configuration that differs per environment</h3>
+  <p>Anything that changes between development and production &mdash; an endpoint address, a key &mdash;
+  belongs in an <b>environment variable</b> rather than pasted into two flows.</p>
+
+  <div class="warn">
+    <b>An environment variable is not a secret store, and this catches people out.</b> The designer stamps
+    the variable's current value into the flow definition when you save it. The action's header looks clean;
+    the definition still carries the literal. What you have gained is <b>one owned place to rotate the
+    value</b> instead of two pasted copies &mdash; which is worth having, and is not secrecy. If the value is
+    genuinely a secret, it needs a Key&nbsp;Vault-backed variable, and your exported files still need
+    checking before they go anywhere.
+  </div>
+
+  <h3>Noticing that someone edited production</h3>
+  <p>Nothing stops a colleague opening the maker portal and changing an instruction. The fix is not a
+  process document; it is a script you can run in ten seconds:</p>
+
+  <ol class="steps">
+    <li><b>Pull</b> each tracked agent, <b>export</b> the solution, <b>unpack</b> it.</li>
+    <li><b>Scrub</b> anything that came back as a literal secret, replacing it with a placeholder.</li>
+    <li>If <code>git diff</code> is empty, there was no drift. If it is not, <b>that diff is the drift</b>
+      &mdash; commit it, and now you know.</li>
+  </ol>
+
+  <div class="warn">
+    <b>Step 2 is not optional, and it is the step people skip.</b> A pull faithfully restores real values
+    over your placeholders &mdash; that is what "pull" means. Run the scrub <b>every time</b>, before
+    <code>git add</code>, and never in the other order. A leaked key in a commit is not fixed by a later
+    commit that removes it.
+  </div>
+
+  <div class="tip">
+    <b>Run it after any portal session, and once after any delivery or workshop.</b> Drift is not usually
+    sabotage &mdash; it is a demo that got fixed live, a switch flipped to make something work, and nobody
+    remembering a week later. Ten seconds of pulling beats an afternoon of "it used to work".
+  </div>
+</section>
+
+<!-- ============================================ PART 7 -->
+<section id="p7">
+  <h2>7 &middot; The things that will stop you</h2>
+
+  <p>Setup problems, in the order you are likely to hit them. None is a fault in your environment; all are
+  worth recognising rather than debugging from scratch.</p>
+
+  <table>
+    <tr><th style="width:26%">Symptom</th><th style="width:38%">What is actually happening</th><th style="width:36%">What to do</th></tr>
+    <tr>
+      <td><code>m365</code> asks for an <code>appId</code> and will not log in</td>
+      <td>Recent versions ship <b>no default app registration</b>. There is nothing to authenticate against
+        until you register one.</td>
+      <td>Register a single-tenant public-client app, declare the permissions you need, sign in against it.
+        Ask Copilot CLI to build the command; this is exactly the fiddly-syntax case.</td>
+    </tr>
+    <tr>
+      <td>A command fails saying nobody has <b>consented</b>, even though you just signed in</td>
+      <td>Interactive sign-in consents <b>only the resource it needs at that moment</b>. Permissions you
+        declared but never exercised are still ungranted.</td>
+      <td>Grant them once, deliberately, rather than expecting the login to cover everything.
+        <b>Verify against the actual grants, not the app's declared list</b> &mdash; the declaration is
+        intent, the grant is fact.</td>
+    </tr>
+    <tr>
+      <td>A whole consent operation fails because of <b>one</b> permission</td>
+      <td>You have declared a resource that is not provisioned in your directory. Consent is all-or-nothing.</td>
+      <td>Remove that resource and re-run. Leaving it in place breaks <b>every future consent</b> on that
+        app, including unrelated ones you add later.</td>
+    </tr>
+    <tr>
+      <td>Commands that sound like they cover one product ask for a different one</td>
+      <td>Tool names are marketing; the token a command requests is engineering. Some commands named after
+        one service authenticate against a quite different resource.</td>
+      <td>Do not assume a name tells you the permission. If it fails, look at what it <i>requested</i>, and
+        be prepared for the honest answer to be that this command cannot work in your directory.</td>
+    </tr>
+    <tr>
+      <td>A globally-installed CLI is "not found"</td>
+      <td>Its install directory is not on your <code>PATH</code>. Separately, a non-interactive shell does
+        not read your shell profile at all.</td>
+      <td>Add it to your profile for interactive use, and call tools by <b>full path</b> in scripts.</td>
+    </tr>
+  </table>
+
+  <div class="warn">
+    <b>Never run these tools with a debug flag on a shared screen.</b> Verbose debug output on some CLIs
+    includes the <b>raw authentication token</b> exchanged with the sign-in service. That token is usable by
+    anyone who reads it &mdash; off a projector, out of a recording, or out of a pasted log. Use the
+    ordinary verbose flag, which tells you what you need without the credential.
+  </div>
+
+  <div class="note">
+    <b>A note on permissions you grant to a CLI.</b> Some of the permission sets these tools recommend are
+    broad &mdash; full control of every site, directory access as yourself. They are bounded by what your own
+    account can already do, so they grant no new <i>reach</i>; what they change is how easily that reach can
+    be exercised by something running on your laptop. Declare what you actually use, and add rather than
+    starting wide. Your platform team will ask, and "I declared six permissions and here is what each is
+    for" is a much better answer than "I accepted the defaults".
+  </div>
+</section>
+
+<!-- ============================================ PART 8 -->
+<section id="p8" class="pb">
+  <h2>8 &middot; A worked loop</h2>
+
+  <p>Prompts, not commands &mdash; because the commands are the part you should be delegating. Each of these
+  is a real request to make of Copilot CLI in a terminal open at your working directory. Read what it
+  proposes before approving it; that reading <i>is</i> the learning.</p>
+
+  <div class="k">Getting oriented</div>
+<pre>List every Copilot Studio agent in my environment with its
+creation date and whether it has been published, then tell
+me which ones look like abandoned experiments.</pre>
+
+  <div class="k">Putting an agent under source control</div>
+<pre>Clone the agent called "&lt;name&gt;" into ./agents/&lt;name&gt;/,
+initialise a git repo if there isn't one, and commit it.
+Before committing, check nothing in the files is a real
+key or endpoint I would not want in a repository.</pre>
+
+  <div class="k">Reviewing a change someone else made</div>
+<pre>Pull the latest version of the agent in ./agents/&lt;name&gt;/
+and compare it to the last commit. Explain in plain English
+what would behave differently for someone asking it a
+question, and flag anything that changes what it is allowed
+to answer without grounding.</pre>
+
+  <div class="k">Preparing a demo's data</div>
+<pre>Upload ./samples/&lt;file&gt; into the SharePoint library at
+&lt;url&gt;, then confirm it is there and tell me when the
+agent's knowledge index is likely to have picked it up.</pre>
+
+  <div class="k">The end-of-week check</div>
+<pre>Pull every agent under ./agents/, export the solution,
+unpack it, replace any literal keys with placeholders, and
+show me a summary of what changed since last week. Do not
+commit anything until I have read it.</pre>
+
+  <div class="amber">
+    <b>Note the shape of the last one.</b> It ends with <i>do not commit until I have read it</i>. A terminal
+    agent is good at the six mechanical steps and has no opinion about whether the seventh should happen.
+    Keeping the decision on your side of the line costs one clause.
+  </div>
+
+  <h3>Where this stops</h3>
+  <p>None of this changes what an agent can <b>do</b> &mdash; the limits from the morning still hold, the
+  numbers boundary still holds, and a governance checklist is still something a person fills in. What it
+  changes is the <b>engineering around</b> the agent: reviewable, repeatable, and hard to lose. That is worth
+  a lot on the second agent and almost nothing on the first, which is the honest reason this pack is a
+  take-away rather than a session.</p>
+
+  <p style="margin-top:12px">Related material: <a href="course-outline-copilot-studio.html">the full course outline</a>
+  &middot; <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a>
+  &middot; <a href="module-2-build.html">Module 2 slides</a> &middot; <a href="demo-guide.html">the demo follow-along guide</a>
+  &middot; <a href="reference-pack.html">the reference pack</a>.</p>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI |
+  <a href="https://devops.gheware.com">devops.gheware.com</a> |
+  Trainer: Rajesh Gheware |
+  Tooling Pack v1.0
+</footer>
+
+<script>
+document.querySelectorAll('pre').forEach(function(pre){
+  var text=pre.innerText;
+  var b=document.createElement('button');
+  b.className='cp';b.type='button';b.textContent='Copy';
+  b.onclick=function(){
+    navigator.clipboard.writeText(text).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done');},1400);
+    });
+  };
+  pre.appendChild(b);
+});
+</script>
+</body>
+</html>

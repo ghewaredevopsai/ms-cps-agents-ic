@@ -1,7 +1,8 @@
-YouTube Resources — Microsoft Copilot Studio
+Resources — Microsoft Copilot Studio
 Investment Consulting team | Trainer: Rajesh Gheware
 Compiled 2026-08-20. All URLs verified live on that date.
 Non-developer section added 2026-08-22; those URLs verified live on that date.
+GitHub examples section added 2026-08-30; those URLs verified live on that date.
 
 Note: Copilot Studio's UI churned heavily through 2025-26. Check each video's
 recording date before pointing participants at it — older videos show a
@@ -46,6 +47,14 @@ https://www.youtube.com/playlist?list=PLTyFh-qDKAiGYsEuJ5plLSEFR72E9M9sW
   "Microsoft Copilot Studio" — Reza Dorrani, 24 videos. Power Platform
   practitioner's angle: deeper on connectors, Power Automate hand-offs and
   the plumbing behind an agent. Pick individual episodes by topic.
+
+https://www.youtube.com/watch?v=bCQGte09-Ko
+  "Agent Flows in Copilot Studio | Complete Tutorial" - Reza Dorrani.
+  Added 2026-08-30, URL verified live on that date. The one video on this list
+  that covers agent flows on their own terms: how an agent reaches a system,
+  and why a flow returns the same answer every time where the model does not.
+  This is the tech behind most of Module 2, and it is the fourth link in the
+  pre-read pack.
 
 
 -- AUTONOMOUS AGENTS: triggers, actions, real business flows (intermediate) --
@@ -154,3 +163,81 @@ https://www.youtube.com/@KevinStratvert
 https://www.youtube.com/@D365Techy
   D365Techy. Owner of the full beginner-to-advanced course playlist above;
   steady stream of Copilot Studio and Dynamics 365 walkthroughs.
+
+
+-- GITHUB: WORKED EXAMPLES YOU CAN IMPORT AND READ (intermediate) --
+
+Added 2026-08-30; all URLs verified live on that date. Everything in this section
+is Microsoft-owned except where marked community.
+
+Videos show you someone building. These let you read a finished build - the
+instructions, the tool descriptions, the topic logic and the flow wiring - which
+is a different and often faster way to learn once you have built one agent
+yourself. Start here after Module 2, not before.
+
+https://github.com/microsoft/m365-agent-templates
+  Microsoft 365 Agent Templates. The most useful repo on this list, because the
+  agents are downloadable as Power Platform solution .zip files and import
+  straight into Copilot Studio - not instructions, finished builds. Ten
+  templates. The ones worth opening first:
+    Request Tracker    approvals and notifications, full Power Automate wiring
+    Status Update      synthesises across mail, Teams, tasks and documents
+    Plan My Day        structured-output triggers, three depth levels
+    My Company Policy  SharePoint-grounded lookup with citations
+    SME Finder         organisational-data connectors
+  Import one into a scratch environment and read its instructions and tool
+  descriptions against your own. How Microsoft words a tool description is
+  worth more than another tutorial.
+
+https://github.com/microsoft/mcs-labs
+  Copilot Studio Labs. 30+ hands-on labs, markdown instructions only - no
+  importable artifacts. The breadth is the point: agent flows and custom
+  connectors, four separate MCP labs (including building your own server and
+  the Dataverse MCP connector), autonomous agents and triggers, computer use,
+  human-in-the-loop approvals, and multi-agent - which is the one place that
+  spells out connected agents versus child agents. Also covers ALM, pipelines
+  and source control, which nothing on the day had time for.
+  Browsable at https://microsoft.github.io/mcs-labs/
+
+https://github.com/microsoft/CopilotStudioSamples
+  Copilot Studio Samples. Low-code samples. The folder to open first is
+  authoring/ - importable solutions plus copy-paste snippets for topics and
+  adaptive cards, which paste directly into a topic's code editor. Also
+  extensibility/ (MCP, agent-to-agent, the M365 Agents SDK), sso/ (Entra ID
+  and Okta), testing/ (pytest and JMeter) and custom chat UIs.
+
+https://github.com/microsoft/Power-CAT-Copilot-Studio-Kit
+  Power CAT Copilot Agent Kit. Not samples - a managed solution you install,
+  from the Microsoft Copilot Acceleration Team. Its automated testing is the
+  serious version of the Evaluation tab: response match, topic match, multi-turn
+  conversations, and user-defined rubrics for generative answers, with test
+  gates wired into Power Platform Pipelines. This is the answer to "how would we
+  know a change actually improved anything" once an agent is real.
+
+https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/agent-samples
+  Microsoft's own curated index of the above and a few more. Check this first if
+  you are looking for something not listed here - it is maintained, and this
+  file is a snapshot.
+
+https://microsoft.github.io/agent-academy/
+  Copilot Studio Agent Academy. Curated lessons rather than a sample catalogue.
+  Structured progression through building agents, for anyone who prefers a
+  syllabus to a playlist.
+
+https://github.com/OfficeDev/microsoft-365-agents-toolkit-samples
+  Microsoft 365 Agents Toolkit samples. Pro-code, scenario-focused, surfaced
+  through the toolkit in VS Code. For developers heading past the Copilot Studio
+  ceiling rather than working inside it.
+
+https://github.com/microsoft/skills-for-copilot-studio
+  Skills for Copilot Studio, from the Copilot Acceleration Team. Authoring
+  helpers for custom agents and more advanced authoring workflows.
+
+https://github.com/pnp/copilot-pro-dev-samples
+  COMMUNITY, not Microsoft-curated. PnP pro-code Copilot agent samples,
+  usually the first place advanced or newly released scenarios appear. Treat as
+  reference, not as guidance - nothing here carries Microsoft support.
+
+One caution for this whole section: the UI-churn warning at the top of this file
+applies to repositories as well. Lab instructions and screenshots go stale exactly
+where the product has moved, and it has moved a lot.
