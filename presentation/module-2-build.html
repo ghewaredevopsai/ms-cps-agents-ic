@@ -154,7 +154,8 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
     <button id="tocbtn" title="Slide index (O)">Index</button>
     <button id="notesbtn" title="Session notes (N)">Notes</button>
     <button id="fsbtn" title="Fullscreen (F)">Fullscreen</button>
-    <a href="demo-guide.html" title="Participant demo follow-along guide">Demo guide</a>
+    <a href="prompt-demos.html" title="Participant prompt-demos guide">Prompt demos</a>
+<a href="../use-cases/fund-research-assistant.html" title="Build and demo the Fund Research Assistant, end to end">Agent build</a>
     <a href="pre-reads.html" title="Pre-read pack">Pre-reads</a>
     <a href="reference-pack.html" title="Take-away reference pack">Reference</a>
     <a href="tooling-pack.html" title="Command-line tooling pack">Tooling</a>
@@ -1954,7 +1955,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
       </svg>
     </div>
   </div>
-  <div class="take"><b>What you take away:</b> both decks with per-slide notes &middot; the <a href="demo-guide.html">demo follow-along guide</a>, which doubles as the patterns reference &middot; the <a href="reference-pack.html">reference pack</a> &mdash; ten consulting prompts, the capability&rarr;workflow map, and the surfaces you can use without an environment or a developer &middot; the <a href="tooling-pack.html">tooling pack</a> &mdash; building, testing and shipping the same agent from the command line &middot; the full demo-asset set.</div>
+  <div class="take"><b>What you take away:</b> both decks with per-slide notes &middot; the <a href="prompt-demos.html">prompt-demos guide</a>, which doubles as the patterns reference &middot; the <a href="reference-pack.html">reference pack</a> &mdash; ten consulting prompts, the capability&rarr;workflow map, and the surfaces you can use without an environment or a developer &middot; the <a href="tooling-pack.html">tooling pack</a> &mdash; building, testing and shipping the same agent from the command line &middot; the full demo-asset set.</div>
 </section>
 
 </div></div>
@@ -1999,7 +2000,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
   var links=[].slice.call(toc.querySelectorAll('a'));
 
   // demo cue layer: where each demo runs, and what is next from here
-  var DEMOS={'2.1':{t:'Generative orchestration, the trace, and proving a fix',m:'~32 min'},'2.2':{t:'Calling an external API &mdash; and a legacy internal one',m:'~35 min'},'2.3':{t:'Excel and SQL data movement',m:'~25 min'},'2.4':{t:'Unstructured &rarr; structured, with a schema',m:'~30 min'},'2.5':{t:'Generating the report',m:'~30 min'},'2.6':{t:'Publish to Teams, share, approve, govern',m:'~35 min'},'2.7':{t:'The agent runs without being asked &mdash; the trigger',m:'~26 min'}};
+  var DEMOS={'2.1':{t:'Generative orchestration, the trace, and proving a fix &middot; agent page, Stage 2',m:'~32 min'},'2.2':{t:'Calling an external API &mdash; and a legacy internal one &middot; agent page, Stage 4',m:'~35 min'},'2.3':{t:'Excel and SQL data movement &middot; agent page, Stage 5',m:'~25 min'},'2.4':{t:'Unstructured &rarr; structured, with a schema &middot; agent page, Stage 6',m:'~30 min'},'2.5':{t:'Generating the report &middot; agent page, Stages 6&ndash;7',m:'~30 min'},'2.6':{t:'Publish to Teams, share, approve, govern &middot; agent page, Stages 7&ndash;8',m:'~35 min'},'2.7':{t:'The agent runs without being asked &mdash; the trigger &middot; agent page, Stage 8',m:'~26 min'}};
   var runAfter={};
   slides.forEach(function(s,k){ if(s.dataset.role==='pre') runAfter[s.dataset.demo]=k; });
   var demoOrder=Object.keys(runAfter).sort();

@@ -17,12 +17,12 @@ staged steps with the exact text to paste &rarr; two tests, one of which is supp
 | [`multi-agent-account-lookup.html`](multi-agent-account-lookup.html) | Three agents behind one conversation — a parent that routes, a child agent held inside it, and a separately published connected agent that queries Dataverse | ~40 min |
 
 Each page prints cleanly to A4 if you would rather work from paper
-(`fund-research-assistant.html` is 13 pages, `autonomous-support-agent.html` is 5,
+(`fund-research-assistant.html` is 16 pages, `autonomous-support-agent.html` is 5,
 `multi-agent-account-lookup.html` is 6).
 
 ## How these relate to the rest of the material
 
-The demos are in [`../presentation/demo-guide.html`](../presentation/demo-guide.html),
+The demos are in [`../presentation/prompt-demos.html`](../presentation/prompt-demos.html),
 and they all use the **Northwind** fund anchor so the figures line up across the decks and the
 guide.
 
@@ -38,10 +38,7 @@ The Fund Research Assistant page is the only one that covers the whole chain in 
 things you configure, then six tools doing three different jobs — two that fetch (a public API, a
 stand-in for a legacy internal system), two that compute (Excel, so no total is ever added by the
 model), two that act (a human approval gate, and the plan-to-PowerPoint hop) — and finally the trigger.
-It is a build sheet, not a discussion. Each of the six tools opens with a **node-strip diagram** of the
-flow — trigger, actions, response — followed by a per-node configuration table carrying the exact
-expression for every field, and the trigger flow gets a full diagram with both branches of its
-condition. Then paste blocks, and a **Check** list per stage.
+It is now the **main document for this use case** — build sheet and demo script in one. Each of the six tools opens with a node-strip diagram and a per-node configuration table carrying every expression; the trigger flow gets a full diagram of both branches. Each stage also carries a **What this proves** line, a **Check** list, and the optional steps to drop first if you are short. A running-order table at the top gives the ~2-hour shape.
 
 The Autonomous Support Agent covers ground the decks only name in passing:
 

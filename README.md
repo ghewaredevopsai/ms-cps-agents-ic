@@ -9,7 +9,7 @@
 
 ## Start here
 
-- **Attending?** Watch what you can from `presentation/pre-reads.html` first (ten short videos; the first four are the ones that matter), then open `presentation/demo-guide.html` — it has the pre-flight checklist and every demo step.
+- **Attending?** Watch what you can from `presentation/pre-reads.html` first (ten short videos; the first four are the ones that matter), then open `presentation/prompt-demos.html` for the prompt work. To build and demo the agent end to end, use `use-cases/fund-research-assistant.html`.
 - **Want the shape of the day?** `presentation/course-outline-copilot-studio.html`.
 - **The slides** are `presentation/module-1-foundations.html` and `module-2-build.html`. Press **N** on any slide for that slide's notes, **O** for the index.
 - **Want to build one yourself?** `use-cases/` has step-by-step guides you can follow in your own environment.
@@ -26,7 +26,7 @@
 | `presentation/course-outline-copilot-studio.html` | **Client-facing course outline** — demo-only, 27 Aug scope. Prints to 5 A4 pages; carries a requirements-coverage table |
 | `presentation/module-1-foundations.html` | **Module 1 slide deck** — 19 slides, per-slide session notes (press N), keyboard/index navigation, hand-authored SVG diagrams sized to fill the frame and read from the back of a room. Self-contained, 1280×720 scaled stage |
 | `presentation/module-2-build.html` | **Module 2 slide deck** — 32 slides, per-slide session notes (press N), segmented session progress, same diagram vocabulary as Module 1. Deep-build content: APIs, identity, failure engineering, schema, ALM, governance |
-| `presentation/demo-guide.html` | **Participant run-sheet** — all 15 demos (8 in Module 1, 7 in Module 2): what each proves, what to type, what you should see, and what to do when it misbehaves. The build configuration lives in `use-cases/fund-research-assistant.html`; each demo points at the stage that builds it |
+| `presentation/prompt-demos.html` | **Prompt demos** — seven bare-surface demos (1.1–1.7) that need nothing provisioned: no agent, no tenant, no licence. The agent itself is built and demonstrated on `use-cases/fund-research-assistant.html` |
 | `presentation/pre-reads.html` | **Pre-read watchlist** sent ahead — ten curated YouTube videos giving a high-level view of the tech that gets demonstrated, each tied to the demo it maps to. Four are marked as the ones that matter; nothing is required preparation. 2 A4 pages |
 | `presentation/reference-pack.html` | **Reference pack** to keep afterwards — a ten-prompt consulting prompt pack (copy buttons), a capability→workflow map for choosing what to build next, and the surfaces you can use without an environment or a developer. 12 A4 pages |
 | `presentation/tooling-pack.html` | **Tooling pack** to keep afterwards — the Microsoft command-line tooling for building, testing and shipping the same agent as files, driven with GitHub Copilot CLI. Covers `pac`, `m365`, `az`, MCP servers, and the setup failures worth recognising. 9 A4 pages |
@@ -65,7 +65,7 @@ All seven `presentation/` files are cross-linked and there is **no `.md` source 
 - **Two modules** matching the client's own split: foundations for all 35 (~3 hr) + a hands-on build track pitched at ~10 devs (~5 hr). Nobody leaves at lunch — the whole room sees the build.
 - **One flagship capstone:** the *Investment Report Agent* — replaces the team's manual unstructured-data → structured → PowerPoint pipeline (today: manual + Aspose + custom code).
 - **NO LAB — trainer live demo only** (client instruction, **20 Jul 2026**; supersedes the earlier Gheware-sandbox-for-all plan). Copilot Studio is opened on screen and the use case built live, showing enterprise-workflow linking, agent sharing and deployment. Nothing is provisioned for participants; no client-tenant readiness dependency.
-- **Participants may follow along** on their own machines using `presentation/demo-guide.html` — optional, nothing required or provisioned. The guide has an A/B/C track system for whatever Copilot Studio access a participant turns out to have.
+- **Participants may follow along** on their own machines using `presentation/prompt-demos.html` — optional, nothing required or provisioned. The guide has an A/B/C track system for whatever Copilot Studio access a participant turns out to have.
 - **The agent must run unattended.** The client's stated ROI test is agents *integrated into workflows*, so session 2.6 / demo 2.7 ends with an automated trigger: a document lands, the agent extracts, enriches, builds the deck and raises an approval card with nobody at the keyboard.
 - **Hybrid delivery is designed, not assumed.** The 5 online seats get a dedicated feed of the Copilot Studio window (not a room camera), a named facilitator watching the meeting chat, and recordings of the demo segments. In a demo-led day with no lab, the recording is what replaces the lab.
 - **Deliberately excluded**, per the client: licensing theory, AI history/background, vendor comparisons.

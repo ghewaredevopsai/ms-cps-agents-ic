@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo Follow-Along Guide — AI Agents for Investment Consulting</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.bld{background:#eef4fd;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#0b2545}
+.bld a{color:#1d4ed8}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545;overflow-wrap:anywhere}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.demo{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.demo>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.demo>.head .id{font-weight:700;font-size:1.02em}
+.demo>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.demo>.head .badges{display:flex;gap:6px;flex-wrap:wrap}
+.demo>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.a{background:#059669;color:#fff}
+.b.bb{background:#1d4ed8;color:#fff}
+.b.c{background:#78716c;color:#fff}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}.k.a{color:#b45309}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:26px;position:relative}
+.chk li::before{content:"\2610";position:absolute;left:0;top:-1px;font-size:17px;color:#1d4ed8}
+.toc{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:14px 18px}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}.toc ol{columns:1}}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  pre .cp{display:none}
+  .demo,.warn,.note,.tip,.amber,table{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .demo{page-break-inside:avoid}
+  .pb{page-break-before:always}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Demo Follow-Along Guide</h1>
+  <div class="tagline">AI Agents for Investment Consulting &mdash; Microsoft Copilot Studio</div>
+  <div class="meta">
+    <span class="d">1 Day &middot; 27 August 2026</span> |
+    <span>Investment Consulting</span> |
+    <span>7 demos</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="warn">
+  <b>Use synthetic data only.</b> Every demo in this guide runs on the supplied <em>Northwind Multi-Asset Growth Fund</em> factsheet &mdash; a fictional fund created for training.
+  <b>Do not paste real client, fund, member or corporate data into any agent you build while following along</b>, and never into a trial or personal tenant.
+  If you are unsure whether your environment is approved for a piece of data, the answer is to use the synthetic file.
+</div>
+
+<section id="how">
+  <h2>How to use this guide</h2>
+  <div class="bld"><b>Two documents, one agent, no overlap.</b> This guide is the <b>run-sheet</b>: what each demo proves, what to type, what you should see, and what to do when it misbehaves. The <b>build sheet</b> is <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a> &mdash; every flow node, every expression, every instruction block, in build order. Demos 1.8 and 2.1&ndash;2.7 all extend the same agent, and each one points at the stage that builds it. Configuration is written down <b>once</b>, on that page.</div>
+<p>
+    The workshop is <strong>trainer-led</strong>: Rajesh builds everything live on screen. Nothing here is required of you, and no lab has been provisioned.
+    This guide exists so that if you <em>want</em> to build alongside the demo &mdash; on the day or afterwards &mdash; you can, without pausing the room to ask what was clicked.
+  </p>
+  <p>Every demo below is written to the same shape: <strong>what it proves &rarr; what you need &rarr; the steps &rarr; the exact text to paste &rarr; what you should see &rarr; what to do when it breaks.</strong></p>
+  <p>If you fall behind, <strong>stop building and start watching.</strong> Every demo states what you should see, so you can read the outcome without having produced it, and the assets are yours to keep &mdash; the afternoon is not a race and nothing later depends on your having finished something earlier.</p>
+
+  <h3>Pick your track before the day</h3>
+  <table>
+    <thead><tr><th style="width:14%">Track</th><th style="width:30%">You have</th><th>What you can do</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="b a">A</span> <strong>Full build</strong></td>
+        <td>Copilot Studio access &mdash; a licence, or a trial you can start</td>
+        <td>All seven demos here. They run on a bare surface &mdash; no agent, nothing provisioned &mdash; and they are the prompt craft everything else rests on. The agent itself is built and demonstrated on <a href="../use-cases/fund-research-assistant.html">the Fund Research Assistant page</a>.</td>
+      </tr>
+      <tr>
+        <td><span class="b bb">B</span> <strong>Copilot only</strong></td>
+        <td>Microsoft 365 Copilot / Copilot Chat, but no Copilot Studio</td>
+        <td>Demos 1.1 through 1.7 in full. For the rest, follow the steps as reading &mdash; they are written so the logic lands without the clicks.</td>
+      </tr>
+      <tr>
+        <td><span class="b c">C</span> <strong>Watch &amp; replay</strong></td>
+        <td>No AI tooling available on the day</td>
+        <td>Watch the demos, keep this guide, and replay any of them later. Every asset you need is in the appendix.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Find out which track you are on in 60 seconds:</strong> open <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> and sign in with your work account.
+    If you land on a home screen where you can create an agent &mdash; or are offered a free trial you are permitted to start &mdash; you are <strong>Track A</strong>.
+    If you are blocked by your tenant, you are Track B or C. <em>Either is fine.</em> Track A is not better attendance; it is just a different way of paying attention.
+  </div>
+  <div class="note">
+    <strong>Joining online?</strong> Five seats are remote. You get a dedicated feed of the Copilot Studio window itself &mdash; not a camera pointed at a room &mdash; so every click is legible at your end.
+    Put your questions in the meeting chat at any point rather than waiting for a pause; someone in the room is watching it and will read them out.
+    The demo segments are recorded and circulated afterwards, so if a step goes past faster than you can follow it, let it go and pick it up from the recording alongside this guide.
+  </div>
+  <div class="amber">
+    <strong>If Copilot Studio is blocked and you want Track A anyway:</strong> a separate Microsoft 365 Developer Program tenant, or a personal Microsoft 365 trial, gives you a sandbox that is nothing to do with your corporate tenant.
+    That is the cleanest option &mdash; but it makes the synthetic-data rule absolute. Nothing corporate goes into it, ever.
+  </div>
+</section>
+
+<section id="toc">
+  <h2>The seven demos</h2>
+  <div class="toc">
+    <ol>
+      <li><a href="#d11">1.1 &mdash; A reusable extraction prompt</a></li>
+      <li><a href="#d12">1.2 &mdash; Manager update &rarr; the house question list</a></li>
+      <li><a href="#d13">1.3 &mdash; Meeting notes &rarr; decisions, actions, owners</a></li>
+      <li><a href="#d14">1.4 &mdash; Holdings extract &rarr; data-quality check</a></li>
+      <li><a href="#d15">1.5 &mdash; Draft commentary &rarr; house tone</a></li>
+      <li><a href="#d16">1.6 &mdash; Drift, fabrication and the grounding fix</a></li>
+      <li><a href="#d17">1.7 &mdash; Marking up your own workflow</a></li>
+    </ol>
+  </div>
+  <p style="margin-top:10px;font-size:.92em;color:#546b8a">
+    These seven run on a bare surface &mdash; a scratch agent with no Instructions, or any chat window. Nothing is built and nothing is provisioned, which is the point: everything you see is the prompt doing the work. Building the agent itself is a separate, longer sitting on <a href="../use-cases/fund-research-assistant.html">the Fund Research Assistant page</a>.</p>
+</section>
+
+<section id="preflight">
+  <h2>Pre-flight &mdash; 15 minutes, done before the day</h2>
+  <p>Do this the day before, not on the morning. If any step fails, you are simply on Track B or C &mdash; note which step failed and tell us at the start.</p>
+  <ul class="chk">
+    <li><strong>Sign in</strong> to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a>. Note what you see: an agent list, a trial offer, or a block.</li>
+    <li><strong>Download the demo assets</strong> &mdash; the <code>demo-assets/</code> folder circulated with this guide. It contains <code>sample-fund-factsheet.pdf</code> (plus <code>.html</code> and <code>.txt</code> versions of the same document), both spreadsheets, both manager updates and the three JSON files. <strong>Nothing has to be typed out by hand.</strong></li>
+    <li><strong>Create a working folder</strong> in OneDrive called <code>copilot-workshop</code> and put the factsheet in it.</li>
+    <li><strong>Copy <code>holdings.xlsx</code> and <code>benchmarks.xlsx</code></strong> into that folder too. Both already have their ranges formatted as real Excel <em>Tables</em>, which is what the connector needs &mdash; open one and check the ribbon shows <em>Table Design</em>. (If you would rather build them yourself, the rows are in <a href="#assets">the appendix</a>.)</li>
+    <li><strong>Check Power Automate opens</strong> at <a href="https://make.powerautomate.com">make.powerautomate.com</a> &mdash; needed for the agent build on <a href="../use-cases/fund-research-assistant.html">the Fund Research Assistant page</a>.</li>
+    <li><strong>Have Teams open</strong> &mdash; the agent build publishes and triggers there.</li>
+    <li><strong>Bring one real question</strong> from your own work that you would like an agent to answer. You will use it in demo 1.7.</li>
+  </ul>
+  <div class="tip">
+    <strong>Nothing to install.</strong> Everything is browser-based. If your laptop can open Teams and OneDrive, it can do every demo in this guide.
+  </div>
+</section>
+
+<section id="m1" class="pb">
+  <h2>Module 1 demos &mdash; foundations (all 35 participants)</h2>
+
+  <!-- D1.1 -->
+  <div class="demo" id="d11">
+    <div class="head">
+      <span class="id">Demo 1.1 <small>A reusable extraction prompt</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~12 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> a prompt with named fields and a fixed output shape produces the same table every time &mdash; which is what makes the next step automatable. A vague prompt does not.</div>
+
+      <div class="k">You need</div>
+      <p>A <strong>bare surface with no Instructions</strong> &mdash; a scratch Copilot Studio agent with an empty Instructions box is the most reliable, and Copilot chat works if your tenant will fabricate. <code>sample-fund-factsheet.pdf</code> attached. Nothing has been built yet, and that is the point: everything you see here is the prompt doing the work, unaided. On <a href="../use-cases/fund-research-assistant.html">the Fund Research Assistant page</a> this same prompt becomes an agent&rsquo;s Instructions.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> Paste the vague prompt. Look at what you get back.</li>
+        <li><strong>Run it again</strong> in a new chat. The shape of the answer will have changed &mdash; different headings, different emphasis, different fields.</li>
+        <li><strong>Now ask properly.</strong> Paste the structured prompt. This is the five-part prompt from the slide: role, context, task, format, example.</li>
+        <li><strong>Run it twice more.</strong> Confirm you get the same table each time.</li>
+      </ol>
+
+      <div class="k">The vague prompt (run this first, so the contrast lands)</div>
+      <pre>Summarise the key points of this fund factsheet.</pre>
+
+      <div class="k">The structured prompt</div>
+      <pre>You are an investment consultant preparing a quarterly fund review for an
+institutional client - a long-horizon retirement portfolio.
+
+Use only the attached Northwind factsheet (data as of 30 June 2026).
+If a value is not present in the document, write: not stated.
+Do not estimate, infer or calculate any figure.
+
+Extract exactly these fields:
+  fund name, ISIN, share class, fund size (AUM), benchmark, fund manager,
+  inception date, TER regular, TER direct, exit load,
+  return 1yr, return 3yr, return 5yr, return since inception,
+  benchmark 1yr, benchmark 3yr, benchmark 5yr,
+  equity allocation, debt allocation, gold allocation, cash allocation,
+  top holding name, top holding weight,
+  tracking error, portfolio turnover, NAV per unit
+
+Return a markdown table with exactly three columns: field | value | source section.
+One row per field, in the order listed above.
+
+Example row:
+TER direct | 0.62% | Section 9 Fees</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>The vague prompt gives you a readable paragraph or bullet list &mdash; useful to a human, useless to a downstream step, and different every run.</li>
+        <li>The structured prompt gives you 26 rows, in your order, with a source column. Run it three times and the table is stable.</li>
+        <li><strong>The last three rows read <em>not stated</em>.</strong> Tracking error, portfolio turnover and NAV per unit are deliberately absent from the factsheet &mdash; they are there to prove the refusal line is doing work. Stage 1 of the agent page deletes that line and shows what fills the gap.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Fields are merged or reordered.</strong> Add <em>"Do not merge, rename, reorder or omit any field. If unsure, output the field with value: not stated."</em></li>
+        <li><strong>You get prose instead of a table.</strong> Some interfaces need the format demand repeated at the end. Append: <em>"Output the markdown table and nothing else."</em></li>
+        <li><strong>The ISIN looks wrong.</strong> It should be <code>INF000SAMPLE01</code> &mdash; the factsheet marks it illustrative. If you got a real-looking ISIN, the model invented it.</li>
+        <li><strong>Step 5 changed nothing &mdash; the fields still read <em>not stated</em>.</strong> Expected in Microsoft 365 Copilot chat with a file attached: it will not invent a field value whichever instruction you delete, and it emits <em>not stated</em> on its own as its convention for an absent field. Deleting the second guard as well makes no difference. Run step 5 against a Copilot Studio agent with <em>Allow ungrounded responses</em> on, or present it as a walkthrough rather than a live result.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Save this prompt. On the agent page that same discipline becomes an <em>enforced schema</em> over a slightly different field list &mdash; at which point "not stated" stops being a request and becomes a rule the system checks.</p>
+    </div>
+  </div>
+
+  <!-- D1.3 -->
+  <div class="demo" id="d12">
+    <div class="head">
+      <span class="id">Demo 1.2 <small>Manager update &rarr; the house question list</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the five parts are not specific to factsheets. Same anatomy, a different document, and a fixed question list &mdash; which is what makes manager A and manager D comparable at all.</div>
+
+      <div class="k">You need</div>
+      <p>The same bare surface as demo 1.1 &mdash; still no Instructions &mdash; with <code>meridian-manager-update.txt</code> attached (it is in <code>demo-assets/</code>). It is also the second knowledge source on the Fund Research Assistant, but run this one outside that agent for the same reason as 1.2.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask badly first.</strong> <em>"What does this manager update say?"</em> You will get the manager&rsquo;s own emphasis, in the manager&rsquo;s own order.</li>
+        <li><strong>Now paste the structured prompt.</strong> Same five parts as the slide, pointed at a different job.</li>
+        <li><strong>Read the headings, not the prose.</strong> They are in <em>your</em> order now, and one of them should say <em>Not addressed</em>.</li>
+      </ol>
+
+      <div class="k">The prompt</div>
+      <pre>You are an investment consultant reviewing a manager's quarterly update
+for an institutional client.
+
+Use only the attached manager update (July 2026). If the update does not
+address something, write: not addressed. Do not infer it from tone.
+
+Answer the house question list, in this order:
+  1. what changed in the team
+  2. what changed in the process
+  3. what drove performance this quarter
+  4. the manager's own explanation of the worst quarter
+
+One heading per question. Two sentences maximum under each.
+Write "Not addressed" wherever the update is silent.
+
+Example:
+Team - Two analysts left the credit desk in May; no replacement named. Section 3</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Four headings, in the order you asked for &mdash; not the order the manager wrote in.</li>
+        <li><strong>At least one <em>Not addressed</em>.</strong> That is the finding: the thing the update quietly skipped is now visible instead of absent.</li>
+        <li>Run it against a second manager update and the two are comparable line for line. That is the whole point of a house list.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It answers in the manager&rsquo;s order.</strong> Repeat the constraint at the end: <em>"Answer the four questions in the order given, even where the update covers them in a different order."</em></li>
+        <li><strong>It infers a reason from tone.</strong> The CONTEXT line is doing the work. Strengthen it: <em>"If the update does not state a reason, write: not addressed. Do not construct one."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d13">
+    <div class="head">
+      <span class="id">Demo 1.3 <small>Meeting notes &rarr; decisions, actions, owners</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the FORMAT line is the whole value here. Three lists with an owner-and-date rule turn a readable summary into a record somebody can be held to.</div>
+
+      <div class="k">You need</div>
+      <p>Nothing attached. Same bare surface &mdash; paste the synthetic notes below, then the prompt underneath them.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Paste the notes.</strong> They are deliberately messy, the way real notes are.</li>
+        <li><strong>Paste the prompt.</strong> Note that it demands an owner and a date on every action line.</li>
+        <li><strong>Count the <em>not stated</em> entries.</strong> Those are the actions that would have quietly gone nowhere.</li>
+      </ol>
+
+      <div class="k">The notes to paste first</div>
+      <pre>IC meeting, 14 July. Present: three of five.
+Northwind - 3yr 15.6% vs benchmark 13.1%. Committee comfortable. Equity 68%,
+mandate ceiling 70%, agreed to keep watching but no action for now.
+Someone to get the latest fee schedule off the manager - direct plan TER
+looked like 0.62% but nobody had it in writing. Before end of September.
+Question raised about whether the gold sleeve is still doing anything.
+Parked. Agreed to revisit the whole allocation at the October meeting.
+Chair asked for the Q3 pack a week earlier than usual this time.</pre>
+
+      <div class="k">The prompt</div>
+      <pre>You are the secretary of an investment committee, writing the record
+for people who were not in the room.
+
+Use only the notes above. Do not add context you believe to be true but
+that nobody actually said.
+
+Separate the notes into three lists: decisions taken, actions agreed,
+and questions left open.
+
+Three headed lists. Every action line carries an owner and a date. Where
+either is missing, write: owner not stated, or: date not stated.
+
+Example:
+Action - Request the fee schedule from the manager | Owner: not stated | By: 30 Sep</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>Three lists, and the split is cleaner than the notes felt.</li>
+        <li><strong>The fee-schedule action comes back as <em>owner not stated</em>.</strong> In the notes it reads as agreed; in the record it reads as nobody&rsquo;s job. That is the demo.</li>
+        <li>The gold-sleeve question lands under <em>open</em>, not under <em>decisions</em> &mdash; "parked" is not a decision.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It invents an owner.</strong> Usually the chair. Add: <em>"Never attribute an action to a person who is not named in the notes."</em></li>
+        <li><strong>It merges decisions and actions.</strong> Add one line of definition: <em>"A decision is a conclusion reached. An action is something a named person must do."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d14">
+    <div class="head">
+      <span class="id">Demo 1.4 <small>Holdings extract &rarr; data-quality check</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the CONTEXT line holding the arithmetic back. This is the task where totalling the column is most tempting and a wrong total is least visible.</div>
+
+      <div class="k">You need</div>
+      <p>Same bare surface. <code>holdings.xlsx</code> from <code>demo-assets/</code>, or just paste half a dozen rows of it &mdash; either works.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Paste the prompt with the holdings rows.</strong></li>
+        <li><strong>Check what it did <em>not</em> do.</strong> It should flag rows and refuse to total the weight column.</li>
+        <li><strong>Optional, ~30 seconds:</strong> delete the sentence beginning <em>"Do not calculate"</em> and run again. Watch a total appear that nobody asked for and nobody will re-add.</li>
+      </ol>
+
+      <div class="k">The prompt</div>
+      <pre>You are a portfolio analyst checking a holdings file before it is used
+in a client report.
+
+Use only the rows in the attached extract. Do not calculate totals,
+averages or weighted figures, and do not convert currencies.
+
+Flag: duplicate identifiers, missing sector or currency, blank weights,
+and any row whose currency differs from the fund's stated currency.
+
+Return a table - row number | field | what is wrong | why it matters.
+Nothing else: no summary, no total row.
+
+Example:
+14 | currency | blank | cannot be aggregated or converted</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>A table of flagged rows, and <strong>no total anywhere</strong>.</li>
+        <li><strong>If a total appears, the CONTEXT line was dropped or overridden.</strong> That is worth showing deliberately &mdash; the number will look entirely reasonable.</li>
+        <li>This is the same tiered rule as the rest of the day: the model may state a difference between two figures it can show you; totals, averages and weighted figures come from an action.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>It totals the weights anyway.</strong> Move the refusal to the last line of the prompt. Position matters more than wording here.</li>
+        <li><strong>It invents a sector for a blank cell.</strong> Add: <em>"A blank cell is a finding, not a gap to fill."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d15">
+    <div class="head">
+      <span class="id">Demo 1.5 <small>Draft commentary &rarr; house tone, figures frozen</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~5 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> one worked line settles tone faster than a style guide &mdash; and that a rewrite is the easiest place in the day to lose a number without noticing.</div>
+
+      <div class="k">You need</div>
+      <p>Nothing attached. Same bare surface &mdash; paste the draft below, then the prompt.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Paste the draft.</strong> It is deliberately written in the wrong voice.</li>
+        <li><strong>Paste the prompt</strong>, including the worked example line.</li>
+        <li><strong>Compare the figures, not the prose.</strong> Every number in the output should be byte-identical to the draft.</li>
+      </ol>
+
+      <div class="k">The draft to paste first</div>
+      <pre>The fund had a truly excellent three years, delivering a stellar 15.6%
+annualised and comfortably crushing its benchmark's 13.1%. Equity exposure
+ended the period at a healthy 68%, and we remain very confident that this
+positioning will continue to reward patient investors going forward. Fees
+remain highly competitive at 1.18% regular and just 0.62% direct.</pre>
+
+      <div class="k">The prompt</div>
+      <pre>You are writing quarterly commentary in your firm's house voice
+for an institutional client.
+
+Use only the figures in the draft above. Do not change, round or
+re-express any number, and do not add a figure that is not already there.
+
+Rewrite the draft in house tone: plain, specific, no superlatives,
+and no forward-looking claims.
+
+Three paragraphs, 120 words maximum each. Every figure exactly as written.
+
+Example of house tone:
+The fund returned 15.6% over three years, against 13.1% for the benchmark.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li>&ldquo;Truly excellent&rdquo;, &ldquo;stellar&rdquo;, &ldquo;crushing&rdquo; and &ldquo;healthy&rdquo; all gone; the sentences got shorter and more specific.</li>
+        <li><strong>The forward-looking claim disappears</strong> &mdash; <em>"we remain very confident this positioning will continue to reward"</em> is exactly the sentence a consultant cannot sign.</li>
+        <li><strong>15.6, 13.1, 68, 1.18 and 0.62 all survive untouched.</strong> Check them one by one. This is the failure to watch for, because rounding reads as tidying.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>15.6% becomes &ldquo;approximately 16%&rdquo;.</strong> The most common failure, and the most plausible-looking. Repeat the constraint last: <em>"Quote every figure exactly as it appears. Do not round."</em></li>
+        <li><strong>It keeps a superlative you did not notice.</strong> Give it the list: <em>"Remove: excellent, stellar, strong, robust, healthy, comfortably, significantly."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo" id="d16">
+    <div class="head">
+      <span class="id">Demo 1.6 <small>Drift, fabrication and the grounding fix</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the same question, asked three ways, produces three different levels of trustworthiness &mdash; and only the grounded version is safe to put near a client deliverable.</div>
+
+      <div class="k">You need</div>
+      <p>Any chat interface to a model you are permitted to use &mdash; but <strong>prefer the Copilot Studio test pane</strong>. On a cautious tenant Microsoft 365 Copilot invents a figure close to the real one (~17% against a true 15.6%) and the contrast barely registers; an agent typically invents 5&ndash;7%, which is visibly wrong. The factsheet file for step 3.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>Ask with no context at all.</strong> Open a fresh chat and paste prompt A. Note the answer.</li>
+        <li><strong>Ask again in a new chat.</strong> Paste exactly the same prompt A a second time. Compare the two answers word by word.</li>
+        <li><strong>Now ground it.</strong> Attach <code>sample-fund-factsheet.pdf</code> to the chat and paste prompt B. Compare against what the document actually says.</li>
+        <li><strong>Ask for the impossible.</strong> With the file still attached, paste prompt C &mdash; it asks for two figures that are <em>not</em> in the document and cannot be worked out from it.</li>
+      </ol>
+
+      <div class="k">Prompt A &mdash; ungrounded</div>
+      <pre>What was the 3-year annualised return of the Northwind Multi-Asset Growth Fund, and what is its total expense ratio?</pre>
+
+      <div class="k">Prompt B &mdash; grounded</div>
+      <pre>Using only the attached factsheet, state the 3-year annualised return of the fund and its total expense ratio.
+For each figure, quote the section of the document it came from.
+If a figure is not present in the document, reply exactly: not stated.</pre>
+
+      <div class="k">Prompt C &mdash; the refusal test</div>
+      <pre>Using only the attached factsheet, state the fund's tracking error against the benchmark
+and its portfolio turnover ratio.
+If a figure is not present in the document, reply exactly: not stated. Do not estimate, infer or calculate.</pre>
+
+      <div class="k g">What you should see</div>
+      <ul>
+        <li><strong>Prompt A</strong> &mdash; a fluent, confident answer containing numbers that are wholly invented, because the fund does not exist. The two runs will usually differ.</li>
+        <li><strong>Prompt B</strong> &mdash; 15.6% and 1.18% (Regular) / 0.62% (Direct), with a pointer to the performance and fees sections. Checkable in seconds.</li>
+        <li><strong>Prompt C</strong> &mdash; <em>not stated</em> for both. Neither figure appears anywhere in the document, in any form, and neither can be derived from what is there. If you get numbers anyway, you have just watched the failure mode that matters most.</li>
+      </ul>
+
+      <div class="k r">When it does not behave</div>
+      <ul>
+        <li><strong>Prompt A refused instead of inventing.</strong> Common &mdash; a tenant with web and enterprise search will look, find nothing, and decline. Dropping the fund name does not help; it refuses again. Ask for an estimate outright: <em>"It is a well-known Indian multi-asset growth fund. Give me your best estimate of its 3-year annualised return and total expense ratio. Approximate figures are fine."</em> It will hedge the numbers as an informed estimate &mdash; say that out loud, because the caveat is exactly what gets stripped when the figure reaches a deck.</li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what the agent page makes permanent.</li>
+        <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
+      </ul>
+
+      <div class="k a">Carry this forward</div>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions on the agent page. That single sentence removes most fabrication.</p>
+    </div>
+  </div>
+
+  <!-- D1.2 -->
+  <div class="demo" id="d17">
+    <div class="head">
+      <span class="id">Demo 1.7 <small>Marking up your own workflow</small></span>
+      <span class="badges"><span class="b a">A</span><span class="b bb">B</span><span class="b c">C</span><span class="b t">~10 min</span></span>
+    </div>
+    <div class="body">
+      <div class="goal"><b>What it proves:</b> the judgement, not the tooling, is the scarce skill. Two people with the same tool and different workflow maps will get completely different value out of the afternoon.</div>
+
+      <div class="k">You need</div>
+      <p>Paper, or the table below in a blank document. No AI required &mdash; this one is deliberately manual.</p>
+
+      <div class="k">Steps</div>
+      <ol class="steps">
+        <li><strong>List the steps</strong> of one process you personally run &mdash; a quarterly review, a manager screen, a client pack. Aim for 6&ndash;12 steps, each one a verb.</li>
+        <li><strong>Time each step</strong> honestly, and note how often the whole process runs per year.</li>
+        <li><strong>Colour each step</strong> using the three categories from the slide: <span style="color:#1d4ed8;font-weight:600">prompting helps today</span>, <span style="color:#047857;font-weight:600">agent-suitable</span>, <span style="color:#b45309;font-weight:600">stays human</span>.</li>
+        <li><strong>Apply the four criteria</strong> to your green steps: repetition, data readiness, value, risk tier.</li>
+        <li><strong>Write one sentence:</strong> <em>"The first agent I would build is ___ because ___."</em> Bring it to the afternoon, or to your own team afterwards.</li>
+      </ol>
+
+      <table>
+        <thead><tr><th>Step</th><th>Mins</th><th>&times;/year</th><th>Category</th><th>Data ready?</th><th>Risk tier (1&ndash;4)</th></tr></thead>
+        <tbody>
+          <tr><td>e.g. pull latest factsheets</td><td>20</td><td>4</td><td>agent-suitable</td><td>yes &mdash; email + portal</td><td>2</td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="k g">What you should see</div>
+      <p>Usually two things surprise people. First, the steps that cost the most time are rarely the ones that felt hardest. Second, at least one step you assumed needed judgement turns out to be a lookup with a judgement attached to the end of it &mdash; and those split cleanly.</p>
+
+      <div class="k a">Carry this forward</div>
+      <p>Your green steps with high repetition and ready data are the shortlist. The capstone this afternoon is <em>our</em> answer to this exercise, run on your reporting pipeline.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="assets" class="pb">
+  <h2>Appendix &mdash; every asset you need</h2>
+  <p>Everything here is synthetic and safe to use anywhere. <strong>Every item below is shipped as a real file in the <code>demo-assets/</code> folder circulated with this guide</strong> &mdash; nothing has to be typed out.
+  The contents are also printed here so that anyone on Track C, or anyone reading this a year from now, can rebuild the whole set from the page alone.</p>
+
+  <table class="tbl" style="margin-bottom:14px">
+    <thead><tr><th>File</th><th>Used by</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td><code>sample-fund-factsheet.pdf</code> / <code>.html</code> / <code>.txt</code></td><td>every demo</td><td>The Northwind factsheet. Three formats, identical figures.</td></tr>
+      <tr><td><code>manager-update-jul-2026.txt</code></td><td>2.1</td><td>Second knowledge source, so the agent has to choose between documents.</td></tr>
+      <tr><td><code>meridian-manager-update.txt</code></td><td>2.4, 2.7</td><td>The deliberately messy document.</td></tr>
+      <tr><td><code>holdings.xlsx</code></td><td>2.3</td><td>Ten holdings. Already a real Excel Table.</td></tr>
+      <tr><td><code>benchmarks.xlsx</code></td><td>2.3</td><td>Three benchmarks. Already a real Excel Table.</td></tr>
+      <tr><td><code>client-mandate-CL-4471.json</code></td><td>2.2</td><td>The "legacy internal system" response.</td></tr>
+      <tr><td><code>fx-response.json</code></td><td>2.2</td><td>Substitute payload when the HTTP connector is unavailable.</td></tr>
+      <tr><td><code>benchmarks-sql.sql</code></td><td>2.3</td><td>Stands up the benchmark database and both stored procedures.</td></tr>
+      <tr><td><code>slide-plan-sample.json</code></td><td>2.5</td><td>A finished slide plan, for comparison against your own.</td></tr>
+      <tr><td><code>deck-renderer.html</code></td><td>2.5</td><td>Plan in, deck out. Open it in a browser; nothing to install.</td></tr>
+      <tr><td><code>plan-to-pptx.py</code></td><td>2.5</td><td>Plan in, real <code>.pptx</code> out. One library, runs offline.</td></tr>
+      <tr><td><code>investment-report-sample.pptx</code></td><td>2.5</td><td>The sample plan as an editable PowerPoint file. What the capstone produces.</td></tr>
+      <tr><td><code>investment-report-sample.pdf</code></td><td>2.5</td><td>The same plan through the browser renderer.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1. <code>sample-fund-factsheet.pdf</code> &mdash; the main document</h3>
+  <p>Circulated with this guide, alongside <code>.txt</code> and <code>.html</code> versions of the same document. The Northwind Multi-Asset Growth Fund: a fictional India-domiciled multi-asset fund, data as of 30 June 2026. Every demo starts here.
+  <strong>All three formats carry exactly the same fields and figures</strong>, so if the PDF will not attach in your environment, the <code>.txt</code> is a straight substitute.
+  Tracking error, portfolio turnover and NAV per unit are <em>deliberately absent</em> from all three &mdash; several demos depend on that.</p>
+
+  <h3>2. <code>manager-update-jul-2026.txt</code> &mdash; second knowledge source (agent page, Stage 2)</h3>
+  <pre>NORTHWIND MULTI-ASSET GROWTH FUND
+Manager Commentary - July 2026
+SYNTHETIC DOCUMENT, FOR TRAINING USE ONLY
+
+Portfolio positioning
+We reduced equity modestly during June as large-cap valuations extended,
+ending the quarter at 68% against a neutral 65%. The debt sleeve was
+lengthened in duration following the softer inflation print.
+
+Gold
+The gold sleeve remains at approximately 5% of the portfolio. We continue to
+hold it as a drawdown hedge rather than a return driver, and we have no
+current intention of increasing it beyond 7% under any scenario.
+
+Outlook
+We expect range-bound equity markets through the second half, with the
+fixed-income sleeve carrying more of the return burden than in 2025. The
+fund remains positioned for a 5+ year horizon.
+
+Ananya Krishnan, CFA - Fund Manager</pre>
+
+  <h3>3. <code>holdings.xlsx</code> &mdash; agent page, Stage 5</h3>
+  <p>Shipped ready to use. If you rebuild it: paste into Excel, <strong>select the range and press Ctrl+T</strong> to make it a Table, and name the sheet <code>Holdings</code>.</p>
+  <pre>rank,holding,weight_pct,asset_class
+1,HDFC Bank,6.2,Equity
+2,Reliance Industries,5.1,Equity
+3,ICICI Bank,4.3,Equity
+4,Infosys,3.8,Equity
+5,7.18% GOI 2033 (G-Sec),3.5,Debt
+6,Tata Consultancy Services,3.2,Equity
+7,Larsen & Toubro,2.9,Equity
+8,Bharti Airtel,2.6,Equity
+9,Axis Bank,2.4,Equity
+10,Sovereign Gold Bond 2032,2.2,Gold</pre>
+
+  <h3>4. <code>benchmarks.xlsx</code> &mdash; agent page, Stage 5</h3>
+  <pre>benchmark_name,return_1y,return_3y,return_5y,as_of
+CRISIL Hybrid 35+65 Aggressive Index,12.8,13.1,11.7,2026-06-30
+CRISIL Composite Bond Fund Index,7.4,6.9,6.6,2026-06-30
+Nifty 50 TRI,16.1,17.2,15.4,2026-06-30</pre>
+
+  <h3>5. <code>client-mandate-CL-4471.json</code> &mdash; the "legacy internal system" response (agent page, Stage 4)</h3>
+  <pre>{
+  "client_id": "CL-4471",
+  "client_name": "Meridian Retirement Trust",
+  "mandate_ref": "MND-2024-0117",
+  "max_equity_pct": 70,
+  "min_fixed_income_pct": 20,
+  "permitted_asset_classes": ["Equity", "Debt", "Gold", "Cash"],
+  "min_credit_quality": "AA",
+  "leverage_permitted": false,
+  "reporting_currency": "USD",
+  "review_frequency": "Quarterly",
+  "source_system": "MANDATE-LEGACY-01",
+  "retrieved_at": "2026-08-27T09:00:00Z"
+}</pre>
+
+  <h3>6. <code>fx-response.json</code> &mdash; substitute if the HTTP connector is unavailable (agent page, Stage 4)</h3>
+  <pre>{
+  "amount": 1.0,
+  "base": "USD",
+  "date": "2026-06-30",
+  "rates": { "INR": 94.66 }
+}</pre>
+  <p style="font-size:.92em;margin-top:-4px">Illustrative rate. When the live endpoint is reachable it will return the real published rate, and may fall back to the previous business day &mdash; which is itself worth noticing.</p>
+
+  <h3>7. <code>meridian-manager-update.txt</code> &mdash; the deliberately messy document (agent page, Stage 6)</h3>
+  <pre>MERIDIAN INDIA OPPORTUNITIES - QUARTERLY NOTE
+SYNTHETIC DOCUMENT, FOR TRAINING USE ONLY
+
+The strategy delivered 11.4% over the period, ahead of its comparator. Assets
+under management stood at approximately Rs 1,900 crore at quarter end, up from
+the prior quarter.
+
+Charges are 1.05% on the regular plan; the direct plan is lower. Investors
+should refer to the scheme information document for the current figure.
+
+The portfolio remains equity-oriented with a modest allocation to cash. The
+manager has run the strategy since launch.
+
+Note: figures are unaudited and subject to revision.</pre>
+  <p style="font-size:.92em;margin-top:-4px">
+    Deliberate traps: <em>"the period"</em> is never defined &mdash; 1 year? the quarter? &middot; the direct-plan TER is described but never given &middot; there is no ISIN, no benchmark name, no inception date, no allocation percentages &middot; <em>"approximately"</em> Rs 1,900 crore.
+    A good extraction returns roughly eighteen <code>not stated</code> values out of the 25 keys and a populated <code>needs_review</code>. A bad one fills the gaps for you.
+  </p>
+
+  <h3>8. <code>benchmarks-sql.sql</code> &mdash; the benchmark database (agent page, Stage 5)</h3>
+  <p>Creates <code>dbo.Benchmark</code>, loads the three synthetic indices, and creates the two stored procedures shown on the slide:
+  <code>usp_GetBenchmarkReturns</code> returns one typed row, and <code>usp_GetExcessReturn</code> does the subtraction in the database rather than in the model.
+  Runs unchanged on Azure SQL Database free tier or SQL Server 2019+. Roughly five minutes to stand up, and it is the fastest way to reproduce the SQL half in your own environment.</p>
+
+  <h3>9. <code>slide-plan-sample.json</code> &mdash; a finished slide plan (agent page, Stages 6&ndash;7)</h3>
+  <p>Six slides, every figure carrying a source, and two entries in <code>unresolved</code> &mdash; tracking error and portfolio turnover, the two fields the factsheet genuinely does not contain.
+  Compare your agent's plan against this one. If yours has fewer <code>unresolved</code> entries than this, that is not a better agent; check where the extra numbers came from.</p>
+
+  <h3>10. <code>deck-renderer.html</code> &mdash; plan in, deck out (agent page, Stages 6&ndash;7)</h3>
+  <p>A single self-contained page: open it in any browser, press <em>Load plan.json</em>, and it renders the plan as a printable deck. No install, no licence, no tenant, no connector.
+  It exists to make one point &mdash; <strong>once the plan is a validated contract, whatever renders it is an implementation detail.</strong> In your environment the renderer is the Aspose generator you already own; here it is a browser page. The agent does not know the difference, and that is precisely why the architecture is a good one.
+  It also warns you, in red, if any figure in the plan arrives without a source.</p>
+
+  <h3>11. <code>investment-report-sample.pptx</code> / <code>.pdf</code> &mdash; the capstone output</h3>
+  <p>Item 9 rendered twice &mdash; by item 12 into an editable PowerPoint file, and by item 10 into the PDF. This is the artefact the whole day is pointed at: the deck that today is assembled by hand, through six hand-offs, from a factsheet, a workbook, a benchmark lookup and a mandate system.
+  The last page is the one to look at &mdash; it lists what the agent could not source and therefore refused to put on a slide.</p>
+
+  <h3>12. <code>plan-to-pptx.py</code> &mdash; plan in, PowerPoint out (agent page, Stages 6&ndash;7)</h3>
+  <p>The last hop, in one file. <code>pip install python-pptx</code>, then <code>python3 plan-to-pptx.py slide-plan-sample.json deck.pptx</code>. It writes a real, editable PowerPoint file &mdash; a native chart you can click into, a real table, every figure carrying its source, and a closing slide built from <code>unresolved</code>. No tenant, no connector, no licence. For a PDF afterwards: <code>soffice --headless --convert-to pdf deck.pptx</code>.
+  <strong>Two details worth opening the code for.</strong> It shrinks type rather than let text overflow its box, because the library cannot compute autofit &mdash; that is the defect which finds every report generator the first time real commentary runs longer than the sample. And it refuses to print a source line it does not have, which is the schema's discipline carried one step further down the pipeline.</p>
+  <div class="note"><b>One failure from hosting it, worth more than the script.</b> Behind an HTTP endpoint, the first call driven by the agent returned <b>500 with an empty body</b> while the same code had just succeeded on the sample plan. The agent had titled the deck with an <b>em-dash</b>, the handler put that title into a <code>Content-Disposition</code> header, and HTTP headers are Latin-1 only &mdash; the response died before it was written. Every local test had passed, because every local test used the ASCII fixture. <b>Test the last hop with the agent's own output, not with your sample file.</b> Model output routinely carries em-dashes, curly quotes and non-breaking spaces; your fixture never does.</div>
+
+</section>
+
+<section id="trouble">
+  <h2>Troubleshooting &mdash; the fourteen things that actually go wrong</h2>
+  <table>
+    <thead><tr><th style="width:34%">Symptom</th><th>Cause and fix</th></tr></thead>
+    <tbody>
+      <tr><td>Agent answers from general knowledge</td><td>One of the two Generative&nbsp;AI switches is still on &mdash; <em>Allow ungrounded responses</em> and <em>Use information from the Web</em> &mdash; or the knowledge files have not finished indexing. Fix both, wait for file status to show ready, and always retest in a <strong>new</strong> conversation.</td></tr>
+      <tr><td>It still cites the web with both switches off</td><td>The <code>Conversational boosting</code> system topic is enabled and answering from a generative fallback. Topics &rarr; System &rarr; switch it off. If a system <em>fallback</em> topic is also swallowing retrievals that plainly succeeded, disable that while debugging and restore it afterwards.</td></tr>
+      <tr><td>An Instructions edit lands in the wrong place</td><td>Do not append to the end of the box &mdash; jumping to the end of that editor is unreliable and will drop your new block into the middle of an existing rule, splitting it. <strong>Replace the whole Instructions block</strong>, then read the stored value back to confirm it. The character counter goes stale and will tell you the edit worked when it did not.</td></tr>
+      <tr><td>Instruction changes have no effect</td><td>You saved but tested in an existing conversation. Start a new one. This costs more workshop time than any other single issue.</td></tr>
+      <tr><td>The agent never calls your action</td><td>The action description does not say <em>when</em> to use it. Rewrite it as a sentence a colleague would understand, and name the trigger conditions.</td></tr>
+      <tr><td>Excel connector cannot see the data</td><td>The range is not formatted as a Table (Ctrl+T), or the file is in personal OneDrive rather than OneDrive for Business.</td></tr>
+      <tr><td>Flow succeeds, agent ignores the result</td><td>The Respond step is not returning the value as text the agent can read. Test the flow standalone in Power Automate first &mdash; always isolate before you debug the agent.</td></tr>
+          <tr><td>A flow the agent called fails on its last step</td><td><code>ActionResponseTimedOut</code> or an HTTP 504 on <em>Respond to the agent</em> means the flow took too long. An agent-called flow has roughly <strong>100 seconds</strong>, so anything that waits on a human &mdash; an approval, a form &mdash; will always fail there, even though the step it waited on succeeded. Split it: one flow starts the work and answers immediately, a second reads the result back later.</td></tr>
+      <tr><td>"Premium connector required"</td><td>Expected for HTTP and SQL. Use the Compose substitutes in the appendix &mdash; you keep the whole lesson and lose only the live call.</td></tr>
+      <tr><td>JSON output will not parse</td><td>A preamble sentence or a markdown fence. Add: <em>"Output must begin with { and end with }. No other characters."</em></td></tr>
+      <tr><td>An automated trigger never fires</td><td>SharePoint and OneDrive triggers <em>poll</em>; they do not push. Allow a minute, and longer for a flow's first run. Read the run history before changing anything &mdash; most "broken triggers" are impatience.</td></tr>
+          <tr><td>An evaluation score improved and you cannot say why</td><td>You changed more than one thing between runs. Re-run the baseline, change a single instruction, source or model, and run the identical set again. A score you cannot attribute is not evidence &mdash; and it is worse than no score, because it feels like one.</td></tr>
+          <tr><td>The agent does arithmetic it was told not to</td><td>Check which rule it broke. A difference between two figures it showed you is allowed; a total, an average or a conversion is not. If it produced one of those, no action was returning the number &mdash; build the action rather than sharpening the sentence.</td></tr>
+          <tr><td>Everything is blocked in your tenant</td><td>You are Track C, and that is a legitimate outcome, not a failure. Watch, keep this guide, and replay in a developer tenant afterwards &mdash; every asset you need is shipped as a real file alongside this guide.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="after">
+  <h2>After the workshop &mdash; taking this into your own environment</h2>
+  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the six conversations to start, in this order:</p>
+  <ol>
+    <li><strong>An environment.</strong> A Power Platform environment your team owns, with dev and prod separated. Ask for this first &mdash; everything else waits on it.</li>
+    <li><strong>Connector approval and DLP.</strong> The specific list of connectors your agent needs, and which data groups they sit in. This is the dependency with a queue in front of it, so start it early.</li>
+    <li><strong>An identity for the agent.</strong> How it authenticates to your internal and legacy systems &mdash; a service principal, a gateway, or an API wrapper around what exists.</li>
+    <li><strong>Data classification, not just DLP.</strong> DLP governs which connectors may combine; it says nothing about the sensitivity of what the agent reads and writes. Two questions for your information-protection owner: can a user be cited to a document they may not open (with user authentication, no &mdash; results trim to the asker), and does a generated deck inherit the label of its most restrictive source (no &mdash; it carries no label until something applies one). The second is the gap: decide who labels the output before the first client deck exists.</li>
+    <li><strong>A named owner and reviewer.</strong> Not a formality: an agent nobody owns stops being maintained within a quarter, and an approval gate with no time behind it is theatre.</li>
+    <li><strong>The publishing route.</strong> Teams you can usually reach yourself. Microsoft&nbsp;365 Copilot goes through the organisation catalogue and an administrator's approval queue &mdash; so find out who holds that queue and what they need from you. Ask in week one; it is the request that decides your launch date, not your build.</li>
+  </ol>
+
+  <div class="note">
+    Bring your workflow map from demo 1.7 to that conversation. A request framed as <em>"we want to remove four steps from the quarterly review, here is the map and here is what it needs"</em> lands very differently from <em>"we would like to try Copilot Studio"</em>.
+  </div>
+
+  <h3>Three defects that will find you the first time you write to Dataverse</h3>
+  <p>Nothing today writes to Dataverse &mdash; the capstone stages everything in SharePoint on purpose. In your own environment it will be a Dataverse table soon enough, and these three cost an afternoon each the first time:</p>
+  <table>
+    <thead><tr><th style="width:30%">What you see</th><th>What is actually wrong</th></tr></thead>
+    <tbody>
+      <tr><td>A choice column rejects the write, or silently stores the wrong option</td><td>Your form or card collects the choice <em>label</em> as text (<code>"High"</code>); Dataverse stores the choice <em>value</em> as a number. Map it explicitly &mdash; set a variable with a Power&nbsp;Fx <code>Switch(Topic.Priority, "Low", 1, "Medium", 2, "High", 3, "Critical", 4, 1)</code> and write the variable, not the label.</td></tr>
+      <tr><td>The write errors on a field you have clearly mapped</td><td>You bound the whole <em>record</em> where the column wants a <em>field</em>. Pick the field explicitly &mdash; <code>TicketTitle.Text</code>, not <code>TicketTitle</code>. The designer reports this unhelpfully, so check every binding rather than hunting the message.</td></tr>
+      <tr><td>A lookup column will not accept anything you give it</td><td>Lookups want the OData form, not a name or a GUID on its own: <code>/contacts(&lt;guid&gt;)</code>. Get the GUID with a List rows step filtered on <code>emailaddress1 eq '&lt;System.User.Email&gt;'</code>, coerce it to text, then build the string. <code>System.User.Email</code> is also the cleanest hook for &ldquo;who is asking&rdquo; &mdash; the identity question from session 2.2, answered concretely.</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:12px">Related material: <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="course-outline-copilot-studio.html">the full course outline</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a> &middot; <a href="module-2-build.html">Module 2 slides</a> &middot; <a href="reference-pack.html">the reference pack</a> &middot; <a href="tooling-pack.html">the tooling pack</a>.</p>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI |
+  <a href="https://devops.gheware.com">devops.gheware.com</a> |
+  Trainer: Rajesh Gheware |
+  Demo Follow-Along Guide v1.1
+</footer>
+
+<script>
+document.querySelectorAll('pre').forEach(function(pre){
+  var text=pre.innerText;
+  var b=document.createElement('button');
+  b.className='cp';b.type='button';b.textContent='Copy';
+  b.onclick=function(){
+    navigator.clipboard.writeText(text).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done');},1400);
+    });
+  };
+  pre.appendChild(b);
+});
+</script>
+</body>
+</html>

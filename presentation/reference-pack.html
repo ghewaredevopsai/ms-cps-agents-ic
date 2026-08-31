@@ -93,7 +93,7 @@ footer a{color:#93c5fd;text-decoration:none}
 
 <div class="note">
   <b>What this is, and how it differs from everything else you were given.</b> The slides and the
-  <a href="demo-guide.html">demo guide</a> are a narrative &mdash; they run in order and they build one agent.
+  <a href="prompt-demos.html">prompt demos</a> are a narrative &mdash; they run in order and they build one agent.
   This pack is the <b>lookup version</b>: things to copy, a map for choosing what to build next, and the surfaces
   you can use on Monday without waiting for anything to be provisioned.
   <b>Part 1 and Part 3 are for everyone. Part 2 is for whoever decides what gets built.</b>
@@ -175,12 +175,12 @@ If a figure is not present in the document, reply exactly: not stated. Do not es
       <div class="k r">When it does not behave</div>
       <ul>
         <li><strong>Prompt A returned "I don't know".</strong> Good &mdash; some configurations are more cautious. Try it without the fund name: <em>"What was the 3-year return of the multi-asset fund we discussed?"</em></li>
-        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what demo 1.8 makes permanent.</li>
+        <li><strong>Prompt C invented a tracking error.</strong> That is the demo working, not failing. Note it &mdash; and note that the fix is an instruction, which is exactly what the agent build makes permanent.</li>
         <li><strong>The file will not attach.</strong> Paste the contents of <code>sample-fund-factsheet.txt</code> from the demo assets into the chat instead. It carries exactly the same figures as the PDF, so the demo behaves the same way.</li>
       </ul>
 
       <div class="k a">Carry this forward</div>
-      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions in demo 1.8. That single sentence removes most fabrication.</p>
+      <p>Prompt B's third line &mdash; <em>"if a figure is not present, reply exactly: not stated"</em> &mdash; becomes a line in your agent's Instructions at Stage 1 of the agent build. That single sentence removes most fabrication.</p>
     </div>
   </div>
 
@@ -390,8 +390,8 @@ or what action anyone should take. If asked for any of those, reply:
       equity. <em>WITHIN</em>, with both figures and both sources shown. Minimum credit quality AA is
       <em>CANNOT DETERMINE</em> &mdash; the factsheet says the fund avoids unrated credit and holds high-grade
       bonds, which is not the same statement as a rating floor, and the prompt is built to notice the difference.</p>
-      <div class="note">The closing paragraph is the same boundary the workshop builds as a <b>topic</b> in
-      demo 1.8 rather than a sentence. A sentence in a prompt asks for the refusal and rewords it every time;
+      <div class="note">The closing paragraph is the same boundary the agent build makes a <b>topic</b> rather than a
+      sentence, at Stage 2. A sentence in a prompt asks for the refusal and rewords it every time;
       a topic makes it fixed wording that a compliance reviewer can approve once. If this prompt becomes an
       agent, that is the first thing to promote.</div>
     </div>
@@ -563,21 +563,21 @@ Then answer this fourth question:
         <td>Portfolio data, the mandate record, allocation limits</td>
         <td>Copilot Studio + an action to the mandate system + a fixed refusal topic</td>
         <td>Second wave &mdash; needs the mandate system reachable</td>
-        <td>Prompt 6 &middot; M1 gallery &middot; demo 2.2</td>
+        <td>Prompt 6 &middot; M1 gallery &middot; agent build, Stage 4</td>
       </tr>
       <tr>
         <td><strong>Manager monitoring</strong></td><td>An update lands in an inbox</td>
         <td>The new document, the previous one, a place to file the difference</td>
         <td>Copilot Studio + an <strong>email or recurrence trigger</strong></td>
         <td>Second wave &mdash; the trigger is one dropdown, the filing is the work</td>
-        <td>Prompt 9 &middot; demo 2.7</td>
+        <td>Prompt 9 &middot; agent build, Stage 8</td>
       </tr>
       <tr>
         <td><strong>Fee &amp; RFP benchmarking</strong></td><td>A schedule is received</td>
         <td>Your benchmark table, past mandates</td>
         <td>Copilot Studio + Excel or SQL action; the arithmetic stays out of the model</td>
         <td>Good data, low frequency &mdash; a fast build with a slower payback</td>
-        <td>Prompt 5 &middot; demo 2.3</td>
+        <td>Prompt 5 &middot; agent build, Stage 5</td>
       </tr>
       <tr>
         <td><strong>Client query triage</strong></td><td>A question hits a shared inbox</td>
@@ -601,7 +601,7 @@ Then answer this fourth question:
       <div class="k a">The five that need a conversation first</div>
       <p>Everything that reaches a system waits on the same four things: an environment your team owns, the
       connectors approved and classified, an identity the agent authenticates as, and a named owner. The
-      <a href="demo-guide.html">demo guide</a> sets out those conversations in the order to have them.</p>
+      <a href="prompt-demos.html">prompt demos</a> sets out those conversations in the order to have them.</p>
     </div>
   </div>
 
@@ -730,13 +730,13 @@ Then answer this fourth question:
   <p>Those four sentences are the argument for Copilot Studio, and they are much more persuasive after you have
   hit them yourself than they are on a slide. <strong>Go and hit them.</strong> Then Part 2 tells you which piece
   of work is worth the environment request, and the <a href="module-2-build.html">Module 2 slides</a> and
-  <a href="demo-guide.html">demo guide</a> show what gets built once you have one.</p>
+  <a href="prompt-demos.html">prompt demos</a> show what gets built once you have one.</p>
 </section>
 
 <section id="rel">
   <p style="margin-top:12px">Related material: <a href="course-outline-copilot-studio.html">the full course outline</a>
   &middot; <a href="pre-reads.html">the pre-read pack</a> &middot; <a href="module-1-foundations.html">Module 1 slides</a>
-  &middot; <a href="module-2-build.html">Module 2 slides</a> &middot; <a href="demo-guide.html">the demo follow-along guide</a> &middot; <a href="tooling-pack.html">the tooling pack</a>.</p>
+  &middot; <a href="module-2-build.html">Module 2 slides</a> &middot; <a href="prompt-demos.html">the prompt-demos guide</a> &middot; <a href="tooling-pack.html">the tooling pack</a>.</p>
 </section>
 
 </div>

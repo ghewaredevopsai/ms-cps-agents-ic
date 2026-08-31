@@ -42,6 +42,10 @@ pre .cp.done{background:#059669}
 .stage>.body{padding:14px 18px}
 .b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
 .b.t{background:#f59e0b;color:#3f2d02}
+.pv{background:#0b2545;color:#dbeafe;border-radius:5px;padding:8px 13px;margin:0 0 12px;font-size:.93em}
+.pv b{color:#fff}
+.opt{background:#f7f9fe;border:1px dashed #94a9c9;border-radius:6px;padding:10px 14px;margin:10px 0;font-size:.94em}
+.opt .h{font-weight:700;color:#0b2545}
 .goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
 .goal b{color:#0b2545}
 .k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
@@ -77,7 +81,7 @@ footer a{color:#93c5fd;text-decoration:none}
   <h1>Fund Research Assistant</h1>
   <div class="tagline">Build it yourself &mdash; Microsoft Copilot Studio</div>
   <div class="meta">
-    <span class="d">~90 minutes</span> |
+    <span class="d">~2 hours</span> |
     <span>Low code</span> |
     <span>3 knowledge sources &middot; 1 topic &middot; 6 tools &middot; 1 unattended flow</span> |
     <span>Trainer: Rajesh Gheware</span>
@@ -100,7 +104,7 @@ footer a{color:#93c5fd;text-decoration:none}
   </div>
   <p><strong>Each stage is usable on its own.</strong> Stop after 2 and you have a grounded research assistant; after 5, one that reaches your systems.</p>
   <div class="note"><b>This page is the build sheet, and the only place the configuration is written down.</b> Its companion is
-  <a href="../presentation/demo-guide.html">demo-guide.html</a>, the run-sheet: what each demo proves, what to type, what you should see and what to do
+  <a href="../presentation/prompt-demos.html">prompt-demos.html</a>, the run-sheet: what each demo proves, what to type, what you should see and what to do
   when it misbehaves. Demos 1.8 and 2.1&ndash;2.7 there each point back at the stage below that builds them. Nothing is duplicated between the two.</div>
 
   <div class="flow">
@@ -192,6 +196,23 @@ footer a{color:#93c5fd;text-decoration:none}
 </section>
 
 <section>
+  <h2>Running order</h2>
+  <p>Build it in this order and it demos in this order &mdash; each stage is a natural stopping point, and the two marked <em>optional</em> are the first things to drop if you are short.</p>
+  <table>
+    <tr><th style="width:7%">Stage</th><th>What you show</th><th style="width:12%">Time</th></tr>
+    <tr><td><b>1</b></td><td>The three-click library agent, then the real thing: grounded answers, citations, <em>not stated</em></td><td>~15 min</td></tr>
+    <tr><td><b>2</b></td><td>A second source and the trace; a topic that cannot be re-worded; proving a fix with an evaluation set</td><td>~16 min</td></tr>
+    <tr><td><b>3</b></td><td>How a tool is built &mdash; once, then repeated five times</td><td>~4 min</td></tr>
+    <tr><td><b>4</b></td><td>A live public API, and a legacy internal system wired the same way</td><td>~18 min</td></tr>
+    <tr><td><b>5</b></td><td>Excel does the arithmetic; the agent refuses what nothing computes <span style="color:#78350f">(+ optional code interpreter)</span></td><td>~16 min</td></tr>
+    <tr><td><b>6</b></td><td>An enforced schema turns a gap into a flag; the slide plan, and the commentary failure worth slowing down for</td><td>~14 min</td></tr>
+    <tr><td><b>7</b></td><td>The human gate, the ~100-second ceiling, and the plan becoming a real file <span style="color:#78350f">(+ optional read-back)</span></td><td>~20 min</td></tr>
+    <tr><td><b>8</b></td><td>Publish, share, govern &mdash; then a file lands and the whole chain runs unattended</td><td>~18 min</td></tr>
+  </table>
+  <p style="margin-top:8px"><b>About two hours</b> end to end, or a little over with both optional steps. Stage 8's unattended run has dead time in it by design &mdash; three to five minutes where nothing visible happens &mdash; so have something to say over it.</p>
+</section>
+
+<section>
   <h2>Before you start</h2>
   <ul class="chk">
     <li><strong>Copilot Studio</strong> and <strong>Power Automate</strong> in an environment you may build in &mdash; not Default if you can avoid it.</li>
@@ -207,11 +228,33 @@ footer a{color:#93c5fd;text-decoration:none}
     <tr><td><code><a href="../demo-assets/holdings.xlsx">holdings.xlsx</a></code> &middot; <code><a href="../demo-assets/benchmarks.xlsx">benchmarks.xlsx</a></code></td><td>Stage 5 &mdash; both already carry a real Excel <strong>Table</strong></td></tr>
     <tr><td><code><a href="../demo-assets/plan-to-pptx.py">plan-to-pptx.py</a></code> &middot; <code><a href="../demo-assets/deck-renderer.html">deck-renderer.html</a></code></td><td>Stage 7 &mdash; two offline ways to render the plan</td></tr>
   </table>
+  <div class="amber">
+    <b>Pre-flight &mdash; 15 minutes, done before you demo, not in front of anyone.</b>
+    <ul style="margin:6px 0 0">
+      <li>Copy the assets above into a OneDrive folder, and confirm <code>holdings.xlsx</code> and <code>benchmarks.xlsx</code> still open as real Excel <strong>Tables</strong>.</li>
+      <li>Check which environment you land in, and that you may create flows there.</li>
+      <li>Settle the premium questions in advance: the <strong>HTTP</strong> action (Stages 4 and 7) and, if you want it, <strong>code interpreter</strong> (Stage 5, off by default and badged premium). Both have a stated fallback &mdash; know which you are taking.</li>
+      <li>Run one throwaway question through a scratch agent to confirm the tenant answers at all before you build anything.</li>
+      <li>If you will show the trigger in Stage 8, create <code>incoming-factsheets</code> now and clear anything left in it.</li>
+    </ul>
+  </div>
 </section>
 
 <div class="stage">
   <div class="head"><span class="id">Stage 1 <small>The agent, its rules, and closing the open web</small></span><span class="b t">~12 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> You can hand an agent your documents and it will answer from them, cite them, and say <em>not stated</em> rather than invent &mdash; but only once you close two switches most people never find.</div>
+    <div class="opt">
+      <div class="h">First, the three-click version &mdash; 3 minutes</div>
+      <p style="margin:6px 0 6px">Before building anything, see what you get <em>without</em> Copilot Studio. This is the rung most people can reach on their own, and the contrast is what makes the next half hour worth sitting through.</p>
+      <ol style="margin:0 0 6px">
+        <li>Open a SharePoint document library holding a few fund documents. Use <strong>Add an agent</strong> (wording varies) from the library itself.</li>
+        <li>Name it, write one sentence describing who it is for, and save. There is no canvas and nothing to configure.</li>
+        <li>Ask it two of the test questions below, then share the link with someone.</li>
+      </ol>
+      <p style="margin:0"><b>What to point out.</b> It works, it cites, it is shareable, and it took a minute &mdash; a genuine result, and the right first thing for most people to build.
+      Then ask it something needing a <em>benchmark</em> figure and watch it fail: it can only read that library. It cannot call the mandate system, cannot run when nobody asks, cannot produce a deck, and offers no trace to read when it is wrong. <b>Those four sentences are the reason the rest of this page exists.</b></p>
+    </div>
     <ol class="steps">
       <li><strong>Create &rarr; New agent</strong>, then <strong>Skip to configure</strong>. Check the environment shown top-right is the one you meant.</li>
       <li>Name it <code>Fund Research Assistant</code>. Description:
@@ -267,6 +310,7 @@ What is the tracking error?</pre>
 <div class="stage">
   <div class="head"><span class="id">Stage 2 <small>A second source, and one answer made non-negotiable</small></span><span class="b t">~10 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> The difference between a rule the model weighs and a rule it cannot re-word. And that a fix you can see working may earn nothing measurable.</div>
     <ol class="steps">
       <li>Upload <code>manager-update-jul-2026.txt</code> as a second knowledge source.</li>
       <li>Click the source row to open its <strong>details page</strong> &mdash; give it a <strong>name</strong>, a one-line <strong>description</strong>, and mark it an <strong>official source</strong>. All three live there, not on an ellipsis menu.
@@ -294,6 +338,18 @@ the allocation, the risk figures and the mandate limits. Ask me for any of
 those and I will cite the source.</pre>
       </li>
     </ol>
+    <div class="k">Part 3 &mdash; prove the fix instead of believing it</div>
+    <ol class="steps">
+      <li><strong>Evaluation</strong> tab &rarr; <em>New evaluation</em> &rarr; <em>Single response</em> &rarr; <em>Quick question set</em>. Copilot Studio generates ten questions from your agent's own description, instructions and knowledge. Read them, correct any that are wrong, and run the set.</li>
+      <li><strong>Change exactly one thing and re-run the identical set.</strong> Delete the ambiguity rule and run it again. One change per run &mdash; change two and a better score tells you nothing about which one earned it.</li>
+      <li><strong>Export the set to CSV and keep it.</strong> This is the file you re-run before every future change, and what makes a change to a published agent defensible rather than hopeful.</li>
+    </ol>
+    <div class="amber">
+      <b>Be ready for the score not to move.</b> On a live run it was <strong>60% with the instruction and 60% without</strong> &mdash; the same six passes, the same four failures.
+      That is the result worth having, and the whole argument for this step: the fix demoed beautifully and earned nothing measurable, which no amount of watching the chat window would have told you.
+      Restore the rule afterwards; every stage after this extends the same agent.
+    </div>
+    <div class="note"><b>No Evaluation tab?</b> It is a newer surface and may not be in your tenant. The discipline survives without it: keep the same ten questions in a file, run them by hand in a new conversation after each change, and record what changed.</div>
     <div class="k g">Check</div>
     <ul>
       <li>The gold question answered from <strong>both</strong> documents, two citations.</li>
@@ -305,6 +361,7 @@ those and I will cite the source.</pre>
 <div class="stage">
   <div class="head"><span class="id">Stage 3 <small>How a tool is built &mdash; read once, repeat five times</small></span><span class="b t">~4 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> Every tool in Copilot Studio is the same four moves. Learn them once.</div>
     <p>Every one of the six tools is the same four moves. Stages 4 to 7 only say what is different.</p>
     <ol class="steps">
       <li><strong>make.powerautomate.com &rarr; Create &rarr; Instant cloud flow</strong>, trigger <strong>When an agent calls the flow</strong>. Name it.</li>
@@ -328,6 +385,7 @@ those and I will cite the source.</pre>
 <div class="stage">
   <div class="head"><span class="id">Stage 4 <small>Two tools that fetch &mdash; a public API and a legacy internal system</small></span><span class="b t">~18 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> The agent stops being a reader and becomes a participant in your systems &mdash; and a legacy internal endpoint is wired exactly like a public one.</div>
     <div class="k">Tool 1 &mdash; Get FX Rate <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#78350f">(premium: the HTTP action)</span></div>
     <div class="flow">
 <svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, HTTP, Compose, Respond to the agent">
@@ -443,6 +501,7 @@ Does the Northwind fund's asset allocation comply with the mandate for client CL
 <div class="stage">
   <div class="head"><span class="id">Stage 5 <small>Two tools that compute &mdash; where the arithmetic goes</small></span><span class="b t">~14 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> Numbers come from systems, narrative comes from the model. Move the arithmetic and a whole class of quiet errors disappears.</div>
     <div class="k">Tool 3 &mdash; Get Holdings</div>
     <div class="flow">
 <svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, List rows present in a table, Compose, Respond to the agent">
@@ -550,12 +609,21 @@ What is the average weight of the fund's top ten holdings?</pre>
     <div class="tip">
       <b>Commonest failure in this stage:</b> the connector cannot see the data because the range is not formatted as a Table &mdash; select it and press <code>Ctrl+T</code>.
     </div>
+    <div class="opt">
+      <div class="h">Optional &mdash; the other deterministic path (~2 min, cut this first if you are late)</div>
+      <p style="margin:6px 0 6px">The flow is not the only thing that can compute. Where <strong>code interpreter</strong> is enabled (<em>Settings &rarr; Generative AI</em>), attach <code>holdings.xlsx</code> to the conversation and ask for the same top-five total. The agent writes code, runs it over the file, and shows you the code it ran. It is <strong>off by default and badged premium</strong>, so turn it on beforehand rather than in front of an audience.</p>
+      <p style="margin:0"><b>Why show it, and why the rule does not change.</b> People reasonably ask whether the flow was necessary for something this small. It was not &mdash; but notice what both paths have that the chat answer does not: a figure produced by something that would produce it again tomorrow, and that you can read. The flow wins where the number must be identical for every user with no file attached; the code interpreter wins for one-off analysis on a file in front of you. <b>Neither is the model doing arithmetic in its head.</b></p>
+    </div>
+    <div class="note">
+      <b>The SQL half.</b> Everything above works identically against a database &mdash; a flow, a parameterised call, a response, an action description. <code><a href="../demo-assets/benchmarks-sql.sql">benchmarks-sql.sql</a></code> creates the benchmark table and two stored procedures including <code>usp_GetExcessReturn</code>, and runs on Azure SQL free tier or any SQL Server 2019+. The SQL Server connector is premium, so with no database use <code>benchmarks.xlsx</code> as the stand-in: <b>the lesson is the boundary, not the technology behind it.</b>
+    </div>
   </div>
 </div>
 
 <div class="stage">
   <div class="head"><span class="id">Stage 6 <small>Enforce a shape &mdash; the fund record and the slide plan</small></span><span class="b t">~14 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> With an enforced output shape, a gap becomes a flag instead of an invention &mdash; and the next step in the pipeline can finally rely on the result.</div>
     <div class="warn" style="margin-bottom:12px">
       <b>Turn <em>Allow ungrounded responses</em> back on first.</b> With it off this stage does not run at all: bare JSON carries no citations,
       so the grounding gate suppresses the answer and you get <em>&ldquo;No information was found that could help answer this.&rdquo;</em>
@@ -627,12 +695,18 @@ and a short commentary.</pre>
       <b>If <code>needs_review</code> comes back empty on the messy document</b>, append: <em>&ldquo;If a value required interpretation of any kind, list its key in needs_review.&rdquo;</em>
       <b>If you get markdown fences</b>: <em>&ldquo;Output must begin with { and end with }. No other characters.&rdquo;</em>
     </div>
+    <div class="tip">
+      <b>Stronger than a sentence: build this as an AI Builder prompt</b> with a defined output schema, and the shape is enforced by the platform rather than requested in Instructions.
+      The wider point is ownership, not credits: a schema built that way is a <b>named, versioned asset with an owner</b> &mdash; the same extraction contract every agent and colleague uses, changed in one place.
+      The equivalent sentence pasted into six agents' Instructions is six things that will quietly diverge.
+    </div>
   </div>
 </div>
 
 <div class="stage">
   <div class="head"><span class="id">Stage 7 <small>Two tools that act &mdash; the gate, and the file</small></span><span class="b t">~16 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> Where autonomy actually gets set: in configuration, not in a policy document. And what a step is allowed to do depends on what is waiting behind it.</div>
     <div class="k">Tool 5 &mdash; Send Deck For Approval</div>
     <div class="flow">
 <svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, Create an approval, Respond to the agent">
@@ -726,6 +800,9 @@ plan as JSON text, exactly as you produced it.</pre>
       <b>Know what this does not buy you.</b> The designer <b>stamps the variable's current value into the flow definition</b>, so an exported solution still carries the key.
       It is one owned place to rotate &mdash; <em>not</em> a secret store. The real fix is a <strong>Secret</strong> environment variable backed by <strong>Azure Key Vault</strong>, resolved at run time and never written into the definition;
       it needs the vault in the same tenant and the Dataverse service principal granted <code>get</code>/<code>list</code> on secrets.
+      <br><br><span class="h" style="font-weight:700">Optional, ~4 minutes &mdash; cut this first if you are late.</span>
+      To have the agent report the <em>verdict</em> too, build a second flow <code>Check Deck Approval</code>: agent trigger with one text input <code>approvalid</code> &rarr; <strong>Wait for an approval</strong> &rarr; <strong>Respond to the agent</strong> with text <code>outcome</code> = <code>outputs('Wait_for_an_approval')?['body/outcome']</code> and text <code>approvercomments</code> = <code>first(outputs('Wait_for_an_approval')?['body/responses'])?['comments']</code>.
+      <b>Map that second one carefully:</b> <code>responseSummary</code> does <em>not</em> carry the comment &mdash; it is only <em>"Approver: name, email, Response: Reject"</em>, which reads as the model being unhelpful when it is really the binding being wrong. Add it as a tool, then reject a card with a reason and ask the agent what happened to that approval.
       <br><b>Simpler routes, honestly labelled:</b> pasting the key literally works and is what most people do first &mdash; just remember there are two copies to rotate.
       Putting it on the query string as <code>?code=&lt;key&gt;</code> is accepted by Functions but is worse, because the whole URL lands in run history.
     </div>
@@ -741,6 +818,7 @@ plan as JSON text, exactly as you produced it.</pre>
 <div class="stage">
   <div class="head"><span class="id">Stage 8 <small>Publish, then make it run without being asked</small></span><span class="b t">~18 min</span></div>
   <div class="body">
+    <div class="pv"><b>What this proves:</b> The answer to the question you actually asked. The work happens because a file arrived, and the first human involvement is a decision rather than a task.</div>
     <div class="k">Part 1 &mdash; publish and share</div>
     <ol class="steps">
       <li><strong>Publish.</strong> Nothing below works until it completes.</li>
@@ -748,6 +826,8 @@ plan as JSON text, exactly as you produced it.</pre>
       <li>Set the publisher name &mdash; <strong>Edit details &rarr; Teams settings &rarr; More</strong> (collapsed). Until you do it reads <em>Your developer name</em>.</li>
       <li><strong>Share</strong> with one colleague. The choice is <em>use</em> versus <em>co-author</em>. Sharing an agent shares what it can <em>do</em>, not only what it knows &mdash; every tool runs under your credentials.</li>
       <li><strong>Settings &rarr; Security &rarr; Authentication.</strong> With <em>Authenticate with Microsoft</em> on, knowledge results trim to each asker's own permissions. Off, everyone queries one index.</li>
+      <li><strong>Submit it to the organisation catalogue.</strong> <em>Availability options &rarr; Show in the store</em> &rarr; pick the audience: <em>Show to my teammates and shared users</em> (lands in <strong>Built with Power Platform</strong>) or <em>Show to everyone in my org</em> (lands in <strong>Built by your org</strong>, after an admin approves) &rarr; <strong>Submit to org catalog</strong>. The dialog asks <em>"Give everyone access to this agent?"</em> &mdash; answering yes is what puts <em>Everyone in organization</em> on the share list. Status becomes <em>waiting for approval from your Teams admin</em>, against a version number. <b>You cannot put an agent in front of the firm on your own signature.</b></li>
+      <li><strong>Look at the other side of the gate.</strong> With admin rights: <em>Microsoft&nbsp;365 admin centre &rarr; Agents &rarr; All agents &rarr; Requests</em>. Open the row itself &mdash; the &#8942; menu's entries are greyed and the live buttons are in the detail panel. Then read its <em>Data &amp; tools</em> tab: knowledge is listed <em>with a Sensitivity label column</em>, but <strong>Tools reports "No tools configured" for an agent with six</strong>, and Permissions reports none from Entra ID. <b>The person approving your agent cannot see that it calls five flows and an outside endpoint under your credentials</b> &mdash; so the reviewer's checklist has to come from you. Without admin rights, find out who holds that queue; they are on your critical path and it is not short.</li>
     </ol>
 
     <div class="k">Part 2 &mdash; the trigger flow, <code>Factsheet Arrived</code></div>
@@ -863,6 +943,27 @@ and let the approval step put it in front of a human.</pre>
       <li>With the messy document it <b>stops</b> instead: more than three fields flagged, so it reports the failure rather than producing a confident, wrong deck.</li>
       <li>The run stays open until you answer. Hours are normal &mdash; a verified run waited 5h 45m and resumed correctly.</li>
       <li><strong>~15 seconds after approving:</strong> a <code>.pptx</code>, a <code>.pdf</code> and an email with the PDF attached. Reject instead and you get no files and an email saying so.</li>
+    </ul>
+
+    <div class="k">Work this checklist against what you built</div>
+    <table>
+      <tr><th style="width:38%">Question</th><th>What good looks like</th></tr>
+      <tr><td>What data does it read?</td><td>You can name every knowledge source and every action, from memory.</td></tr>
+      <tr><td>Where can data go?</td><td>You can name every connector and say whether it leaves the tenant.</td></tr>
+      <tr><td>Who can use it?</td><td>An explicit list, not &ldquo;whoever has the link&rdquo;.</td></tr>
+      <tr><td>Who owns it?</td><td>A named person, with a named deputy.</td></tr>
+      <tr><td>What can it do unattended?</td><td>Read and draft. Anything client-facing passes the gate.</td></tr>
+      <tr><td>Which classification of data reaches it?</td><td>Sensitivity labels and source permissions are known &mdash; and somebody labels the <em>output</em>, which inherits none.</td></tr>
+      <tr><td>How do we know what it did?</td><td>You can open a past run and read the actions and inputs.</td></tr>
+      <tr><td>What happens when it is wrong?</td><td>A named reviewer, with time in their week to be that reviewer.</td></tr>
+      <tr><td>How does it change safely?</td><td>Edits are tested somewhere before they reach the published agent.</td></tr>
+    </table>
+
+    <div class="k">Where the evidence lives &mdash; open these three once before you finish</div>
+    <ul>
+      <li><strong>The agent's Analytics tab</strong> &mdash; sessions, engagement, and the share of conversations that ended without an answer. A rising unanswered rate is your knowledge going stale, visible here long before anyone complains.</li>
+      <li><strong>Session transcripts</strong>, retained as Dataverse rows &mdash; the honest answer to <em>&ldquo;show me every question anyone asked this agent last quarter&rdquo;</em>, which run history cannot give you because most conversations never reach a flow. Check the retention period your tenant applies; it is a setting and it needs an owner.</li>
+      <li><strong>Flow run history</strong> &mdash; elapsed time and outcome per unattended run, which turns an ROI estimate into a measurement. Screenshot the analytics page at week four; the case that gets a second agent funded is the one with actuals in it.</li>
     </ul>
   </div>
 </div>
