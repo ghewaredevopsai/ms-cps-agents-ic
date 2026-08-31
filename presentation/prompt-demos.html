@@ -726,7 +726,7 @@ Note: figures are unaudited and subject to revision.</pre>
 
 <section id="after">
   <h2>After the workshop &mdash; taking this into your own environment</h2>
-  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the six conversations to start, in this order:</p>
+  <p>Everything you built today lives in a training environment on synthetic data. Rebuilding it against your own systems is a separate piece of work with real dependencies. These are the seven conversations to start, in this order:</p>
   <ol>
     <li><strong>An environment.</strong> A Power Platform environment your team owns, with dev and prod separated. Ask for this first &mdash; everything else waits on it.</li>
     <li><strong>Connector approval and DLP.</strong> The specific list of connectors your agent needs, and which data groups they sit in. This is the dependency with a queue in front of it, so start it early.</li>
@@ -734,6 +734,7 @@ Note: figures are unaudited and subject to revision.</pre>
     <li><strong>Data classification, not just DLP.</strong> DLP governs which connectors may combine; it says nothing about the sensitivity of what the agent reads and writes. Two questions for your information-protection owner: can a user be cited to a document they may not open (with user authentication, no &mdash; results trim to the asker), and does a generated deck inherit the label of its most restrictive source (no &mdash; it carries no label until something applies one). The second is the gap: decide who labels the output before the first client deck exists.</li>
     <li><strong>A named owner and reviewer.</strong> Not a formality: an agent nobody owns stops being maintained within a quarter, and an approval gate with no time behind it is theatre.</li>
     <li><strong>The publishing route.</strong> Teams you can usually reach yourself. Microsoft&nbsp;365 Copilot goes through the organisation catalogue and an administrator's approval queue &mdash; so find out who holds that queue and what they need from you. Ask in week one; it is the request that decides your launch date, not your build.</li>
+    <li><strong>How the agent is versioned, reviewed and promoted.</strong> The only one on this list you can start without anyone's permission. The solution exports as a file, and the agent definition itself &mdash; instructions, topics, settings, tool bindings &mdash; pulls to disk as YAML and pushes back, so it belongs in a repository and its changes can be reviewed like any other change. Run that pull on a schedule and an edit somebody made in the portal on Friday arrives as a diff on Monday rather than as a surprise in a demo. Settle who reviews that diff, and what has to pass before dev &rarr; test &rarr; prod, while there is still one agent and not three. Commands are in <a href="tooling-pack.html">the tooling pack</a>.</li>
   </ol>
 
   <div class="note">

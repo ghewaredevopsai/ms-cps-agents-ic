@@ -322,7 +322,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
 </section>
 
 <!-- 4 -->
-<section class="slide" data-sec="2.1 Orchestration" data-title="Instructions are production code" data-notes="Every line in this block traces back to a failure seen in Module 1. That is what makes it a specification rather than a prompt - and why it belongs in source control, reviewed like any other code." data-demo="2.1" data-role="pre">
+<section class="slide" data-sec="2.1 Orchestration" data-title="Instructions are production code" data-notes="Every line in this block traces back to a failure seen in Module 1. That is what makes it a specification rather than a prompt - and why it belongs in source control, reviewed like any other code. Where that actually happens is session 2.6: the agent exports as files, so a repo is available inside this product today - it is not something you get by graduating to code." data-demo="2.1" data-role="pre">
   <h2>Instructions are production code &mdash; annotated<span class="cue pre">PRE &middot; DEMO 2.1</span><span class="tag">2.1</span></h2>
   <div class="body g55">
     <div>
@@ -1475,7 +1475,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
 </section>
 
 <!-- 25 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Environments, solutions, ALM" data-notes="Short and firm: build in the default environment and you will regret it. Solutions and connection references are what make an agent movable between environments, and what stop your personal credentials travelling to production.  From the slide panel: THREE RULES, LEARNED EXPENSIVELY — Never build in the default environment. It is shared with the entire tenant, it cannot be governed properly, and moving out later is a rebuild. Put the agent in a solution from day one. A solution is what makes it exportable, importable and versionable. Use connection references, not embedded connections &mdash; otherwise the agent carries your credentials to production, which is both a security finding and a single point of failure when you take leave. WHAT DLP ACTUALLY DOES HERE — Connectors sit in business, non-business or blocked groups, and a flow may not combine across groups. That is the mechanism your governance forum will use to say yes &mdash; so bring them the connector list, not a description of the idea. The gap between a working demo and a supported service is almost entirely this slide. It is also the least glamorous and most predictive." data-demo="2.6" data-role="pre">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="Environments, solutions, ALM" data-notes="Short and firm: build in the default environment and you will regret it. Solutions and connection references are what make an agent movable between environments, and what stop your personal credentials travelling to production. The take-away bar answers the question slide 4 leaves open: the agent is files, so it goes under source control now rather than after a rewrite - and a scheduled pull turns a maker-portal edit into a git diff.  From the slide panel: THREE RULES, LEARNED EXPENSIVELY — Never build in the default environment. It is shared with the entire tenant, it cannot be governed properly, and moving out later is a rebuild. Put the agent in a solution from day one. A solution is what makes it exportable, importable and versionable. Use connection references, not embedded connections &mdash; otherwise the agent carries your credentials to production, which is both a security finding and a single point of failure when you take leave. WHAT DLP ACTUALLY DOES HERE — Connectors sit in business, non-business or blocked groups, and a flow may not combine across groups. That is the mechanism your governance forum will use to say yes &mdash; so bring them the connector list, not a description of the idea. The gap between a working demo and a supported service is almost entirely this slide. It is also the least glamorous and most predictive." data-demo="2.6" data-role="pre">
   <h2>Environments and ALM: the part that decides whether this survives<span class="cue pre">PRE &middot; DEMO 2.6</span><span class="tag">2.6</span></h2>
   <div class="body g1">
     <div>
@@ -1531,6 +1531,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
         <text class="ss" x="22" y="418" style="fill:#b91c1c;font-weight:600">Ten minutes of setup now. Weeks saved later.</text>
       </svg>
     </div>
+    <div class="take"><b>Source control is available here, today.</b> The solution exports as a file, and the agent itself &mdash; instructions, topics, settings, tool bindings &mdash; pulls to disk as YAML and pushes back, so a portal edit becomes a reviewable diff instead of something discovered live. The commands are in the tooling pack; the point is that you do not have to leave Copilot Studio to get a repo.</div>
   </div>
 </section>
 
@@ -1578,7 +1579,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
 </section>
 
 <!-- 27 -->
-<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The governance checklist, worked" data-notes="Worked against a real agent rather than in the abstract. Any row you cannot answer is a piece of work, not a formality - and this table is the artefact to take to a governance forum. Row three is the one teams skip. Knowledge respects the permissions and sensitivity labels on the source, so a user cannot be cited to a document they may not open - but the deck the agent generates inherits no label at all. Whoever owns the output folder owns that gap." data-demo="2.6" data-role="post">
+<section class="slide" data-sec="2.6 Deploy &amp; govern" data-title="The governance checklist, worked" data-notes="Worked against a real agent rather than in the abstract. Any row you cannot answer is a piece of work, not a formality - and this table is the artefact to take to a governance forum. Row three is the one teams skip. Knowledge respects the permissions and sensitivity labels on the source, so a user cannot be cited to a document they may not open - but the deck the agent generates inherits no label at all. Whoever owns the output folder owns that gap. Row two names the second thing that leaves: the renderer is an endpoint of your own, and it receives the entire slide plan, not a date. What protects it is a function key in a header, held in an environment variable so there is one owned place to rotate it - be honest about that in a governance forum, because an environment variable is not a secret store: the designer stamps its value into the flow definition. A Key Vault-backed secret is the version that survives the question." data-demo="2.6" data-role="post">
   <h2>The governance checklist &mdash; worked against what we just built<span class="cue post">POST &middot; DEMO 2.6</span><span class="tag k">2.6</span></h2>
   <div class="body g1">
     <div>
@@ -1595,8 +1596,8 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
 
         <rect class="bx g" x="4" y="112.5" width="1172" height="52.5" rx="5"/>
         <text class="ss" x="22" y="145" style="font-weight:600;fill:#0b2545">Can data leave the tenant?</text>
-        <text class="ss" x="360" y="145">Only via the FX endpoint, which receives a date and nothing else</text>
-        <text class="ss" x="880" y="145">DLP connector groups</text>
+        <text class="ss" x="360" y="145">FX endpoint gets a date; the render endpoint gets the whole slide plan</text>
+        <text class="ss" x="880" y="145">DLP groups + a function key</text>
 
         <rect class="bx g" x="4" y="172.5" width="1172" height="52.5" rx="5"/>
         <text class="ss" x="22" y="205" style="font-weight:600;fill:#0b2545">Which classification of data reaches it?</text>
@@ -1792,7 +1793,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
 </section>
 
 <!-- 30 -->
-<section class="slide" data-sec="2.7 Close" data-title="When to graduate from Copilot Studio" data-notes="Honest and short. The five signals protect you from building the wrong thing next year. Agent Framework is the named path, but it is not today's decision - prototype here first, always. The amber box at the bottom is the one to act on. Our capstone agent already does four unrelated jobs - extract, mandate-check, benchmark, plan - behind a single instruction block heading for the 8,000-character ceiling. That is signal 1, and the first answer is not code: it is connected agents, where one agent lists others as tools and each keeps its own knowledge, instructions and trace. You get shorter instructions, a smaller blast radius per change, and separate owners. Graduate only when splitting has stopped helping.">
+<section class="slide" data-sec="2.7 Close" data-title="When to graduate from Copilot Studio" data-notes="Honest and short. The five signals protect you from building the wrong thing next year. Agent Framework is the named path, but it is not today's decision - prototype here first, always. Note what is not on this list: source control. The agent is already files, so a repo is a session 2.6 decision, not a reason to leave - what you actually graduate for is CI, real regression testing and latency. The amber box at the bottom is the one to act on. Our capstone agent already does four unrelated jobs - extract, mandate-check, benchmark, plan - behind a single instruction block heading for the 8,000-character ceiling. That is signal 1, and the first answer is not code: it is connected agents, where one agent lists others as tools and each keeps its own knowledge, instructions and trace. You get shorter instructions, a smaller blast radius per change, and separate owners. Graduate only when splitting has stopped helping.">
   <h2>When to graduate &mdash; and how you will know<span class="tag">2.7</span></h2>
   <div class="body g64">
     <div>
@@ -1814,7 +1815,7 @@ svg.u136 .ss{font-size:17px}svg.u136 .tt{font-size:20.4px}svg.u136 .lb{font-size
 
         <rect class="bx" x="4" y="315.4" width="692" height="133.9" rx="8"/>
         <text class="lb" x="22" y="339.1">WHAT GRADUATION LOOKS LIKE</text>
-        <text class="ss" x="22" y="365">Microsoft Agent Framework or a code-first stack, owned by engineering, in source control,</text>
+        <text class="ss" x="22" y="365">Microsoft Agent Framework or a code-first stack, owned by engineering, under full CI,</text>
         <text class="ss" x="22" y="386.6">with tests and a deployment pipeline. Same concepts &mdash; instructions, tools, orchestration, traces &mdash;</text>
         <text class="ss" x="22" y="408.2">expressed in code instead of configuration.</text>
         <text class="ss" x="22" y="436.3" style="font-weight:600;fill:#0b2545">Everything you learned today transfers. The vocabulary does not change; only who maintains it does.</text>
