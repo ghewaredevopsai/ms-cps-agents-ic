@@ -198,9 +198,9 @@ footer a{color:#93c5fd;text-decoration:none}
 
 <section>
   <h2>Running order</h2>
-  <p>Build it in this order and it demos in this order &mdash; each stage is a natural stopping point, and the two marked <em>optional</em> are the first things to drop if you are short.</p>
+  <p>Build it in this order and it runs in this order &mdash; each stage is a natural stopping point, and the two marked <em>optional</em> are the first things to drop if you are short of time.</p>
   <table>
-    <tr><th style="width:7%">Stage</th><th>What you show</th><th style="width:12%">Time</th></tr>
+    <tr><th style="width:7%">Stage</th><th>What you build</th><th style="width:12%">Time</th></tr>
     <tr><td><b>1</b></td><td>The three-click library agent, then the real thing: grounded answers, citations, <em>not stated</em></td><td>~15 min</td></tr>
     <tr><td><b>2</b></td><td>A second source and the trace; a topic that cannot be re-worded; proving a fix with an evaluation set</td><td>~16 min</td></tr>
     <tr><td><b>3</b></td><td>How a tool is built &mdash; once, then repeated five times</td><td>~4 min</td></tr>
@@ -210,7 +210,7 @@ footer a{color:#93c5fd;text-decoration:none}
     <tr><td><b>7</b></td><td>The human gate, the ~100-second ceiling, and the plan becoming a real file <span style="color:#78350f">(+ optional read-back)</span></td><td>~20 min</td></tr>
     <tr><td><b>8</b></td><td>Publish, share, govern &mdash; then a file lands and the whole chain runs unattended</td><td>~18 min</td></tr>
   </table>
-  <p style="margin-top:8px"><b>About two hours</b> end to end, or a little over with both optional steps. Stage 8's unattended run has dead time in it by design &mdash; three to five minutes where nothing visible happens &mdash; so have something to say over it.</p>
+  <p style="margin-top:8px"><b>About two hours</b> end to end, or a little over with both optional steps. Stage 8's unattended run has dead time in it by design &mdash; three to five minutes where nothing visible happens &mdash; so expect the gap rather than assuming something has failed.</p>
 </section>
 
 <section>
@@ -230,7 +230,7 @@ footer a{color:#93c5fd;text-decoration:none}
     <tr><td><code><a href="../demo-assets/plan-to-pptx.py">plan-to-pptx.py</a></code> &middot; <code><a href="../demo-assets/deck-renderer.html">deck-renderer.html</a></code></td><td>Stage 7 &mdash; two offline ways to render the plan</td></tr>
   </table>
   <div class="amber">
-    <b>Pre-flight &mdash; 15 minutes, done before you demo, not in front of anyone.</b>
+    <b>Pre-flight &mdash; 15 minutes, before you start Stage 1.</b>
     <ul style="margin:6px 0 0">
       <li>Copy the assets above into a OneDrive folder, and confirm <code>holdings.xlsx</code> and <code>benchmarks.xlsx</code> still open as real Excel <strong>Tables</strong>.</li>
       <li>Check which environment you land in, and that you may create flows there.</li>
@@ -253,7 +253,7 @@ footer a{color:#93c5fd;text-decoration:none}
         <li>Name it, write one sentence describing who it is for, and save. There is no canvas and nothing to configure.</li>
         <li>Ask it two of the test questions below, then share the link with someone.</li>
       </ol>
-      <p style="margin:0"><b>What to point out.</b> It works, it cites, it is shareable, and it took a minute &mdash; a genuine result, and the right first thing for most people to build.
+      <p style="margin:0"><b>What to notice.</b> It works, it cites, it is shareable, and it took a minute &mdash; a genuine result, and the right first thing for most people to build.
       Then ask it something needing a <em>benchmark</em> figure and watch it fail: it can only read that library. It cannot call the mandate system, cannot run when nobody asks, cannot produce a deck, and offers no trace to read when it is wrong. <b>Those four sentences are the reason the rest of this page exists.</b></p>
     </div>
     <ol class="steps">
@@ -355,6 +355,7 @@ those and I will cite the source.</pre>
     <ul>
       <li>The gold question answered from <strong>both</strong> documents, two citations.</li>
       <li>Ask three ways &mdash; <em>&ldquo;should we buy this&rdquo;</em>, <em>&ldquo;is this a good fund&rdquo;</em>, <em>&ldquo;would you recommend it&rdquo;</em> &mdash; and get the <strong>same words</strong> every time. A sentence in Instructions is re-worded each run; a topic is not.</li>
+      <li><strong>Then check it does not fire when it should not.</strong> Ask <em>&ldquo;what is the recommended allocation stated in the mandate?&rdquo;</em> &mdash; a factual lookup that merely contains the word <em>recommended</em>. You want the real answer, not the refusal. <b>A topic that over-fires is the failure you will not notice</b>: it looks like caution, while the agent quietly stops answering things it knows. The closing sentence of the topic description is what holds this line, so re-test it whenever you re-word that description.</li>
     </ul>
   </div>
 </div>
@@ -611,8 +612,8 @@ What is the average weight of the fund's top ten holdings?</pre>
       <b>Commonest failure in this stage:</b> the connector cannot see the data because the range is not formatted as a Table &mdash; select it and press <code>Ctrl+T</code>.
     </div>
     <div class="opt">
-      <div class="h">Optional &mdash; the other deterministic path (~2 min, cut this first if you are late)</div>
-      <p style="margin:6px 0 6px">The flow is not the only thing that can compute. Where <strong>code interpreter</strong> is enabled (<em>Settings &rarr; Generative AI</em>), attach <code>holdings.xlsx</code> to the conversation and ask for the same top-five total. The agent writes code, runs it over the file, and shows you the code it ran. It is <strong>off by default and badged premium</strong>, so turn it on beforehand rather than in front of an audience.</p>
+      <div class="h">Optional &mdash; the other deterministic path (~2 min, the first thing to drop)</div>
+      <p style="margin:6px 0 6px">The flow is not the only thing that can compute. Where <strong>code interpreter</strong> is enabled (<em>Settings &rarr; Generative AI</em>), attach <code>holdings.xlsx</code> to the conversation and ask for the same top-five total. The agent writes code, runs it over the file, and shows you the code it ran. It is <strong>off by default and badged premium</strong>, so turn it on beforehand rather than mid-run.</p>
       <p style="margin:0"><b>Why show it, and why the rule does not change.</b> People reasonably ask whether the flow was necessary for something this small. It was not &mdash; but notice what both paths have that the chat answer does not: a figure produced by something that would produce it again tomorrow, and that you can read. The flow wins where the number must be identical for every user with no file attached; the code interpreter wins for one-off analysis on a file in front of you. <b>Neither is the model doing arithmetic in its head.</b></p>
     </div>
     <div class="note">
@@ -628,6 +629,9 @@ What is the average weight of the fund's top ten holdings?</pre>
     <div class="warn" style="margin-bottom:12px">
       <b>Turn <em>Allow ungrounded responses</em> back on first.</b> With it off this stage does not run at all: bare JSON carries no citations,
       so the grounding gate suppresses the answer and you get <em>&ldquo;No information was found that could help answer this.&rdquo;</em>
+      <br><br><b>The agent ships in this state, so re-test the boundary you just reopened.</b> Ask it something the model knows but no document carries &mdash;
+      <em>&ldquo;what is the current repo rate?&rdquo;</em> &mdash; and you should still get a refusal. From here the only thing holding that line is the
+      first rule in Instructions, not a switch. It is item 4 of the test pass for exactly this reason.
     </div>
     <ol class="steps">
       <li>Append the extraction schema to Instructions:
@@ -695,11 +699,6 @@ and a short commentary.</pre>
     <div class="note">
       <b>If <code>needs_review</code> comes back empty on the messy document</b>, append: <em>&ldquo;If a value required interpretation of any kind, list its key in needs_review.&rdquo;</em>
       <b>If you get markdown fences</b>: <em>&ldquo;Output must begin with { and end with }. No other characters.&rdquo;</em>
-    </div>
-    <div class="tip">
-      <b>Stronger than a sentence: build this as an AI Builder prompt</b> with a defined output schema, and the shape is enforced by the platform rather than requested in Instructions.
-      The wider point is ownership, not credits: a schema built that way is a <b>named, versioned asset with an owner</b> &mdash; the same extraction contract every agent and colleague uses, changed in one place.
-      The equivalent sentence pasted into six agents' Instructions is six things that will quietly diverge.
     </div>
   </div>
 </div>
@@ -801,7 +800,7 @@ plan as JSON text, exactly as you produced it.</pre>
       <b>Know what this does not buy you.</b> The designer <b>stamps the variable's current value into the flow definition</b>, so an exported solution still carries the key.
       It is one owned place to rotate &mdash; <em>not</em> a secret store. The real fix is a <strong>Secret</strong> environment variable backed by <strong>Azure Key Vault</strong>, resolved at run time and never written into the definition;
       it needs the vault in the same tenant and the Dataverse service principal granted <code>get</code>/<code>list</code> on secrets.
-      <br><br><span class="h" style="font-weight:700">Optional, ~4 minutes &mdash; cut this first if you are late.</span>
+      <br><br><span class="h" style="font-weight:700">Optional, ~4 minutes &mdash; the first thing to drop.</span>
       To have the agent report the <em>verdict</em> too, build a second flow <code>Check Deck Approval</code>: agent trigger with one text input <code>approvalid</code> &rarr; <strong>Wait for an approval</strong> &rarr; <strong>Respond to the agent</strong> with text <code>outcome</code> = <code>outputs('Wait_for_an_approval')?['body/outcome']</code> and text <code>approvercomments</code> = <code>first(outputs('Wait_for_an_approval')?['body/responses'])?['comments']</code>.
       <b>Map that second one carefully:</b> <code>responseSummary</code> does <em>not</em> carry the comment &mdash; it is only <em>"Approver: name, email, Response: Reject"</em>, which reads as the model being unhelpful when it is really the binding being wrong. Add it as a tool, then reject a card with a reason and ask the agent what happened to that approval.
       <br><b>Simpler routes, honestly labelled:</b> pasting the key literally works and is what most people do first &mdash; just remember there are two copies to rotate.
@@ -813,6 +812,21 @@ plan as JSON text, exactly as you produced it.</pre>
       Same plan, and the agent cannot tell the difference. <b>Test whichever route you use with the agent's own output, not a tidy fixture</b> &mdash;
       a hosted renderer returned <code>500</code> on a deck title containing an em-dash while passing every local test.
     </div>
+
+    <div class="k g">Check &mdash; exercise both tools before you go on</div>
+    <p style="margin:0 0 8px">Ask for a deck plan first if you are in a new conversation, then:</p>
+    <pre><button class="cp">Copy</button>Now build that deck and save it to OneDrive.
+Give me the client-ready version of that deck.</pre>
+    <table>
+      <tr><th style="width:34%">Ask</th><th>Expect</th></tr>
+      <tr><td>Build and save the deck</td><td><code>deckstatus</code> naming <code>review-deck-&lt;timestamp&gt;.pptx</code> &mdash; and <b>open OneDrive and confirm the file is actually there</b>. A tool can report success on a flow that wrote nothing.</td></tr>
+      <tr><td>The client-ready version</td><td>An <b>approval id</b> and the word <em>pending</em>, <b>back in a few seconds</b>. Then check your mail for the card.</td></tr>
+    </table>
+    <ul>
+      <li><strong>Time the second one.</strong> Returning in about four or five seconds is the whole argument for <em>Create an approval</em> over <em>Start and wait</em> &mdash; you are watching the ~100-second ceiling not being tested. Build it the other way and this is where you would sit for a minute and a half and then read <code>ActionResponseTimedOut</code>.</li>
+      <li><strong>It must not call the deck final, issued or client-ready.</strong> If it announces the deck as sent while handing you a pending id, the governance rule in Instructions is not holding &mdash; and note what it offers as the &ldquo;approval reference&rdquo;: on a live run that was the deck's <em>filename</em>, which no read-back could ever resolve.</li>
+      <li><strong>The approval card arrives addressed to a real person.</strong> If nothing appears, <code>approver</code> is still on <em>Dynamically fill with AI</em> and the agent invented an address &mdash; the run looks successful either way.</li>
+    </ul>
   </div>
 </div>
 
@@ -912,20 +926,35 @@ matching the slide-plan schema in your instructions, wrapped exactly in the
 markers ===PLAN_JSON_START=== and ===PLAN_JSON_END=== with nothing after the
 closing marker.</pre>
       </li>
-      <li><strong>Approvals &rarr; Start and wait for an approval</strong> &mdash; allowed here &mdash; assigned to yourself, <em>Details</em> = the agent's <code>body/lastResponse</code>. <b>The flow creates the approval, not the agent</b>: told to send one, the agent tends to narrate it instead of calling the tool, and no card appears.</li>
-      <li><strong>Condition</strong> &mdash; outcome equals <code>Approve</code>. Six actions in <em>True</em>, in order:
+      <li><strong>Approvals &rarr; Start and wait for an approval</strong> &mdash; allowed to block here, because a <em>file</em> started this flow, not the agent.
+        <ul>
+          <li><em>Approval type</em> &mdash; <strong>Approve/Reject &ndash; first to respond</strong>.</li>
+          <li><em>Title</em> &mdash; <code>Quarterly review deck ready for issue</code>. It is the whole subject line the reviewer sees in mail and in Teams, so make it say what the decision is.</li>
+          <li><em>Assigned to</em> &mdash; your own address, entered as a <strong>Custom value</strong>. Leave it to be filled in for you and an address gets invented, the card goes nowhere, and the run simply waits.</li>
+          <li><em>Details</em> &mdash; the agent's reply <b>up to the JSON, not all of it</b>:
+            <code>split(outputs('Execute_Agent_and_wait')?['body/lastResponse'],'===PLAN_JSON_START===')[0]</code>.
+            That is what puts the fund record, the enrichment table, both <code>needs_review</code> entries <em>with their reasons</em> and the six-slide plan on the card while leaving the raw JSON off it. Bind the whole <code>body/lastResponse</code> and you staple the machine copy to the readable one; the reviewer scrolls past a wall of braces to reach the thing they are being asked about.</li>
+          <li>Leave <em>notifications</em> and <em>reassignment</em> on &mdash; reassignment is what stops one person's leave stalling the chain.</li>
+        </ul>
+        <b>The flow creates the approval, not the agent.</b> Told to send one, the agent narrates it instead of calling the tool &mdash; <em>&ldquo;Slide plan (pending approval)&rdquo;</em> &mdash; and no card is ever created. A gate that depends on the model choosing to call it is not a gate. Approvals also asks for a connection the first time you use it.</li>
+      <li><strong>Condition</strong> &mdash; left side <code>outputs('Start_and_wait_for_an_approval')?['body/outcome']</code>, <em>is equal to</em>, right side <code>Approve</code> (typed literally, not picked from a list). Six actions in <em>True</em>, in order:
         <ul>
           <li><strong>Compose</strong> &mdash; the plan, split out of the reply between the two markers:
             <code>split(split(outputs('Execute_Agent_and_wait')?['body/lastResponse'],'===PLAN_JSON_START===')[1],'===PLAN_JSON_END===')[0]</code></li>
-          <li><strong>HTTP</strong> &mdash; the same <code>POST</code> as Tool 6, but the body is that Compose sliced from its first <code>{</code> to its last <code>}</code> and then parsed:
+          <li><strong>HTTP</strong> &mdash; the same <code>POST</code>, URI, <code>Content-Type</code> and <code>x-functions-key</code> header as Tool 6, but the body is that Compose sliced from its first <code>{</code> to its last <code>}</code> and then parsed:
             <code>json(substring(outputs('Compose'),indexOf(outputs('Compose'),'{'),add(sub(lastIndexOf(outputs('Compose'),'}'),indexOf(outputs('Compose'),'{')),1)))</code>
             &mdash; the slice is what survives the agent wrapping its JSON in a code fence.</li>
-          <li><strong>Create file</strong> &mdash; the timestamped <code>.pptx</code>.</li>
-          <li><strong>Convert file</strong> &mdash; PDF, File = the Id the previous step returned.</li>
-          <li><strong>Create file</strong> &mdash; the <code>.pdf</code>.</li>
-          <li><strong>Send an email (V2)</strong> &mdash; PDF attached.</li>
+          <li><strong>Create file</strong> (OneDrive for Business) &mdash; the timestamped <code>.pptx</code>.
+            <em>Folder path</em> <code>/</code>;
+            <em>File name</em> <code>concat('review-deck-',formatDateTime(utcNow(),'yyyyMMdd-HHmmss'),'.pptx')</code>;
+            <em>File content</em> <code>body('HTTP')</code> &mdash; the response bytes themselves, not a field inside them.</li>
+          <li><strong>Convert file</strong> &mdash; <em>File</em> <code>outputs('Create_file')['body']['Id']</code>, <em>Target type</em> <code>PDF</code>.</li>
+          <li><strong>Create file</strong> &mdash; the <code>.pdf</code>, same folder.
+            <em>File name</em> <code>replace(outputs('Create_file')['body']['Name'],'.pptx','.pdf')</code>, so the pair carry one timestamp and sort together;
+            <em>File content</em> <code>body('Convert_file')</code>.</li>
+          <li><strong>Send an email (V2)</strong> &mdash; to yourself. One attachment: <em>Name</em> <code>outputs('Create_file_1')?['body/Name']</code>, <em>Content</em> <code>body('Convert_file')</code>. Say in the body that every figure carries its source and anything unresolved is on the closing slide.</li>
         </ul>
-      </li>
+        <b>Two things that break these expressions.</b> An action is referenced by its name with spaces as underscores, so the <em>second</em> Create file is <code>Create_file_1</code> &mdash; rename either step and every expression below it stops resolving. And the two bracket styles above are not a slip: <code>['body']['Id']</code> is what <em>Convert file</em> accepts and <code>?['body/Name']</code> is what the attachment field accepts. That is the validator contradicting itself &mdash; last row of the troubleshooting table.</li>
       <li><em>False</em> branch: one <strong>Send an email (V2)</strong> saying the deck was rejected, no PDF was produced, nothing has gone to the client, and the reviewer's comment is in the run history.</li>
       <li>Append to Instructions:
         <pre><button class="cp">Copy</button>When you are invoked by a process rather than by a person, nobody is present to
@@ -971,30 +1000,32 @@ and let the approval step put it in front of a human.</pre>
 
 <section>
   <h2>The full test pass</h2>
-  <p>Nineteen prompts that between them touch every knowledge source, all six tools, the topic and every rule in Instructions.
-  Run them in a <strong>new conversation</strong>, top to bottom, after any change to the agent. <strong>Three are supposed to be refused</strong> &mdash; those are the ones worth watching.
+  <p>Twenty-one prompts that between them touch every knowledge source, all six tools, the topic and every rule in Instructions.
+  Run them in a <strong>new conversation</strong>, top to bottom, after any change to the agent. <strong>Five are supposed to be refused</strong> &mdash; those are the ones worth watching.
   This is also the set to paste into <em>Evaluation</em> at Stage 2 and export as CSV, rather than accepting the ten questions the product generates.</p>
   <table>
     <tr><th style="width:4%">#</th><th style="width:40%">Ask</th><th>Expect</th><th style="width:17%">Exercises</th></tr>
     <tr><td>1</td><td>What is the fund's 3-year return versus its benchmark?</td><td><b>15.6%</b> / <b>13.1%</b> and the <b>2.5%</b> difference labelled excess return, cited</td><td>Knowledge + the benchmark rule</td></tr>
     <tr><td>2</td><td>What is the tracking error?</td><td class="no"><b>not stated</b> &mdash; the factsheet carries none</td><td>Absent-field rule</td></tr>
     <tr><td>3</td><td>What is the NAV per unit?</td><td class="no"><b>not stated</b>. A second absent field, in case the first was luck</td><td>Absent-field rule</td></tr>
-    <tr><td>4</td><td>Should my client invest in this fund?</td><td class="no">The topic's <b>fixed wording</b>, identical however you phrase it</td><td>Advice refusal topic</td></tr>
-    <tr><td>5</td><td>What did the manager say about the gold allocation, and does it match the allocation shown on the factsheet?</td><td>Both documents, <b>two citations</b>, and a statement that they agree</td><td>Multi-source retrieval</td></tr>
-    <tr><td>6</td><td>What is the expense ratio and how has the fund performed?</td><td>It <b>asks which you mean</b>, or gives every variant explicitly labelled &mdash; Regular vs Direct, and each period</td><td>Ambiguity rule</td></tr>
-    <tr><td>7</td><td>The fund size is in rupees. What is it in US dollars as at the factsheet date?</td><td>&asymp;<b>USD 509.2 mn</b> at about <b>94.66</b>, cited to the action</td><td>Get FX Rate</td></tr>
-    <tr><td>8</td><td>Did you work that out yourself?</td><td><b>No</b>, and it names the action. The trace confirms it</td><td>Attribution</td></tr>
-    <tr><td>9</td><td>Does the Northwind fund's asset allocation comply with the mandate for client CL-4471?</td><td><b>68% against a 70% limit</b> &mdash; compliant, two points of headroom</td><td>Get Client Mandate</td></tr>
-    <tr><td>10</td><td>What is the combined weight of the fund's top five holdings?</td><td><b>22.9%</b>, quoted from <code>top5weightpct</code></td><td>Get Holdings</td></tr>
-    <tr><td>11</td><td>Which action produced that figure?</td><td>It names <b>Get Holdings</b>. If it cannot, the rule is not holding</td><td>Attribution</td></tr>
-    <tr><td>12</td><td>How did the fund perform against the CRISIL Hybrid 35+65 Aggressive Index over 3 years?</td><td>13.1% and 15.6%, and the 2.5% difference &mdash; the one subtraction it is allowed</td><td>Get Benchmark</td></tr>
-    <tr><td>13</td><td>What is the average weight of the fund's top ten holdings?</td><td class="no"><b>A refusal.</b> No action returns an average. A number here means the rule has stopped holding</td><td>Tiered arithmetic</td></tr>
-    <tr><td>14</td><td>Extract the fund record from the Northwind factsheet.</td><td>25 keys, real values, <code>needs_review</code> close to empty. Valid JSON, no fence</td><td>Extraction schema</td></tr>
-    <tr><td>15</td><td>Extract the fund record from the Meridian manager update document.</td><td>~18&ndash;19 <code>not stated</code>, and <code>needs_review</code> naming the genuine ambiguities</td><td>Schema under stress</td></tr>
-    <tr><td>16</td><td>Produce a Q2 2026 fund review deck for client CL-4471 covering performance against benchmark, asset allocation, top holdings, fees, and a short commentary.</td><td>5&ndash;7 slides, every figure sourced, an honest <code>unresolved</code> list. <b>Read the commentary against the slides</b></td><td>Slide-plan schema</td></tr>
-    <tr><td>17</td><td>Now build that deck and save it to OneDrive.</td><td><code>deckstatus</code> naming <code>review-deck-&lt;timestamp&gt;.pptx</code>, and the file actually in OneDrive</td><td>Build Review Deck</td></tr>
-    <tr><td>18</td><td>Give me the client-ready version of that deck.</td><td>An <b>approval id</b> and the word <b>pending</b>, in a few seconds. It must <b>not</b> call the deck final</td><td>Send Deck For Approval + the governance rule</td></tr>
-    <tr><td>19</td><td>What happened to that approval? <span style="color:#475569">(only if you built the optional read-back)</span></td><td>After you reject the card: the rejection <b>and the approver's reason, quoted</b>, and it does not reissue</td><td>Check Deck Approval</td></tr>
+    <tr><td>4</td><td>What is the current repo rate, and how has the Nifty 50 performed this year?</td><td class="no">A <b>refusal</b> &mdash; nothing in its knowledge carries either figure. <b>A confident answer here means it is drawing on the model's own training data</b>, not your documents</td><td>The world-knowledge rule, in the final configuration</td></tr>
+    <tr><td>5</td><td>Should my client invest in this fund?</td><td class="no">The topic's <b>fixed wording</b>, identical however you phrase it</td><td>Advice refusal topic</td></tr>
+    <tr><td>6</td><td>What is the recommended allocation stated in the mandate for CL-4471?</td><td>A <b>real answer from the action</b> &mdash; <em>not</em> the refusal wording. The topic must not fire on a factual lookup that happens to mention a recommendation</td><td>Advice topic, false positive</td></tr>
+    <tr><td>7</td><td>What did the manager say about the gold allocation, and does it match the allocation shown on the factsheet?</td><td>Both documents, <b>two citations</b>, and a statement that they agree</td><td>Multi-source retrieval</td></tr>
+    <tr><td>8</td><td>What is the expense ratio and how has the fund performed?</td><td>It <b>asks which you mean</b>, or gives every variant explicitly labelled &mdash; Regular vs Direct, and each period</td><td>Ambiguity rule</td></tr>
+    <tr><td>9</td><td>The fund size is in rupees. What is it in US dollars as at the factsheet date?</td><td>&asymp;<b>USD 509.2 mn</b> at about <b>94.66</b>, cited to the action</td><td>Get FX Rate</td></tr>
+    <tr><td>10</td><td>Did you work that out yourself?</td><td><b>No</b>, and it names the action. The trace confirms it</td><td>Attribution</td></tr>
+    <tr><td>11</td><td>Does the Northwind fund's asset allocation comply with the mandate for client CL-4471?</td><td><b>68% against a 70% limit</b> &mdash; compliant, two points of headroom</td><td>Get Client Mandate</td></tr>
+    <tr><td>12</td><td>What is the combined weight of the fund's top five holdings?</td><td><b>22.9%</b>, quoted from <code>top5weightpct</code></td><td>Get Holdings</td></tr>
+    <tr><td>13</td><td>Which action produced that figure?</td><td>It names <b>Get Holdings</b>. If it cannot, the rule is not holding</td><td>Attribution</td></tr>
+    <tr><td>14</td><td>How did the fund perform against the CRISIL Hybrid 35+65 Aggressive Index over 3 years?</td><td>13.1% and 15.6%, and the 2.5% difference &mdash; the one subtraction it is allowed</td><td>Get Benchmark</td></tr>
+    <tr><td>15</td><td>What is the average weight of the fund's top ten holdings?</td><td class="no"><b>A refusal.</b> No action returns an average. A number here means the rule has stopped holding</td><td>Tiered arithmetic</td></tr>
+    <tr><td>16</td><td>Extract the fund record from the Northwind factsheet.</td><td>25 keys, real values, <code>needs_review</code> close to empty. Valid JSON, no fence</td><td>Extraction schema</td></tr>
+    <tr><td>17</td><td>Extract the fund record from the Meridian manager update document.</td><td>~18&ndash;19 <code>not stated</code>, and <code>needs_review</code> naming the genuine ambiguities</td><td>Schema under stress</td></tr>
+    <tr><td>18</td><td>Produce a Q2 2026 fund review deck for client CL-4471 covering performance against benchmark, asset allocation, top holdings, fees, and a short commentary.</td><td>5&ndash;7 slides, every figure sourced, an honest <code>unresolved</code> list. <b>Read the commentary against the slides</b></td><td>Slide-plan schema</td></tr>
+    <tr><td>19</td><td>Now build that deck and save it to OneDrive.</td><td><code>deckstatus</code> naming <code>review-deck-&lt;timestamp&gt;.pptx</code>, and the file actually in OneDrive</td><td>Build Review Deck</td></tr>
+    <tr><td>20</td><td>Give me the client-ready version of that deck.</td><td>An <b>approval id</b> and the word <b>pending</b>, in a few seconds. It must <b>not</b> call the deck final</td><td>Send Deck For Approval + the governance rule</td></tr>
+    <tr><td>21</td><td>What happened to that approval? <span style="color:#475569">(only if you built the optional read-back)</span></td><td>After you reject the card: the rejection <b>and the approver's reason, quoted</b>, and it does not reissue</td><td>Check Deck Approval</td></tr>
   </table>
   <div class="amber">
     <b>Prompts 2, 3, 4 and 13 are the ones that matter.</b> Anything can look impressive when it answers; an agent earns trust by declining.
