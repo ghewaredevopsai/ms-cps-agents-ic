@@ -25,12 +25,14 @@ li{margin-bottom:5px}
 .warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
 .warn b{color:#991b1b}
 .note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.bld{background:#eef4fd;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#0b2545}
+.bld a{color:#1d4ed8}
 .tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
 .amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
 table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
 th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
 th{background:#eef4fd;color:#0b2545}
-code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545;overflow-wrap:anywhere}
 pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px}
 pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
 pre .cp:hover{background:#2563eb}
@@ -100,7 +102,8 @@ footer a{color:#93c5fd;text-decoration:none}
 
 <section id="how">
   <h2>How to use this guide</h2>
-  <p>
+  <div class="bld"><b>Two documents, one agent, no overlap.</b> This guide is the <b>run-sheet</b>: what each demo proves, what to type, what you should see, and what to do when it misbehaves. The <b>build sheet</b> is <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a> &mdash; every flow node, every expression, every instruction block, in build order. Demos 1.8 and 2.1&ndash;2.7 all extend the same agent, and each one points at the stage that builds it. Configuration is written down <b>once</b>, on that page.</div>
+<p>
     The workshop is <strong>trainer-led</strong>: Rajesh builds everything live on screen. Nothing here is required of you, and no lab has been provisioned.
     This guide exists so that if you <em>want</em> to build alongside the demo &mdash; on the day or afterwards &mdash; you can, without pausing the room to ask what was clicked.
   </p>
@@ -600,81 +603,16 @@ If a figure is not present in the document, reply exactly: not stated. Do not es
       Participants who want this for their own libraries have it as Part&nbsp;3 of the <a href="reference-pack.html">reference pack</a>.</div>
 
       <div class="k">Steps</div>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stages 1 and 2 &mdash; the agent, its rules, the two grounding switches, and the Advice refusal topic.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for.</div>
+
       <ol class="steps">
-        <li>Go to <a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> and confirm the environment shown top-right is the one you intend to build in.</li>
-        <li>Select <strong>Create</strong> &rarr; <strong>New agent</strong>. If offered a describe-it-in-words flow, choose to <strong>skip to configure</strong> instead &mdash; you want to see the four boxes, not have them filled in for you.</li>
-        <li><strong>Name it</strong> <code>Fund Research Assistant</code> and give it the description below.</li>
-        <li><strong>Paste the Instructions</strong> below. This is demo 1.1's prompt, made permanent.</li>
-        <li><strong>Add Knowledge:</strong> under Knowledge, choose <strong>Add knowledge</strong> &rarr; upload <code>sample-fund-factsheet.pdf</code>. Wait until its status shows ready &mdash; this takes a minute or two.</li>
-        <li><strong>Close both doors to the open web.</strong> Settings &rarr; <strong>Generative AI</strong>. Switch <strong>Allow ungrounded responses</strong> to <em>off</em> &mdash; that blocks any answer not built from a knowledge source or a tool. Then switch <strong>Use information from the Web</strong> to <em>off</em>. Both, not one. <strong>Note where this switch goes next:</strong> demo 2.4 turns <em>Allow ungrounded responses</em> back on, and cannot run without it &mdash; the pair of demos is the clearest illustration all day of what &ldquo;grounded&rdquo; actually enforces, so plan to toggle it live rather than leaving it one way all day.</li>
-        <li><strong>Retest before doing anything else.</strong> Those two switches are usually enough &mdash; verified on a live tenant, where the same question went from a web answer to a cited factsheet answer on the toggles alone. <strong>Only if it still cites the web:</strong> Topics &rarr; <strong>System</strong> &rarr; switch off <code>Conversational boosting</code>, which answers from a generative fallback and is the step almost everyone misses.</li>
-        <li><strong>Test it</strong> in the pane on the right with the three questions below &mdash; in a <strong>new</strong> conversation, always.</li>
-        <li><strong>Now make one behaviour non-negotiable.</strong> Question 3 was refused by a <em>sentence in Instructions</em> &mdash; guidance the model weighs against everything else you wrote. For the things compliance signs off, that is not strong enough. <strong>Topics</strong> &rarr; <strong>+ Add a topic</strong> &rarr; <strong>From blank</strong>, named <code>Advice refusal</code>.</li>
-        <li><strong>Describe when the topic applies.</strong> There is no longer a trigger-phrase list: a blank topic's trigger is <em>"The agent chooses"</em> plus a free-text <strong>"Describe what the topic does"</strong> box. Put the six phrases below into that description as example questions, and add the narrowing sentence so it does not swallow document lookups. They match on <em>meaning</em>, so you need not enumerate every phrasing.</li>
-        <li><strong>Add a Message node</strong> and paste the refusal wording below. Nothing on this path is generated, so nothing on it can be re-worded. Save.</li>
-        <li><strong>Retest in a new conversation</strong>, asking three ways &mdash; <em>"should we buy this"</em>, <em>"is this a good fund"</em>, <em>"would you recommend it"</em>. Compare with step 8.</li>
-        <li><strong>Break it deliberately.</strong> In this agent&rsquo;s Instructions, delete the line beginning <em>"If a value is not present"</em>, turn <em>Allow ungrounded responses</em> on, and re-run demo 1.1&rsquo;s structured prompt. Watch tracking error, portfolio turnover and NAV per unit quietly fill with plausible numbers that change every run. Put the line back afterwards.</li>
+        <li><strong>Build it first</strong>, from the page above. Come back here to run it.</li>
+        <li>Test it in the pane on the right with the three questions below &mdash; in a <strong>new conversation</strong>, always.</li>
+        <li>After you add the <code>Advice refusal</code> topic, <strong>retest asking three ways</strong> &mdash; "should we buy this", "is this a good fund", "would you recommend it" &mdash; and compare with the answer you got from the Instructions sentence alone. Before, the decline was polite and slightly different every time; after, it is a fixed statement compliance can read once and approve once. <strong>That is the whole argument for topics.</strong></li>
+        <li><strong>Break it deliberately.</strong> Delete the line beginning "If a value is not present" from Instructions, turn <em>Allow ungrounded responses</em> on, and re-run demo 1.1's structured prompt. Watch tracking error, portfolio turnover and NAV per unit quietly fill with plausible numbers that change every run. Put the line back afterwards.</li>
       </ol>
 
-      <div class="k">Description</div>
-      <pre>Answers questions about fund factsheets for investment consultants. Quotes the
-source for every figure and refuses to estimate anything not in the document.</pre>
-
-      <div class="k">Instructions</div>
-      <pre>You are a research assistant for an investment consulting team.
-
-You answer questions about the fund documents in your knowledge only.
-
-Rules you must follow without exception:
-- Every figure you state must come from a document in your knowledge, or from
-  an action you called. Never from your own knowledge of the world.
-- After every figure, cite the section, page or action it came from.
-- If a figure is not in your documents, reply exactly: not stated.
-- Never estimate, infer or annualise a figure, and never fill a gap.
-- Arithmetic: you may state the difference between two figures you have just
-  retrieved, provided you show both of them with their sources in the same
-  reply. Everything else that produces a number - totals, averages, weighted
-  figures, currency conversion, anything computed across a set of rows - must
-  come from an action. If no action provides it, name the action that is
-  missing instead of working it out yourself.
-- If asked for advice on whether to invest, decline and say that suitability
-  is a consultant judgement, not a document lookup.
-- Be brief. A consultant is reading this between meetings.
-
-When asked to compare the fund against its benchmark, state both numbers and
-the difference, and label the difference as excess return.</pre>
-
-      <div class="tip" style="margin-top:10px">
-        <strong>Read the arithmetic rule twice &mdash; it is the spine of the whole afternoon.</strong> A difference between two figures already on screen is checkable by eye, so the agent may state it.
-        A total across ten rows, or a currency conversion, is not checkable by eye &mdash; so a system computes it and the agent quotes the system. Demos 2.2 and 2.3 build the actions that make this rule keepable rather than merely stern.
-      </div>
-
-      <div class="note">
-        <strong>Two other switches live on that same Generative AI page.</strong> Leave them alone today, but know they are there.
-        <strong>File uploads</strong> lets a user attach a PDF, TXT, CSV, XLSX or image to the conversation, up to 15&nbsp;MB.
-        <strong>Code interpreter</strong> generates and runs code over an attached file &mdash; which is a further <em>deterministic</em> route to a computed number, alongside the actions you build in demos 2.2 and 2.3. The arithmetic rule does not change either way: the figure comes from something that would produce it again tomorrow, and the agent says what produced it. Both switches may be restricted in your tenant.
-      </div>
-
-      <div class="k">Describe what the topic does &mdash; the <code>Advice refusal</code> topic</div>
-      <p>A blank topic no longer takes a list of trigger phrases. It takes one free-text description of <em>what the topic does</em>, and the agent routes to it from that. Write the condition, not a sample question &mdash; then test it with several phrasings, because the description is doing the work a phrase list used to do.</p>
-      <pre>Fires when the user asks whether to invest in, buy, recommend or allocate to
-a fund, or whether one is suitable for a client - any question seeking an
-investment judgement rather than a document lookup.</pre>
-
-      <div class="k">Message node &mdash; the wording, fixed</div>
-      <pre>I can't advise on whether to invest. Suitability depends on the client's
-mandate, risk tolerance and existing allocation - that is a consultant
-judgement, not a document lookup.
-
-I can give you what the documents say: performance against the benchmark,
-the allocation, the risk figures and the mandate limits. Ask me for any of
-those and I will cite the source.</pre>
-
-      <div class="tip">
-        <strong>Instructions or a topic? The test is who has to defend the wording.</strong>
-        Instructions are the right home for almost everything &mdash; they are how the agent adapts to a question you did not anticipate. A <strong>topic</strong> is right when the answer must be identical every time and somebody outside the team signs it off: the advice refusal, a regulatory disclaimer, the escalation path on a mandate breach.
-        Three topics is healthy for an agent this size; thirty means you have rebuilt a decision tree. Note that the agent still <em>chooses</em> the topic, so the description you give it matters as much as the message inside it.
-      </div>
 
       <div class="k">Test questions</div>
       <pre>What is the fund's 3-year return versus its benchmark?
@@ -719,19 +657,18 @@ Should my client invest in this fund?</pre>
       <p>Your Fund Research Assistant from demo 1.8. The second document, <code>manager-update-jul-2026.txt</code>, from <a href="#assets">the appendix</a>.</p>
 
       <div class="k">Steps</div>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 2 &mdash; adding the second knowledge source, naming and describing it, marking it official, and reading the trace.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for. The evaluation loop below is not on that page; it lives here.</div>
+
       <ol class="steps">
-        <li><strong>Add a second knowledge source.</strong> Save the manager update from the appendix as a <code>.txt</code> or <code>.docx</code> file and upload it alongside the factsheet.</li>
-        <li><strong>Name it and describe it properly.</strong> Give the source a meaningful display name and a one-line description of what it contains. The agent reads both when it decides which source to consult &mdash; an untitled upload competes badly against a well-named one, and this costs you nothing.</li>
-        <li><strong>Mark it as an official source</strong> &mdash; click the knowledge source row to open its details page; naming, describing and the official flag all live there. Answers drawn from it are then flagged as official, which matters disproportionately to a reader deciding how far to trust a figure. <strong>Read the confirmation dialog before you accept it:</strong> marking a source official also <em>rewrites your agent's instructions</em>, adding a rule about preferring authoritative data. It does not appear in the Instructions box, so it is a second change you did not type &mdash; worth knowing before the one-change-per-run discipline in step 10.</li>
-        <li><strong>Confirm generative orchestration is on</strong> &mdash; Settings &rarr; Orchestration (or the toggle on the agent's Overview). This is what lets the agent decide which source to read.</li>
-        <li><strong>Ask a question that spans both documents</strong> &mdash; question 1 below. Neither document answers it alone.</li>
-        <li><strong>Open the trace.</strong> In the test pane, expand the activity / reasoning detail for that answer. Read which knowledge source it consulted, in what order, and what it retrieved.</li>
-        <li><strong>Now break it on purpose.</strong> Ask question 2 &mdash; deliberately ambiguous about which period and which plan.</li>
-        <li><strong>Read the trace again</strong> to see what it assumed, then <strong>fix it with one instruction</strong> (below) and re-ask.</li>
-        <li><strong>Now prove the fix, instead of believing it.</strong> Open the <strong>Evaluation</strong> tab &rarr; <em>New evaluation</em> &rarr; <em>Single response</em> &rarr; <strong>Quick question set</strong>. Copilot Studio generates ten questions from your agent's own description, instructions and knowledge. Read them, correct any that are wrong, and run the set.</li>
-        <li><strong>Change exactly one thing and re-run the identical set.</strong> Delete the instruction you added in step 8 and run the identical set again. One change per run &mdash; change two and a better score tells you nothing about which one earned it. <strong>Be ready for the score not to move.</strong> On a live run it was 60% with the instruction and 60% without it: the same six passes, the same four failures. That is the result worth having, and it is the whole argument for this step &mdash; the fix demoed beautifully and earned nothing measurable, which no amount of watching the chat window would have told you. Restore the instruction afterwards; every demo after this one extends this same agent.</li>
+        <li>With the second source added and marked official, <strong>ask a question that spans both documents</strong> &mdash; question 1 below. Neither answers it alone.</li>
+        <li><strong>Open the trace.</strong> Expand the activity / reasoning detail for that answer and read which knowledge source it consulted, in what order, and what it retrieved.</li>
+        <li><strong>Now break it on purpose.</strong> Ask question 2 &mdash; deliberately ambiguous about which period and which plan &mdash; read the trace again to see what it assumed, then add the ambiguity rule from Stage 2 and re-ask.</li>
+        <li><strong>Now prove the fix, instead of believing it.</strong> Open the <strong>Evaluation</strong> tab &rarr; <em>New evaluation</em> &rarr; <em>Single response</em> &rarr; <em>Quick question set</em>. Copilot Studio generates ten questions from your agent's own description, instructions and knowledge. Read them, correct any that are wrong, and run the set.</li>
+        <li><strong>Change exactly one thing and re-run the identical set.</strong> Delete the ambiguity instruction and run it again. One change per run &mdash; change two and a better score tells you nothing about which one earned it. <strong>Be ready for the score not to move.</strong> On a live run it was 60% with the instruction and 60% without: the same six passes, the same four failures. That is the result worth having, and it is the whole argument for this step &mdash; the fix demoed beautifully and earned nothing measurable, which no amount of watching the chat window would have told you. Restore the instruction afterwards; every demo after this one extends this same agent.</li>
         <li><strong>Export the set to CSV and keep it.</strong> This is the file you re-run before every future change, and the artefact that makes a change to a published agent defensible rather than hopeful.</li>
       </ol>
+
 
       <div class="k">Question 1 &mdash; spans both sources</div>
       <pre>What did the manager say about the gold allocation, and does it match the
@@ -739,16 +676,6 @@ allocation shown on the factsheet?</pre>
 
       <div class="k">Question 2 &mdash; deliberately ambiguous</div>
       <pre>What is the expense ratio and how has the fund performed?</pre>
-
-      <div class="k">The one-line fix &mdash; append to Instructions</div>
-      <pre>If a question is ambiguous about the period, the share class or the plan
-(Regular or Direct), do not choose one silently. Ask which is meant, or state
-every variant explicitly with its label.</pre>
-
-      <div class="note">
-        <strong>If your source is a table rather than a document</strong> &mdash; a Dataverse table, say &mdash; you get two more levers on the same screen: per-column <strong>synonyms</strong> and per-column <strong>descriptions</strong>. Add the words your team actually uses (<em>tag</em> for <em>asset tag</em>, <em>TER</em> for <em>expense ratio</em>, <em>sleeve</em> for <em>allocation</em>) and retrieval accuracy improves without touching the instructions.
-        Column names are the schema; synonyms are the house vocabulary. Most retrieval complaints about tabular data are really vocabulary complaints.
-      </div>
 
       <div class="k g">What you should see</div>
       <ul>
@@ -781,36 +708,9 @@ every variant explicitly with its label.</pre>
       <p>The Northwind fund reports in INR. Your client reports in USD. The agent needs the FX rate as at the factsheet date &mdash; a live external lookup &mdash; and the client's mandate limits, which live in an internal system nobody has an API document for.</p>
 
       <div class="k">Part 1 &mdash; the external REST API</div>
-      <ol class="steps">
-        <li>Go to <a href="https://make.powerautomate.com">make.powerautomate.com</a> &rarr; <strong>Create</strong> &rarr; <strong>Instant cloud flow</strong> &rarr; trigger: <strong>When an agent calls the flow</strong>. Name it <code>Get FX Rate</code>.</li>
-        <li>Add two inputs to the trigger: text named <code>ratedate</code>, and number named <code>amountinr</code>.</li>
-        <li>Add an <strong>HTTP</strong> action. Method <code>GET</code>. URI: the URL below, with the input appended.</li>
-        <li><strong>Do the conversion in the flow, not in the agent.</strong> Add a <strong>Compose</strong> action with the expression below &mdash; it divides the rupee amount by the retrieved rate.</li>
-        <li>Add <strong>Respond to the agent</strong> with two outputs: text <code>fxjson</code> set to the HTTP body, and number <code>amountusd</code> set to the Compose output.</li>
-        <li>Save. In Copilot Studio, open your agent &rarr; <strong>Tools</strong> &rarr; <strong>Add a tool</strong> &rarr; <strong>Workflows</strong> &rarr; pick your flow.</li>
-        <li><strong>Reopen <code>Respond to the agent</code> and check the number output kept its expression.</strong> Publishing silently blanks number-typed outputs; the flow still saves and runs, it just returns one output instead of two. Re-add and republish if empty.</li>
-        <li>Give the action a description the agent can route on &mdash; text below. This description is how it decides to call your flow, so write it for a reader, not a machine.</li>
-        <li>Test: ask the agent the FX question below.</li>
-      </ol>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 4, Tool 1 &mdash; Get FX Rate.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for. The no-premium route (a Compose holding the canned response) is there too.</div>
 
-      <div class="k">The API call</div>
-      <pre>https://api.frankfurter.dev/v1/2026-06-30?from=USD&to=INR</pre>
-      <p style="font-size:.92em;margin-top:-4px">A free, no-key FX endpoint. <strong>The older <code>api.frankfurter.app</code> host now returns 301 and the HTTP action does not follow redirects</strong>, so use the <code>.dev</code> host and the <code>/v1/</code> path. Paste it in a browser tab first to see the raw JSON before you wire it up &mdash; always confirm an API works outside the agent before blaming the agent.</p>
-
-      <div class="k">The conversion expression &mdash; Compose action</div>
-      <pre>div(
-  triggerBody()?['number'],
-  float(body('HTTP')?['rates']?['INR'])
-)</pre>
-      <p style="font-size:.92em;margin-top:-4px"><strong>Note the key is <code>number</code>, not <code>amountinr</code>.</strong> On this trigger the names you type are only display titles; the body keys are generic (<code>text</code>, <code>number</code>). Using <code>['amountinr']</code> yields Null and the flow fails. Safest of all: insert the value from the dynamic-content picker rather than hand-writing <code>triggerBody()</code>. This is the arithmetic rule from demo 1.8 being kept rather than talked about. The agent supplies the rupee figure it read off the factsheet; the flow returns the dollar figure. Nothing multiplies or divides inside the model.</p>
-
-      <div class="k">Action description &mdash; how the agent knows to use it</div>
-      <pre>Converts an amount in Indian rupees to US dollars at the exchange rate published
-for a given date, and returns both the rate and the converted amount. Use this
-whenever a value in rupees needs to be expressed in US dollars, or a currency
-conversion is requested. Never convert currency yourself - always call this.
-Input ratedate must be in YYYY-MM-DD format. Input amountinr is the rupee
-amount as a plain number, so Rs 4,820 crore is passed as 48200000000.</pre>
 
       <div class="k">Test question</div>
       <pre>The fund size is in rupees. What is it in US dollars as at the factsheet date?</pre>
@@ -820,6 +720,7 @@ amount as a plain number, so Rs 4,820 crore is passed as 48200000000.</pre>
         <li>The agent reads <em>Rs 4,820 crore</em> off the factsheet, converts it to <code>48200000000</code>, and passes that to the action &mdash; the one piece of arithmetic it is allowed, because a crore is a unit, not a calculation.</li>
         <li>It reports roughly <strong>USD 509.2 million</strong> at a rate of about <strong>94.66</strong>, citing the action rather than itself. (Rates move &mdash; check the live figure before the session and expect the number on screen to differ from any printed here.)</li>
         <li>Ask it <em>"did you work that out yourself?"</em>. The correct answer is no, and the trace will confirm it.</li>
+        <li><strong>Prove the date input is wired</strong> before you trust any of it: run the flow on its own twice, <code>ratedate</code> <code>2026-06-30</code> and then <code>2026-03-31</code>, and check the rate moves. Testing only the date you happened to hardcode passes either way.</li>
       </ul>
 
       <div class="amber">
@@ -829,19 +730,9 @@ amount as a plain number, so Rs 4,820 crore is passed as 48200000000.</pre>
 
       <div class="k">Part 2 &mdash; the legacy internal system</div>
       <p>No premium needed. This is the honest simulation of an internal endpoint: a flow that returns a fixed JSON payload, exactly as a wrapped legacy service would.</p>
-      <ol class="steps">
-        <li>New instant cloud flow, same <strong>When an agent calls the flow</strong> trigger, named <code>Get Client Mandate</code>. Input: text, <code>clientid</code>.</li>
-        <li>Add a <strong>Compose</strong> action containing <code>client-mandate-CL-4471.json</code> from the demo assets (also printed in <a href="#assets">the appendix</a>).</li>
-        <li><strong>Respond to the agent</strong> with text output <code>mandatejson</code> = the Compose output.</li>
-        <li>Add it to the agent as a second tool &mdash; <strong>Tools &rarr; Add a tool &rarr; Workflows</strong> &mdash; with the description below.</li>
-        <li>Ask the combined question &mdash; it needs the factsheet, the mandate and a comparison.</li>
-      </ol>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 4, Tool 2 &mdash; Get Client Mandate.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for.</div>
 
-      <div class="k">Action description</div>
-      <pre>Looks up a client's investment mandate limits from the internal mandate system.
-Returns maximum equity allocation, permitted asset classes and minimum credit
-quality. Use whenever a fund must be checked against a client's mandate.
-Input clientid is the internal client reference, for example CL-4471.</pre>
 
       <div class="k">Test question</div>
       <pre>Does the Northwind fund's asset allocation comply with the mandate for client CL-4471?</pre>
@@ -876,39 +767,10 @@ Input clientid is the internal client reference, for example CL-4471.</pre>
       <div class="k">You need</div>
       <p><code>holdings.xlsx</code> and <code>benchmarks.xlsx</code> in OneDrive, copied from the demo assets in pre-flight. Both already use a real Excel <strong>Table</strong>, which is what the connector needs &mdash; if you rebuild them by hand from <a href="#assets">the appendix</a>, select the range and press <strong>Ctrl+T</strong> first, or the connector will not see them.</p>
 
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li>New flow, <strong>When an agent calls the flow</strong>, named <code>Get Holdings</code>. No inputs needed.</li>
-        <li>Add <strong>Excel Online (Business)</strong> &rarr; <strong>List rows present in a table</strong>. Point it at <code>holdings.xlsx</code> and its table.</li>
-        <li><strong>Compute the top-five total inside the flow.</strong> Add a <strong>Compose</strong> action with the expression below. This is the step people skip, and skipping it is what pushes the arithmetic back into the model.</li>
-        <li>Respond to the agent with two outputs: text <code>holdingsrows</code> (the rows) and number <code>top5weightpct</code> (the Compose output).</li>
-        <li>Repeat for <code>benchmarks.xlsx</code> as <code>Get Benchmark</code>, with a text input <code>benchmarkname</code>.</li>
-        <li>Add both actions to the agent with descriptions that say when to use them.</li>
-        <li>Add the calculation rule below to Instructions &mdash; this is what stops the model doing the maths itself.</li>
-        <li>Ask the three test questions.</li>
-      </ol>
+      <div class="k">Build it</div>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 5, Tools 3 and 4 &mdash; Get Holdings and Get Benchmark.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for. The calculation rule appended to Instructions is on the same stage.</div>
 
-      <div class="k">The top-five expression &mdash; Compose action</div>
-      <pre>add(
-  add(
-    add(
-      add(
-        float(first(body('List_rows_present_in_a_table')?['value'])?['weight_pct']),
-        float(body('List_rows_present_in_a_table')?['value'][1]?['weight_pct'])),
-      float(body('List_rows_present_in_a_table')?['value'][2]?['weight_pct'])),
-    float(body('List_rows_present_in_a_table')?['value'][3]?['weight_pct'])),
-  float(body('List_rows_present_in_a_table')?['value'][4]?['weight_pct'])
-)</pre>
-      <p style="font-size:.92em;margin-top:-4px">Deliberately literal, so you can read what it does at a glance: the weights of rows 1 to 5, added by the flow. The rows arrive already ranked, so
-      the first five rows <em>are</em> the top five. In your own environment this belongs in the query or the workbook &mdash; the point is only that it happens somewhere deterministic.</p>
-
-      <div class="k">Instructions to append</div>
-      <pre>Never calculate a total, a weighted figure or an average yourself, and never
-convert a currency yourself. Retrieve the number using an action and quote it.
-You may still state the difference between two figures you have retrieved, as
-long as both are shown with their sources.
-If a calculation is needed and no action provides it, say which action or data
-source is missing, and do not answer with a number.</pre>
 
       <div class="k a">Optional &mdash; the other deterministic path (~2 min, cut this first if you are late)</div>
       <p>The flow is not the only thing that can compute. Where the <strong>code interpreter</strong> is enabled on
@@ -969,36 +831,10 @@ What is the average weight of the fund's top ten holdings?</pre>
       <div class="k">You need</div>
       <p>Your agent. The schema and the deliberately messy document, both in <a href="#assets">the appendix</a>.</p>
 
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li><strong>Turn <em>Allow ungrounded responses</em> back on</strong> &mdash; Settings &rarr; Generative AI. Demo 1.8 switched it off, and with it off this demo does not run at all: a bare JSON object carries no citations, so the grounding gate suppresses the answer and you get <em>"No information was found that could help answer this."</em> Retrieval succeeds; the reply is blocked after the fact. Say why you are toggling it &mdash; it is the clearest illustration all day of what "grounded" actually enforces.</li>
-        <li>Add the extraction instruction block below to your agent's Instructions.</li>
-        <li>Ask it to extract the clean factsheet &mdash; command 1. Check every field against the document yourself. Yes, all of them; this is the one demo where you must verify by hand.</li>
-        <li>Save the messy document from the appendix as a second file and upload it as knowledge.</li>
-        <li>Run command 2 against the messy document.</li>
-        <li>Compare the two outputs. Count the <code>not stated</code> values and the <code>needs_review</code> flags.</li>
-      </ol>
+      <div class="k">Build it</div>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 6, Part 1 &mdash; unstructured to structured.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for. Note Stage 6 opens by turning <em>Allow ungrounded responses</em> back on; without it this demo returns nothing.</div>
 
-      <div class="k">Instructions to append</div>
-      <pre>When asked to extract a fund record, return valid JSON only - no commentary,
-no markdown fence - with exactly these keys:
-
-fund_name, isin, share_class, aum, currency, benchmark, manager,
-inception_date, ter_regular, ter_direct, exit_load,
-return_1y, return_3y, return_5y, return_since_inception,
-benchmark_1y, benchmark_3y, benchmark_5y,
-alloc_equity, alloc_debt, alloc_gold, alloc_cash,
-as_of_date, source_document, needs_review
-
-Rules:
-- Every key must be present. Never add, remove or rename a key.
-- If a value is absent from the document, use the string: not stated
-- Percentages as strings with the percent sign, exactly as printed.
-- as_of_date in YYYY-MM-DD.
-- needs_review is a list of key names that were absent, ambiguous, or where the
-  document gave more than one candidate value. Empty list if none.
-- Never infer a value from another value, unless you also list that key in
-  needs_review so the inference is visible to the next reader.</pre>
 
       <div class="k">Command 1 &mdash; the clean document</div>
       <pre>Extract the fund record from the Northwind factsheet.</pre>
@@ -1042,40 +878,10 @@ Rules:
         What matters is that <strong>the plan is the interface</strong>. Everything before it is what you build in Copilot Studio; everything after it is code your team already knows how to write.<br><br><strong>Beside the flow, or inside it.</strong> Run the generator by hand and the chain still needs a person at the end &mdash; which quietly undercuts what demo 2.7 claims. Host the same script behind an HTTP endpoint (an Azure Function in Python takes minutes) and the flow calls it: <em>agent &rarr; flow &rarr; endpoint &rarr; file in OneDrive</em>, no human step. The trainer runs the hosted version; nothing about the plan, the schema or the agent changes. That is the whole point &mdash; the interface is the plan, and where the renderer lives is your team's decision, not the agent's.
       </div>
 
-      <div class="k">Steps</div>
-      <ol class="steps">
-        <li>Add the slide-plan instruction block below to your agent.</li>
-        <li>Ask for a review deck &mdash; command below. Read the JSON it produces as if you were the consultant presenting it.</li>
-        <li>Build a flow named <code>Save Slide Plan</code>: the <strong>When an agent calls the flow</strong> trigger, text input <code>planjson</code>, then <strong>OneDrive for Business &rarr; Create file</strong> writing <code>plan.json</code> into your <code>copilot-workshop</code> folder.</li>
-        <li>Add it as an action, described as: <em>"Saves a finished slide plan as a file so it can be turned into a PowerPoint deck."</em></li>
-        <li>Ask the agent to generate <em>and save</em> the plan. Open the file in OneDrive to confirm it landed.</li>
-        <li>Watch the trainer complete the final hop, plan to a real <code>.pptx</code>, using <code>plan-to-pptx.py</code> from the demo assets. Note exactly where your own generator would sit instead &mdash; the agent cannot tell the difference.</li>
-        <li><strong>Do the last hop yourself, offline.</strong> Two routes, neither needing a tenant, a connector or a licence: run <code>python3 plan-to-pptx.py plan.json deck.pptx</code> for a real editable PowerPoint file, or open <code>deck-renderer.html</code> in any browser, press <em>Load plan.json</em> and print it. Same plan, two renderers &mdash; which is exactly the point.</li>
-      </ol>
+      <div class="k">Build it</div>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 6, Part 2 (the slide-plan schema) and Stage 7, Tool 6 (Build Review Deck).</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for. The two offline renderers, <code>plan-to-pptx.py</code> and <code>deck-renderer.html</code>, are covered there too.</div>
 
-      <div class="k">Instructions to append</div>
-      <pre>When asked to produce a fund review deck, output valid JSON only, with this shape:
-
-{
-  "deck_title": "",
-  "client": "",
-  "as_of": "YYYY-MM-DD",
-  "slides": [
-    {"layout":"title",   "title":"", "subtitle":""},
-    {"layout":"kpi",     "title":"", "kpis":[{"label":"","value":"","source":""}]},
-    {"layout":"table",   "title":"", "columns":[], "rows":[[]], "source":""},
-    {"layout":"chart",   "title":"", "chart_type":"pie", "series":[{"label":"","value":0}], "source":""},
-    {"layout":"comment", "title":"", "bullets":[""], "source":""}
-  ],
-  "unresolved": []
-}
-
-Rules:
-- Every figure on every slide must carry a source string naming the document
-  section or the action it came from.
-- Any figure you could not source goes in unresolved, and does not appear on a slide.
-- Never write a commentary sentence containing a number that is not on a slide.
-- Five to seven slides. Commentary bullets: maximum twelve words each.</pre>
 
       <div class="k">Command</div>
       <pre>Produce a Q2 2026 fund review deck for client CL-4471 covering the Northwind
@@ -1117,22 +923,11 @@ and a short commentary. Then save the plan.</pre>
         <li><strong>Open one page you have not looked at yet:</strong> Settings &rarr; <strong>Security</strong> &rarr; <strong>Authentication</strong>. With <em>Authenticate with Microsoft</em> on, knowledge results trim to each asker's own permissions &mdash; a colleague who cannot open a file cannot be cited to it. Off, everyone queries one index and the agent becomes a way to read documents you were never given. Thirty seconds, and it decides whether sharing this agent is safe. On a governed tenant you may find <em>No authentication</em> and <em>Authenticate manually</em> greyed out altogether, and <em>Multi-tenant support</em> disabled &mdash; the decision taken above your head, which is the point rather than a disappointment.</li>
         <li><strong>Submit it to the organisation catalogue.</strong> <em>Availability options</em> &rarr; <strong>Show in the store</strong> &rarr; pick the audience: <em>Show to my teammates and shared users</em>, which lands in <strong>Built with Power Platform</strong>, or <em>Show to everyone in my org</em>, which lands in <strong>Built by your org</strong> after an admin approves &rarr; <strong>Submit to org catalog</strong>. A dialog asks <em>"Give everyone access to this agent?"</em> &mdash; and answering yes is what put <strong>Everyone in organization</strong> on the share list you just read. The status becomes <strong>waiting for approval from your Teams admin</strong>, against a version number. <strong>That is the lesson of this step:</strong> you cannot put an agent in front of the firm on your own signature.</li>
         <li><strong>Look at the other side of the gate.</strong> With admin rights: Microsoft&nbsp;365 admin centre &rarr; <strong>Agents</strong> &rarr; <strong>All agents</strong> &rarr; <strong>Requests</strong>, where your submission appears within seconds. Open the row itself &mdash; the &#8942; menu's entries are greyed; the live <em>Publish to store</em> and <em>Reject submission</em> sit in the detail panel. Then read its <strong>Data &amp; tools</strong> tab out loud: knowledge is listed with a <strong>Sensitivity label</strong> column, but <em>Tools</em> reports <strong>"No tools configured"</strong> for an agent with seven, and <em>Permissions</em> reports none from Entra&nbsp;ID. <strong>The person approving your agent cannot see that it calls five flows and an outside endpoint under your credentials</strong> &mdash; so the reviewer's checklist has to come from you, which is what the table below is for. Without admin rights &mdash; the normal case &mdash; find out <em>who</em> holds that queue. They are on your critical path, and the queue is not short.</li>
-        <li><strong>Add the approval gate &mdash; and this is where the product bites.</strong> New flow, the <strong>When an agent calls the flow</strong> trigger, text inputs <code>decksummary</code> and <code>approver</code>. Add <strong>Approvals &rarr; Create an approval</strong> &mdash; <em>not</em> <em>Start and wait for an approval</em>. Then <strong>Respond to the agent</strong> with two text outputs: <code>status</code>, a fixed <code>Pending approval</code>, and <code>approvalid</code>, set to the action's <strong>Approval ID</strong>. Publish the flow.</li>
-        <li><strong>Two things that will otherwise cost you the afternoon.</strong> Approvals asks you to <em>create a connection</em> the first time it is used &mdash; an extra dialog, no credentials typed. And on the tool's <strong>Inputs</strong>, change <code>approver</code> from <em>Dynamically fill with AI</em> to <strong>Custom value</strong> with a real address: left on AI-fill the agent invents a plausible address and the approval silently goes nowhere.</li>
-        <li>Add it as a tool, described as: <em>"Sends a finished client deck for human approval before it is issued. Must be used before any output is described as final or client-ready. It returns as soon as the request is sent, so the outcome is not known yet: report that approval is pending and never describe the output as approved."</em></li>
-        <li>Add the governance rule below to Instructions.</li>
+        <li><strong>Add the approval gate.</strong> Build <code>Send Deck For Approval</code> and add the governance rule to Instructions &mdash; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, <strong>Stage 7, Tool 5</strong>. Two things there are worth reading out while you build: it uses <em>Create an approval</em> rather than <em>Start and wait</em>, and <code>approver</code> must be a <strong>Custom value</strong> &mdash; left on <em>Dynamically fill with AI</em> the agent invents an address and the approval goes nowhere.</li>
         <li>Ask the agent for a client-ready deck. It should come back <strong>in a few seconds</strong> with an approval id and the word <em>pending</em> &mdash; not hanging, and not calling the deck final.</li>
         <li><strong>Optional, about four minutes &mdash; cut this first if you are running late.</strong> If you want the agent to report the verdict too, build a second flow <code>Check Deck Approval</code>: agent trigger with one text input <code>approvalid</code> &rarr; <strong>Wait for an approval</strong> &rarr; <strong>Respond to the agent</strong> with <code>outcome</code> and <code>approvercomments</code>. Map that second one carefully: <strong><code>responseSummary</code> does not carry the comment</strong> &mdash; it is only <em>"Approver: name, email, Response: Reject"</em>. Use <code>first(outputs('Wait_for_an_approval')?['body/responses'])?['comments']</code>. Add it as a tool. Now <strong>reject the card</strong> with a reason, then ask the agent what happened to that approval.</li>
         <li>Work the checklist below against what you built.</li>
       </ol>
-
-      <div class="k">Instructions to append</div>
-      <pre>Nothing you produce is client-ready until a human has approved it. When asked
-for a final or client-ready output, always send it for approval first. The
-approval tool returns before any human has answered, so report that approval is
-pending, give the approval id, and never describe the output as approved or
-final. If you are told the approval was rejected, state the reason and do not
-reissue the output.</pre>
 
       <div class="k">The governance checklist &mdash; work it against your own agent</div>
       <table>
@@ -1183,27 +978,16 @@ reissue the output.</pre>
       The extraction, the enrichment, the slide plan and the approval request all happen because a file appeared &mdash; and the first human involvement is a card in Teams asking a consultant to approve a <em>plan</em>. Approve it and the deck renders itself &mdash; PowerPoint, then PDF, then an email with the PDF attached, in about fifteen seconds. Nothing client-facing exists until somebody has said yes.</p>
 
       <div class="k">Steps</div>
+      
+      <div class="bld"><b>Build steps &rarr; <a href="../use-cases/fund-research-assistant.html">use-cases/fund-research-assistant.html</a>, Stage 8, Part 2 &mdash; the <code>Factsheet Arrived</code> flow.</b> That page is the single source for the configuration &mdash; node by node, with every expression. This guide carries what to run and what to look for. That stage carries the diagram of both branches, the Message block, and the marker/slice expressions.</div>
+
       <ol class="steps">
-        <li>Create a SharePoint document library (or a folder in one) called <code>incoming-factsheets</code>. A OneDrive folder works just as well if SharePoint is restricted.</li>
-        <li>New flow &mdash; this time an <strong>Automated cloud flow</strong>, not an instant one. Trigger: <strong>When a file is created (properties only)</strong>, pointed at that library. Name it <code>Factsheet Arrived</code>.</li>
-        <li><strong>No <em>Get file content</em> step is needed</strong> &mdash; this trigger already returns <em>File content</em>, <em>File name</em> and <em>File path</em> among its outputs. One step fewer than you would expect.</li>
-        <li><strong>Call the agent.</strong> The action is not called "the Copilot Studio action": it is <strong>Microsoft Copilot Studio &rarr; Execute Agent and wait</strong>. Pick your agent, then click <em>Show all</em> on the advanced parameters to reveal <strong>Message</strong>, and put the instruction below there with the trigger's <strong>File name</strong> token inside it. First use asks you to create a connection.</li>
-        <li><strong>Put the approval in the flow, not in the agent's hands.</strong> Add <strong>Approvals &rarr; Start and wait for an approval</strong> &mdash; <em>Approve/Reject &ndash; First to respond</em>, assigned to yourself, <em>Details</em> set to the agent's reply. This is not a step backwards from demo 2.6: told to "send the plan for approval" with nobody watching, the agent tends to <em>narrate</em> the approval instead of calling the tool &mdash; writing <em>"Slide plan (pending approval)"</em>, or even replying that no approval system was found in its knowledge. No card is created. <strong>A human gate must not depend on the model choosing to use it.</strong></li>
-        <li><strong>And notice you are allowed to <em>wait</em> here.</strong> Demo 2.6 had to use fire-and-forget because a flow called by an agent gets roughly 100 seconds. Nothing is calling this flow &mdash; a file did &mdash; so it can block on a person for days. On a live run it sat on this step for <strong>5 hours 45 minutes</strong> and resumed correctly the moment the card was answered. Same connector, same action, opposite verdict, and the only thing that changed is who started the flow. That is the most transferable sentence in the afternoon: <strong>what a step is allowed to do depends on what is waiting behind it.</strong></li>
-        <li><strong>Everything after the gate.</strong> Add a <strong>Condition</strong> &mdash; the approval's <code>outcome</code> <em>is equal to</em> <code>Approve</code> &mdash; and put six actions in the <strong>True</strong> branch, in this order. The trainer's copy is already built: walk it rather than building it live unless the session is running early.
-          <ul>
-            <li><strong>Compose</strong> &mdash; the slide plan, split out of the agent's reply between the two markers.</li>
-            <li><strong>HTTP</strong> &mdash; POST that plan to the renderer endpoint.</li>
-            <li><strong>Create file</strong> &mdash; <code>review-deck-&lt;timestamp&gt;.pptx</code>, content = the HTTP body. <em>Timestamped, not fixed:</em> a constant filename overwrites yesterday's deck, and it did &mdash; five successful runs once produced one file.</li>
-            <li><strong>Convert file</strong> &mdash; target type <strong>PDF</strong>, File = the <em>Id</em> the Create file step returned.</li>
-            <li><strong>Create file</strong> again &mdash; the <code>.pdf</code>, named by swapping the extension on the first file's name.</li>
-            <li><strong>Send an email (V2)</strong> &mdash; attachment <em>Name</em> = the PDF's name, <em>Content</em> = the Convert file body.</li>
-          </ul>
-          Then give the <strong>False</strong> branch one action of its own &mdash; another <strong>Send an email (V2)</strong>, saying the deck was rejected, that no PDF was produced and nothing has gone to the client, and pointing at the run history for the reviewer's comment. Without it a rejected run ends silently and nobody is told, which is the kind of gap that only shows up in production. Say why the reason is not in the email itself: getting it there means <code>responses[0].comments</code>, not <code>responseSummary</code> &mdash; the same trap as demo 2.6 step 12 &mdash; and the run history has it either way.</li>
-        <li><strong>Test it the honest way:</strong> drop <code>sample-fund-factsheet.pdf</code> into the folder and then close the browser tab. Come back in <strong>three to five minutes</strong> and look at Teams. The agent's leg is the steady part &mdash; about two and a half minutes, run after run. The polling trigger in front of it is the variable one, taking anything from the same minute as the drop to a couple of minutes. Budget the longer figure.</li>
+        <li><strong>Build the flow first</strong>, from the page above, then come back and run it.</li>
+        <li><strong>Test it the honest way:</strong> drop <code>sample-fund-factsheet.pdf</code> into the folder and then <strong>close the browser tab</strong>. Come back in <strong>three to five minutes</strong> and look at Teams. The agent's leg is the steady part &mdash; about two and a half minutes, run after run. The polling trigger in front of it is the variable one, taking anything from the same minute as the drop to a couple of minutes. Budget the longer figure.</li>
         <li>Now drop <code>meridian-manager-update.txt</code> in as well &mdash; the messy one &mdash; and watch what a triggered agent does when the document does not cooperate.</li>
-        <li><strong>Change the trigger, and nothing else.</strong> Open the same flow, delete the trigger step, and put a different one in its place. Everything downstream &mdash; call the agent, wait for approval, render, convert, email &mdash; is untouched. Do it twice, with the two below.</li>
+        <li><strong>Change the trigger, and nothing else.</strong> Delete the trigger step and put a different one in its place. Everything downstream &mdash; call the agent, wait for approval, render, convert, email &mdash; is untouched. Do it twice, with the two below.</li>
       </ol>
+
 
       <div class="k">The two other triggers worth building</div>
       <ul>
@@ -1215,30 +999,6 @@ reissue the output.</pre>
         <strong>The trigger is a swap, not a rebuild.</strong> A file arriving, a date, an email, a row changing, an approval completing, another agent calling &mdash; each is one dropdown, and everything from demos 2.2&ndash;2.6 runs unchanged behind it. You are not looking for work that suits Copilot Studio; you are looking for the sentence <em>&ldquo;when X arrives, someone has to&hellip;&rdquo;</em>.
       </div>
 
-
-      <div class="k">What the flow asks the agent</div>
-      <pre>A new fund document has arrived in the incoming-factsheets folder: [File name].
-Extract the fund record using the schema in your instructions, enrich it with the
-mandate and benchmark actions, and produce a slide plan for a quarterly review.
-
-Produce the plan only: do not call the deck-building tool, because this process
-renders the deck itself after a human has approved the plan.
-
-Do not describe anything as final; the flow will send this for approval. Do not
-state an approval id - you will not have one. If more than three fields are in
-needs_review, do not produce a plan at all - report which fields failed and stop.
-
-When you do produce a plan, end your reply with the slide plan as raw JSON
-matching the slide-plan schema in your instructions, wrapped exactly in the
-markers ===PLAN_JSON_START=== and ===PLAN_JSON_END=== with nothing after the
-closing marker.</pre>
-      <div class="tip"><strong>Three of those sentences are scar tissue.</strong> <em>"Produce the plan only"</em> stops the agent calling the deck builder and raising a second approval card for the same deck. <em>"Do not state an approval id"</em> exists because an earlier version of this prompt said <em>report the approval id</em>, and the agent dutifully invented one &mdash; it was the deck's filename. And the markers exist because a flow cannot reliably find JSON inside prose; give it two fences and the extraction is a one-line expression.</div>
-
-      <div class="k">Instructions to append</div>
-      <pre>When you are invoked by a process rather than by a person, nobody is present to
-answer a follow-up question. So: never ask a clarifying question in that context.
-If something is ambiguous, choose nothing, state the ambiguity in needs_review,
-and let the approval step put it in front of a human.</pre>
 
       <div class="k g">What you should see</div>
       <ul>
@@ -1260,7 +1020,7 @@ and let the approval step put it in front of a human.</pre>
         <li><strong>You are tempted by plain <em>Execute Agent</em>, without the wait.</strong> Only the waiting version returns <code>body/lastResponse</code> &mdash; which is what puts the fund record, the enrichment table and the slide plan on the approval card. Drop the wait and the reviewer gets a card with nothing to review.</li>
         <li><strong>You expect this leg to time out too. It does not.</strong> The ~100-second ceiling that forced <em>Create an approval</em> in demo 2.6 applies to an <em>agent calling a flow</em>. This is the other direction &mdash; a flow calling an agent &mdash; and it happily ran for two and a half minutes. Worth saying out loud, because the two look symmetrical and are not.</li>
         <li><strong>It asks a clarifying question and then waits forever.</strong> Exactly the failure the appended instruction prevents. Add it, republish, and drop the file again.</li>
-        <li><strong>Two approval cards arrive for one dropped file.</strong> Your agent still has a deck-building tool with its own approval gate and it called it anyway &mdash; so you have the flow's card <em>and</em> the tool's. Check the <em>"produce the plan only"</em> line is actually in the Message. Do not fix it by deleting the flow's approval: that hands the human gate back to the model, which is what step 5 exists to prevent. And if two similar cards are already queued, read the timestamps &mdash; approving the wrong one leaves the run waiting and looks exactly like a broken flow.</li>
+        <li><strong>Two approval cards arrive for one dropped file.</strong> This happens when your deck-building tool carries an approval gate of its own: the agent calls it despite the instruction, and you get the flow's card <em>and</em> the tool's. <strong>The durable fix is to keep the gate in one place.</strong> A tool the agent decides to call is the worst place for a human gate &mdash; that is the whole point of step 5 &mdash; so leave the approval in this flow and make the deck builder render-only: trigger &rarr; HTTP &rarr; Create file &rarr; Respond. The <em>"produce the plan only"</em> line in the Message then stops being load-bearing and becomes a belt-and-braces. Never fix it the other way round by deleting <em>this</em> flow's approval. If two similar cards are already queued, read the timestamps &mdash; approving the wrong one leaves the run waiting and looks exactly like a broken flow.</li>
         <li><strong>The expression editor rejects something that is obviously right.</strong> The designer accepts <code>outputs('X')?['body/Name']</code> in some fields and <code>outputs('X')['body']['Name']</code> in others, and it will not tell you which it wants. Both mean the same thing. Try the other bracket style before you assume the expression is wrong &mdash; it cost real time on the build.</li>
         <li><strong>The reply names an "approval reference id" that does not work.</strong> It is the deck's <em>filename</em>, and the reply claims the plan was "sent for approval" before the flow had created anything. The model is narrating a step it did not take &mdash; step 5's failure surviving in the prose even when the flow does the real work. Read it out; it argues for the deterministic gate better than any slide.</li>
         <li><strong>Everything is blocked in your tenant.</strong> Read the steps and watch the trainer. The architecture is the transferable part, and it is unchanged whichever button starts it.</li>

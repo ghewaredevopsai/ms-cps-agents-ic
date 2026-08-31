@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build It Yourself &mdash; Fund Research Assistant</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545;overflow-wrap:anywhere}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px;white-space:pre-wrap}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.stage{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.stage>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stage>.head .id{font-weight:700;font-size:1.02em}
+.stage>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.stage>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.t{background:#f59e0b;color:#3f2d02}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}.k.g{color:#047857}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:26px;position:relative}
+.chk li::before{content:"\2610";position:absolute;left:0;top:-1px;font-size:17px;color:#1d4ed8}
+.flow{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:12px 14px;margin:10px 0}
+.flow svg{display:block;width:100%;height:auto}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;font-size:10px;line-height:1.45;padding:9px 11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  pre .cp{display:none}
+  .stage,.warn,.note,.tip,.amber,table,.flow{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .stage{page-break-inside:auto}
+  .stage>.head{page-break-after:avoid}
+  pre,.note,.tip,.amber,.warn,ol.steps>li,tr{page-break-inside:avoid}
+  h2,h3,.k{page-break-after:avoid}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Fund Research Assistant</h1>
+  <div class="tagline">Build it yourself &mdash; Microsoft Copilot Studio</div>
+  <div class="meta">
+    <span class="d">~90 minutes</span> |
+    <span>Low code</span> |
+    <span>3 knowledge sources &middot; 1 topic &middot; 6 tools &middot; 1 unattended flow</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="warn">
+  <b>Everything here is synthetic &mdash; keep it that way.</b> The fund, the client and both workbooks are made up.
+  By Stage 8 this agent writes files and sends mail on its own, so build it against your own test files, not a real factsheet or client reference.
+</div>
+
+<section>
+  <h2>What you are building</h2>
+  <div class="goal">
+    <b>The agent the workshop demos build, in one sequence.</b> It answers from fund documents and cites every figure, refuses to invent one,
+    calls Excel and two systems for anything it may not work out itself, produces a validated slide plan &mdash; and by Stage 8 does all of that
+    because a file arrived, with a human approving the result.
+  </div>
+  <p><strong>Each stage is usable on its own.</strong> Stop after 2 and you have a grounded research assistant; after 5, one that reaches your systems.</p>
+  <div class="note"><b>This page is the build sheet, and the only place the configuration is written down.</b> Its companion is
+  <a href="../presentation/demo-guide.html">demo-guide.html</a>, the run-sheet: what each demo proves, what to type, what you should see and what to do
+  when it misbehaves. Demos 1.8 and 2.1&ndash;2.7 there each point back at the stage below that builds them. Nothing is duplicated between the two.</div>
+
+  <div class="flow">
+<svg viewBox="0 0 880 452" role="img" aria-label="Architecture of the Fund Research Assistant: two ways in, four things you configure, six tools reaching out, and four things it leaves behind">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/>
+    </marker>
+  </defs>
+
+  <text x="16" y="16" style="font:700 10px 'Segoe UI',sans-serif;fill:#475569;letter-spacing:.9px">WHAT STARTS IT</text>
+
+  <rect x="14" y="24" width="196" height="40" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="112" y="41" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">A person, in Teams</text>
+  <text x="112" y="56" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#475569">stages 1&#8211;7</text>
+
+  <rect x="14" y="72" width="196" height="40" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.4"/>
+  <text x="112" y="89" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">A file landing in a library</text>
+  <text x="112" y="104" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#92400e">stage 8 &#8212; nobody types anything</text>
+
+  <line x1="212" y1="68" x2="252" y2="68" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="256" y="16" width="336" height="106" rx="7" style="fill:#0b2545"/>
+  <text x="424" y="40" text-anchor="middle" style="font:700 15px 'Segoe UI',sans-serif;fill:#ffffff">Fund Research Assistant</text>
+  <rect x="270" y="52" width="150" height="26" rx="4" style="fill:#123a6b"/>
+  <text x="345" y="69" text-anchor="middle" style="font:600 10.5px 'Segoe UI',sans-serif;fill:#bfdbfe">INSTRUCTIONS &#183; the rules</text>
+  <rect x="428" y="52" width="150" height="26" rx="4" style="fill:#123a6b"/>
+  <text x="503" y="69" text-anchor="middle" style="font:600 10.5px 'Segoe UI',sans-serif;fill:#bfdbfe">KNOWLEDGE &#183; 3 documents</text>
+  <rect x="270" y="84" width="150" height="26" rx="4" style="fill:#123a6b"/>
+  <text x="345" y="101" text-anchor="middle" style="font:600 10.5px 'Segoe UI',sans-serif;fill:#bfdbfe">TOPIC &#183; fixed wording</text>
+  <rect x="428" y="84" width="150" height="26" rx="4" style="fill:#123a6b"/>
+  <text x="503" y="101" text-anchor="middle" style="font:600 10.5px 'Segoe UI',sans-serif;fill:#bfdbfe">TOOLS &#183; 6 agent flows</text>
+
+  <line x1="596" y1="68" x2="636" y2="68" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <text x="640" y="16" style="font:700 10px 'Segoe UI',sans-serif;fill:#475569;letter-spacing:.9px">WHAT IT REACHES</text>
+  <rect x="638" y="24" width="228" height="98" rx="6" style="fill:#ffffff;stroke:#d7e0ee;stroke-width:1.2"/>
+  <text x="650" y="42" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">Excel workbooks &#8212; holdings, benchmarks</text>
+  <text x="650" y="59" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">A public REST API &#8212; the FX rate</text>
+  <text x="650" y="76" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">A legacy internal system &#8212; the mandate</text>
+  <text x="650" y="93" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">A renderer endpoint &#8212; plan to PowerPoint</text>
+  <text x="650" y="110" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">Approvals &#8212; a card, to a named human</text>
+
+  <line x1="424" y1="122" x2="424" y2="150" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="14" y="152" width="852" height="150" rx="6" style="fill:#f7f9fe;stroke:#d7e0ee;stroke-width:1.2"/>
+  <text x="28" y="172" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.9px">THE SIX TOOLS &#8212; EACH ONE IS A POWER AUTOMATE FLOW THE AGENT CHOOSES TO CALL</text>
+
+  <rect x="28" y="182" width="264" height="52" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="40" y="200" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#0b2545">Get Holdings</text>
+  <text x="40" y="216" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">Excel rows + the top-five total,</text>
+  <text x="40" y="229" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">added by the flow, not the model</text>
+
+  <rect x="308" y="182" width="264" height="52" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="320" y="200" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#0b2545">Get Benchmark</text>
+  <text x="320" y="216" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">published index returns,</text>
+  <text x="320" y="229" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">so a comparison has two real sides</text>
+
+  <rect x="588" y="182" width="264" height="52" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="600" y="200" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#0b2545">Get FX Rate</text>
+  <text x="600" y="216" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">a live call, and the division</text>
+  <text x="600" y="229" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">happens outside the model</text>
+
+  <rect x="28" y="242" width="264" height="52" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="40" y="260" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#0b2545">Get Client Mandate</text>
+  <text x="40" y="276" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">a stand-in for the internal system</text>
+  <text x="40" y="289" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">nobody has an API document for</text>
+
+  <rect x="308" y="242" width="264" height="52" rx="5" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.3"/>
+  <text x="320" y="260" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#0b2545">Send Deck For Approval</text>
+  <text x="320" y="276" style="font:400 11px 'Segoe UI',sans-serif;fill:#78350f">the gate &#8212; returns immediately,</text>
+  <text x="320" y="289" style="font:400 11px 'Segoe UI',sans-serif;fill:#78350f">so nothing is ever called &#8220;final&#8221;</text>
+
+  <rect x="588" y="242" width="264" height="52" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="600" y="260" style="font:600 12.5px 'Segoe UI',sans-serif;fill:#0b2545">Build Review Deck</text>
+  <text x="600" y="276" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">the plan becomes a real .pptx</text>
+  <text x="600" y="289" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">saved to OneDrive</text>
+
+  <rect x="14" y="312" width="852" height="60" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="28" y="331" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.9px">WHAT IT LEAVES BEHIND</text>
+  <text x="28" y="351" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">A cited answer &#183; a 25-key JSON fund record &#183; a validated slide plan &#183; a PowerPoint and a PDF</text>
+  <text x="28" y="366" style="font:400 11.5px 'Segoe UI',sans-serif;fill:#334155">&#183; an approval card somebody answered &#183; a run history you can read back months later</text>
+
+  <rect x="14" y="382" width="852" height="56" rx="5" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.2"/>
+  <text x="440" y="403" text-anchor="middle" style="font:700 12.5px 'Segoe UI',sans-serif;fill:#065f46">The one rule the whole build exists to enforce</text>
+  <text x="440" y="423" text-anchor="middle" style="font:400 12px 'Segoe UI',sans-serif;fill:#065f46">If a reader cannot check a number at a glance, a system computes it and the agent quotes the system.</text>
+</svg>
+  </div>
+</section>
+
+<section>
+  <h2>Before you start</h2>
+  <ul class="chk">
+    <li><strong>Copilot Studio</strong> and <strong>Power Automate</strong> in an environment you may build in &mdash; not Default if you can avoid it.</li>
+    <li><strong>OneDrive for Business</strong> or SharePoint. Personal OneDrive will not work: the Excel connector cannot see it.</li>
+    <li><strong>Premium connectors</strong> for the HTTP action, used in <strong>Stages 4 and 7</strong>. Both stages give a route that does not need it.</li>
+    <li>These assets, copied into a OneDrive folder first:</li>
+  </ul>
+  <table>
+    <tr><th>File</th><th>Used in</th></tr>
+    <tr><td><code><a href="../demo-assets/sample-fund-factsheet.pdf">sample-fund-factsheet.pdf</a></code></td><td>Stage 1 &mdash; the clean document</td></tr>
+    <tr><td><code><a href="../demo-assets/manager-update-jul-2026.txt">manager-update-jul-2026.txt</a></code></td><td>Stage 2 &mdash; a second source to choose between</td></tr>
+    <tr><td><code><a href="../demo-assets/meridian-manager-update.txt">meridian-manager-update.txt</a></code></td><td>Stage 6 &mdash; the messy document</td></tr>
+    <tr><td><code><a href="../demo-assets/holdings.xlsx">holdings.xlsx</a></code> &middot; <code><a href="../demo-assets/benchmarks.xlsx">benchmarks.xlsx</a></code></td><td>Stage 5 &mdash; both already carry a real Excel <strong>Table</strong></td></tr>
+    <tr><td><code><a href="../demo-assets/plan-to-pptx.py">plan-to-pptx.py</a></code> &middot; <code><a href="../demo-assets/deck-renderer.html">deck-renderer.html</a></code></td><td>Stage 7 &mdash; two offline ways to render the plan</td></tr>
+  </table>
+</section>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 1 <small>The agent, its rules, and closing the open web</small></span><span class="b t">~12 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li><strong>Create &rarr; New agent</strong>, then <strong>Skip to configure</strong>. Check the environment shown top-right is the one you meant.</li>
+      <li>Name it <code>Fund Research Assistant</code>. Description:
+        <pre><button class="cp">Copy</button>Answers questions about fund factsheets for investment consultants. Quotes the source for every figure and refuses to estimate anything not in the document.</pre>
+      </li>
+      <li>Paste the <strong>Instructions</strong>:
+        <pre><button class="cp">Copy</button>You are a research assistant for an investment consulting team.
+
+You answer questions about the fund documents in your knowledge only.
+
+Rules you must follow without exception:
+- Every figure you state must come from a document in your knowledge, or from
+  an action you called. Never from your own knowledge of the world.
+- After every figure, cite the section, page or action it came from.
+- If a figure is not in your documents, reply exactly: not stated.
+- Never estimate, infer or annualise a figure, and never fill a gap.
+- Arithmetic: you may state the difference between two figures you have just
+  retrieved, provided you show both of them with their sources in the same
+  reply. Everything else that produces a number - totals, averages, weighted
+  figures, currency conversion, anything computed across a set of rows - must
+  come from an action. If no action provides it, name the action that is
+  missing instead of working it out yourself.
+- If asked for advice on whether to invest, decline and say that suitability
+  is a consultant judgement, not a document lookup.
+- Be brief. A consultant is reading this between meetings.
+
+When asked to compare the fund against its benchmark, state both numbers and
+the difference, and label the difference as excess return.</pre>
+      </li>
+      <li><strong>Knowledge &rarr; Add knowledge</strong> &rarr; upload <code>sample-fund-factsheet.pdf</code>. Wait until its status says <strong>ready</strong>.</li>
+      <li><strong>Settings &rarr; Orchestration</strong> &rarr; confirm <strong>generative orchestration</strong> is on. <b>Do this before testing.</b> On the classic setting the agent only answers what a topic matches, and a research question matches none.</li>
+      <li><strong>Settings &rarr; Generative AI</strong> &rarr; switch <strong>both</strong> off:
+        <ul>
+          <li><strong>Allow ungrounded responses</strong> &mdash; blocks any answer not built from knowledge or a tool. <em>Stage 6 turns this one back on.</em></li>
+          <li><strong>Use information from the Web</strong>.</li>
+        </ul>
+      </li>
+      <li><em>Only if it still cites a web page after that</em>: <strong>Topics &rarr; System &rarr; Conversational boosting</strong> &rarr; off. Leave it alone otherwise &mdash; see troubleshooting.</li>
+      <li>Test in the pane on the right, in a <strong>new conversation</strong>:
+        <pre><button class="cp">Copy</button>What is the fund's 3-year return versus its benchmark?
+What is the tracking error?</pre>
+      </li>
+    </ol>
+    <div class="k g">Check</div>
+    <ul>
+      <li><strong>15.6%</strong> fund, <strong>13.1%</strong> benchmark, excess return <strong>2.5%</strong>, cited to the performance section.</li>
+      <li><strong>not stated</strong> for tracking error &mdash; the factsheet carries none.</li>
+      <li>Getting <em>&ldquo;I'm not sure how to help with that&rdquo;</em> instead? That is the stock Fallback topic, not a refusal. See the first troubleshooting row.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 2 <small>A second source, and one answer made non-negotiable</small></span><span class="b t">~10 min</span></div>
+  <div class="body">
+    <ol class="steps">
+      <li>Upload <code>manager-update-jul-2026.txt</code> as a second knowledge source.</li>
+      <li>Click the source row to open its <strong>details page</strong> &mdash; give it a <strong>name</strong>, a one-line <strong>description</strong>, and mark it an <strong>official source</strong>. All three live there, not on an ellipsis menu.
+        <div class="note" style="margin:6px 0 0">Marking it official also <b>rewrites your agent's Instructions</b>, adding a rule about preferring authoritative data. It does not show in the Instructions box.</div>
+      </li>
+      <li>Ask a question neither document answers alone, then <strong>open the trace</strong> on the answer and read which source it used, in what order:
+        <pre><button class="cp">Copy</button>What did the manager say about the gold allocation, and does it match the allocation shown on the factsheet?</pre>
+      </li>
+      <li>Append the ambiguity rule to Instructions:
+        <pre><button class="cp">Copy</button>If a question is ambiguous about the period, the share class or the plan
+(Regular or Direct), do not choose one silently. Ask which is meant, or state
+every variant explicitly with its label.</pre>
+      </li>
+      <li><strong>Topics &rarr; + Add a topic &rarr; From blank</strong>, named <code>Advice refusal</code>.</li>
+      <li>There is <strong>no trigger-phrase list any more</strong> &mdash; a blank topic takes one free-text <em>&ldquo;Describe what the topic does&rdquo;</em> box, and the agent routes on it:
+        <pre><button class="cp">Copy</button>Fires when the user asks whether to invest in, buy, recommend or allocate to a fund, or whether one is suitable for a client - any question seeking an investment judgement rather than a document lookup. Example questions: Should my client invest in this fund? Is this a good fund? Would you recommend this fund? Is this fund suitable for our client? Do not use this topic for factual document lookups such as the recommended allocation stated in a mandate.</pre>
+      </li>
+      <li>Add a <strong>Message</strong> node with this wording, then <strong>Save</strong>:
+        <pre><button class="cp">Copy</button>I can't advise on whether to invest. Suitability depends on the client's
+mandate, risk tolerance and existing allocation - that is a consultant
+judgement, not a document lookup.
+
+I can give you what the documents say: performance against the benchmark,
+the allocation, the risk figures and the mandate limits. Ask me for any of
+those and I will cite the source.</pre>
+      </li>
+    </ol>
+    <div class="k g">Check</div>
+    <ul>
+      <li>The gold question answered from <strong>both</strong> documents, two citations.</li>
+      <li>Ask three ways &mdash; <em>&ldquo;should we buy this&rdquo;</em>, <em>&ldquo;is this a good fund&rdquo;</em>, <em>&ldquo;would you recommend it&rdquo;</em> &mdash; and get the <strong>same words</strong> every time. A sentence in Instructions is re-worded each run; a topic is not.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 3 <small>How a tool is built &mdash; read once, repeat five times</small></span><span class="b t">~4 min</span></div>
+  <div class="body">
+    <p>Every one of the six tools is the same four moves. Stages 4 to 7 only say what is different.</p>
+    <ol class="steps">
+      <li><strong>make.powerautomate.com &rarr; Create &rarr; Instant cloud flow</strong>, trigger <strong>When an agent calls the flow</strong>. Name it.</li>
+      <li>Add the trigger's <strong>inputs</strong>, do the work, finish with <strong>Respond to the agent</strong> carrying named outputs. <strong>Save</strong>, then test the flow on its own before attaching it.
+        <div class="note" style="margin:6px 0 0"><b>Each output takes an expression</b>, entered with the <em>fx</em> button. Two rules cover every one below: a <b>text</b> output holding rows or a response body must be wrapped in <code>string(&hellip;)</code>, because the connector hands you an array or an object and the output is typed text; a <b>number</b> output must be wrapped in <code>float(&hellip;)</code>.</div>
+      </li>
+      <li>In Copilot Studio: <strong>Tools &rarr; Add a tool &rarr; Workflows</strong> &rarr; pick your flow.</li>
+      <li>Give the tool a <strong>description</strong> &mdash; this is how the agent decides to call it. Say <em>when</em> to use it, not just what it does.</li>
+    </ol>
+    <div class="warn">
+      <b>Three traps that will cost you time.</b>
+      <ul style="margin-bottom:0">
+        <li>The input names you type are <b>display titles only</b>. The body keys are generic &mdash; <code>text</code>, <code>number</code>, <code>text_1</code>. <code>triggerBody()?['amountinr']</code> is always <code>Null</code>; insert values from the <b>dynamic-content picker</b>.</li>
+        <li><b>Publishing silently blanks number-typed outputs</b> on <em>Respond to the agent</em>. Reopen and re-check after every publish.</li>
+        <li>Clicking the canvas <code>+</code> <b>while a parameter panel is open</b> sends your keystrokes into that panel's field.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 4 <small>Two tools that fetch &mdash; a public API and a legacy internal system</small></span><span class="b t">~18 min</span></div>
+  <div class="body">
+    <div class="k">Tool 1 &mdash; Get FX Rate <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#78350f">(premium: the HTTP action)</span></div>
+    <div class="flow">
+<svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, HTTP, Compose, Respond to the agent">
+<defs><marker id="afx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+<rect x="0" y="10" width="200" height="62" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="100" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER</text>
+<text x="100" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When an agent</text>
+<text x="100" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">calls the flow</text>
+<line x1="203" y1="41" x2="222" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#afx)"/>
+<rect x="226" y="10" width="200" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="326" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="326" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">HTTP</text>
+<line x1="429" y1="41" x2="448" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#afx)"/>
+<rect x="452" y="10" width="200" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="552" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="552" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Compose</text>
+<line x1="655" y1="41" x2="674" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#afx)"/>
+<rect x="678" y="10" width="200" height="62" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.5"/>
+<text x="778" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+<text x="778" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Respond to</text>
+<text x="778" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the agent</text>
+</svg>
+</div>
+<table>
+  <tr><th style="width:26%">Node</th><th>Configure</th></tr>
+  <tr><td><b>When an agent calls the flow</b></td><td>Two inputs: text <code>ratedate</code>, number <code>amountinr</code>.</td></tr>
+  <tr><td><b>HTTP</b></td><td>Method <code>GET</code>. <b>The date in the path is the <code>ratedate</code> input</b> &mdash; insert it from the dynamic-content picker. Use the <code>.dev</code> host and <code>/v1/</code> path: the old <code>.app</code> host returns <code>301</code> and the action does not follow redirects. Hardcode the date and the tool advertises a <code>ratedate</code> it never uses.
+    <pre><button class="cp">Copy</button>https://api.frankfurter.dev/v1/@{triggerBody()?['text']}?from=USD&amp;to=INR</pre></td></tr>
+  <tr><td><b>Compose</b></td><td>The division, in the flow rather than in the model.
+    <pre><button class="cp">Copy</button>div(
+  triggerBody()?['number'],
+  float(body('HTTP')?['rates']?['INR'])
+)</pre></td></tr>
+  <tr><td><b>Respond to the agent</b></td><td>text <code>fxjson</code> = <code>string(body('HTTP'))</code><br>number <code>amountusd</code> = <code>float(outputs('Compose'))</code></td></tr>
+</table>
+<p><b>Test it alone</b> (<em>Test &rarr; Manually</em>): <code>ratedate</code> = <code>2026-06-30</code>, <code>amountinr</code> = <code>48200000000</code>. Expect <code>amountusd</code> &asymp; <strong>509190788</strong> at a rate of about <strong>94.66</strong>. <b>Run it again with <code>2026-03-31</code> and check the rate changes</b> &mdash; that is how you know the input is wired.</p>
+<p>Tool description:</p>
+    <pre><button class="cp">Copy</button>Converts an amount in Indian rupees to US dollars at the exchange rate published
+for a given date, and returns both the rate and the converted amount. Use this
+whenever a value in rupees needs to be expressed in US dollars, or a currency
+conversion is requested. Never convert currency yourself - always call this.
+Input ratedate must be in YYYY-MM-DD format. Input amountinr is the rupee
+amount as a plain number, so Rs 4,820 crore is passed as 48200000000.</pre>
+    <div class="tip">
+      <b>No premium connector?</b> Replace the HTTP action with a <strong>Compose</strong> holding this &mdash; exactly what the live call returns &mdash;
+      and point the division at it instead: <code>float(outputs('Compose')?['rates']?['INR'])</code>. It returns one fixed day whatever <code>ratedate</code> says &mdash; the only thing you lose.
+      <pre><button class="cp">Copy</button>{
+  "amount": 1.0,
+  "base": "USD",
+  "date": "2026-06-30",
+  "rates": {
+    "INR": 94.66
+  }
+}</pre>
+    </div>
+
+    <div class="k">Tool 2 &mdash; Get Client Mandate <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#047857">(no premium needed)</span></div>
+    <div class="flow">
+<svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, Compose, Respond to the agent">
+<defs><marker id="acm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+<rect x="0" y="10" width="276" height="62" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="138" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER</text>
+<text x="138" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When an agent</text>
+<text x="138" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">calls the flow</text>
+<line x1="279" y1="41" x2="298" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#acm)"/>
+<rect x="302" y="10" width="276" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="440" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="440" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Compose</text>
+<line x1="581" y1="41" x2="600" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#acm)"/>
+<rect x="604" y="10" width="276" height="62" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.5"/>
+<text x="742" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+<text x="742" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Respond to</text>
+<text x="742" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the agent</text>
+</svg>
+</div>
+<table>
+  <tr><th style="width:26%">Node</th><th>Configure</th></tr>
+  <tr><td><b>When an agent calls the flow</b></td><td>One input: text <code>clientid</code>.</td></tr>
+  <tr><td><b>Compose</b></td><td>The fixed payload. A flow returning a constant is an honest stand-in for a wrapped legacy service.
+    <pre><button class="cp">Copy</button>{
+  "client_id": "CL-4471",
+  "client_name": "Meridian Retirement Trust",
+  "mandate_ref": "MND-2024-0117",
+  "max_equity_pct": 70,
+  "min_fixed_income_pct": 20,
+  "permitted_asset_classes": ["Equity", "Debt", "Gold", "Cash"],
+  "min_credit_quality": "AA",
+  "leverage_permitted": false,
+  "reporting_currency": "USD",
+  "review_frequency": "Quarterly",
+  "source_system": "MANDATE-LEGACY-01",
+  "retrieved_at": "2026-08-27T09:00:00Z"
+}</pre></td></tr>
+  <tr><td><b>Respond to the agent</b></td><td>text <code>mandatejson</code> = <code>outputs('Compose')</code> &mdash; no <code>string()</code> here, the Compose already holds text.</td></tr>
+</table>
+<p><b>Test it alone</b> with <code>clientid</code> = <code>CL-4471</code>. It returns the same payload whatever you type, which is worth saying out loud.</p>
+<p>Tool description:</p>
+    <pre><button class="cp">Copy</button>Looks up a client's investment mandate limits from the internal mandate system.
+Returns maximum equity allocation, permitted asset classes and minimum credit
+quality. Use whenever a fund must be checked against a client's mandate.
+Input clientid is the internal client reference, for example CL-4471.</pre>
+<div class="k g">Check</div>
+    <pre><button class="cp">Copy</button>The fund size is in rupees. What is it in US dollars as at the factsheet date?
+Does the Northwind fund's asset allocation comply with the mandate for client CL-4471?</pre>
+    <ul>
+      <li>Roughly <strong>USD 509.2 million at about 94.66</strong>, citing the action. It converts <em>Rs 4,820 crore</em> to <code>48200000000</code> itself &mdash; a crore is a unit, not a calculation.</li>
+      <li>The response's <code>date</code> may not be the one you asked for: on a weekend or holiday the API returns the last business day. Correct behaviour &mdash; the agent should quote the date it got back, not the one it sent.</li>
+      <li><strong>Equity 68% against a 70% limit</strong> &mdash; compliant, two points of headroom. It called the mandate action and read the allocation section without being given the sequence.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 5 <small>Two tools that compute &mdash; where the arithmetic goes</small></span><span class="b t">~14 min</span></div>
+  <div class="body">
+    <div class="k">Tool 3 &mdash; Get Holdings</div>
+    <div class="flow">
+<svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, List rows present in a table, Compose, Respond to the agent">
+<defs><marker id="agh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+<rect x="0" y="10" width="200" height="62" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="100" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER</text>
+<text x="100" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When an agent</text>
+<text x="100" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">calls the flow</text>
+<line x1="203" y1="41" x2="222" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#agh)"/>
+<rect x="226" y="10" width="200" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="326" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="326" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">List rows present</text>
+<text x="326" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">in a table</text>
+<line x1="429" y1="41" x2="448" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#agh)"/>
+<rect x="452" y="10" width="200" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="552" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="552" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Compose</text>
+<line x1="655" y1="41" x2="674" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#agh)"/>
+<rect x="678" y="10" width="200" height="62" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.5"/>
+<text x="778" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+<text x="778" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Respond to</text>
+<text x="778" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the agent</text>
+</svg>
+</div>
+<table>
+  <tr><th style="width:26%">Node</th><th>Configure</th></tr>
+  <tr><td><b>When an agent calls the flow</b></td><td><b>No inputs.</b></td></tr>
+  <tr><td><b>List rows present in a table</b></td><td><strong>Excel Online (Business)</strong>, pointed at <code>holdings.xlsx</code> and its table.</td></tr>
+  <tr><td><b>Compose</b></td><td>The top-five total, added by the flow. Deliberately literal; the rows arrive already ranked.
+    <pre><button class="cp">Copy</button>add(
+  add(
+    add(
+      add(
+        float(first(body('List_rows_present_in_a_table')?['value'])?['weight_pct']),
+        float(body('List_rows_present_in_a_table')?['value'][1]?['weight_pct'])),
+      float(body('List_rows_present_in_a_table')?['value'][2]?['weight_pct'])),
+    float(body('List_rows_present_in_a_table')?['value'][3]?['weight_pct'])),
+  float(body('List_rows_present_in_a_table')?['value'][4]?['weight_pct'])
+)</pre></td></tr>
+  <tr><td><b>Respond to the agent</b></td><td>text <code>holdingsrows</code> = <code>string(body('List_rows_present_in_a_table')?['value'])</code><br>number <code>top5weightpct</code> = <code>float(outputs('Compose'))</code></td></tr>
+</table>
+<p><b>Test it alone</b> &mdash; expect ten rows and <code>top5weightpct</code> = <strong>22.9</strong>.</p>
+<p>Tool description:</p>
+    <pre><button class="cp">Copy</button>Returns the fund's top ten holdings from the holdings workbook, and the combined
+weight of the top five holdings as a computed total. Use this whenever the
+holdings, the top holdings, or a combined or total weight across holdings is
+requested. Never add weights together yourself - always call this and quote the
+top5weightpct value it returns.</pre>
+
+    <div class="k">Tool 4 &mdash; Get Benchmark</div>
+    <div class="flow">
+<svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, List rows present in a table, Respond to the agent">
+<defs><marker id="agb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+<rect x="0" y="10" width="276" height="62" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="138" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER</text>
+<text x="138" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When an agent</text>
+<text x="138" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">calls the flow</text>
+<line x1="279" y1="41" x2="298" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#agb)"/>
+<rect x="302" y="10" width="276" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="440" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="440" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">List rows present</text>
+<text x="440" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">in a table</text>
+<line x1="581" y1="41" x2="600" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#agb)"/>
+<rect x="604" y="10" width="276" height="62" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.5"/>
+<text x="742" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+<text x="742" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Respond to</text>
+<text x="742" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the agent</text>
+</svg>
+</div>
+<table>
+  <tr><th style="width:26%">Node</th><th>Configure</th></tr>
+  <tr><td><b>When an agent calls the flow</b></td><td>One input: text <code>benchmarkname</code>.</td></tr>
+  <tr><td><b>List rows present in a table</b></td><td>Same Excel action, pointed at <code>benchmarks.xlsx</code>. <b>No Compose</b> &mdash; nothing is being totalled here.</td></tr>
+  <tr><td><b>Respond to the agent</b></td><td>text <code>benchmarkrows</code> = <code>string(body('List_rows_present_in_a_table')?['value'])</code> &mdash; the same expression as Get Holdings, because it is the same action name in a different flow.</td></tr>
+</table>
+<p><b>Test it alone</b> with <code>CRISIL Hybrid 35+65 Aggressive Index</code>.</p>
+<p>Tool description:</p>
+    <pre><button class="cp">Copy</button>Returns published benchmark index returns over 1, 3 and 5 years from the
+benchmark reference table, with the as-of date. Use this whenever a benchmark
+index return is needed, or the fund must be compared against its benchmark.
+Input benchmarkname is the index name, for example CRISIL Hybrid 35+65
+Aggressive Index.</pre>
+<div class="k">Then append to Instructions</div>
+    <pre><button class="cp">Copy</button>Never calculate a total, a weighted figure or an average yourself, and never
+convert a currency yourself. Retrieve the number using an action and quote it.
+You may still state the difference between two figures you have retrieved, as
+long as both are shown with their sources.
+If a calculation is needed and no action provides it, say which action or data
+source is missing, and do not answer with a number.</pre>
+
+    <div class="k g">Check &mdash; the third is supposed to fail</div>
+    <pre><button class="cp">Copy</button>What is the combined weight of the fund's top five holdings?
+How did the fund perform against the CRISIL Hybrid 35+65 Aggressive Index over 3 years?
+What is the average weight of the fund's top ten holdings?</pre>
+    <table>
+      <tr><th>Ask</th><th>Expect</th></tr>
+      <tr><td>Combined top-five weight</td><td><b>22.9%</b> from <code>top5weightpct</code>. Ask which action produced it &mdash; it can name one.</td></tr>
+      <tr><td>Fund vs benchmark, 3 years</td><td>13.1% and 15.6%, and the <b>2.5% difference</b> as excess return. Allowed: both operands are on screen with sources.</td></tr>
+      <tr><td>Average weight of the top ten</td><td><b>A refusal.</b> No action returns an average. A number here means the rule is not holding.</td></tr>
+    </table>
+    <div class="note">
+      Expect the refusal to be blunt. With <em>Allow ungrounded responses</em> off, the agent cannot explain itself and falls to the generic
+      <em>&ldquo;I'm not sure how to help with that.&rdquo;</em> No average is invented &mdash; the sentence is just suppressed.
+    </div>
+    <div class="tip">
+      <b>Commonest failure in this stage:</b> the connector cannot see the data because the range is not formatted as a Table &mdash; select it and press <code>Ctrl+T</code>.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 6 <small>Enforce a shape &mdash; the fund record and the slide plan</small></span><span class="b t">~14 min</span></div>
+  <div class="body">
+    <div class="warn" style="margin-bottom:12px">
+      <b>Turn <em>Allow ungrounded responses</em> back on first.</b> With it off this stage does not run at all: bare JSON carries no citations,
+      so the grounding gate suppresses the answer and you get <em>&ldquo;No information was found that could help answer this.&rdquo;</em>
+    </div>
+    <ol class="steps">
+      <li>Append the extraction schema to Instructions:
+        <pre><button class="cp">Copy</button>When asked to extract a fund record, return valid JSON only - no commentary,
+no markdown fence - with exactly these keys:
+
+fund_name, isin, share_class, aum, currency, benchmark, manager,
+inception_date, ter_regular, ter_direct, exit_load,
+return_1y, return_3y, return_5y, return_since_inception,
+benchmark_1y, benchmark_3y, benchmark_5y,
+alloc_equity, alloc_debt, alloc_gold, alloc_cash,
+as_of_date, source_document, needs_review
+
+Rules:
+- Every key must be present. Never add, remove or rename a key.
+- If a value is absent from the document, use the string: not stated
+- Percentages as strings with the percent sign, exactly as printed.
+- as_of_date in YYYY-MM-DD.
+- needs_review is a list of key names that were absent, ambiguous, or where the
+  document gave more than one candidate value. Empty list if none.
+- Never infer a value from another value, unless you also list that key in
+  needs_review so the inference is visible to the next reader.</pre>
+      </li>
+      <li>Upload <code>meridian-manager-update.txt</code> as a third knowledge source, then run both commands and compare:
+        <pre><button class="cp">Copy</button>Extract the fund record from the Northwind factsheet.
+Extract the fund record from the Meridian manager update document.</pre>
+      </li>
+      <li>Append the slide-plan schema. <strong>The plan is the interface</strong> &mdash; everything after it is ordinary code:
+        <pre><button class="cp">Copy</button>When asked to produce a fund review deck, output valid JSON only, with this shape:
+
+{
+  "deck_title": "",
+  "client": "",
+  "as_of": "YYYY-MM-DD",
+  "slides": [
+    {"layout":"title",   "title":"", "subtitle":""},
+    {"layout":"kpi",     "title":"", "kpis":[{"label":"","value":"","source":""}]},
+    {"layout":"table",   "title":"", "columns":[], "rows":[[]], "source":""},
+    {"layout":"chart",   "title":"", "chart_type":"pie", "series":[{"label":"","value":0}], "source":""},
+    {"layout":"comment", "title":"", "bullets":[""], "source":""}
+  ],
+  "unresolved": []
+}
+
+Rules:
+- Every figure on every slide must carry a source string naming the document
+  section or the action it came from.
+- Any figure you could not source goes in unresolved, and does not appear on a slide.
+- Never write a commentary sentence containing a number that is not on a slide.
+- Five to seven slides. Commentary bullets: maximum twelve words each.</pre>
+      </li>
+      <li>Ask for the deck:
+        <pre><button class="cp">Copy</button>Produce a Q2 2026 fund review deck for client CL-4471 covering the Northwind
+fund: performance against benchmark, asset allocation, top holdings, fees,
+and a short commentary.</pre>
+      </li>
+    </ol>
+    <div class="k g">Check</div>
+    <ul>
+      <li><strong>Clean document:</strong> 25 keys, real values, <code>needs_review</code> close to empty. Verify every field against the factsheet by hand &mdash; this is the one place worth it.</li>
+      <li><strong>Messy document:</strong> around eighteen or nineteen <code>not stated</code>, and <code>needs_review</code> naming the real ambiguities &mdash; the 11.4% return with no period, the &ldquo;approximately&rdquo; AUM, and <code>as_of_date</code>, which is never given.</li>
+      <li>Both parse. Paste one into a JSON validator.</li>
+      <li><strong>Read the deck's commentary bullets against its slides.</strong> Expect a figure that is real, sourced, and <em>on no slide</em> &mdash; on a live run it cited a mandate ceiling of 70%. Tighten the rule and re-run.</li>
+    </ul>
+    <div class="note">
+      <b>If <code>needs_review</code> comes back empty on the messy document</b>, append: <em>&ldquo;If a value required interpretation of any kind, list its key in needs_review.&rdquo;</em>
+      <b>If you get markdown fences</b>: <em>&ldquo;Output must begin with { and end with }. No other characters.&rdquo;</em>
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 7 <small>Two tools that act &mdash; the gate, and the file</small></span><span class="b t">~16 min</span></div>
+  <div class="body">
+    <div class="k">Tool 5 &mdash; Send Deck For Approval</div>
+    <div class="flow">
+<svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, Create an approval, Respond to the agent">
+<defs><marker id="aap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+<rect x="0" y="10" width="276" height="62" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="138" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER</text>
+<text x="138" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When an agent</text>
+<text x="138" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">calls the flow</text>
+<line x1="279" y1="41" x2="298" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#aap)"/>
+<rect x="302" y="10" width="276" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="440" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="440" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Create an approval</text>
+<line x1="581" y1="41" x2="600" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#aap)"/>
+<rect x="604" y="10" width="276" height="62" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.5"/>
+<text x="742" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+<text x="742" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Respond to</text>
+<text x="742" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the agent</text>
+</svg>
+</div>
+<table>
+  <tr><th style="width:26%">Node</th><th>Configure</th></tr>
+  <tr><td><b>When an agent calls the flow</b></td><td>Two inputs: text <code>decksummary</code>, text <code>approver</code>.</td></tr>
+  <tr><td><b>Create an approval</b></td><td><strong>Approvals</strong> connector &mdash; <b>not</b> <em>Start and wait for an approval</em>, for the reason below. Type <em>Basic</em>, <em>Assigned to</em> = the <code>approver</code> input, <em>Details</em> = <code>decksummary</code>. First use asks you to create a connection; no credentials are typed.</td></tr>
+  <tr><td><b>Respond to the agent</b></td><td>text <code>status</code> = the literal words <code>Pending approval</code> &mdash; the one output here that is not an expression<br>text <code>approvalid</code> = <code>outputs('Create_an_approval')?['body/name']</code></td></tr>
+</table>
+<p>On the <em>tool's</em> Inputs in Copilot Studio, set <code>approver</code> to a <strong>Custom value</strong> holding a real address you can receive at. Left on <em>Dynamically fill with AI</em>, the agent invents an address and the approval goes nowhere.</p>
+<p>Tool description:</p>
+    <pre><button class="cp">Copy</button>Sends a finished client deck for human approval before it is issued. Must be used
+before any output is described as final or client-ready. It returns as soon as the
+request is sent, so the outcome is not known yet: report that approval is pending
+and never describe the output as approved.</pre>
+    <div class="warn">
+      <b>Why <em>Create an approval</em> and not <em>Start and wait</em>.</b> A flow <b>called by an agent</b> has roughly <b>100 seconds</b> to answer.
+      Waiting on a human blows through it and the <em>response</em> leg fails with <code>ActionResponseTimedOut</code> or HTTP <code>504</code> &mdash;
+      the approval succeeds, and the agent has already hung up. Stage 8 <em>is</em> allowed to wait, because a file starts that flow, not the agent.
+    </div>
+
+    <div class="k">Tool 6 &mdash; Build Review Deck</div>
+    <div class="flow">
+<svg viewBox="0 0 880 80" role="img" aria-label="Flow nodes in order: When an agent calls the flow, HTTP, Create file, Respond to the agent">
+<defs><marker id="abd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+<rect x="0" y="10" width="200" height="62" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="100" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER</text>
+<text x="100" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When an agent</text>
+<text x="100" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">calls the flow</text>
+<line x1="203" y1="41" x2="222" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#abd)"/>
+<rect x="226" y="10" width="200" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="326" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="326" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">HTTP</text>
+<line x1="429" y1="41" x2="448" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#abd)"/>
+<rect x="452" y="10" width="200" height="62" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="552" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="552" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Create file</text>
+<line x1="655" y1="41" x2="674" y2="41" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#abd)"/>
+<rect x="678" y="10" width="200" height="62" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.5"/>
+<text x="778" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+<text x="778" y="49" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Respond to</text>
+<text x="778" y="63" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the agent</text>
+</svg>
+</div>
+<table>
+  <tr><th style="width:26%">Node</th><th>Configure</th></tr>
+  <tr><td><b>When an agent calls the flow</b></td><td>One input: text <code>planjson</code>.</td></tr>
+  <tr><td><b>HTTP</b></td><td>Method <code>POST</code>. URI <code>https://&lt;your-renderer-host&gt;/api/render</code>. Header <code>Content-Type</code> = <code>application/json</code>, plus your endpoint's auth &mdash; an Azure Function wants <code>x-functions-key</code> (see below). Body:
+    <pre><button class="cp">Copy</button>@json(triggerBody()?['text'])</pre>
+    <b>The <code>json()</code> is load-bearing:</b> the plan arrives as a <em>text</em> input, so without it you post a quoted string where the endpoint expects an object.</td></tr>
+  <tr><td><b>Create file</b></td><td><strong>OneDrive for Business</strong>. Content = <code>body('HTTP')</code>. Name <b>timestamped</b>, not fixed &mdash; a constant name overwrites yesterday's deck.
+    <pre><button class="cp">Copy</button>concat('review-deck-', formatDateTime(utcNow(),'yyyyMMdd-HHmmss'), '.pptx')</pre></td></tr>
+  <tr><td><b>Respond to the agent</b></td><td>text <code>deckstatus</code> = <code>Deck saved to OneDrive as @{outputs('Create_file')?['body/Name']}</code> &mdash; literal text with the expression inline, so the agent can name the file it wrote.</td></tr>
+</table>
+<p>Tool description:</p>
+    <pre><button class="cp">Copy</button>Turns a finished slide plan into a real PowerPoint file and saves it to OneDrive.
+Use this after you have produced a fund review deck plan, when the user asks for
+the deck to be built, generated or saved. Input planjson is the complete slide
+plan as JSON text, exactly as you produced it.</pre>
+<div class="note">
+      <b>What the endpoint has to do &mdash; the whole contract.</b> Accept the slide plan as a JSON body, return the <code>.pptx</code> as <b>raw bytes</b>. No handshake, no callback, no polling.
+      The next step writes the HTTP body straight to OneDrive, so whatever comes back <em>is</em> the file &mdash; if your renderer returns JSON saying &ldquo;here is a link&rdquo;, you will save that sentence as a <code>.pptx</code>.
+    </div>
+    <div class="amber">
+      <b>Where the <code>x-functions-key</code> value comes from.</b> Not typed into the header &mdash; the header holds an expression that reads an <strong>environment variable</strong>,
+      so there is one place to rotate the key instead of a copy in every flow that calls the endpoint.
+      <ol style="margin:6px 0 0">
+        <li><b>Get the key:</b> Azure portal &rarr; your Function App &rarr; <strong>App keys</strong> &rarr; the <code>default</code> host key. Or <code>az functionapp keys list -g &lt;rg&gt; -n &lt;app&gt;</code>.</li>
+        <li><b>The flow must be inside a solution.</b> A flow sitting in <em>My flows</em> cannot reference an environment variable at all. This is the step that is usually missed.</li>
+        <li><strong>Solutions &rarr; your solution &rarr; New &rarr; More &rarr; Environment variable.</strong> Data type <strong>Text</strong>. Put the key in <strong>Current Value</strong>.</li>
+        <li>Reference it as the header value &mdash; <b>display name, a space, then the schema name in brackets</b>, exactly:
+          <code>@{parameters('Render endpoint key (new_RenderEndpointKey)')}</code>. Get that name wrong and the header resolves to null and the endpoint returns <code>401</code>.</li>
+        <li>On the HTTP action, <strong>Settings &rarr; Secure Inputs</strong>. Without it the key is readable in every run's inputs in run history.</li>
+      </ol>
+      <b>Know what this does not buy you.</b> The designer <b>stamps the variable's current value into the flow definition</b>, so an exported solution still carries the key.
+      It is one owned place to rotate &mdash; <em>not</em> a secret store. The real fix is a <strong>Secret</strong> environment variable backed by <strong>Azure Key Vault</strong>, resolved at run time and never written into the definition;
+      it needs the vault in the same tenant and the Dataverse service principal granted <code>get</code>/<code>list</code> on secrets.
+      <br><b>Simpler routes, honestly labelled:</b> pasting the key literally works and is what most people do first &mdash; just remember there are two copies to rotate.
+      Putting it on the query string as <code>?code=&lt;key&gt;</code> is accepted by Functions but is worse, because the whole URL lands in run history.
+    </div>
+    <div class="tip">
+      <b>No renderer endpoint?</b> Build the flow as <em>Create file</em> writing <code>plan.json</code> instead, and do the last hop offline:
+      <code>python3 plan-to-pptx.py plan.json deck.pptx</code>, or open <code>deck-renderer.html</code> in a browser and press <em>Load plan.json</em>.
+      Same plan, and the agent cannot tell the difference. <b>Test whichever route you use with the agent's own output, not a tidy fixture</b> &mdash;
+      a hosted renderer returned <code>500</code> on a deck title containing an em-dash while passing every local test.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 8 <small>Publish, then make it run without being asked</small></span><span class="b t">~18 min</span></div>
+  <div class="body">
+    <div class="k">Part 1 &mdash; publish and share</div>
+    <ol class="steps">
+      <li><strong>Publish.</strong> Nothing below works until it completes.</li>
+      <li><strong>Channels</strong> &mdash; behind the <strong>+2</strong> overflow beside the tab strip, not on it. Teams and Microsoft 365 Copilot are now one tile, <strong>Microsoft 365 and Microsoft Teams</strong>. Turn it on and ask a question from inside Teams.</li>
+      <li>Set the publisher name &mdash; <strong>Edit details &rarr; Teams settings &rarr; More</strong> (collapsed). Until you do it reads <em>Your developer name</em>.</li>
+      <li><strong>Share</strong> with one colleague. The choice is <em>use</em> versus <em>co-author</em>. Sharing an agent shares what it can <em>do</em>, not only what it knows &mdash; every tool runs under your credentials.</li>
+      <li><strong>Settings &rarr; Security &rarr; Authentication.</strong> With <em>Authenticate with Microsoft</em> on, knowledge results trim to each asker's own permissions. Off, everyone queries one index.</li>
+    </ol>
+
+    <div class="k">Part 2 &mdash; the trigger flow, <code>Factsheet Arrived</code></div>
+<div class="flow">
+<svg viewBox="0 0 880 300" role="img" aria-label="Factsheet Arrived: a file trigger calls the agent, waits for a human approval, then a condition splits into a render branch and a rejection branch">
+<defs><marker id="afa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+
+<rect x="0" y="10" width="266" height="60" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.5"/>
+<text x="133" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">TRIGGER &#183; NOBODY TYPES ANYTHING</text>
+<text x="133" y="50" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">When a file is created</text>
+<text x="133" y="64" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#475569">(properties only)</text>
+
+<line x1="269" y1="40" x2="303" y2="40" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#afa)"/>
+
+<rect x="307" y="10" width="266" height="60" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+<text x="440" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">ACTION</text>
+<text x="440" y="50" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Execute Agent and wait</text>
+<text x="440" y="64" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#475569">~2&#189; min &#183; returns body/lastResponse</text>
+
+<line x1="576" y1="40" x2="610" y2="40" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#afa)"/>
+
+<rect x="614" y="10" width="266" height="60" rx="6" style="fill:#eef4fd;stroke:#1d4ed8;stroke-width:1.5"/>
+<text x="747" y="31" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">THE HUMAN GATE</text>
+<text x="747" y="50" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">Start and wait for an approval</text>
+<text x="747" y="64" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#065f46">allowed here &#8212; hours are normal</text>
+
+<line x1="747" y1="72" x2="747" y2="92" style="stroke:#1e40af;stroke-width:1.6"/>
+<line x1="133" y1="92" x2="747" y2="92" style="stroke:#1e40af;stroke-width:1.6"/>
+<text x="440" y="87" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.6px">CONDITION &#183; outcome is equal to Approve</text>
+<line x1="133" y1="92" x2="133" y2="116" style="stroke:#047857;stroke-width:1.6" marker-end="url(#afa)"/>
+<text x="150" y="110" style="font:700 10px 'Segoe UI',sans-serif;fill:#065f46">TRUE</text>
+<line x1="747" y1="92" x2="747" y2="220" style="stroke:#b91c1c;stroke-width:1.6" marker-end="url(#afa)"/>
+<text x="694" y="110" style="font:700 10px 'Segoe UI',sans-serif;fill:#b91c1c">FALSE</text>
+
+<rect x="0" y="118" width="600" height="126" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.4"/>
+<text x="14" y="136" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">SIX ACTIONS, IN THIS ORDER &#8212; ~15 SECONDS END TO END</text>
+<rect x="14" y="144" width="182" height="42" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="105" y="161" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">1 &#183; Compose</text>
+<text x="105" y="176" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">slice between the markers</text>
+<rect x="206" y="144" width="182" height="42" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="297" y="161" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">2 &#183; HTTP</text>
+<text x="297" y="176" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">POST to the renderer</text>
+<rect x="398" y="144" width="182" height="42" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="489" y="161" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">3 &#183; Create file</text>
+<text x="489" y="176" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">the .pptx, timestamped</text>
+<rect x="14" y="192" width="182" height="42" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="105" y="209" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">4 &#183; Convert file</text>
+<text x="105" y="224" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">target type PDF</text>
+<rect x="206" y="192" width="182" height="42" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="297" y="209" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">5 &#183; Create file</text>
+<text x="297" y="224" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">the .pdf</text>
+<rect x="398" y="192" width="182" height="42" rx="5" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="489" y="209" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">6 &#183; Send an email</text>
+<text x="489" y="224" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">PDF attached</text>
+
+<rect x="614" y="222" width="266" height="52" rx="6" style="fill:#fef2f2;stroke:#fecaca;stroke-width:1.4"/>
+<text x="747" y="240" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#b91c1c;letter-spacing:.7px">ONE ACTION</text>
+<text x="747" y="257" text-anchor="middle" style="font:600 11.5px 'Segoe UI',sans-serif;fill:#0b2545">Send an email &#8212; not issued</text>
+<text x="747" y="270" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">no PDF exists; nothing went out</text>
+
+<rect x="0" y="252" width="600" height="38" rx="5" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.1"/>
+<text x="300" y="268" text-anchor="middle" style="font:600 11px 'Segoe UI',sans-serif;fill:#0b2545">Both branches end with somebody being told &#8212; that is the</text>
+<text x="300" y="282" text-anchor="middle" style="font:600 11px 'Segoe UI',sans-serif;fill:#0b2545">difference between unattended and unsupervised.</text>
+</svg>
+</div>
+    <ol class="steps">
+      <li>Create a library or folder called <code>incoming-factsheets</code>.</li>
+      <li>New <strong>Automated cloud flow</strong> &mdash; not an instant one. Trigger: <strong>When a file is created (properties only)</strong>, pointed at that folder.</li>
+      <li><b>No <em>Get file content</em> step</b> &mdash; the trigger already returns File content, File name and File path.</li>
+      <li><strong>Microsoft Copilot Studio &rarr; Execute Agent and wait</strong> (search the action list for <em>copilot</em>, not <em>agent</em>). Pick your agent, click <strong>Show all</strong> to reveal <strong>Message</strong>, and paste this with the trigger's <em>File name</em> token inside it:
+        <pre><button class="cp">Copy</button>A new fund document has arrived in the incoming-factsheets folder: [File name].
+Extract the fund record using the schema in your instructions, enrich it with the
+mandate and benchmark actions, and produce a slide plan for a quarterly review.
+Produce the plan only: do not call the deck-building tool, because this process
+renders the deck itself after a human has approved the plan.
+Do not describe anything as final; the flow will send this for approval. Do not
+state an approval id - you will not have one. If more than three fields are in
+needs_review, do not produce a plan at all - report which fields failed and stop.
+When you do produce a plan, end your reply with the slide plan as raw JSON
+matching the slide-plan schema in your instructions, wrapped exactly in the
+markers ===PLAN_JSON_START=== and ===PLAN_JSON_END=== with nothing after the
+closing marker.</pre>
+      </li>
+      <li><strong>Approvals &rarr; Start and wait for an approval</strong> &mdash; allowed here &mdash; assigned to yourself, <em>Details</em> = the agent's <code>body/lastResponse</code>. <b>The flow creates the approval, not the agent</b>: told to send one, the agent tends to narrate it instead of calling the tool, and no card appears.</li>
+      <li><strong>Condition</strong> &mdash; outcome equals <code>Approve</code>. Six actions in <em>True</em>, in order:
+        <ul>
+          <li><strong>Compose</strong> &mdash; the plan, split out of the reply between the two markers:
+            <code>split(split(outputs('Execute_Agent_and_wait')?['body/lastResponse'],'===PLAN_JSON_START===')[1],'===PLAN_JSON_END===')[0]</code></li>
+          <li><strong>HTTP</strong> &mdash; the same <code>POST</code> as Tool 6, but the body is that Compose sliced from its first <code>{</code> to its last <code>}</code> and then parsed:
+            <code>json(substring(outputs('Compose'),indexOf(outputs('Compose'),'{'),add(sub(lastIndexOf(outputs('Compose'),'}'),indexOf(outputs('Compose'),'{')),1)))</code>
+            &mdash; the slice is what survives the agent wrapping its JSON in a code fence.</li>
+          <li><strong>Create file</strong> &mdash; the timestamped <code>.pptx</code>.</li>
+          <li><strong>Convert file</strong> &mdash; PDF, File = the Id the previous step returned.</li>
+          <li><strong>Create file</strong> &mdash; the <code>.pdf</code>.</li>
+          <li><strong>Send an email (V2)</strong> &mdash; PDF attached.</li>
+        </ul>
+      </li>
+      <li><em>False</em> branch: one <strong>Send an email (V2)</strong> saying the deck was rejected, no PDF was produced, nothing has gone to the client, and the reviewer's comment is in the run history.</li>
+      <li>Append to Instructions:
+        <pre><button class="cp">Copy</button>When you are invoked by a process rather than by a person, nobody is present to
+answer a follow-up question. So: never ask a clarifying question in that context.
+If something is ambiguous, choose nothing, state the ambiguity in needs_review,
+and let the approval step put it in front of a human.</pre>
+      </li>
+      <li>Drop <code>sample-fund-factsheet.pdf</code> into the folder and <strong>close the tab</strong>. Come back in <strong>three to five minutes</strong>.</li>
+      <li>Then drop the <strong>messy</strong> document in and watch what a triggered agent does when the document does not cooperate.</li>
+      <li><strong>Swap the trigger, change nothing else.</strong> Delete the trigger step and put <strong>Recurrence</strong> or <strong>When a new email arrives (V3)</strong> in its place. Everything downstream is untouched.</li>
+    </ol>
+    <div class="k g">Check</div>
+    <ul>
+      <li><strong>Nothing, for several minutes</strong> &mdash; no window open, nobody waiting. Then an <strong>approval card</strong> carrying the fund record and slide plan.</li>
+      <li>Two entries in <code>needs_review</code> you did not plant: <code>client_mandate</code> (no client id was supplied, so the action was never called) and <code>isin</code> (the factsheet prints <em>INF000SAMPLE01 (illustrative)</em>). Two is under the threshold of three, <b>so the plan is still produced</b>.</li>
+      <li>With the messy document it <b>stops</b> instead: more than three fields flagged, so it reports the failure rather than producing a confident, wrong deck.</li>
+      <li>The run stays open until you answer. Hours are normal &mdash; a verified run waited 5h 45m and resumed correctly.</li>
+      <li><strong>~15 seconds after approving:</strong> a <code>.pptx</code>, a <code>.pdf</code> and an email with the PDF attached. Reject instead and you get no files and an email saying so.</li>
+    </ul>
+  </div>
+</div>
+
+<section>
+  <h2>When nothing comes back</h2>
+  <table>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+    <tr><td><b>&ldquo;I'm sorry, I'm not sure how to help with that&rdquo;</b></td><td>The stock <em>Fallback</em> topic &mdash; nothing generated an answer. This is not the agent refusing.</td><td>In order: <b>1</b> orchestration is still classic; <b>2</b> you switched off <code>Conversational boosting</code>, which on the classic setting <em>is</em> what answers from knowledge &mdash; turn it back on; <b>3</b> the file has not indexed; <b>4</b> new conversation.</td></tr>
+    <tr><td>Answers a <em>not stated</em> question with a number</td><td>A Generative AI switch is still on, or the file is still indexing.</td><td>Check both, wait two minutes, retest in a <b>new</b> conversation.</td></tr>
+    <tr><td>Cites a web page with both switches off</td><td><code>Conversational boosting</code> is enabled.</td><td>Switch it off, new conversation.</td></tr>
+    <tr><td>Says it cannot find any documents</td><td>Still indexing. A PDF over ~200 pages or an image-only scan never will.</td><td>Wait, then remove and re-upload.</td></tr>
+    <tr><td>Your edit had no effect</td><td>The test pane keeps the old configuration inside an open conversation.</td><td><b>Save, then start a fresh conversation</b> &mdash; not just a new question.</td></tr>
+    <tr><td>The agent never calls your tool</td><td>Nine times out of ten the description is too terse.</td><td>Rewrite it to say <em>when</em> to use it. The agent routes on that sentence.</td></tr>
+    <tr><td>An expression returns <code>Null</code></td><td>You used the input's display name; the body key is <code>text</code> or <code>number</code>.</td><td>Insert from the dynamic-content picker.</td></tr>
+    <tr><td>A number output vanished after publishing</td><td>Publishing blanks number-typed outputs on <em>Respond to the agent</em>.</td><td>Reopen, re-add, republish, check again.</td></tr>
+    <tr><td>The expression editor rejects something obviously right</td><td>It accepts <code>outputs('X')?['body/Name']</code> in some fields and <code>outputs('X')['body']['Name']</code> in others.</td><td><b>Try the other bracket style</b> before assuming the expression is wrong.</td></tr>
+    <tr><td>The Excel connector cannot see your data</td><td>The range is not formatted as a Table.</td><td>Select it, <code>Ctrl+T</code>.</td></tr>
+    <tr><td><code>ActionResponseTimedOut</code> / HTTP <code>504</code></td><td><em>Start and wait</em> in a flow the <b>agent</b> calls. ~100 seconds, and a human is slower.</td><td>Swap in <em>Create an approval</em>.</td></tr>
+    <tr><td>The approval never arrives</td><td><code>approver</code> left on <em>Dynamically fill with AI</em>.</td><td>Custom value, real address. Then read the flow's run history, not the agent's reply.</td></tr>
+    <tr><td>Two approval cards for one dropped file</td><td>Your deck-building tool has an approval gate of its own, and the agent called it despite the instruction.</td><td><b>Keep the gate in one place: leave it in this flow and make Tool 6 render-only</b>, as Stage 7 builds it. A gate the agent chooses whether to call is not a gate. Never fix it by deleting <em>this</em> flow's approval.</td></tr>
+    <tr><td>The trigger never fires</td><td>SharePoint and OneDrive triggers poll, not push, and the wait varies.</td><td>Read the run history before changing anything.</td></tr>
+    <tr><td>The approval card is empty</td><td>You used plain <em>Execute Agent</em>. Only <em>and wait</em> returns <code>body/lastResponse</code>.</td><td>Swap it.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Before you use this for real</h2>
+  <table>
+    <tr><th>Gap</th><th>The fix</th></tr>
+    <tr><td><b>Every tool runs as whoever built it</b> &mdash; anyone you share with gets your Excel, OneDrive and mailbox reach.</td>
+        <td>Decide whose credentials each tool uses, and turn on <em>Settings &rarr; Security &rarr; Authentication</em>.</td></tr>
+    <tr><td><b>Knowledge respects the labels on the source; generated output inherits none.</b></td>
+        <td>Somebody has to label the deck. Decide who before the first one leaves the building.</td></tr>
+    <tr><td><b>Nothing proves a change helped.</b></td>
+        <td><em>Evaluation</em> tab &rarr; a question set, run before and after. <b>Change one thing per run</b>, and expect the score sometimes not to move.</td></tr>
+    <tr><td><b>The agent lives in one environment with no way back.</b></td>
+        <td>It clones to disk and pushes back as files &mdash; see <a href="../presentation/tooling-pack.html">tooling-pack.html</a>.</td></tr>
+    <tr><td><b>Nobody knows whether it is used.</b></td>
+        <td>Once a month: the <em>Analytics</em> tab, session transcripts, and flow run history.</td></tr>
+  </table>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI | devops.gheware.com | Trainer: Rajesh Gheware | Fund Research Assistant v2
+</footer>
+
+<script>
+document.querySelectorAll('pre .cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.parentNode.cloneNode(true);
+    t.querySelector('.cp').remove();
+    navigator.clipboard.writeText(t.textContent.trim()).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>

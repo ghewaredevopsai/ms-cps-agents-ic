@@ -12,18 +12,36 @@ staged steps with the exact text to paste &rarr; two tests, one of which is supp
 
 | Page | What you build | Time |
 |---|---|---|
+| [`fund-research-assistant.html`](fund-research-assistant.html) | The workshop's own agent, end to end &mdash; grounded knowledge, a fixed-wording topic, six tools that fetch, compute and act, and finally a trigger that runs the whole chain when a file lands | ~90 min |
 | [`autonomous-support-agent.html`](autonomous-support-agent.html) | An agent nobody talks to — started by an email arriving, three connectors bound directly as tools, a reply sent with no human in the loop | ~35 min |
 | [`multi-agent-account-lookup.html`](multi-agent-account-lookup.html) | Three agents behind one conversation — a parent that routes, a child agent held inside it, and a separately published connected agent that queries Dataverse | ~40 min |
 
 Each page prints cleanly to A4 if you would rather work from paper
-(`autonomous-support-agent.html` is 5 pages, `multi-agent-account-lookup.html` is 6).
+(`fund-research-assistant.html` is 13 pages, `autonomous-support-agent.html` is 5,
+`multi-agent-account-lookup.html` is 6).
 
 ## How these relate to the rest of the material
 
 The demos are in [`../presentation/demo-guide.html`](../presentation/demo-guide.html),
 and they all use the **Northwind** fund anchor so the figures line up across the decks and the
-guide. These pages deliberately do **not** use that anchor — they are different jobs, on
-different data, so nothing you build here can be confused with a demo figure.
+guide.
+
+**`fund-research-assistant.html` is the one page that uses that anchor**, deliberately: it *is*
+the agent the demos build, collapsed out of eight separate demos into one sequence you can follow
+straight through at your own pace. Same figures, same instruction blocks, same expressions — so it
+never contradicts the guide, and either can be read against the other.
+
+The other two pages deliberately do **not** use the anchor — they are different jobs, on
+different data, so nothing you build there can be confused with a demo figure.
+
+The Fund Research Assistant page is the only one that covers the whole chain in build order: the four
+things you configure, then six tools doing three different jobs — two that fetch (a public API, a
+stand-in for a legacy internal system), two that compute (Excel, so no total is ever added by the
+model), two that act (a human approval gate, and the plan-to-PowerPoint hop) — and finally the trigger.
+It is a build sheet, not a discussion. Each of the six tools opens with a **node-strip diagram** of the
+flow — trigger, actions, response — followed by a per-node configuration table carrying the exact
+expression for every field, and the trigger flow gets a full diagram with both branches of its
+condition. Then paste blocks, and a **Check** list per stage.
 
 The Autonomous Support Agent covers ground the decks only name in passing:
 
