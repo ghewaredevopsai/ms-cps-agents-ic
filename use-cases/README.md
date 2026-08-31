@@ -13,11 +13,13 @@ staged steps with the exact text to paste &rarr; two tests, one of which is supp
 | Page | What you build | Time |
 |---|---|---|
 | [`fund-research-assistant.html`](fund-research-assistant.html) | The workshop's own agent, end to end &mdash; grounded knowledge, a fixed-wording topic, six tools that fetch, compute and act, and finally a trigger that runs the whole chain when a file lands | ~90 min |
+| [`render-endpoint-azure-function.html`](render-endpoint-azure-function.html) | The box behind the agent's last hop &mdash; an Azure Function in Python that turns a slide plan into a real PowerPoint file, from `func init` to a deployed, key-protected endpoint | ~45 min |
 | [`autonomous-support-agent.html`](autonomous-support-agent.html) | An agent nobody talks to — started by an email arriving, three connectors bound directly as tools, a reply sent with no human in the loop | ~35 min |
 | [`multi-agent-account-lookup.html`](multi-agent-account-lookup.html) | Three agents behind one conversation — a parent that routes, a child agent held inside it, and a separately published connected agent that queries Dataverse | ~40 min |
 
 Each page prints cleanly to A4 if you would rather work from paper
-(`fund-research-assistant.html` is 16 pages, `autonomous-support-agent.html` is 5,
+(`fund-research-assistant.html` is 17 pages, `render-endpoint-azure-function.html` is 5,
+`autonomous-support-agent.html` is 5,
 `multi-agent-account-lookup.html` is 6).
 
 ## How these relate to the rest of the material

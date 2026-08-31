@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build It Yourself &mdash; The Render Endpoint</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14.5px;line-height:1.5}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:24px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.55em}
+header .tagline{margin-top:7px;color:#bfdbfe;font-size:.96em;font-weight:600}
+header .meta{margin-top:9px;color:#c7d2e4;font-size:.87em}
+header .meta span{margin:0 7px}
+header .meta .d{color:#93c5fd;font-weight:600}
+.container{max-width:1020px;margin:16px auto;background:#fff;padding:18px 28px 26px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+section{margin-bottom:22px}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:6px;margin:0 0 12px;color:#0b2545;font-size:1.22em}
+h3{margin:16px 0 6px;color:#0b2545;font-size:1.02em}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 5px 5px 0;padding:12px 16px;color:#7f1d1d;margin-bottom:18px}
+.warn b{color:#991b1b}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #1d4ed8;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0}
+.tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid #059669;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#064e3b}
+.amber{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:10px 14px;font-size:.94em;margin:10px 0;color:#78350f}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th,td{border:1px solid #d7e0ee;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545}
+code{background:#eef2f7;padding:1px 5px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545;overflow-wrap:anywhere}
+pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-radius:5px;overflow-x:auto;font-family:Consolas,Monaco,monospace;font-size:12.6px;line-height:1.55;margin:8px 0 12px;white-space:pre-wrap}
+pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+pre .cp:hover{background:#2563eb}
+pre .cp.done{background:#059669}
+.stage{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.stage>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stage>.head .id{font-weight:700;font-size:1.02em}
+.stage>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
+.stage>.body{padding:14px 18px}
+.b{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.b.t{background:#f59e0b;color:#3f2d02}
+.pv{background:#0b2545;color:#dbeafe;border-radius:5px;padding:8px 13px;margin:0 0 12px;font-size:.93em}
+.pv b{color:#fff}
+.opt{background:#f7f9fe;border:1px dashed #94a9c9;border-radius:6px;padding:10px 14px;margin:10px 0;font-size:.94em}
+.opt .h{font-weight:700;color:#0b2545}
+.goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.goal b{color:#0b2545}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
+.k.r{color:#dc2626}
+td.no{background:#fef2f2}.k.g{color:#047857}
+ol.steps{counter-reset:s;list-style:none;padding-left:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:26px;position:relative}
+.chk li::before{content:"\2610";position:absolute;left:0;top:-1px;font-size:17px;color:#1d4ed8}
+.flow{background:#f7f9fe;border:1px solid #d7e0ee;border-radius:6px;padding:12px 14px;margin:10px 0}
+.flow svg{display:block;width:100%;height:auto}
+footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
+footer a{color:#93c5fd;text-decoration:none}
+@media print{
+  @page{size:A4;margin:11mm}
+  body{background:#fff;font-size:10.5px}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
+  pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;font-size:10px;line-height:1.45;padding:9px 11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  pre .cp{display:none}
+  .stage,.warn,.note,.tip,.amber,table,.flow{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .stage{page-break-inside:auto}
+  .stage>.head{page-break-after:avoid}
+  pre,.note,.tip,.amber,.warn,ol.steps>li,tr{page-break-inside:avoid}
+  h2,h3,.k{page-break-after:avoid}
+  footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Render Endpoint</h1>
+  <div class="tagline">Slide plan in, PowerPoint out &mdash; an Azure Function in Python</div>
+  <div class="meta">
+    <span class="d">~45 minutes</span> |
+    <span>Python 3.11</span> |
+    <span>One dependency</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="note">
+  <b>This is the box behind Tool 6.</b> It is the last hop of
+  <a href="fund-research-assistant.html">the Fund Research Assistant build</a> &mdash; Stage 7's <code>Build Review Deck</code> and Stage 8's trigger flow both
+  <code>POST</code> a slide plan here and get a <code>.pptx</code> back. Nothing on this page is AI: it is ordinary application code, and the whole point is that
+  <b>the interface is the plan</b>, so your team can replace this with whatever generator you already own.
+</div>
+
+<section>
+  <h2>What you are building</h2>
+  <div class="goal">
+    <b>An HTTP endpoint that turns JSON into a PowerPoint file.</b> One route, one <code>POST</code>, raw <code>.pptx</code> bytes in the response body.
+    It has no state, no database and no knowledge of Copilot Studio &mdash; which is exactly why the agent can be pointed at it, or at something else, without either side caring.
+  </div>
+
+  <div class="flow">
+<svg viewBox="0 0 880 250" role="img" aria-label="The agent or the trigger flow posts a slide plan to the function, which returns pptx bytes that the flow writes to OneDrive">
+  <defs><marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/></marker></defs>
+
+  <rect x="0" y="14" width="196" height="58" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="98" y="34" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">POWER AUTOMATE</text>
+  <text x="98" y="52" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Build Review Deck</text>
+  <text x="98" y="66" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#475569">or Factsheet Arrived</text>
+
+  <line x1="199" y1="43" x2="243" y2="43" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ax)"/>
+  <text x="221" y="34" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#475569">POST</text>
+
+  <rect x="247" y="14" width="196" height="58" rx="6" style="fill:#ffffff;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="345" y="34" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.7px">REQUEST BODY</text>
+  <text x="345" y="53" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">the slide plan, as JSON</text>
+  <text x="345" y="67" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#475569">exactly what the agent produced</text>
+
+  <line x1="446" y1="43" x2="490" y2="43" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ax)"/>
+
+  <rect x="494" y="14" width="196" height="58" rx="6" style="fill:#0b2545"/>
+  <text x="592" y="34" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#bfdbfe;letter-spacing:.7px">AZURE FUNCTION &#183; PYTHON</text>
+  <text x="592" y="53" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#ffffff">POST /api/render</text>
+  <text x="592" y="67" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#93c5fd">python-pptx does the work</text>
+
+  <line x1="693" y1="43" x2="737" y2="43" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ax)"/>
+
+  <rect x="741" y="14" width="139" height="58" rx="6" style="fill:#ecfdf5;stroke:#a7f3d0;stroke-width:1.4"/>
+  <text x="810" y="34" text-anchor="middle" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.7px">RESPONSE</text>
+  <text x="810" y="53" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">.pptx bytes</text>
+  <text x="810" y="67" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#475569">nothing else</text>
+
+  <line x1="810" y1="74" x2="810" y2="98" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ax)"/>
+  <rect x="600" y="100" width="280" height="44" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="740" y="119" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Create file &rarr; OneDrive</text>
+  <text x="740" y="134" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#475569">content = the HTTP body, verbatim</text>
+
+  <rect x="0" y="166" width="880" height="70" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.3"/>
+  <text x="16" y="186" style="font:700 9.5px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.7px">THE WHOLE CONTRACT &#8212; AND THE REASON IT IS REPLACEABLE</text>
+  <text x="16" y="206" style="font:400 12px 'Segoe UI',sans-serif;fill:#0b2545">In: a JSON slide plan. Out: the raw bytes of a PowerPoint file. No callback, no polling, no state, no auth handshake beyond a key.</text>
+  <text x="16" y="224" style="font:400 12px 'Segoe UI',sans-serif;fill:#0b2545">Anything that speaks HTTP and can honour those two sentences can take this box's place &#8212; including the generator you already own.</text>
+</svg>
+  </div>
+</section>
+
+<section>
+  <h2>Before you start</h2>
+  <ul class="chk">
+    <li>An <strong>Azure subscription</strong> you can create resources in. The Consumption plan's free grant covers this comfortably.</li>
+    <li><strong>Python 3.11</strong> locally &mdash; match the runtime you will deploy to, or you will debug a version difference instead of your code.</li>
+    <li><strong>Azure CLI</strong> (<code>az</code>) and <strong>Azure Functions Core Tools v4</strong> (<code>func</code>).</li>
+    <li><code><a href="../demo-assets/plan-to-pptx.py">plan-to-pptx.py</a></code> and <code><a href="../demo-assets/slide-plan-sample.json">slide-plan-sample.json</a></code> from the demo assets.</li>
+  </ul>
+  <div class="tip">
+    <b>You do not need any of this to finish the agent build.</b> Stage 7 of the agent page gives two offline routes &mdash; run <code>plan-to-pptx.py</code> by hand, or open <code>deck-renderer.html</code> in a browser.
+    Host it only when you want the chain to run with <em>nobody at the keyboard</em>, which is what Stage 8 is for.
+  </div>
+</section>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 1 <small>Scaffold it locally</small></span><span class="b t">~8 min</span></div>
+  <div class="body">
+    <div class="pv"><b>What this proves:</b> the whole thing runs on your laptop first. Deploying is the last step, not the first.</div>
+    <ol class="steps">
+      <li>Create the project. The <strong>v2 programming model</strong> is the current one &mdash; a single <code>function_app.py</code> with decorators, no per-function folders or <code>function.json</code>:
+        <pre><button class="cp">Copy</button>mkdir plan-to-pptx &amp;&amp; cd plan-to-pptx
+func init . --python --model V2</pre>
+      </li>
+      <li>Declare the dependencies. <strong>Two lines</strong> &mdash; that is the entire supply chain:
+        <pre><button class="cp">Copy</button>azure-functions
+python-pptx</pre>
+      </li>
+      <li>Copy <code>plan-to-pptx.py</code> into the project folder, beside <code>function_app.py</code>. You are going to <em>import</em> it, not rewrite it &mdash; its <code>build(plan, out)</code> already does the work, and keeping one renderer means the hosted and offline routes cannot drift apart.</li>
+      <li>Create the virtual environment and install:
+        <pre><button class="cp">Copy</button>python3 -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt</pre>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 2 <small>The handler &mdash; about thirty lines</small></span><span class="b t">~10 min</span></div>
+  <div class="body">
+    <div class="pv"><b>What this proves:</b> the endpoint is a thin wrapper. All the real work already existed as a script.</div>
+    <p>Replace <code>function_app.py</code> with this:</p>
+    <pre><button class="cp">Copy</button>import io
+import json
+import logging
+
+import azure.functions as func
+
+from plan_to_pptx import build          # the script you copied in, unchanged
+
+app = func.FunctionApp()
+
+PPTX = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+
+
+@app.route(route="render", methods=["POST"], auth_level=func.AuthLevel.FUNCTION)
+def render(req: func.HttpRequest) -&gt; func.HttpResponse:
+    try:
+        plan = req.get_json()
+    except ValueError:
+        return func.HttpResponse("body must be JSON", status_code=400)
+
+    if not isinstance(plan, dict) or "slides" not in plan:
+        return func.HttpResponse("expected a slide plan with a 'slides' list", status_code=400)
+
+    buf = io.BytesIO()
+    try:
+        count = build(plan, buf)
+    except Exception:
+        logging.exception("render failed")
+        return func.HttpResponse("could not render this plan", status_code=500)
+
+    logging.info("rendered %d slides", count)
+    return func.HttpResponse(buf.getvalue(), mimetype=PPTX, status_code=200)</pre>
+    <div class="warn">
+      <b>Do not add a <code>Content-Disposition</code> header with the deck's title in it.</b> This is the bug that cost a live run.
+      HTTP headers are <strong>Latin-1 only</strong>; the agent titled a deck with an <b>em-dash</b>, the header could not encode it, and the function returned <code>500</code> &mdash;
+      while every local test passed, because every local test used the tidy ASCII sample. The flow names the file anyway, so the header buys nothing.
+      If you want one, normalise first: <code>title.encode('ascii', 'ignore').decode()</code>.
+    </div>
+    <div class="note">
+      <b>Two small things that matter.</b> <code>plan-to-pptx.py</code> must be imported as <code>plan_to_pptx</code> &mdash; rename the file or add a shim, because a hyphen is not valid in a module name.
+      And <code>build()</code> takes a path in the script; <code>prs.save()</code> accepts a file-like object just as happily, which is why <code>io.BytesIO()</code> works without touching the renderer.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 3 <small>Run it on your laptop and prove it works</small></span><span class="b t">~7 min</span></div>
+  <div class="body">
+    <div class="pv"><b>What this proves:</b> if it fails after deployment, you will know it is the deployment and not the code.</div>
+    <ol class="steps">
+      <li>Start the runtime. It prints the local route:
+        <pre><button class="cp">Copy</button>func start</pre>
+      </li>
+      <li>Post the sample plan and keep what comes back:
+        <pre><button class="cp">Copy</button>curl -s -X POST http://localhost:7071/api/render \
+     -H "Content-Type: application/json" \
+     --data @slide-plan-sample.json \
+     -o local.pptx
+file local.pptx</pre>
+      </li>
+      <li><code>file</code> should say a Microsoft PowerPoint / OOXML document. <strong>Open it.</strong> A file of the right size that PowerPoint refuses is still a failure.</li>
+      <li><strong>Then post something that is not the tidy sample.</strong> Edit <code>deck_title</code> in the JSON to contain an em-dash and a rupee sign and post it again. This is the test that would have caught the bug above.</li>
+    </ol>
+    <div class="k g">Check</div>
+    <ul>
+      <li><code>local.pptx</code> opens, seven slides, a native chart and a real table.</li>
+      <li>Every figure carries its source line, and the closing slide lists whatever was in <code>unresolved</code>.</li>
+      <li>Post <code>{}</code> and you get <b>400</b>, not a stack trace. Post malformed JSON and you get <b>400</b> too.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 4 <small>Create the Azure resources</small></span><span class="b t">~8 min</span></div>
+  <div class="body">
+    <div class="pv"><b>What this proves:</b> three commands, and the names are the only decisions.</div>
+    <pre><button class="cp">Copy</button>LOC=centralindia
+RG=rg-render-endpoint
+STG=strender$RANDOM                 # storage names: lowercase letters and digits, 3-24 chars, globally unique
+APP=fn-render-$RANDOM               # the function app name becomes the hostname, so it is global too
+
+az group create -n $RG -l $LOC
+
+az storage account create -n $STG -g $RG -l $LOC --sku Standard_LRS
+
+az functionapp create -g $RG -n $APP \
+  --storage-account $STG \
+  --consumption-plan-location $LOC \
+  --runtime python --runtime-version 3.11 --functions-version 4 \
+  --os-type Linux</pre>
+    <div class="note">
+      <b>Both names are globally unique</b>, so a plain <code>fn-render</code> will collide with somebody else's. The <code>$RANDOM</code> suffix is not decoration.
+      Keep the whole thing in one resource group and teardown is a single command &mdash; see the end of this page.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 5 <small>Deploy, and get the key</small></span><span class="b t">~7 min</span></div>
+  <div class="body">
+    <div class="pv"><b>What this proves:</b> the same bytes that worked locally now answer from the internet &mdash; and only to a caller holding the key.</div>
+    <ol class="steps">
+      <li>Publish. Core Tools builds the dependencies remotely, which is what you want &mdash; <code>python-pptx</code> then matches the host's platform rather than your laptop's:
+        <pre><button class="cp">Copy</button>func azure functionapp publish $APP --build remote</pre>
+      </li>
+      <li>Read the function key back. <strong>Treat what this prints as a credential</strong> &mdash; it is the only thing standing between your endpoint and the open internet:
+        <pre><button class="cp">Copy</button>az functionapp function keys list -g $RG -n $APP --function-name render -o tsv</pre>
+        <p style="margin:6px 0 0">If that returns nothing, the host key works too: <code>az functionapp keys list -g $RG -n $APP --query functionKeys -o tsv</code>.</p>
+      </li>
+      <li>Test the deployed endpoint exactly as you tested the local one:
+        <pre><button class="cp">Copy</button>curl -s -X POST "https://$APP.azurewebsites.net/api/render" \
+     -H "Content-Type: application/json" \
+     -H "x-functions-key: &lt;the key&gt;" \
+     --data @slide-plan-sample.json \
+     -o hosted.pptx
+file hosted.pptx</pre>
+      </li>
+      <li><strong>Call it once without the key</strong> and confirm you get <code>401</code>. An endpoint you have not tried to break is an endpoint you are guessing about.</li>
+    </ol>
+    <div class="amber">
+      <b>The first call after idle will be slow.</b> On the Consumption plan the app scales to zero, so a cold start of several seconds is normal and is <em>not</em> a fault.
+      It matters here: a flow called by an agent has roughly <b>100 seconds</b> in total, and a cold start eats into it. If that becomes tight, warm it or move off Consumption &mdash; do not shorten the plan.
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="head"><span class="id">Stage 6 <small>Point the flow at it</small></span><span class="b t">~5 min</span></div>
+  <div class="body">
+    <div class="pv"><b>What this proves:</b> the agent side needs one URL and one header, and nothing about the renderer leaks into it.</div>
+    <p>Back in <a href="fund-research-assistant.html">the agent build</a>, <strong>Stage 7, Tool 6</strong> &mdash; the <code>HTTP</code> action takes:</p>
+    <table>
+      <tr><th style="width:22%">Field</th><th>Value</th></tr>
+      <tr><td>Method</td><td><code>POST</code></td></tr>
+      <tr><td>URI</td><td><code>https://&lt;your-app&gt;.azurewebsites.net/api/render</code></td></tr>
+      <tr><td>Headers</td><td><code>Content-Type</code> = <code>application/json</code><br><code>x-functions-key</code> = the environment variable, <b>not the literal</b> &mdash; the recipe is on the agent page</td></tr>
+      <tr><td>Body</td><td><code>@json(triggerBody()?['text'])</code></td></tr>
+    </table>
+    <div class="note">
+      Stage 8's trigger flow posts the same way, except its body is the agent's reply sliced between the two markers. <b>Neither flow knows anything about Python</b>, which is the property worth keeping.
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2>When it does not work</h2>
+  <table>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+    <tr><td><code>500</code> on the agent's plan, <code>200</code> on the sample</td><td>Non-ASCII in a string you put into a header. The agent writes em-dashes; your fixture does not.</td><td>Drop the <code>Content-Disposition</code> header, or normalise the value. <b>Always test with the agent's own output.</b></td></tr>
+    <tr><td><code>ModuleNotFoundError: plan_to_pptx</code></td><td>The file is still called <code>plan-to-pptx.py</code>. A hyphen is not valid in a module name.</td><td>Rename it to <code>plan_to_pptx.py</code>.</td></tr>
+    <tr><td>Works locally, <code>500</code> once deployed</td><td><code>python-pptx</code> was built for your laptop's platform.</td><td>Republish with <code>--build remote</code>.</td></tr>
+    <tr><td><code>401</code> from the flow</td><td>The <code>x-functions-key</code> header resolved to null &mdash; usually the environment-variable name is wrong.</td><td>It is <em>display name, space, schema name in brackets</em>, exactly. Test the URL with <code>curl</code> and the literal key first to prove the endpoint is fine.</td></tr>
+    <tr><td>The flow saves a file that will not open</td><td><em>Create file</em> is writing the wrong thing &mdash; often an error page, saved as <code>.pptx</code>.</td><td>Open the flow run and read the HTTP action's output. A renderer that returns JSON on error will have that JSON saved as a deck.</td></tr>
+    <tr><td>Timeouts under the agent</td><td>Cold start plus render time against the ~100-second agent-to-flow ceiling.</td><td>Warm the app, or move the render behind the approval as Stage 8 does &mdash; nothing is waiting on it there.</td></tr>
+    <tr><td>Deployment succeeds, route 404s</td><td>The v2 model needs <code>function_app.py</code> at the project root, and the route name must match.</td><td><code>func azure functionapp list-functions $APP</code> &mdash; if it lists nothing, the file was not found.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Before you use this for real</h2>
+  <table>
+    <tr><th>Gap</th><th>The fix</th></tr>
+    <tr><td><b>A function key is a shared secret in a header</b>, and everyone who can open the flow can read it.</td><td>A Key Vault-backed <em>Secret</em> environment variable, or put the endpoint behind Entra ID and call it with a managed identity.</td></tr>
+    <tr><td><b>Anyone with the key can post anything.</b> There is no size limit and no schema validation beyond one key check.</td><td>Validate the plan against the schema before rendering, and cap the request body.</td></tr>
+    <tr><td><b>It is open to the internet.</b></td><td>VNet integration and a private endpoint, or an IP allow-list, if the plans carry anything real.</td></tr>
+    <tr><td><b>Nothing tells you when it fails</b> except a flow run somebody happens to read.</td><td>Turn on Application Insights and alert on the failure rate. It is a checkbox at creation time and a retrofit afterwards.</td></tr>
+    <tr><td><b>The renderer is a copy.</b></td><td>Keep one <code>plan_to_pptx.py</code> in source control and deploy it, so the hosted and offline routes cannot diverge.</td></tr>
+  </table>
+  <div class="tip">
+    <b>Tear it all down</b> when you are finished &mdash; one command, because everything went into one resource group:
+    <pre><button class="cp">Copy</button>az group delete -n $RG --yes --no-wait</pre>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI | devops.gheware.com | Trainer: Rajesh Gheware | The Render Endpoint v1
+</footer>
+
+<script>
+document.querySelectorAll('pre .cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.parentNode.cloneNode(true);
+    t.querySelector('.cp').remove();
+    navigator.clipboard.writeText(t.textContent.trim()).then(function(){
+      b.textContent='Copied';b.classList.add('done');
+      setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>

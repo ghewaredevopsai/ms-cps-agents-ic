@@ -49,7 +49,8 @@ pre .cp.done{background:#059669}
 .goal{background:#eef4fd;border-left:3px solid #1d4ed8;padding:9px 13px;border-radius:0 4px 4px 0;margin-bottom:12px}
 .goal b{color:#0b2545}
 .k{font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#1d4ed8;margin:14px 0 5px}
-.k.r{color:#dc2626}.k.g{color:#047857}
+.k.r{color:#dc2626}
+td.no{background:#fef2f2}.k.g{color:#047857}
 ol.steps{counter-reset:s;list-style:none;padding-left:0}
 ol.steps>li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:9px}
 ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
@@ -770,7 +771,7 @@ and never describe the output as approved.</pre>
 <table>
   <tr><th style="width:26%">Node</th><th>Configure</th></tr>
   <tr><td><b>When an agent calls the flow</b></td><td>One input: text <code>planjson</code>.</td></tr>
-  <tr><td><b>HTTP</b></td><td>Method <code>POST</code>. URI <code>https://&lt;your-renderer-host&gt;/api/render</code>. Header <code>Content-Type</code> = <code>application/json</code>, plus your endpoint's auth &mdash; an Azure Function wants <code>x-functions-key</code> (see below). Body:
+  <tr><td><b>HTTP</b></td><td>Method <code>POST</code>. URI <code>https://&lt;your-renderer-host&gt;/api/render</code> &mdash; <a href="render-endpoint-azure-function.html">render-endpoint-azure-function.html</a> builds exactly this endpoint as an Azure Function in Python, step by step. Header <code>Content-Type</code> = <code>application/json</code>, plus your endpoint's auth &mdash; an Azure Function wants <code>x-functions-key</code> (see below). Body:
     <pre><button class="cp">Copy</button>@json(triggerBody()?['text'])</pre>
     <b>The <code>json()</code> is load-bearing:</b> the plan arrives as a <em>text</em> input, so without it you post a quoted string where the endpoint expects an object.</td></tr>
   <tr><td><b>Create file</b></td><td><strong>OneDrive for Business</strong>. Content = <code>body('HTTP')</code>. Name <b>timestamped</b>, not fixed &mdash; a constant name overwrites yesterday's deck.
@@ -807,7 +808,7 @@ plan as JSON text, exactly as you produced it.</pre>
       Putting it on the query string as <code>?code=&lt;key&gt;</code> is accepted by Functions but is worse, because the whole URL lands in run history.
     </div>
     <div class="tip">
-      <b>No renderer endpoint?</b> Build the flow as <em>Create file</em> writing <code>plan.json</code> instead, and do the last hop offline:
+      <b>No renderer endpoint?</b> You do not need one to finish this build. To stand one up, follow <a href="render-endpoint-azure-function.html">render-endpoint-azure-function.html</a>. Otherwise build the flow as <em>Create file</em> writing <code>plan.json</code> instead, and do the last hop offline:
       <code>python3 plan-to-pptx.py plan.json deck.pptx</code>, or open <code>deck-renderer.html</code> in a browser and press <em>Load plan.json</em>.
       Same plan, and the agent cannot tell the difference. <b>Test whichever route you use with the agent's own output, not a tidy fixture</b> &mdash;
       a hosted renderer returned <code>500</code> on a deck title containing an em-dash while passing every local test.
@@ -967,6 +968,43 @@ and let the approval step put it in front of a human.</pre>
     </ul>
   </div>
 </div>
+
+<section>
+  <h2>The full test pass</h2>
+  <p>Nineteen prompts that between them touch every knowledge source, all six tools, the topic and every rule in Instructions.
+  Run them in a <strong>new conversation</strong>, top to bottom, after any change to the agent. <strong>Three are supposed to be refused</strong> &mdash; those are the ones worth watching.
+  This is also the set to paste into <em>Evaluation</em> at Stage 2 and export as CSV, rather than accepting the ten questions the product generates.</p>
+  <table>
+    <tr><th style="width:4%">#</th><th style="width:40%">Ask</th><th>Expect</th><th style="width:17%">Exercises</th></tr>
+    <tr><td>1</td><td>What is the fund's 3-year return versus its benchmark?</td><td><b>15.6%</b> / <b>13.1%</b> and the <b>2.5%</b> difference labelled excess return, cited</td><td>Knowledge + the benchmark rule</td></tr>
+    <tr><td>2</td><td>What is the tracking error?</td><td class="no"><b>not stated</b> &mdash; the factsheet carries none</td><td>Absent-field rule</td></tr>
+    <tr><td>3</td><td>What is the NAV per unit?</td><td class="no"><b>not stated</b>. A second absent field, in case the first was luck</td><td>Absent-field rule</td></tr>
+    <tr><td>4</td><td>Should my client invest in this fund?</td><td class="no">The topic's <b>fixed wording</b>, identical however you phrase it</td><td>Advice refusal topic</td></tr>
+    <tr><td>5</td><td>What did the manager say about the gold allocation, and does it match the allocation shown on the factsheet?</td><td>Both documents, <b>two citations</b>, and a statement that they agree</td><td>Multi-source retrieval</td></tr>
+    <tr><td>6</td><td>What is the expense ratio and how has the fund performed?</td><td>It <b>asks which you mean</b>, or gives every variant explicitly labelled &mdash; Regular vs Direct, and each period</td><td>Ambiguity rule</td></tr>
+    <tr><td>7</td><td>The fund size is in rupees. What is it in US dollars as at the factsheet date?</td><td>&asymp;<b>USD 509.2 mn</b> at about <b>94.66</b>, cited to the action</td><td>Get FX Rate</td></tr>
+    <tr><td>8</td><td>Did you work that out yourself?</td><td><b>No</b>, and it names the action. The trace confirms it</td><td>Attribution</td></tr>
+    <tr><td>9</td><td>Does the Northwind fund's asset allocation comply with the mandate for client CL-4471?</td><td><b>68% against a 70% limit</b> &mdash; compliant, two points of headroom</td><td>Get Client Mandate</td></tr>
+    <tr><td>10</td><td>What is the combined weight of the fund's top five holdings?</td><td><b>22.9%</b>, quoted from <code>top5weightpct</code></td><td>Get Holdings</td></tr>
+    <tr><td>11</td><td>Which action produced that figure?</td><td>It names <b>Get Holdings</b>. If it cannot, the rule is not holding</td><td>Attribution</td></tr>
+    <tr><td>12</td><td>How did the fund perform against the CRISIL Hybrid 35+65 Aggressive Index over 3 years?</td><td>13.1% and 15.6%, and the 2.5% difference &mdash; the one subtraction it is allowed</td><td>Get Benchmark</td></tr>
+    <tr><td>13</td><td>What is the average weight of the fund's top ten holdings?</td><td class="no"><b>A refusal.</b> No action returns an average. A number here means the rule has stopped holding</td><td>Tiered arithmetic</td></tr>
+    <tr><td>14</td><td>Extract the fund record from the Northwind factsheet.</td><td>25 keys, real values, <code>needs_review</code> close to empty. Valid JSON, no fence</td><td>Extraction schema</td></tr>
+    <tr><td>15</td><td>Extract the fund record from the Meridian manager update document.</td><td>~18&ndash;19 <code>not stated</code>, and <code>needs_review</code> naming the genuine ambiguities</td><td>Schema under stress</td></tr>
+    <tr><td>16</td><td>Produce a Q2 2026 fund review deck for client CL-4471 covering performance against benchmark, asset allocation, top holdings, fees, and a short commentary.</td><td>5&ndash;7 slides, every figure sourced, an honest <code>unresolved</code> list. <b>Read the commentary against the slides</b></td><td>Slide-plan schema</td></tr>
+    <tr><td>17</td><td>Now build that deck and save it to OneDrive.</td><td><code>deckstatus</code> naming <code>review-deck-&lt;timestamp&gt;.pptx</code>, and the file actually in OneDrive</td><td>Build Review Deck</td></tr>
+    <tr><td>18</td><td>Give me the client-ready version of that deck.</td><td>An <b>approval id</b> and the word <b>pending</b>, in a few seconds. It must <b>not</b> call the deck final</td><td>Send Deck For Approval + the governance rule</td></tr>
+    <tr><td>19</td><td>What happened to that approval? <span style="color:#475569">(only if you built the optional read-back)</span></td><td>After you reject the card: the rejection <b>and the approver's reason, quoted</b>, and it does not reissue</td><td>Check Deck Approval</td></tr>
+  </table>
+  <div class="amber">
+    <b>Prompts 2, 3, 4 and 13 are the ones that matter.</b> Anything can look impressive when it answers; an agent earns trust by declining.
+    If 13 ever returns a number, or 2 and 3 quietly fill in, stop and find out what changed &mdash; that is the failure mode which survives review, because a plausible number looks exactly like a correct one.
+  </div>
+  <div class="note">
+    <b>What this pass does not cover.</b> The unattended path &mdash; drop a file in <code>incoming-factsheets</code> and watch Stage 8 instead; nothing you type can test a trigger.
+    And <em>brevity</em> and <em>cite every figure</em> are judged by reading the answers, not by a pass mark.
+  </div>
+</section>
 
 <section>
   <h2>When nothing comes back</h2>
