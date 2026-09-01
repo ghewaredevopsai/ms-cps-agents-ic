@@ -15,12 +15,12 @@ staged steps with the exact text to paste &rarr; two tests, one of which is supp
 | [`fund-research-assistant.html`](fund-research-assistant.html) | The workshop's own agent, end to end &mdash; grounded knowledge, a fixed-wording topic, six tools that fetch, compute and act, and finally a trigger that runs the whole chain when a file lands | ~90 min |
 | [`render-endpoint-azure-function.html`](render-endpoint-azure-function.html) | The box behind the agent's last hop &mdash; an Azure Function in Python that turns a slide plan into a real PowerPoint file, from `func init` to a deployed, key-protected endpoint | ~45 min |
 | [`autonomous-support-agent.html`](autonomous-support-agent.html) | An agent nobody talks to — started by an email arriving, three connectors bound directly as tools, a reply sent with no human in the loop | ~35 min |
-| [`multi-agent-account-lookup.html`](multi-agent-account-lookup.html) | Three agents behind one conversation — a parent that routes, a child agent held inside it, and a separately published connected agent that queries Dataverse | ~40 min |
+| [`multi-agent-account-lookup.html`](multi-agent-account-lookup.html) | One parent behind one conversation — a topic that sets a global variable, two child agents gated on it by condition, and an already-built connected agent reached by description | ~40 min |
 
 Each page prints cleanly to A4 if you would rather work from paper
 (`fund-research-assistant.html` is 17 pages, `render-endpoint-azure-function.html` is 5,
 `autonomous-support-agent.html` is 5,
-`multi-agent-account-lookup.html` is 6).
+`multi-agent-account-lookup.html` is 3).
 
 ## How these relate to the rest of the material
 
@@ -49,18 +49,25 @@ The Autonomous Support Agent covers ground the decks only name in passing:
   you can build in an afternoon;
 - what it costs to have **no human in the loop**, stated as six specific gaps rather than a warning.
 
-The Multi-Agent page covers the other thing the decks only name in passing — **more than one agent**:
+The Multi-Agent page covers the other thing the decks only name in passing — **more than one agent**.
+It builds **one** agent, the `Sales Associate Assistant` parent, and treats the account-lookup agent it
+delegates to as a prerequisite that already exists — so the whole page stays on the parent:
 
 - the difference between a **child agent** (lives inside the parent, published with it) and a
   **connected agent** (its own agent, published separately, reusable by many parents);
-- **orchestration as a routing decision** made at run time from the descriptions you wrote — which is
-  why the page makes you test that the *wrong* agent does not answer;
-- the **Dataverse prerequisites** nobody mentions until the agent returns nothing: search indexing,
-  and the fact that a Quick Find view's *Find by* columns — not its view columns — decide what is searchable.
+- **two kinds of routing in one agent** — the two product child agents gated by a *condition* on
+  `Global.Market`, which is deterministic, and the connected agent chosen by the *orchestrator* from a
+  description, which is not. They fail differently and are debugged from opposite ends, which is the
+  page's real subject;
+- a **global variable set by a topic** the orchestrator chooses from its description, with the
+  *Conversation Start* redirect kept as a second way in rather than the mechanism &mdash; redirect-only
+  works in the Test pane and fails silently in Microsoft 365 Copilot.
 
-> ⚠️ **If you hit `HTTP 403 — connectorAuthorizationError`, it is almost certainly consent, not the
-> connection.** An agent must be granted permission to use a connection, and tools that arrive by
-> importing a solution never raise that prompt. See *When nothing comes back* on the page.
+> **Building the connected agent is a separate job** and deliberately out of scope here — it carries
+> Dataverse search indexing, Quick Find *Find by* columns and a connection-consent trap that would bury
+> the routing lesson. The page links
+> [microsoft/mcs-labs → `mcs-multi-agent`](https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-multi-agent)
+> for it, which is also listed in `../resources.txt`.
 
 ## Use synthetic data
 

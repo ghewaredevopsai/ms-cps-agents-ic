@@ -1,645 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI Agents for Investment Consulting — Hands-on Microsoft Copilot Studio</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f3f6fb;
-      color: #1f2937;
-      font-size: 14px;
-      line-height: 1.4;
-    }
-    a { color: #1d4ed8; }
-    header {
-      background: linear-gradient(135deg, #0b2545 0%, #123a6b 60%, #1d4ed8 140%);
-      color: #fff;
-      padding: 22px 20px;
-      text-align: center;
-      border-bottom: 3px solid #f59e0b;
-    }
-    header h1 { margin: 0; font-size: 1.5em; }
-    header .tagline { margin-top: 6px; color: #bfdbfe; font-size: 0.95em; font-weight: 600; }
-    header .client { margin-top: 7px; font-size: 0.86em; color: #93c5fd; }
-    header .meta { margin-top: 8px; color: #c7d2e4; font-size: 0.88em; }
-    header .meta span { margin: 0 7px; }
-    header .meta .duration { color: #93c5fd; font-weight: 600; }
-    header .meta .level { color: #fbbf24; font-weight: 600; }
-    .container {
-      max-width: 1000px;
-      margin: 15px auto;
-      background: #fff;
-      padding: 15px 25px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    section { margin-bottom: 15px; }
-    section h2 {
-      border-bottom: 2px solid #1d4ed8;
-      padding-bottom: 5px;
-      margin: 0 0 10px 0;
-      color: #0b2545;
-      font-size: 1.2em;
-    }
-    .overview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .overview-grid.two { grid-template-columns: 1fr 1fr; }
-    .overview-box {
-      background: #eef4fd;
-      padding: 10px 12px;
-      border-radius: 4px;
-      border-left: 3px solid #1d4ed8;
-    }
-    .overview-box h4 { margin: 0 0 5px 0; font-size: 0.95em; color: #0b2545; }
-    .overview-box ul { margin: 0; padding-left: 18px; font-size: 0.88em; }
-    .overview-box li { margin-bottom: 2px; }
-    .overview-box.warn { background: #fef6e7; border-left-color: #d97706; }
-    .overview-box.warn h4 { color: #92400e; }
-    .roi {
-      background: #0b2545;
-      color: #fff;
-      border-left: 4px solid #f59e0b;
-      border-radius: 4px;
-      padding: 10px 14px;
-      font-size: 0.9em;
-      margin-top: 10px;
-    }
-    .roi strong { color: #fbbf24; }
-    .day-header {
-      background: linear-gradient(135deg, #0b2545 0%, #1d4ed8 150%);
-      color: #fff;
-      padding: 8px 12px;
-      margin: 15px 0 10px 0;
-      border-radius: 4px;
-      font-size: 1.02em;
-      font-weight: 600;
-      border-left: 4px solid #f59e0b;
-    }
-    .day-header .goal { display: block; font-weight: 400; font-size: 0.82em; color: #bfdbfe; margin-top: 3px; }
-    .modules-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .module {
-      background: #f7f9fe;
-      padding: 8px 10px;
-      border-left: 3px solid #1d4ed8;
-      border-radius: 0 4px 4px 0;
-      font-size: 0.85em;
-    }
-    .module.full { grid-column: 1 / -1; }
-    .module h4 { margin: 0 0 5px 0; font-size: 0.95em; color: #0b2545; }
-    .module h4 .time { float: right; font-weight: 400; font-size: 0.85em; color: #64748b; }
-    .module ul { margin: 0; padding-left: 16px; }
-    .module li { margin-bottom: 1px; }
-    .module .demo {
-      display: block;
-      margin-top: 6px;
-      padding: 5px 8px;
-      background: #fffbeb;
-      border-left: 3px solid #f59e0b;
-      border-radius: 0 3px 3px 0;
-      color: #78350f;
-      font-size: 0.97em;
-    }
-    .badge {
-      display: inline-block;
-      padding: 1px 6px;
-      border-radius: 10px;
-      font-size: 0.7em;
-      margin-left: 5px;
-      vertical-align: middle;
-    }
-    .core-badge { background: #1d4ed8; color: #fff; }
-    .key-badge { background: #cf222e; color: #fff; }
-    .gap-badge { background: #047857; color: #fff; }
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-    .info-box h3 {
-      margin: 0 0 8px 0;
-      font-size: 1em;
-      color: #0b2545;
-      border-bottom: 1px solid #cbd5e1;
-      padding-bottom: 4px;
-    }
-    .info-box ul { margin: 0; padding-left: 18px; font-size: 0.85em; }
-    .info-box li { margin-bottom: 3px; }
-    .two-col-list { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 20px; }
-    .two-col-list li { margin-bottom: 2px; }
-    .capstone {
-      background: #fffbeb;
-      border: 1px solid #fbbf24;
-      border-left: 4px solid #f59e0b;
-      border-radius: 4px;
-      padding: 10px 14px;
-      font-size: 0.9em;
-    }
-    .capstone ul { margin: 6px 0 0 0; padding-left: 18px; }
-    .note {
-      background: #eff6ff;
-      border: 1px solid #93c5fd;
-      border-left: 4px solid #1d4ed8;
-      border-radius: 4px;
-      padding: 8px 12px;
-      font-size: 0.85em;
-      margin-top: 8px;
-    }
-    table.cover { width: 100%; border-collapse: collapse; font-size: 0.82em; }
-    table.cover th, table.cover td { border: 1px solid #d7e0ee; padding: 5px 8px; text-align: left; vertical-align: top; }
-    table.cover th { background: #eef4fd; color: #0b2545; }
-    table.cover td.where { white-space: nowrap; color: #1d4ed8; font-weight: 600; }
-    .agenda { font-size: 0.85em; margin: 0; padding-left: 18px; }
-    .agenda li { margin-bottom: 2px; }
-    footer {
-      background: #0b2545;
-      color: #fff;
-      text-align: center;
-      padding: 14px;
-      font-size: 0.85em;
-    }
-    footer a { color: #93c5fd; text-decoration: none; }
-
-    @media print {
-      @page { size: A4; margin: 10mm; }
-      body { font-size: 11px; background: #fff; }
-      header { padding: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      header h1 { font-size: 1.3em; }
-      .container { box-shadow: none; padding: 10px 15px; margin: 10px auto; }
-      section { margin-bottom: 10px; }
-      section h2 { font-size: 1.1em; margin-bottom: 8px; }
-      .day-header { padding: 6px 10px; margin: 10px 0 8px 0; font-size: 0.95em; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .module { padding: 6px 8px; font-size: 0.8em; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .module h4 { font-size: 0.9em; }
-      .modules-grid { gap: 6px; }
-      .overview-grid, .info-grid { gap: 10px; }
-      .info-box ul { font-size: 0.8em; }
-      .roi, .capstone, .note { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      table.cover { font-size: 0.78em; }
-      footer { padding: 8px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .page-break { page-break-before: always; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agents for Investment Consulting — Copilot Studio, by use case</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f3f6fb;color:#1f2937;font-size:14px;line-height:1.42}
+a{color:#1d4ed8}
+header{background:linear-gradient(135deg,#0b2545 0%,#123a6b 60%,#1d4ed8 140%);color:#fff;padding:20px 20px;text-align:center;border-bottom:3px solid #f59e0b}
+header h1{margin:0;font-size:1.42em}
+header .tagline{margin-top:6px;color:#bfdbfe;font-size:.94em;font-weight:600}
+header .meta{margin-top:8px;color:#c7d2e4;font-size:.86em}
+header .meta span{margin:0 6px}
+header .meta .d{color:#93c5fd;font-weight:600}
+header .meta .l{color:#fbbf24;font-weight:600}
+.container{max-width:1000px;margin:14px auto;background:#fff;padding:14px 24px 20px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+h2{border-bottom:2px solid #1d4ed8;padding-bottom:4px;margin:0 0 8px;color:#0b2545;font-size:1.1em}
+p{margin:0 0 8px}
+.lede{background:#eef4fd;border-left:3px solid #1d4ed8;padding:8px 12px;border-radius:0 4px 4px 0;margin-bottom:12px;font-size:.93em}
+.lede b{color:#0b2545}
+.bar{background:#0b2545;color:#fff;padding:6px 13px;border-radius:5px 5px 0 0;margin-top:12px;font-weight:700;font-size:.95em;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.bar .who{font-weight:400;color:#bfdbfe;font-size:.84em}
+.bar a{color:#0b2545;background:#fbbf24;padding:2px 9px;border-radius:10px;text-decoration:none;font-size:.78em;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.86em;margin:0}
+th,td{border:1px solid #d7e0ee;padding:4px 8px;text-align:left;vertical-align:top}
+th{background:#eef4fd;color:#0b2545;font-size:.95em}
+td.n{white-space:nowrap;font-weight:600;color:#0b2545;width:16%}
+td.u{width:30%}
+code{background:#eef2f7;padding:0 4px;border-radius:3px;font-family:Consolas,Monaco,monospace;font-size:.92em;color:#0b2545}
+.cap{background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:0 5px 5px 0;padding:8px 12px;margin:12px 0 0;font-size:.9em;color:#78350f}
+.cap b{color:#78350f}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.bx{border:1px solid #d7e0ee;border-radius:5px;padding:8px 11px;font-size:.83em;background:#fbfcfe}
+.bx h3{margin:0 0 5px;color:#0b2545;font-size:.95em;border-bottom:1px solid #d7e0ee;padding-bottom:3px}
+.bx ul{margin:0;padding-left:16px}
+.bx li{margin-bottom:3px}
+footer{background:#0b2545;color:#fff;text-align:center;padding:13px;font-size:.83em}
+footer a{color:#93c5fd;text-decoration:none}
+@media print{
+  @page{size:A4;margin:8mm}
+  body{background:#fff;font-size:9.3px;line-height:1.3}
+  .container{box-shadow:none;padding:0;margin:0;max-width:none}
+  header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:11px}
+  header h1{font-size:1.5em}
+  .bar,.cap,.lede,table,th,.bx,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bar{padding:4px 10px;margin-top:8px}
+  th,td{padding:2.5px 6px}
+  .lede{padding:6px 10px;margin-bottom:8px}
+  .cap{padding:6px 10px;margin-top:8px}
+  .grid{gap:7px;margin-top:8px}
+  .bx{padding:6px 9px}
+  footer{padding:9px}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>AI Agents for Investment Consulting<br>Hands-on Microsoft Copilot Studio</h1>
-    <div class="tagline">From Copilot user to workflow-integrated agent &mdash; built live, on your own reporting pipeline</div>
-    <div class="client">Prepared for the <strong>Investment Consulting</strong> team</div>
-    <div class="meta">
-      <span class="duration">1 Day &middot; 09:00&ndash;18:00 &middot; 27 Aug 2026</span> |
-      <span class="level">Experienced practitioners</span> |
-      <span>In-person Bangalore + 5 online</span> |
-      <span>Trainer: Rajesh Gheware</span>
-    </div>
-  </header>
+<header>
+  <h1>AI Agents for Investment Consulting</h1>
+  <div class="tagline">Hands-on Microsoft Copilot Studio &mdash; every session is a use case, built live on screen</div>
+  <div class="meta">
+    <span class="d">1 day &middot; ~3 hrs + ~5 hrs</span> |
+    <span class="l">Experienced practitioners</span> |
+    <span>Microsoft-only, by governance</span> |
+    <span>Trainer: Rajesh Gheware</span>
+  </div>
+</header>
 
-  <div class="container">
+<div class="container">
 
-    <!-- Overview -->
-    <section id="overview">
-      <h2>Course Overview</h2>
-      <div class="overview-grid two">
-        <div class="overview-box">
-          <h4>What this day does</h4>
-          <ul>
-            <li>Takes the IC team from <em>Copilot user</em> to <em>agent builder</em> &mdash; agents that sit <strong>inside workflows</strong>, not beside them</li>
-            <li>Answers the two questions you raised directly: <strong>how Copilot Studio calls an API</strong>, and <strong>how the agent deploys into an existing system</strong></li>
-            <li>Every example is an <strong>investment-consulting</strong> one &mdash; asset owners, pension funds, fund research, client reporting</li>
-            <li>Converges on <strong>one flagship agent</strong> that replaces your manual unstructured&nbsp;&rarr;&nbsp;structured&nbsp;&rarr;&nbsp;PowerPoint pipeline</li>
-          </ul>
-        </div>
-        <div class="overview-box warn">
-          <h4>What this day deliberately excludes</h4>
-          <ul>
-            <li><strong>No licensing theory</strong> &mdash; no SKU/entitlement sessions</li>
-            <li><strong>No AI history for its own sake</strong> &mdash; one orientation slide places Copilot Studio on the ML &rarr; deep learning &rarr; generative &rarr; RAG &rarr; agentic path, and that is all</li>
-            <li><strong>No hype</strong> &mdash; model behaviour is covered only where it changes what you build</li>
-            <li><strong>No non-Microsoft tooling</strong> &mdash; nothing you cannot run under current governance</li>
-            <li>Microsoft Agent Framework / code-first frameworks are <em>positioned</em> as the graduation path, not built here</li>
-          </ul>
-        </div>
-      </div>
-      <div class="roi">
-        <strong>The ROI test for the day.</strong> Participants must leave able to build an AI agent <strong>integrated into a workflow</strong> &mdash;
-        not merely better at prompt engineering. Every session below is scored against that single criterion, and the capstone is the proof.
-      </div>
-    </section>
-
-    <!-- Outcomes -->
-    <section id="outcomes">
-      <h2>Learning Outcomes</h2>
-      <div class="overview-grid">
-        <div class="overview-box">
-          <h4>Understand</h4>
-          <ul>
-            <li>How the model actually behaves &mdash; and where it will fail on consulting work</li>
-            <li>What an "agent" really is in Copilot Studio: instructions, knowledge, topics, actions</li>
-            <li>Where Copilot stops and an agent begins &mdash; and why the pilot has not moved the needle</li>
-            <li>Copilot Studio's real limits on scale and control, stated honestly</li>
-          </ul>
-        </div>
-        <div class="overview-box">
-          <h4>Build</h4>
-          <ul>
-            <li>Agents that call <strong>external and internal / legacy REST APIs</strong></li>
-            <li>Data movement through <strong>Excel and SQL</strong>, in and out</li>
-            <li><strong>Unstructured &rarr; structured</strong> extraction from fund documents</li>
-            <li><strong>PowerPoint report generation</strong> without the manual Aspose step</li>
-          </ul>
-        </div>
-        <div class="overview-box">
-          <h4>Deploy &amp; Govern</h4>
-          <ul>
-            <li>Publish and <strong>deploy the agent to Teams</strong>; share it with a team</li>
-            <li>Link an agent into an existing enterprise workflow</li>
-            <li>Work a <strong>governance checklist</strong>: DLP, data boundary, connector approval, audit</li>
-            <li>Know when to stay in Copilot Studio and when to graduate to code-first</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Audience -->
-    <section id="audience">
-      <h2>Target Audience, Prerequisites &amp; Pre-reads</h2>
-      <div class="overview-grid">
-        <div class="overview-box">
-          <h4>Who attends</h4>
-          <ul>
-            <li><strong>All 35</strong> &mdash; Investment Consulting team: consultants, analysts, developers, leads</li>
-            <li><strong>All 35 stay for the whole day</strong> &mdash; Module&nbsp;2 is <strong>pitched at the ~10 developers</strong>, and everyone else follows it as observers and keeps it as reference</li>
-            <li>Senior audience &mdash; delivered by a senior practitioner, pitched accordingly</li>
-            <li><strong>30 in the room</strong> in Bangalore, <strong>5 joining online</strong> (hybrid)</li>
-          </ul>
-        </div>
-        <div class="overview-box">
-          <h4>Prerequisites</h4>
-          <ul>
-            <li>Familiarity with your own reporting and fund-research workflow</li>
-            <li><strong>Nothing to prepare</strong> &mdash; the day is demo-led; participants may follow along on their own machines if they wish</li>
-            <li>Module 2: comfort with REST APIs, Excel/SQL and your legacy integration surface</li>
-            <li>No new tooling to install or procure</li>
-          </ul>
-        </div>
-        <div class="overview-box">
-          <h4>Pre-reads (sent ahead)</h4>
-          <ul>
-            <li><a href="pre-reads.html"><strong>One pre-read sheet</strong></a>, a single page, thirteen curated links across four areas:</li>
-            <li>Copilot Studio &mdash; the product the day is built on</li>
-            <li>Power Automate and agent flows &mdash; how an agent reaches a system</li>
-            <li>Microsoft 365 agents &mdash; what you can build with no environment</li>
-            <li>Foundry agents &mdash; where you go when Copilot Studio runs out</li>
-          </ul>
-          <div style="font-size:0.78em;color:#5b6b70;margin-top:5px;">First-party sources throughout, each with a line on what it gives you. Read what is relevant before the day; keep it afterwards as the answer to &ldquo;where next?&rdquo;.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MODULE 1 -->
-    <div class="day-header">
-      <a href="module-1-foundations.html" style="float:right;font-size:0.8em;font-weight:600;color:#0b2545;background:#fbbf24;padding:3px 10px;border-radius:11px;text-decoration:none;position:relative;top:1px">View slides &rarr;</a>
-      Module 1 &mdash; Foundations for the Whole Team &nbsp;&middot;&nbsp; ~3 hrs &nbsp;&middot;&nbsp; all 35 participants
-      <span class="goal">Goal: a shared, hype-free understanding of what AI can be trusted with in investment consulting, and where an agent fits your workflow inside your governance constraints.</span>
-    </div>
-    <div class="modules-grid">
-      <div class="module">
-        <h4>1.1 What an "Agent" Really Is in Copilot Studio <span class="badge core-badge">Core</span> <span class="time">~30 min</span></h4>
-        <ul>
-          <li>Where Copilot ends, Copilot Studio begins and Microsoft Foundry starts &mdash; three products on one spectrum, and the two questions that settle which one you need</li>
-          <li>Agent anatomy: instructions, knowledge, topics, actions, orchestration</li>
-          <li><strong>What actually starts an agent</strong> &mdash; a person, a file landing in a library, a schedule, an email, or another agent &mdash; which is what puts the work inside the process rather than beside it</li>
-          <li>How the agent decides what to do at runtime &mdash; and why the trace is the first place you look when it chooses wrongly</li>
-          <li><strong>Six agents teams actually build</strong> &mdash; what starts each one, what it touches, what it returns, and which is the realistic first</li>
-        </ul>
-        <span class="demo"><strong>Built at the end of the morning</strong> &mdash; these four slides describe the agent; it is built live once the prompting work is done, so the room sees what a prompt is worth before it sees what an agent adds.</span>
-      </div>
-      <div class="module">
-        <h4>1.2 Prompting for Consulting Work &mdash; and Why Answers Drift <span class="time">~70 min</span></h4>
-        <ul>
-          <li>Structured prompts: role, context, task, output format, examples</li>
-          <li>Why each part earns its place &mdash; the specific failure that comes back when you drop it</li>
-          <li><strong>Four worked prompts, one per consulting job</strong> &mdash; manager update &rarr; house question list, meeting notes &rarr; decisions and owners, holdings &rarr; data-quality check, draft commentary &rarr; house tone &mdash; each built from the same five parts and run on screen</li>
-          <li>Why figures get invented &mdash; fabrication, the right number for the wrong thing, stale data &mdash; and exactly what grounding fixes and what it leaves to you</li>
-          <li>Turning a prompt that works into a <strong>team asset</strong> rather than a chat message</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; a reusable prompt pack for asset-owner reporting: fund summary, manager commentary, data-quality check; then one fund question through three prompts, on screen: watch the answer drift, then watch grounding fix it. <em>Participants are welcome to follow along on their own machines.</em></span>
-      </div>
-            <div class="module">
-        <h4>1.3 Where It Fits <em>Your</em> Workflow &mdash; and Which Agent to Build First <span class="badge key-badge">Key</span> <span class="time">~35 min</span></h4>
-        <ul>
-          <li>Honest limits: scale, control, latency, and what that means for production use</li>
-          <li>Mapping the IC workflow: research &rarr; analysis &rarr; report &rarr; client</li>
-          <li>Why the Copilot pilot has not produced gains &mdash; assistance vs integration</li>
-          <li>Positioning the internal <strong>GPT tool</strong>: what it does, what an agent adds</li>
-          <li>Picking the first agent: value, risk, data readiness, repetition volume &mdash; and why the least glamorous candidate is usually the right one</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; your reporting pipeline drawn on screen and marked step by step (prompt-only, agent-suitable, human-only), then the four criteria applied to pick the first agent actually worth building.</span>
-      </div>
-</div>
-      <div class="module">
-        <h4>Live Build &mdash; Your First Agent, End to End <span class="badge core-badge">Core</span> <span class="time">~35 min</span></h4>
-        <ul>
-          <li>First the three-click version anyone can build over a document library &mdash; so the non-developer majority leaves with something they can do unaided</li>
-          <li>Then a <strong>Fund Research Assistant built from empty</strong> in Copilot Studio: grounded on sample fund factsheets, tested and corrected on screen</li>
-          <li>The reusable prompt from 1.2 becomes the agent&rsquo;s Instructions &mdash; the same words, now permanent, shared and callable</li>
-          <li>Deleting one line from those Instructions, to show what the refusal rule was holding back</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; the morning closes on a working agent, and the afternoon extends that same agent rather than starting again.</span>
-      </div>
-    <!-- MODULE 2 -->
-    <div class="day-header page-break">
-      <a href="module-2-build.html" style="float:right;font-size:0.8em;font-weight:600;color:#0b2545;background:#fbbf24;padding:3px 10px;border-radius:11px;text-decoration:none;position:relative;top:1px">View slides &rarr;</a>
-      Module 2 &mdash; Hands-on Agent Building &nbsp;&middot;&nbsp; ~5 hrs &nbsp;&middot;&nbsp; all 35 present &middot; build depth pitched at the ~10 developers
-      <span class="goal">Goal: an agent built end to end on screen &mdash; calling external and legacy REST APIs, moving data through Excel and SQL, extracting unstructured data, generating the PowerPoint, and deploying to Teams under a governance checklist.</span>
-    </div>
-    <div class="modules-grid">
-      <div class="module">
-        <h4>2.1 Agent Anatomy &amp; Generative Orchestration <span class="time">~40 min</span></h4>
-        <ul>
-          <li>Topics and their descriptions vs generative orchestration &mdash; when to use which</li>
-          <li>Instructions that constrain behaviour reliably</li>
-          <li>Knowledge sources: SharePoint, files, Dataverse &mdash; and freshness</li>
-          <li>Reading the orchestration trace to debug why the agent chose what it chose</li>
-          <li><strong>Evaluating a change</strong> &mdash; test sets, scores and a repeatable before-and-after, so an improvement is a number rather than an impression</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; rebuild the Module&nbsp;1 assistant with generative orchestration and citations; trace one wrong answer, fix it on screen, then run a test set before and after the fix to show the change actually helped.</span>
-      </div>
-      <div class="module">
-        <h4>2.2 Actions: Calling External &amp; Internal / Legacy REST APIs <span class="badge gap-badge">Your gap</span> <span class="time">~55 min</span></h4>
-        <ul>
-          <li>Prebuilt connectors vs Power Automate flows vs custom connectors &mdash; the decision</li>
-          <li>Wiring a REST call: endpoint, auth, request shape, parsing the response</li>
-          <li>Reaching an <strong>internal / legacy</strong> system: gateways, on-prem data, service accounts</li>
-          <li>Error paths, empty results, timeouts &mdash; and never guessing missing data</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; the agent calls a market/fund-data REST API live, then a mock internal API standing in for a legacy system; both responses parsed into the conversation.</span>
-      </div>
-      <div class="module">
-        <h4>2.3 Moving Data Through Excel &amp; SQL <span class="time">~35 min</span></h4>
-        <ul>
-          <li>Reading a holdings / performance workbook into an agent action</li>
-          <li>Querying a SQL source for reference and benchmark data</li>
-          <li>Writing results back to a system of record</li>
-          <li>Keeping numbers system-sourced and narrative model-generated &mdash; never the reverse</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; join the API response to an Excel holdings extract and a SQL benchmark lookup, producing one clean structured record set.</span>
-      </div>
-      <div class="module">
-        <h4>2.4 Unstructured &rarr; Structured Extraction <span class="badge key-badge">Key</span> <span class="time">~40 min</span></h4>
-        <ul>
-          <li>The step your developers do by hand today &mdash; automated</li>
-          <li>Extracting fields from fund factsheets, manager updates, PDFs</li>
-          <li>Enforcing an output schema so downstream steps can rely on it</li>
-          <li>Validation, confidence and the "flag it, don't invent it" rule</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; a sample fund factsheet (PDF) goes in, a validated structured record comes out; a deliberately messy document shows the failure path and the flag.</span>
-      </div>
-      <div class="module">
-        <h4>2.5 Generating the PowerPoint Report <span class="badge gap-badge">Your gap</span> <span class="time">~45 min</span></h4>
-        <ul>
-          <li>Replacing the manual conversion + Aspose + custom-code path</li>
-          <li>Template-driven deck generation from the structured record</li>
-          <li>Charts, tables and commentary assembled into the house format</li>
-          <li>What stays in code, what moves to the agent &mdash; an honest split</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; the agent produces a finished investment report deck end to end, from factsheet input to delivered PowerPoint file.</span>
-      </div>
-      <div class="module">
-        <h4>2.6 Deploy, Trigger, Share and Govern <span class="badge key-badge">Key</span> <span class="time">~50 min</span></h4>
-        <ul>
-          <li>Publishing the agent and <strong>deploying it into Teams</strong> where the team already works &mdash; and into Microsoft&nbsp;365 Copilot via the organisation catalogue, which is an administrator-approved route</li>
-          <li><strong>Sharing</strong> the agent: users, roles, co-authors, environments</li>
-          <li><strong>Running it without being asked</strong> &mdash; an automated trigger fires the agent when a document arrives, so the work happens inside the process rather than in a chat window</li>
-          <li>Designing for unattended runs: no clarifying questions, flag and escalate, readable run history &mdash; and an approval gate whose shape depends on what started the chain &mdash; an agent calling a flow cannot be made to wait while a person decides, so that gate is <strong>asynchronous by design</strong>; a flow started by a document <em>can</em> wait, and does</li>
-          <li><strong>Governance checklist</strong>: DLP, tenant data boundary, connector approval, audit trail, human-in-the-loop, dev&nbsp;&rarr;&nbsp;test&nbsp;&rarr;&nbsp;prod</li>
-        </ul>
-        <span class="demo"><strong>Live demo</strong> &mdash; publish, deploy to Teams, share with a second user; then a factsheet is dropped into a SharePoint library and the agent extracts, enriches, builds the deck and raises an approval card <em>with nobody at the keyboard</em>. Finally the governance checklist, walked item by item against what was just built.</span>
-      </div>
-      <div class="module full">
-        <h4>2.7 Consolidation, Roadmap &amp; Open Q&amp;A <span class="time">~20 min</span></h4>
-        <ul class="two-col-list">
-          <li>The capstone consolidated: the whole chain walked through once more, with every stage traced back to the session that built it</li>
-          <li>What Copilot Studio should <em>not</em> be asked to do</li>
-          <li>Sizing the effort and building the internal ROI case</li>
-          <li>Roadmap: POC &rarr; pilot &rarr; production, and when to go code-first (Agent Framework)</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Capstone -->
-    <section id="capstone" style="margin-top: 15px;">
-      <h2>Capstone &mdash; The "Investment Report Agent"</h2>
-      <div class="capstone">
-        One flagship agent, built live across Module&nbsp;2 and consolidated at the end. It replaces the team's current
-        <strong>manual unstructured&nbsp;&rarr;&nbsp;structured conversion + Aspose libraries + custom code</strong> reporting pipeline.
-        <ul class="two-col-list">
-          <li><strong>Ingest</strong> &mdash; fund factsheets / manager updates (unstructured)</li>
-          <li><strong>Extract</strong> &mdash; validated structured records against a schema</li>
-          <li><strong>Enrich</strong> &mdash; external market API + internal/legacy API + Excel + SQL</li>
-          <li><strong>Generate</strong> &mdash; the investment report PowerPoint, house format</li>
-          <li><strong>Deploy</strong> &mdash; published to Teams, shared with the team</li>
-          <li><strong>Govern</strong> &mdash; DLP, audit, human review gate before client issue</li>
-        </ul>
-        <div style="margin-top:6px;">
-          <strong>Outcome split:</strong> all 35 are in the room for the whole build and leave AI-literate, able to see exactly where agents fit their workflow;
-          the ~10 developers leave with a working proof-of-concept pattern they can rebuild in their own environment, and everyone else with a reference for what it takes.
-        </div>
-      </div>
-      <div class="note">
-        <strong>To anchor the capstone on your real work:</strong> we ask for <strong>one concrete use case plus a sample API and dataset</strong>
-        ahead of the session &mdash; the Aspose/PowerPoint reporting pipeline is the natural candidate. If nothing can be shared in time,
-        the demo runs on synthetic fund factsheets and mock APIs we provide, with no impact on the agenda.
-      </div>
-    </section>
-
-    <!-- Info -->
-    <section id="info" style="margin-top: 15px;">
-      <div class="info-grid">
-        <div class="info-box">
-          <h3>Tools &amp; Technologies</h3>
-          <ul>
-            <li>Microsoft Copilot Studio <em>(primary build platform)</em></li>
-            <li>Microsoft 365 Copilot</li>
-            <li>Power Platform &middot; Power Automate &middot; connectors</li>
-            <li>External + internal/legacy REST APIs</li>
-            <li>Excel &middot; SQL &middot; SharePoint</li>
-            <li>PowerPoint generation</li>
-            <li>Microsoft Teams &mdash; deployment &amp; sharing</li>
-            <li>DLP, environments, audit &mdash; governance surface</li>
-          </ul>
-          <div style="font-size:0.78em;color:#5b6b70;margin-top:5px;"><strong>Microsoft-only by design</strong>, matching your governance. No third-party, Azure-hosted or open-source AI tooling is required at any point.</div>
-        </div>
-        <div class="info-box">
-          <h3>Delivery Format &mdash; Trainer Live Demo</h3>
-          <ul>
-            <li><strong>No participant lab is provisioned</strong> &mdash; per your instruction of 20 July</li>
-            <li>The trainer opens <strong>Copilot Studio on screen</strong> and builds the use case live</li>
-            <li>Enterprise-workflow linking, agent sharing and deployment all shown from there</li>
-            <li><strong>No dependency on client tenant readiness</strong> &mdash; no DLP allow-listing, connector licensing or egress prerequisites</li>
-            <li><strong>Pure demo throughout</strong> &mdash; participants may follow along on their own machines while the trainer builds, using the <a href="prompt-demos.html" style="color:#1d4ed8">prompt-demos guide</a>; entirely optional, nothing is provisioned or required</li>
-            <li><strong>For the 5 online seats:</strong> a dedicated feed of the Copilot Studio window itself &mdash; not a room camera &mdash; a named facilitator in the room monitoring the meeting chat, and <strong>recordings of the demo segments</strong> circulated afterwards. In a demo-led day the recording is what replaces a lab, so it serves the room as well as the remote seats</li>
-          </ul>
-          <div class="note" style="margin-top:6px;">
-            Hands-on inside <strong>your own environment</strong>, and any participant build against live systems, is a <strong>follow-on engagement</strong> &mdash; separate scope.
-          </div>
-        </div>
-        <div class="info-box">
-          <h3>Logistics &amp; Takeaways</h3>
-          <ul>
-            <li><strong>Date:</strong> Thursday, 27 August 2026</li>
-            <li><strong>Timing:</strong> 09:00 &ndash; 18:00 &mdash; 8 hrs content + breaks</li>
-            <li><strong>Venue:</strong> In-person Bangalore for 30; <strong>hybrid</strong> for 5 online participants <em>(client AV / conferencing required)</em></li>
-            <li><strong>Headcount:</strong> 35 total (30 in-room &middot; 5 online), present all day &middot; ~10 of them are the Module&nbsp;2 build track</li>
-          </ul>
-          <div style="font-size:0.85em;margin-top:6px;"><strong>Participants receive:</strong> slide decks (<a href="module-1-foundations.html">Module 1</a> &middot; <a href="module-2-build.html">Module 2</a>, both with per-slide notes) &middot; the <a href="prompt-demos.html">prompt-demos guide</a> &mdash; eight worked prompt demos that need nothing provisioned &middot; the <a href="pre-reads.html">pre-read pack</a> &middot; the <a href="reference-pack.html">reference pack</a> &mdash; a ten-prompt consulting prompt pack, a capability&rarr;workflow map, and the surfaces the non-developer majority can use without an environment &middot; the <a href="tooling-pack.html">tooling pack</a> &mdash; the Microsoft command-line tooling for building, testing and shipping the same agent as files, driven with GitHub Copilot CLI &middot; the full demo-asset set (synthetic factsheet, workbooks, mandate and FX payloads, SQL build script, slide-plan schema and a working plan&rarr;deck renderer) &middot; governance checklist &middot; recordings of the demo segments &middot; certificates &middot; one async Q&amp;A touchpoint within 2 weeks.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Agenda -->
-    <section id="agenda">
-      <h2>Indicative Day Plan</h2>
-      <div class="overview-grid two">
-        <div class="overview-box">
-          <h4>Morning &mdash; all 35 participants</h4>
-          <ul class="agenda">
-            <li><strong>09:00</strong> &mdash; Kickoff: the ROI test for the day</li>
-            <li><strong>09:10</strong> &mdash; 1.1 What an agent really is in Copilot Studio</li>
-            <li><strong>09:40</strong> &mdash; 1.2 Prompting, and why answers drift</li>
-            <li><strong>10:50</strong> &mdash; Break</li>
-            <li><strong>11:05</strong> &mdash; 1.3 Where it fits, and which agent to build first</li>
-            <li><strong>11:40</strong> &mdash; Live build: your first agent, end to end</li>
-            <li><strong>12:15</strong> &mdash; Lunch <em>(everyone continues into the afternoon; the build detail is pitched at the ~10 developers)</em></li>
-          </ul>
-        </div>
-        <div class="overview-box">
-          <h4>Afternoon &mdash; all 35 &middot; build track for the ~10 developers</h4>
-          <ul class="agenda">
-            <li><strong>13:00</strong> &mdash; 2.1 Agent anatomy &amp; generative orchestration</li>
-            <li><strong>13:40</strong> &mdash; 2.2 Calling external &amp; legacy REST APIs</li>
-            <li><strong>14:35</strong> &mdash; 2.3 Excel &amp; SQL data movement</li>
-            <li><strong>15:10</strong> &mdash; Break</li>
-            <li><strong>15:25</strong> &mdash; 2.4 Unstructured &rarr; structured extraction</li>
-            <li><strong>16:05</strong> &mdash; 2.5 Generating the PowerPoint report</li>
-            <li><strong>16:50</strong> &mdash; 2.6 Deploy, trigger, share &amp; govern</li>
-            <li><strong>17:40</strong> &mdash; 2.7 Consolidation, roadmap &amp; Q&amp;A &rarr; <strong>18:00 close</strong></li>
-          </ul>
-        </div>
-      </div>
-      <div class="note"><strong>09:00 &ndash; 18:00</strong>, including two 15-minute breaks and a 45-minute lunch. Timings flex to the room. All 35 attend throughout; the split is one of <em>depth</em>, not attendance &mdash; ~3 hrs of foundations for everyone, then ~5 hrs of build pitched at the ~10 developers with the rest of the room observing.</div>
-    </section>
-
-    <!-- Requirements coverage -->
-    <section id="coverage" class="page-break">
-      <h2>How This Outline Covers Your Stated Requirements</h2>
-      <table class="cover">
-        <thead>
-          <tr><th style="width:38%">Your requirement</th><th style="width:20%">Where it is covered</th><th>How</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Practical Copilot Studio integration, <em>not</em> theoretical AI concepts</td>
-            <td class="where">Whole day</td>
-            <td>Every session ends in a live on-screen build; concept time is capped and always precedes a demo</td>
-          </tr>
-          <tr>
-            <td><strong>ROI test:</strong> participants leave able to build agents <em>integrated into workflows</em>, not just better prompting</td>
-            <td class="where">1.3, 2.2, 2.6, Capstone</td>
-            <td>Prompting's ceiling is named in 1.2; the rest of the day is integration, deployment and workflow linking</td>
-          </tr>
-          <tr>
-            <td>Anchor to real investment-consulting / asset-owner / pension-fund use cases</td>
-            <td class="where">All modules</td>
-            <td>Fund factsheets, holdings, benchmarks, manager commentary and client reporting are the only examples used</td>
-          </tr>
-          <tr>
-            <td>Explicitly avoid licensing theory and AI background/history</td>
-            <td class="where">Course Overview</td>
-            <td>Licensing theory appears nowhere. AI background is one orientation slide placing Copilot Studio against what came before &mdash; there is no history section</td>
-          </tr>
-          <tr>
-            <td>Self-learning pre-reads shared ahead so hands-on time is maximised</td>
-            <td class="where">Pre-reads</td>
-            <td>Four-part primer pack sent before the session, including the capstone brief</td>
-          </tr>
-          <tr>
-            <td><strong>Pain:</strong> manual unstructured&nbsp;&rarr;&nbsp;structured + Aspose + custom code for PowerPoint reports</td>
-            <td class="where">2.4, 2.5, Capstone</td>
-            <td>This exact pipeline is the flagship capstone, rebuilt as an agent end to end</td>
-          </tr>
-          <tr>
-            <td><strong>Pain:</strong> the internal GPT tool gives limited help; not integrated with workflows</td>
-            <td class="where">1.3</td>
-            <td>Internal GPT tool positioned against agents: what it covers, what an integrated agent adds</td>
-          </tr>
-          <tr>
-            <td><strong>Pain:</strong> Copilot pilot produced no meaningful productivity gains</td>
-            <td class="where">1.1, 1.3</td>
-            <td>Diagnosed directly &mdash; assistance vs integration &mdash; then answered by the build track</td>
-          </tr>
-          <tr>
-            <td><strong>Core gap:</strong> how Copilot Studio makes API calls and deploys into existing systems</td>
-            <td class="where">2.2, 2.6</td>
-            <td>A full session each on REST actions (external + legacy) and on deployment, sharing and workflow linking</td>
-          </tr>
-          <tr>
-            <td><strong>ROI test, restated:</strong> agents <em>inside</em> workflows, not beside them</td>
-            <td class="where">2.6 (trigger)</td>
-            <td>A document arriving fires the agent unattended &mdash; extraction, enrichment, slide plan and approval card with nobody at the keyboard; approve it and the deck, its PDF and the covering email follow on their own. This is the demonstration that separates an agent from a better chat window</td>
-          </tr>
-          <tr>
-            <td>Governance limits tooling to Microsoft Copilot + Copilot Studio</td>
-            <td class="where">Tools &amp; Technologies</td>
-            <td>Microsoft-only stack throughout; no Claude, Azure-hosted or open-source tooling required</td>
-          </tr>
-          <tr>
-            <td>Copilot Studio's known limits on scale and control acknowledged</td>
-            <td class="where">1.3, 2.7</td>
-            <td>Stated honestly, with the code-first graduation path scoped as a later step</td>
-          </tr>
-          <tr>
-            <td>Microsoft Agent Framework / LangChain out of scope, longer-term path</td>
-            <td class="where">2.7</td>
-            <td>Positioned in the roadmap only &mdash; nothing built on it</td>
-          </tr>
-          <tr>
-            <td>Demonstrate: external + internal/legacy REST APIs, Excel, SQL, PowerPoint, Teams deployment, agent sharing, governance checklist</td>
-            <td class="where">2.2 &ndash; 2.6</td>
-            <td>All eight surfaces are demonstrated live; each maps to a named session above</td>
-          </tr>
-          <tr>
-            <td>No lab build &mdash; trainer live on-screen demo of Copilot Studio functionality</td>
-            <td class="where">Delivery Format</td>
-            <td>Demo-only delivery; nothing provisioned for participants, no tenant-readiness dependency</td>
-          </tr>
-          <tr>
-            <td>Split: ~3 hrs foundations for all 35 &middot; ~5 hrs hands-on build for ~10 developers</td>
-            <td class="where">Modules 1 &amp; 2</td>
-            <td>The day plan holds the split as one of depth: all 35 stay in the room, Module&nbsp;2 is pitched at the ~10 developers, and the other 25 observe and keep the material as reference</td>
-          </tr>
-          <tr>
-            <td>Senior trainer, experienced audience, hybrid for the 5 online participants</td>
-            <td class="where">Logistics</td>
-            <td>Delivered by Rajesh Gheware; a dedicated screen feed and a named remote facilitator for the 5 online seats</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
+  <div class="lede">
+    <b>The test for the day:</b> participants leave able to build an agent that sits <b>inside a workflow</b>, not beside it
+    &mdash; not merely better at prompting. Module&nbsp;1 is pitched at the whole team and ends with a working agent.
+    Module&nbsp;2 extends that same agent to the point where a document landing in a library runs the chain with nobody at the
+    keyboard. <b>Nothing is provisioned</b>: the trainer builds on screen and participants may follow along if they wish.
   </div>
 
-  <footer>
-    &copy; 2026 Gheware DevOps &amp; Agentic AI |
-    <a href="https://devops.gheware.com">devops.gheware.com</a> |
-    Trainer: Rajesh Gheware |
-    AI Agents for Investment Consulting (Copilot Studio) v1.0
-  </footer>
+  <div class="bar">
+    <span>Module 1 &mdash; Foundations <span class="who">~3 hrs &middot; the whole team &middot; eight use cases</span></span>
+    <a href="module-1-foundations.html">View slides &rarr;</a>
+  </div>
+  <table>
+    <tr><th class="n">&nbsp;</th><th class="u">Use case</th><th>What goes in &rarr; what comes out</th></tr>
+    <tr><td class="n">1.1</td><td class="u">A reusable extraction prompt</td>
+        <td>A fund factsheet &rarr; 26 named fields. The two figures the document does not carry are <b>listed as unresolved</b>, not invented &mdash; which is the whole point of the exercise.</td></tr>
+    <tr><td class="n">1.2</td><td class="u">Manager update &rarr; house question list</td>
+        <td>A quarterly manager letter &rarr; the questions your own process says to ask of it, in your order.</td></tr>
+    <tr><td class="n">1.3</td><td class="u">Meeting notes &rarr; decisions, actions, owners</td>
+        <td>Raw notes or a Teams recap &rarr; a circulated record with an owner against every action.</td></tr>
+    <tr><td class="n">1.4</td><td class="u">Holdings extract &rarr; data-quality check</td>
+        <td>A holdings workbook &rarr; the rows that do not reconcile, <b>flagged rather than quietly corrected</b>.</td></tr>
+    <tr><td class="n">1.5</td><td class="u">Draft commentary &rarr; house tone</td>
+        <td>A rough paragraph &rarr; house style, with any claim it cannot support marked instead of smoothed over.</td></tr>
+    <tr><td class="n">1.6</td><td class="u">Drift, fabrication and the grounding fix</td>
+        <td>One fund question through three prompts &mdash; the room watches the answer drift and a figure get invented, then watches grounding fix it and sees exactly what grounding still leaves to you.</td></tr>
+    <tr><td class="n">1.7</td><td class="u">Marking up your own workflow</td>
+        <td>Your reporting pipeline drawn on screen &rarr; each step marked prompt-only, agent-suitable or human-only, then four criteria applied to pick the first agent actually worth building.</td></tr>
+    <tr><td class="n">1.8</td><td class="u">Your first agent</td>
+        <td>A three-click agent over a document library that any non-developer can repeat unaided &mdash; then the <b>Fund Research Assistant</b> built from empty, grounded, tested and corrected live.</td></tr>
+  </table>
+
+  <div class="bar">
+    <span>Module 2 &mdash; Building It <span class="who">~5 hrs &middot; all present, build depth pitched at the ~10 developers &middot; one agent, seven steps</span></span>
+    <a href="module-2-build.html">View slides &rarr;</a>
+  </div>
+  <table>
+    <tr><th class="n">&nbsp;</th><th class="u">Use case</th><th>What is built, and what it proves</th></tr>
+    <tr><td class="n">2.1</td><td class="u">Orchestration, and proving a change helped</td>
+        <td>Trace one wrong answer and fix it &mdash; then score a test set before and after. Sometimes the number says the change earned nothing, which is the honest lesson.</td></tr>
+    <tr><td class="n">2.2</td><td class="u">Calling external and legacy APIs</td>
+        <td>A live public endpoint and a stand-in for <b>a legacy internal system</b>, both parsed into the conversation; error paths, empty results and timeouts included.</td></tr>
+    <tr><td class="n">2.3</td><td class="u">Excel and SQL</td>
+        <td>A holdings workbook and a benchmark table reached as actions, so <b>totals, averages and currency conversion come from a system</b> rather than from the model.</td></tr>
+    <tr><td class="n">2.4</td><td class="u">Unstructured &rarr; structured</td>
+        <td>Factsheet &rarr; a validated 25-key record. What it cannot confirm lands in <code>needs_review</code> <b>with a reason</b> &mdash; the step your developers do by hand today.</td></tr>
+    <tr><td class="n">2.5</td><td class="u">Generating the report</td>
+        <td>The structured record &rarr; a six-slide plan &rarr; a real PowerPoint file, replacing the manual conversion and Aspose step. What stays in code is stated honestly.</td></tr>
+    <tr><td class="n">2.6</td><td class="u">Deploy, trigger, share, govern</td>
+        <td>Published to Teams and Microsoft&nbsp;365 Copilot; shared; then <b>a factsheet dropped into a library runs the whole chain unattended</b> and raises an approval card. Governance walked item by item against what was just built.</td></tr>
+    <tr><td class="n">2.7</td><td class="u">Consolidation</td>
+        <td>The capstone consolidated: the whole chain walked through once more, with every stage traced back to the session that built it. Plus what Copilot Studio should <em>not</em> be asked to do.</td></tr>
+  </table>
+
+  <div class="cap">
+    <b>Capstone &mdash; the quarterly fund review.</b> One agent carrying <b>6 actions, 3 knowledge sources and 7 flows</b>,
+    assembled across Module&nbsp;2 rather than demonstrated separately: ingest an unstructured document, extract a validated
+    record, enrich it from an external API, a legacy system, Excel and SQL, generate the deck, and put a human approval gate in
+    front of anything that reaches a client. The full build sheet is a
+    <a href="../use-cases/fund-research-assistant.html">separate page</a> participants keep, so the whole agent can be rebuilt
+    at their own pace.
+  </div>
+
+  <div class="grid">
+    <div class="bx">
+      <h3>Deliberately excluded</h3>
+      <ul>
+        <li><b>No licensing or SKU theory</b></li>
+        <li><b>No AI history for its own sake</b> &mdash; one slide places Copilot Studio on the ML &rarr; generative &rarr; RAG &rarr; agentic path, and that is all</li>
+        <li><b>No hype</b> &mdash; model behaviour only where it changes what you build</li>
+        <li><b>No non-Microsoft tooling</b> &mdash; nothing you cannot run under current governance. Agent Framework is positioned as the graduation path, not built</li>
+      </ul>
+    </div>
+    <div class="bx">
+      <h3>How it is delivered</h3>
+      <ul>
+        <li><b>No participant lab</b> &mdash; the trainer builds live in Copilot Studio on screen</li>
+        <li><b>No dependency on tenant readiness</b> &mdash; no DLP allow-listing, connector licensing or egress prerequisites</li>
+        <li>Following along is optional and needs nothing provisioned</li>
+        <li>For online seats: a feed of the Copilot Studio window itself, a facilitator watching chat, and recordings of the demo segments</li>
+        <li>Hands-on in your own environment is a follow-on engagement, separate scope</li>
+      </ul>
+    </div>
+    <div class="bx">
+      <h3>What participants keep</h3>
+      <ul>
+        <li>Both decks &mdash; <a href="module-1-foundations.html">Module&nbsp;1</a> &middot; <a href="module-2-build.html">Module&nbsp;2</a> &mdash; with per-slide notes</li>
+        <li>The <a href="prompt-demos.html">prompt-demos run-sheet</a> &mdash; the seven prompt use cases, nothing provisioned</li>
+        <li>The <a href="reference-pack.html">reference pack</a> &mdash; ten consulting prompts, a capability&rarr;workflow map, and <b>all eight surfaces</b>, including those the non-developer majority can use with no environment</li>
+        <li>The <a href="tooling-pack.html">tooling pack</a> &mdash; the same agent as files, on the command line</li>
+        <li>A <a href="pre-reads.html">pre-read watchlist</a> sent the evening before &mdash; ten videos, four marked as the ones that matter</li>
+        <li>Demo assets: synthetic factsheet, workbooks, mandate and FX payloads, SQL script, slide-plan schema and a working plan&rarr;deck renderer</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 Gheware DevOps &amp; Agentic AI |
+  <a href="https://devops.gheware.com">devops.gheware.com</a> |
+  Trainer: Rajesh Gheware |
+  AI Agents for Investment Consulting (Copilot Studio) v2.0
+</footer>
 </body>
 </html>

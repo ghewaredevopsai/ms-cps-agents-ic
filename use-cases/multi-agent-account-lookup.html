@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build It Yourself — Multi-Agent: Parent, Child, Connected</title>
+<title>Build It Yourself &mdash; Sales Associate Assistant: Child Agents</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -35,7 +35,7 @@ pre{position:relative;background:#0b2545;color:#e8eefb;padding:14px 16px;border-
 pre .cp{position:absolute;top:7px;right:8px;background:#1d4ed8;color:#fff;border:0;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
 pre .cp:hover{background:#2563eb}
 pre .cp.done{background:#059669}
-.stage{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden;page-break-inside:avoid}
+.stage{border:1px solid #d7e0ee;border-radius:6px;margin-bottom:20px;overflow:hidden}
 .stage>.head{background:#0b2545;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .stage>.head .id{font-weight:700;font-size:1.02em}
 .stage>.head .id small{font-weight:400;color:#bfdbfe;margin-left:8px;font-size:.8em}
@@ -57,318 +57,350 @@ ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:22
 footer{background:#0b2545;color:#fff;text-align:center;padding:16px;font-size:.85em}
 footer a{color:#93c5fd;text-decoration:none}
 @media print{
-  @page{size:A4;margin:11mm}
-  body{background:#fff;font-size:10.5px}
+  @page{size:A4;margin:9mm}
+  body{background:#fff;font-size:10.5px;line-height:1.36}
+  p{margin:0 0 6px}
+  li{margin-bottom:3px}
+  ul,ol{margin:0 0 7px}
+  h2{margin:0 0 7px;padding-bottom:4px}
+  h3{margin:10px 0 4px}
+  section{margin-bottom:13px}
+  pre{font-size:9.7px;line-height:1.42;padding:7px 9px;margin:5px 0 7px}
+  table{margin:6px 0}
+  th,td{padding:4px 7px}
+  .stage{margin-bottom:12px}
+  .stage>.head{padding:6px 12px}
+  .stage>.body{padding:9px 13px}
+  .warn,.note,.tip,.amber{padding:7px 11px;margin:7px 0}
+  .goal{padding:7px 11px;margin-bottom:8px}
+  .flow{padding:7px 9px;margin:7px 0}
+  ol.steps>li{margin-bottom:6px}
   .container{box-shadow:none;padding:0;margin:0;max-width:none}
   header{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px}
   pre{background:#f4f6fb;color:#0b2545;border:1px solid #d7e0ee;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   pre .cp{display:none}
   .stage,.warn,.note,.tip,.amber,table,.flow{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .stage{page-break-inside:avoid}
+  .stage{overflow:visible;border-radius:0}
+  .stage>.head{page-break-after:avoid;border-radius:0}
+  tr{page-break-inside:avoid}
   footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
 <body>
 <header>
-  <h1>Multi-Agent: Parent, Child, Connected</h1>
-  <div class="tagline">Build it yourself &mdash; Microsoft Copilot Studio</div>
+  <h1>Sales Associate Assistant</h1>
+  <div class="tagline">Build it yourself &mdash; one parent, two child agents, one topic</div>
   <div class="meta">
     <span class="d">~40 minutes</span> |
     <span>No code</span> |
-    <span>1 parent &middot; 1 child &middot; 1 connected agent</span> |
+    <span>Microsoft Copilot Studio</span> |
     <span>Trainer: Rajesh Gheware</span>
   </div>
 </header>
 
 <div class="container">
 
-<div class="warn">
-  <b>Use synthetic Account records.</b> This agent reads customer rows out of Dataverse and repeats them back in chat.
-  Build it against sample data or a table you have populated yourself &mdash; never against live customer records
-  until you have worked through <em>Before you use this for real</em> at the end.
-</div>
-
 <section>
   <h2>What you are building</h2>
   <div class="goal">
-    <b>Three agents, one conversation.</b> A parent agent takes the question. It keeps some skills <em>inside</em> itself as a
-    <strong>child agent</strong>, and delegates the rest to a separately published <strong>connected agent</strong> that
-    queries Dataverse. The person typing sees one assistant.
+    <b>One assistant, three things behind it.</b> A topic asks which market you are in. Two <strong>child agents</strong> hold
+    the product knowledge, and the condition on that variable decides which one is eligible. An already-published
+    <strong>connected agent</strong> takes anything about an account. You build the parent only.
   </div>
-  <p>
-    The point of this build is not the data lookup &mdash; it is watching the orchestrator <strong>choose</strong>, at run time,
-    which agent should handle a question, based only on the descriptions you wrote.
-  </p>
 
   <div class="flow">
-<svg viewBox="0 0 880 280" role="img" aria-label="A person asks the parent agent, which routes either to a child agent held inside it or to a separately published connected agent that queries Dataverse">
+<svg viewBox="0 0 880 250" role="img" aria-label="A person asks the Sales Associate Assistant. A Select Market topic sets a global variable, which gates two child agents, one for the US market and one for the UK. Separately the parent routes account questions to an already-built connected agent that reads a Dataverse account table.">
   <defs>
     <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" style="fill:#1e40af"/>
     </marker>
   </defs>
 
-  <rect x="14" y="112" width="104" height="56" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
-  <text x="66" y="136" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">PERSON</text>
-  <text x="66" y="154" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">asks once</text>
+  <rect x="8" y="110" width="98" height="52" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="57" y="131" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">PERSON</text>
+  <text x="57" y="149" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">asks once</text>
 
-  <line x1="120" y1="140" x2="150" y2="140" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <line x1="108" y1="136" x2="134" y2="136" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
 
-  <rect x="154" y="100" width="196" height="80" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
-  <text x="252" y="124" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#93c5fd;letter-spacing:.8px">PARENT AGENT</text>
-  <text x="252" y="145" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#fff">Sales Assistant</text>
-  <text x="252" y="164" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#bfdbfe">orchestrates &#183; routes</text>
+  <rect x="138" y="96" width="198" height="80" rx="6" style="fill:#0b2545;stroke:#0b2545"/>
+  <text x="237" y="116" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#93c5fd;letter-spacing:.8px">PARENT AGENT</text>
+  <text x="237" y="135" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#fff">Sales Associate</text>
+  <text x="237" y="151" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#fff">Assistant</text>
+  <text x="237" y="168" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#bfdbfe">orchestrates &#183; routes</text>
 
-  <path d="M352,124 C392,124 392,66 424,66" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
-  <path d="M352,158 C392,158 392,216 424,216" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <path d="M336,124 C352,124 348,94 356,94" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
 
-  <rect x="428" y="26" width="222" height="80" rx="6" style="fill:#ecfdf5;stroke:#059669;stroke-width:1.4"/>
-  <text x="539" y="49" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.8px">CHILD AGENT</text>
-  <text x="539" y="70" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Product Information</text>
-  <text x="539" y="90" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">lives inside the parent</text>
+  <rect x="360" y="62" width="118" height="64" rx="6" style="fill:#f7f9fe;stroke:#94a9c9;stroke-width:1.2"/>
+  <text x="419" y="82" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">TOPIC</text>
+  <text x="419" y="100" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Select Market</text>
+  <text x="419" y="117" text-anchor="middle" style="font:400 10px 'Segoe UI',sans-serif;fill:#334155">sets Global.Market</text>
 
-  <rect x="428" y="176" width="222" height="80" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.4"/>
-  <text x="539" y="199" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.8px">CONNECTED AGENT</text>
-  <text x="539" y="220" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Account Lookup</text>
-  <text x="539" y="240" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">published on its own</text>
+  <path d="M480,86 C500,86 502,40 518,40" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <path d="M480,102 C500,102 502,116 518,116" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
 
-  <line x1="652" y1="216" x2="694" y2="216" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+  <rect x="522" y="10" width="212" height="60" rx="6" style="fill:#ecfdf5;stroke:#059669;stroke-width:1.4"/>
+  <text x="628" y="30" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.8px">CHILD AGENT</text>
+  <text x="628" y="48" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">US Product Information</text>
+  <text x="628" y="64" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#334155">condition: Market = US</text>
 
-  <rect x="698" y="176" width="166" height="80" rx="6" style="fill:#eef4fd;stroke:#94a9c9;stroke-width:1.2"/>
-  <text x="781" y="199" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">DATAVERSE</text>
-  <text x="781" y="220" text-anchor="middle" style="font:600 13px 'Segoe UI',sans-serif;fill:#0b2545">Account table</text>
-  <text x="781" y="240" text-anchor="middle" style="font:400 11px 'Segoe UI',sans-serif;fill:#334155">via search</text>
+  <rect x="522" y="86" width="212" height="60" rx="6" style="fill:#ecfdf5;stroke:#059669;stroke-width:1.4"/>
+  <text x="628" y="106" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#065f46;letter-spacing:.8px">CHILD AGENT</text>
+  <text x="628" y="124" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">UK Product Information</text>
+  <text x="628" y="140" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#334155">condition: Market = UK</text>
+
+  <path d="M336,158 C420,158 430,204 518,204" style="fill:none;stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="522" y="170" width="212" height="68" rx="6" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:1.4;stroke-dasharray:5 3"/>
+  <text x="628" y="190" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#92400e;letter-spacing:.8px">CONNECTED AGENT</text>
+  <text x="628" y="208" text-anchor="middle" style="font:600 13.5px 'Segoe UI',sans-serif;fill:#0b2545">Account Data Lookup</text>
+  <text x="628" y="226" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#334155">chosen from its description</text>
+
+  <line x1="736" y1="204" x2="752" y2="204" style="stroke:#1e40af;stroke-width:1.6" marker-end="url(#ar)"/>
+
+  <rect x="756" y="170" width="116" height="68" rx="6" style="fill:#f7f9fe;stroke:#94a9c9;stroke-width:1.2;stroke-dasharray:5 3"/>
+  <text x="814" y="190" text-anchor="middle" style="font:700 10px 'Segoe UI',sans-serif;fill:#1e40af;letter-spacing:.8px">DATAVERSE</text>
+  <text x="814" y="208" text-anchor="middle" style="font:600 12px 'Segoe UI',sans-serif;fill:#0b2545">Account table</text>
+  <text x="814" y="226" text-anchor="middle" style="font:400 10.5px 'Segoe UI',sans-serif;fill:#334155">already built</text>
 </svg>
   </div>
 
-  <h3>The distinction that decides everything</h3>
   <table>
-    <tr><th style="width:16%">&nbsp;</th><th>Child agent</th><th>Connected agent</th></tr>
-    <tr><td><b>Where it lives</b></td><td>Inside the parent. It has no separate existence.</td><td>Its own agent, in the same environment.</td></tr>
-    <tr><td><b>Publishing</b></td><td>Published with the parent.</td><td>Published on its own. The parent only ever sees its <b>last published</b> version.</td></tr>
-    <tr><td><b>Reuse</b></td><td>Belongs to one parent.</td><td>Any number of parents can connect to it.</td></tr>
-    <tr><td><b>Pick it when</b></td><td>You are grouping instructions and tools for one job, managed by one person.</td><td>A different team owns it, or you want it usable directly and by other agents.</td></tr>
+    <tr><th style="width:15%">&nbsp;</th><th>Child agent &mdash; the two product agents</th><th>Connected agent &mdash; account lookup</th></tr>
+    <tr><td><b>Lives</b></td><td>Inside the parent, published with it.</td><td>Its own published agent, reusable. The parent sees its <b>last published</b> version.</td></tr>
+    <tr><td><b>Chosen by</b></td><td>A <b>condition</b> on <code>Global.Market</code> &mdash; deterministic.</td><td>The <b>orchestrator</b>, weighing your description &mdash; not deterministic.</td></tr>
+    <tr><td><b>Fails by</b></td><td>The variable unset &rarr; <b>neither</b> child eligible. Debug the variable, not descriptions.</td><td>Descriptions overlapping &rarr; the wrong agent answers. Rewrite the description, not the instructions.</td></tr>
   </table>
 </section>
 
 <section>
   <h2>Before you start</h2>
-  <ul class="chk">
-    <li><strong>Copilot Studio</strong>, in an environment you are allowed to build in &mdash; and both agents must be in the <strong>same environment</strong>. Cross-environment connections are not supported.</li>
-    <li><strong>Dataverse with rows in the Account table.</strong> Sample data is fine and is the fastest route (Power Platform admin centre &rarr; your environment &rarr; <em>Settings &rarr; Data management &rarr; Sample data &rarr; Install</em>).</li>
-    <li>Permission to <strong>turn on Dataverse search</strong> and to <strong>edit Quick Find views</strong> for the Account table.</li>
-    <li>Permission to create a <strong>Microsoft Dataverse connection</strong>. It is a premium connector &mdash; availability varies by licence, and that is a question for your admin rather than a blocker to reading on.</li>
-  </ul>
-  <div class="note">
-    No knowledge sources are needed anywhere in this build. Both agents answer from a live table or from their own instructions.
-  </div>
+  <p>
+    Copilot Studio, in an environment you can build in &mdash; plus <strong>the <code>Account Data Lookup Agent</code> already
+    built and published there</strong>. It must satisfy all three of: same environment, <b>published</b>, and
+    <em>Let other agents connect to and use this one</em> on. Confirm it answers
+    <code>What are the accounts in Texas?</code> from its own test pane before you go on. Building it is a separate job with its
+    own Dataverse prerequisites &mdash; follow
+    <a href="https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-multi-agent">microsoft/mcs-labs &rarr;
+    <code>mcs-multi-agent</code></a> (also in <code>resources.txt</code>).
+  </p>
+  <p>
+    You also need a <strong>public website</strong> with different pages per market for the children's knowledge. This build
+    uses <code>microsoft.com</code> and <code>microsoft.com/en-gb</code>. Nothing else &mdash; no Dataverse permissions, no
+    premium connector, no flows.
+  </p>
 </section>
 
 <div class="stage">
-  <div class="head"><span class="id">Stage 1 <small>Make Dataverse searchable</small></span><span class="b t">~10 min</span></div>
+  <div class="head"><span class="id">Stage 1 <small>Create the parent</small></span><span class="b t">~8 min</span></div>
   <div class="body">
-    <p>Do this first. Every later stage looks broken if you skip it, and the error you get will not mention search.</p>
     <ol class="steps">
-      <li>In the <strong>Power Platform admin centre</strong>, open your environment &rarr; <strong>Settings &rarr; Product &rarr; Features</strong>.</li>
-      <li>Under <strong>Dataverse search</strong>, turn <strong>on</strong> search indexing. Newer tenants show two checkboxes rather than one switch &mdash; tick the one that turns on indexing for <em>search experiences</em>, not only the AI one. Save.</li>
-      <li>Go to <a href="https://make.powerapps.com">make.powerapps.com</a> &rarr; <strong>Tables &rarr; Account &rarr; Views</strong> and open <strong>Quick Find Active Accounts</strong>.</li>
-      <li>Add the columns you want returned to the view: <em>Address 1: State/Province</em>, <em>Address 1: ZIP/Postal Code</em>, <em>Annual Revenue</em>, <em>Currency</em>.</li>
-      <li>Now the step that actually matters &mdash; open <strong>Edit find table columns</strong> and add <em>Address 1: City</em>, <em>Address 1: State/Province</em> and <em>Address 1: ZIP/Postal Code</em> to <strong>Find by</strong>.</li>
-      <li><strong>Save and publish</strong>, and do not navigate away until it finishes. Then, from <strong>Solutions</strong>, run <strong>Publish all customizations</strong>.</li>
+      <li><a href="https://copilotstudio.microsoft.com">copilotstudio.microsoft.com</a> &rarr; check the
+        <strong>environment</strong> top right is the one your lookup agent lives in.</li>
+      <li><strong>Agents</strong> &rarr; chevron beside <em>New agent</em> &rarr; <strong>New classic agent</strong>. Name it
+        <code>Sales Associate Assistant</code>. Leave the <em>New experience</em> toggle on.</li>
+      <li>A classic agent starts blank. In <strong>Instructions</strong> select <strong>Edit</strong> and paste:
+        <pre><button class="cp">Copy</button>You are the Sales Associate Assistant. Your purpose is to help sales associates quickly find product information and look up account and contact information in the sales system.
+
+Guidelines:
+- Help sales associates get market-specific product information and answer account and contact questions.
+- Only use the knowledge, tools, and connected or child agents configured on this agent. Do not rely on general model knowledge or the web.
+- Ask the user which market they are working in when it is needed to scope product information.
+- Delegate account and contact lookups to the connected account and contact agent.
+- Keep responses concise, accurate, and grounded in the sources you are given.
+- If you don't have the information, say so rather than guessing.</pre>
+      </li>
+      <li><strong>Settings &rarr; Generative AI</strong>, bottom of the page: turn <strong>off</strong> both
+        <strong>Use general knowledge</strong> and <strong>Use information from the Web</strong>. <strong>Save</strong>.</li>
     </ol>
     <div class="amber">
-      <b>View columns and find columns are not the same list.</b> What the search can <em>match on</em> comes from
-      <strong>Find by</strong>. What it can <em>return</em> comes from the view columns. Add a state to the view but not to
-      Find by, and the agent will cheerfully tell you there are no accounts in that state.
-    </div>
-    <div class="tip">
-      <b>Verify before moving on.</b> The modern designer will not offer some address columns at all &mdash; if a column
-      you need is missing from the picker, use <strong>Switch to classic</strong> on that view, which lists every one of them.
+      <b>Step 4 is not housekeeping.</b> Leave model knowledge on and the parent answers product questions itself, out of what
+      it happens to know &mdash; and it looks right. Both children then appear to work while never being called.
     </div>
   </div>
 </div>
 
 <div class="stage">
-  <div class="head"><span class="id">Stage 2 <small>Build the lookup agent</small></span><span class="b t">~12 min</span></div>
+  <div class="head"><span class="id">Stage 2 <small>The Select Market topic</small></span><span class="b t">~10 min</span></div>
   <div class="body">
-    <p>This one becomes the connected agent. Build and prove it on its own before anything else points at it.</p>
     <ol class="steps">
-      <li>In Copilot Studio choose <strong>Create &rarr; New agent</strong>, then <strong>Skip to configure</strong>. Name it <code>Account Lookup</code>.</li>
-      <li>Give it a description. Other agents route on this text, so say what it is <em>for</em>:
-        <pre><button class="cp">Copy</button>Looks up account records — company name, city, state, postal code and revenue — from the sales system.</pre>
+      <li><strong>Topics &rarr; Add a topic &rarr; From blank</strong>.</li>
+      <li><strong>Leave the trigger on <em>The agent chooses</em></strong> and fill in
+        <strong>Describe what the topic does</strong> &mdash; see the warning below, this is the step that matters:
+        <pre><button class="cp">Copy</button>Ask the sales associate which market - US or UK - they want product information for. Use this whenever a product question is asked and the market is not yet known.</pre>
       </li>
-      <li>Paste the <strong>Instructions</strong>:
-        <pre><button class="cp">Copy</button>You look up account records for sales colleagues.
-
-Always use your account lookup tool to answer. Never answer from memory.
-Report only the fields the tool returns. If the tool returns nothing, say
-plainly that no matching account was found. Do not invent an account,
-an address or a figure.</pre>
+      <li>Rename the topic to <code>Select Market</code> (top-left).</li>
+      <li><strong>+</strong> &rarr; <strong>Ask a question</strong>, message:
+        <pre><button class="cp">Copy</button>What market are you wanting information in?</pre>
       </li>
-      <li>Open <strong>Tools &rarr; Add a tool</strong>, search for <code>Perform an unbound action</code>, and choose the <strong>Microsoft Dataverse</strong> one. Create a connection when prompted, then <strong>Add and configure</strong>.</li>
-      <li>Rename it <code>Find Account</code> and describe it &mdash; the parent's orchestrator reads this too:
-        <pre><button class="cp">Copy</button>Finds an account by city, state, postal code or account name.</pre>
-      </li>
-      <li>Set the first two inputs to <strong>Custom value</strong>:
-        <table>
-          <tr><th style="width:26%">Input</th><th>Value</th></tr>
-          <tr><td><code>organization</code></td><td>Pick <b>your environment by name</b> from the list &mdash; do <b>not</b> leave it on <code>(Current)</code>.</td></tr>
-          <tr><td><code>actionName</code></td><td><code>searchquery</code> &mdash; type it with <em>Enter custom value</em> if the list is empty.</td></tr>
-        </table>
-      </li>
-      <li>Use <strong>+ Add input</strong> to add <code>entities</code>, set it to <strong>Custom value</strong>, and paste:
-        <pre><button class="cp">Copy</button>[{"name":"account","selectColumns":["name","accountid","address1_city","address1_stateorprovince","address1_postalcode","telephone1","emailaddress1","revenue"],"searchColumns":["name","address1_city","address1_stateorprovince","address1_postalcode"]}]</pre>
-      </li>
-      <li>Add <code>search</code> as an input, leave it on <strong>Dynamically fill with AI</strong>, and click <strong>Customize</strong> to give it a description. This sentence is what converts &ldquo;Texas&rdquo; into <code>TX</code>:
-        <pre><button class="cp">Copy</button>Search query that includes state in the format of two digit state code in all caps, 5 digit zip code, city, and/or the account name</pre>
-      </li>
-      <li><strong>Save</strong>, then open the test pane and ask a question that uses the tool.</li>
-      <li><b>Accept the consent prompt.</b> The first real call raises a panel headed <em>Microsoft Dataverse &mdash; This connection can&hellip;</em>. Click <strong>Allow</strong>. Nothing works until you do.</li>
-      <li>Go to <strong>Settings &rarr; Generative AI</strong> and turn on <strong>Let other agents connect to and use this one</strong>.</li>
-      <li><strong>Publish</strong> the agent.</li>
+      <li><strong>New option</strong> &rarr; <code>US</code>, then again for <code>UK</code>.</li>
+      <li>Under <strong>Save user response as</strong>, select <code>Var1</code> and rename it <code>Market</code>.</li>
+      <li>In <strong>Variable properties</strong>: <strong>Usage &rarr; Global</strong>, tick <strong>External sources can
+        receive value</strong>. Description: <code>The market that the sales associate is requesting information about.</code></li>
+      <li><strong>Delete every Condition node</strong> the editor added under the question. You are storing the answer, not
+        branching on it. <strong>Save</strong>.</li>
+      <li>Second way in, for channels that support it: chevron beside the topic name &rarr; <strong>Conversation Start</strong>
+        &rarr; add a node at the end &rarr; <strong>Topic Management &rarr; Go to another topic &rarr; Select Market</strong>.
+        <strong>Save</strong>.</li>
     </ol>
     <div class="warn">
-      <b>Step 10 is the one that catches everyone.</b> Until you click <strong>Allow</strong>, every call fails with
-      <code>HTTP 403 &mdash; connectorAuthorizationError</code>, and the message blames the connection even though the connection
-      is perfectly healthy. You can confirm the state under <strong>Settings &rarr; Connection Settings</strong>: before consent
-      it reads <em>&ldquo;There are no permissions associated with this agent&rdquo;</em>.
+      <b>Do not make Conversation Start the only way in.</b> Setting the topic to <em>It's redirected to</em> works in the Test
+      pane and <b>fails silently in Microsoft 365 Copilot</b>, which invokes the agent straight with the user's message and
+      raises no conversation-start activity. The topic never runs, the variable stays empty, neither child is eligible, model
+      knowledge is off &mdash; and a plain product question returns <em>&ldquo;I'm not sure how to help with that.&rdquo;</em>
+      Nothing errors; nothing is logged. Hence step 2: <em>asking</em> becomes the model's judgement, the <b>gate stays
+      deterministic</b>.
+    </div>
+    <div class="note">
+      <b>Usage must be Global.</b> A topic-scoped variable dies with the topic and will not appear in Stage&nbsp;3's condition
+      picker. If <code>Global.Market</code> is missing there, step 7 is why.
     </div>
   </div>
 </div>
 
 <div class="stage">
-  <div class="head"><span class="id">Stage 3 <small>Build the parent and its child agent</small></span><span class="b t">~10 min</span></div>
+  <div class="head"><span class="id">Stage 3 <small>The two child agents</small></span><span class="b t">~12 min</span></div>
   <div class="body">
     <ol class="steps">
-      <li>Create a second agent named <code>Sales Assistant</code> with these <strong>Instructions</strong>:
-        <pre><button class="cp">Copy</button>You help sales colleagues find what they need.
-
-Delegate product questions to the product agent, and any question about
-an account, customer or company to the account lookup agent. Do not
-answer account questions yourself. Keep replies short and factual.</pre>
+      <li><strong>Agents</strong> (top nav) &rarr; <strong>Add</strong> &rarr; <strong>New child agent</strong>. Name:
+        <code>US Product Information Agent</code>.</li>
+      <li><strong>Description</strong>:
+        <pre><button class="cp">Copy</button>This agent provides details about the Surface products offered in the United States</pre>
       </li>
-      <li>Open the <strong>Agents</strong> tab &rarr; <strong>Add an agent</strong> &rarr; <strong>New child agent</strong>. Name it <code>Product Information</code>.</li>
-      <li>Give the child a description &mdash; this is the only thing the orchestrator uses to route to it:
-        <pre><button class="cp">Copy</button>Answers questions about our products: what they do, who they suit and how they differ from each other.</pre>
+      <li>Expand <strong>Advanced</strong>, set <strong>Condition</strong> to <code>Global.Market</code>
+        <strong>is equal to</strong> <code>US</code>.</li>
+      <li><strong>Instructions</strong>:
+        <pre><button class="cp">Copy</button>This agent should only answer questions about Microsoft Surface products in regards to the US-based products. It should never provide details or stats on any products not offered or details about models offered outside of the United States. You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.</pre>
       </li>
-      <li>Give the child its own instructions, and a knowledge source if you have one. Keep it deliberately narrow &mdash; a child that claims to do everything will steal questions meant for the connected agent.</li>
-      <li><strong>Publish</strong> the parent.</li>
+      <li>In the child's own <strong>Knowledge</strong> section: <strong>Add &rarr; Public websites</strong> &rarr;
+        <code>microsoft.com</code> &rarr; <strong>Add</strong> &rarr; <strong>Add to agent</strong>. <strong>Save</strong>.</li>
+      <li>Repeat for the UK child, changing four things: name <code>UK Product Information Agent</code>, condition
+        <code>= UK</code>, knowledge <code>microsoft.com/en-gb</code>, and <em>United Kingdom</em> / <em>UK-based</em> in place
+        of <em>United States</em> / <em>US-based</em> in both the description and the instructions.</li>
     </ol>
     <div class="note">
-      Notice what you did <em>not</em> do: the child agent was never published separately and has no settings page of its own.
-      That is the whole difference between the two kinds.
+      Both fields are needed and do different jobs: the <b>condition</b> decides whether the agent is <em>eligible</em>, the
+      <b>description</b> decides whether the orchestrator <em>picks</em> it from those that are. Neither child is published
+      separately or has a settings page, channel or URL &mdash; that is the whole difference from the connected agent.
     </div>
   </div>
 </div>
 
 <div class="stage">
-  <div class="head"><span class="id">Stage 4 <small>Connect the two agents</small></span><span class="b t">~5 min</span></div>
+  <div class="head"><span class="id">Stage 4 <small>Connect the Account Data Lookup Agent</small></span><span class="b t">~5 min</span></div>
   <div class="body">
     <ol class="steps">
-      <li>In <code>Sales Assistant</code>, go to <strong>Agents &rarr; Add an agent</strong>.</li>
-      <li>Under <em>Connect to an external agent</em>, choose <strong>Copilot Studio</strong>, then pick <code>Account Lookup</code> from the list.</li>
-      <li>Read the description it carries across, and sharpen it if it overlaps the child agent. <b>This copy is local</b> &mdash; later edits to the source agent's description will not flow through.</li>
-      <li>Leave <strong>Pass conversation history to this agent</strong> ticked, so the lookup agent can see what was already asked.</li>
-      <li><strong>Add and configure</strong>, then <strong>Publish</strong> the parent again.</li>
+      <li><strong>Agents &rarr; Add an agent</strong> &rarr; pick <code>Account Data Lookup Agent</code>.</li>
+      <li>Read the <strong>description</strong> it brings across and sharpen it if it overlaps either child. <b>This copy is
+        local</b> &mdash; later edits on the source agent do not flow through.</li>
+      <li>Confirm <strong>Pass conversation history to this agent</strong> is ticked.</li>
+      <li><strong>Add and configure</strong>, then <strong>Publish</strong>.</li>
     </ol>
     <div class="amber">
-      <b>Not in the list?</b> A connected agent only appears if it is (1) in the same environment, (2) <b>published</b>, and
-      (3) has <em>Let other agents connect to and use this one</em> switched on. All three, not any one.
+      <b>Not in the list?</b> It fails one of the three: same environment, published, <em>Let other agents connect to and use
+      this one</em> on. All three are settings on <em>that</em> agent. What gets stored here is only a name and a description
+      &mdash; which is why a change over there needs a publish before it is visible here.
     </div>
   </div>
 </div>
 
 <div class="stage">
-  <div class="head"><span class="id">Stage 5 <small>Test both paths</small></span><span class="b t">~5 min</span></div>
+  <div class="head"><span class="id">Stage 5 <small>Test &mdash; in the pane, then in a channel</small></span><span class="b t">~5 min</span></div>
   <div class="body">
-    <p>Test from the <strong>parent</strong>, never from the lookup agent. You are testing the routing, not the query.</p>
+    <p>Always from the <strong>parent</strong>. Open the activity map beside each answer &mdash; the hops are the result.</p>
+    <table>
+      <tr><th style="width:38%">Ask</th><th>Should happen</th></tr>
+      <tr><td>Answer <code>US</code>, then <code>Which Surface laptops can I offer?</code></td>
+          <td>The <b>US child</b> answers. Reset, answer <code>UK</code>, ask again &mdash; the <em>other</em> child takes it.
+            Same question, different branch, decided by the variable alone.</td></tr>
+      <tr><td><code>What are all of the details of accounts in Texas?</code></td>
+          <td>Three hops: parent &rarr; <b>connected agent</b> &rarr; its tool, ~2 s. The description did that.</td></tr>
+      <tr><td>Fresh session; skip the market, ask the Surface question</td>
+          <td>The parent should <b>ask which market</b> &mdash; step 2's description working, and the closest the pane gets to
+            channel behaviour. It must <em>not</em> answer with the market unset.</td></tr>
+      <tr><td><code>Who is the contact at Alpine Ski House?</code></td>
+          <td>Still the connected agent. If both answer, your descriptions overlap.</td></tr>
+    </table>
 
-    <div class="k g">Test 1 &mdash; should work</div>
-    <pre><button class="cp">Copy</button>What are the accounts in Texas?</pre>
+    <div class="k r">Then publish to a channel and repeat the first two</div>
     <p>
-      Open the activity map beside the answer. You should see the parent hand off to <strong>Account Lookup</strong>, which calls
-      <strong>Find Account</strong>, which completes in about two seconds and returns real rows. Three hops, one answer.
+      Not a formality: the pane raises a conversation-start activity on every new session and a channel may not, so
+      <b>the first test can pass in the pane and fail in the channel</b>. If products fail there, ask the account question in
+      the same channel. <b>Accounts work, products do not</b> &rarr; the published version is current, so it is the market
+      variable: check the trigger is <em>The agent chooses</em> with a description. <b>Both fail</b> &rarr; not routing.
+      Almost always the agent was never republished after your last change &mdash; the pane runs the draft, the channel runs the
+      last publish. Check the published date before changing anything.
     </p>
-
-    <div class="k r">Test 2 &mdash; should refuse</div>
-    <pre><button class="cp">Copy</button>What is the credit rating of the largest account in Texas?</pre>
-    <p>
-      Credit rating is not in your <code>selectColumns</code>, so the tool cannot return it. A healthy agent says it does not have
-      that field. An agent that answers anyway has just invented a number about a customer &mdash; and it will do that in front of
-      a client too. If it invents, tighten the last line of the lookup agent's instructions and run it again.
-    </p>
-    <div class="tip">
-      <b>Also worth trying:</b> ask a product question and confirm it goes to the <em>child</em> agent instead. If both agents
-      answer, or the wrong one does, your two descriptions overlap &mdash; fix the descriptions, not the instructions.
-    </div>
   </div>
 </div>
 
 <section>
   <h2>When nothing comes back</h2>
-  <p>Work down this list in order. The first two rows catch nearly all of it.</p>
   <table>
-    <tr><th style="width:26%">Symptom</th><th>What is happening</th><th>What to do</th></tr>
+    <tr><th style="width:30%">Symptom</th><th>Cause</th><th>Fix</th></tr>
     <tr>
-      <td><b><code>HTTP 403</code> &mdash; connector returned an authorization error</b></td>
-      <td>The agent was never granted consent to use the connection &mdash; the message blames the connection, which is fine. Tools that arrive by <b>importing a solution</b> never raise the prompt at all.</td>
-      <td>Run the tool from the test pane and click <strong>Allow</strong>. If no prompt appears, delete the tool and add it again from scratch &mdash; a freshly created tool raises it.</td>
+      <td><b>Anything</b> works in the Test pane but not in a channel</td>
+      <td><b>The pane runs the draft; a channel runs the last published version.</b> A saved change is not a published change,
+        and nothing warns you.</td>
+      <td>Publish, then retest. Check the last published date <em>before</em> debugging anything else &mdash; it is the single
+        most common cause of a pane/channel split.</td>
     </tr>
     <tr>
-      <td>Action list is empty, or <code>entities</code> and <code>search</code> never appear as inputs</td>
-      <td>Same cause &mdash; the designer is reading Dataverse metadata over that unconsented connection.</td>
-      <td>Fix the consent first. The inputs appear under <strong>+ Add input</strong> as soon as the schema can be read.</td>
+      <td>Published, and the market is still never asked <b>in a channel</b>; every product question returns
+        <em>&ldquo;not sure how to help&rdquo;</em></td>
+      <td>No conversation-start activity in that channel, so a redirect-only topic never ran. The variable stays empty, no child
+        is eligible, and model knowledge is off.</td>
+      <td>Trigger &rarr; <strong>The agent chooses</strong>, with a description (Stage&nbsp;2 step 2). Keep the redirect too.
+        Republish and retest <b>in the channel</b>.</td>
     </tr>
     <tr>
-      <td><code>HTTP 400 &mdash; Required field 'search' is missing</code></td>
-      <td>Consent is now fine and the call is reaching Dataverse &mdash; you are simply missing an input.</td>
-      <td>Add <code>search</code> and <code>entities</code> as in Stage 2, steps 7 and 8.</td>
+      <td>The topic is skipped when the user's message already names a market</td>
+      <td>The model judges &ldquo;the market is known&rdquo; from the conversation, not from the variable &mdash; so it skips
+        the topic and <code>Global.Market</code> stays empty. A user saying &ldquo;US&rdquo; sets nothing.</td>
+      <td>Point the description at the variable, not at knowledge: <em>&hellip;has not yet been set in this conversation,
+        including when the user names a market, because that does not set the variable.</em></td>
     </tr>
     <tr>
-      <td>&ldquo;No accounts were found&rdquo; but you can see the rows in the table</td>
-      <td>Either the search term does not match the stored format (states are stored as <code>TX</code>, not <code>Texas</code>), or the column is not in <b>Find by</b>.</td>
-      <td>Check the <code>search</code> input has the description from Stage 2 step 8, and re-check Stage 1 step 5.</td>
+      <td><code>Global.Market</code> is missing from the condition picker</td>
+      <td>The variable is topic-scoped.</td>
+      <td>Stage&nbsp;2 step 7 &mdash; <strong>Usage &rarr; Global</strong>, save, reopen the child.</td>
     </tr>
     <tr>
-      <td>An error naming a column you do not recognise</td>
-      <td>Your <code>selectColumns</code> lists a column that does not exist in <em>your</em> environment &mdash; common when copying a definition from somewhere else.</td>
-      <td>Remove it. Only stock Account columns are used in the block in Stage 2.</td>
+      <td>Neither child answers; the wrong child answers</td>
+      <td>The variable is empty for this session, or a condition points at the wrong value.</td>
+      <td>Check the variable first. Compare both children's <strong>Advanced</strong> sections. Do not touch descriptions.</td>
     </tr>
     <tr>
-      <td>The parent answers account questions itself</td>
-      <td>Routing, not plumbing. The parent's own instructions or the child's description are broad enough to swallow the question.</td>
-      <td>Narrow the child's description and keep the parent's <em>&ldquo;do not answer account questions yourself&rdquo;</em> line.</td>
-    </tr>
-    <tr>
-      <td>Changes to the connected agent have no effect</td>
-      <td>The parent uses the connected agent's <b>last published</b> version.</td>
-      <td>Publish the connected agent after every change, then retest from the parent.</td>
+      <td>The parent answers questions itself instead of delegating</td>
+      <td>For products: <strong>Use general knowledge</strong> is still on, so it never needed a child. For accounts: the
+        hand-off line is missing or the connected agent's local description is vague.</td>
+      <td>Stage&nbsp;1 step 4; or keep the <em>&ldquo;Delegate account and contact lookups&hellip;&rdquo;</em> line and sharpen
+        the description.</td>
     </tr>
   </table>
 </section>
 
 <section>
   <h2>Before you use this for real</h2>
-  <p>What you have built works. These are the gaps between it and something you would put in front of colleagues.</p>
   <ul>
-    <li><strong>Everyone sees the maker's rows.</strong> The tool runs on maker-provided credentials, so every user gets the same
-      results regardless of their own permissions. Row-level security in Dataverse is the fix, and it is a design decision rather than a switch.</li>
-    <li><strong>Connected agents are one level deep.</strong> An agent that already has connected agents cannot itself be connected to a third.</li>
-    <li><strong>Every hop costs latency.</strong> The parent orchestrates, then the connected agent orchestrates again &mdash; noticeably slower, for reasons the user cannot see.</li>
-    <li><strong>Descriptions are the routing logic</strong>, and they are prose, so they degrade quietly as you add agents. Past roughly
-      30&ndash;40 choices an agent stops discriminating well; that, not tidiness, is the signal to split.</li>
-    <li><strong>Nothing here is versioned.</strong> Instructions, descriptions and that <code>entities</code> block live only in the maker
-      portal. Decide where the source of truth lives before a second person edits it.</li>
+    <li><strong>A condition is only as good as what sets it</strong> &mdash; and this one has already bitten. Publishing to
+      Microsoft 365 Copilot skipped the market question and both children dropped out of every turn; agent-to-agent calls and
+      unattended triggers do the same. When you add a surface, ask not <em>does it answer</em> but <em>what still sets the
+      variables it gates on</em>.</li>
+    <li><strong>Everyone sees the same rows.</strong> The lookup agent's tool runs on credentials you do not control from here,
+      so results may not be trimmed per asker. Dataverse row-level security is the fix, and a design decision.</li>
+    <li><strong>Descriptions are routing logic in prose</strong> and degrade quietly as you add agents &mdash; past roughly
+      30&ndash;40 choices an agent stops discriminating well. Conditions do not, which argues for using them wherever the answer
+      is genuinely deterministic. Connected agents are also only one level deep, and none of this is versioned: instructions,
+      descriptions and both conditions live only in the maker portal.</li>
   </ul>
 </section>
 
 </div>
 
 <footer>
-  &copy; 2026 Gheware DevOps &amp; Agentic AI | devops.gheware.com | Trainer: Rajesh Gheware | Multi-Agent Account Lookup v1
+  &copy; 2026 Gheware DevOps &amp; Agentic AI | devops.gheware.com | Trainer: Rajesh Gheware | Sales Associate Assistant v3
 </footer>
-
 <script>
 document.querySelectorAll('pre .cp').forEach(function(b){
   b.addEventListener('click',function(){
